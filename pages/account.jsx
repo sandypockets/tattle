@@ -1,10 +1,10 @@
 import Layout from "../components/Layout/Layout";
-import Account from "../components/Account";
+import Profile from "../components/Profile/Profile";
 
 export default function AccountPage() {
   return (
     <Layout>
-      <Account />
+      <Profile />
     </Layout>
   )
 }

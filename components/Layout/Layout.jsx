@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../utils/supabaseClient";
-import Navigation from "./Navigation";
 import { useRouter } from "next/router";
+import { supabase } from "../../lib/supabaseClient";
+import Navigation from "./Navigation";
+import axios from "axios";
+import Footer from "./Footer";
+import Meta from "./Meta";
 
 export default function Layout({ children }) {
   const [loading, setLoading] = useState(true)
@@ -9,6 +12,7 @@ export default function Layout({ children }) {
   const [username, setUsername] = useState(null)
   const router = useRouter()
   const currentUrl = router.asPath
+  const user = supabase.auth.user()
 
   useEffect(() => {
     setSession(supabase.auth.session())
@@ -18,38 +22,30 @@ export default function Layout({ children }) {
   }, [])
 
   useEffect(() => {
-    getUsername()
-  }, [session])
-  async function getUsername() {
-    try {
-      setLoading(true)
-      const user = supabase.auth.user()
-
-      let { data, error, status } = await supabase
-        .from('profiles')
-        .select(`username`)
-        .eq('id', user.id)
-        .single()
-
-      if (error && status !== 406) {
-        throw error
-      }
-
-      if (data) {
-        setUsername(data.username)
-      }
-    } catch (error) {
-      alert(error.message)
-    } finally {
-      setLoading(false)
+    if (user) {
+      axios
+        .get('/api/usernames', {
+          params: { id: user.id }
+        })
+        .then(function (response) {
+          setUsername(response.data.data.username)
+        })
+        .catch(function (error) {
+          console.error(error);
+        })
     }
-  }
-
+  }, [session])
 
   return (
-    <div>
-      <Navigation username={username} currentUrl={currentUrl} />
-      {children}
-    </div>
+    <>
+      <Meta />
+      <header>
+        <Navigation username={username} currentUrl={currentUrl} />
+      </header>
+      <main>
+        {children}
+      </main>
+      <Footer />
+    </>
   )
 }

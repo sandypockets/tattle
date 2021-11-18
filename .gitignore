@@ -36,4 +36,5 @@ yarn-error.log*
 # Storybook
 /storybook-static
 
-.idea/
+# Supabase
+.supabase

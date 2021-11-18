@@ -1,8 +1,8 @@
-import {useEffect, useState} from "react";
-import { supabase } from "../utils/supabaseClient";
+import { useEffect, useState } from "react";
 import Link from 'next/link'
+import handleLogin from "../../helpers/auth/magicLink";
 
-export default function Auth({ registrationType }) {
+export default function MagicLinkAuth({ registrationType }) {
   const [loading, setLoading] = useState(false)
   const [email, setEmail] = useState('')
   const [content, setContent] = useState('signup')
@@ -15,20 +15,6 @@ export default function Auth({ registrationType }) {
       setContent('signin')
     }
   }, [])
-
-
-  const handleLogin = async (email) => {
-    try {
-      setLoading(true)
-      const { error } = await supabase.auth.signIn({ email })
-      if (error) throw error
-      alert('Check your email for the login link!')
-    } catch (error) {
-      alert(error.error_description || error.message)
-    } finally {
-      setLoading(false)
-    }
-  }
 
   return (
     <div className="min-h-screen bg-white flex">

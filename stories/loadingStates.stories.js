@@ -1,5 +1,5 @@
 import React from 'react'
-import LoadingWheel from "../components/LoadingWheel";
+import LoadingWheel from "../components/Utils/LoadingWheel";
 
 export default { title: 'Loading states' }
 

@@ -1,5 +1,5 @@
-import Auth from "../components/Auth";
+import EmailPasswordAuth from "../components/Auth/EmailPasswordAuth";
 
 export default function SignInPage() {
-  return <Auth registrationType="signin"/>
+  return <EmailPasswordAuth registrationType="signin"/>
 }

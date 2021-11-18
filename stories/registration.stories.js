@@ -1,7 +1,7 @@
 import React from 'react'
-import Auth from "../components/Auth";
+import MagicLinkAuth from "../components/Auth/MagicLinkAuth";
 
 export default { title: 'Registration' }
 
-export const signIn = (args) => <Auth registrationType="signin" {...args} />
-export const signUp = (args) => <Auth registrationType="signup" {...args} />
+export const signIn = (args) => <MagicLinkAuth registrationType="signin" {...args} />
+export const signUp = (args) => <MagicLinkAuth registrationType="signup" {...args} />

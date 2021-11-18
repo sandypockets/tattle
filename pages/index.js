@@ -1,22 +1,14 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '../utils/supabaseClient'
-import SignIn from "../components/Auth";
+import { supabase } from '../lib/supabaseClient'
 import { useRouter } from 'next/router'
 import HomePage from "../components/HomePage";
 import Layout from '../components/Layout/Layout'
-import LoadingWheel from "../components/LoadingWheel";
+import LoadingWheel from "../components/Utils/LoadingWheel";
 
 export default function Index() {
   const [session, setSession] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
-
-  // Loading delay
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 800)
-  }, [session])
 
   useEffect(() => {
     setSession(supabase.auth.session())
@@ -25,14 +17,19 @@ export default function Index() {
     })
   }, [])
 
+  useEffect(() => {
+    if (!supabase.auth.session()) {
+      router.push('/signin')
+    }
+  }, [session])
+
   return (
     <>
-      {loading ? (
+      {loading || !session ? (
         <div className="flex justify-center mt-24">
           <LoadingWheel />
         </div>
-        ) :
-        !session ? <SignIn /> : (
+        ) : (
         <Layout>
           <HomePage />
         </Layout>

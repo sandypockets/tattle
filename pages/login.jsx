@@ -1,4 +1,4 @@
-import SignIn from "../components/Auth";
+import SignIn from "../components/Auth/MagicLinkAuth";
 
 export default function LoginPage() {
   return <SignIn />
