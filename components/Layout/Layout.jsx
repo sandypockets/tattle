@@ -42,7 +42,7 @@ export default function Layout({ children }) {
       <header>
         <Navigation username={username} currentUrl={currentUrl} />
       </header>
-      <main>
+      <main className="mt-10">
         {children}
       </main>
       <Footer />

@@ -10,27 +10,27 @@ function classNames(...classes) {
 
 const navItems = [
     {
-    name: 'Home',
+    name: 'Tattle',
     href: '/',
   },
   {
-    name: 'Reports',
-    href: '/reports',
+    name: 'How it works',
+    href: '/how-it-works',
   },
   {
-    name: 'Projects',
-    href: '/projects',
+    name: 'FAQ',
+    href: '/faq',
   },
   {
-    name: 'More',
-    href: '/more',
+    name: 'Pricing',
+    href: '/pricing',
   },
 ]
 
 export default function Navigation({ currentUrl }) {
   return (
     <nav>
-      <Disclosure as="nav" className="bg-white shadow">
+      <Disclosure as="nav" className="bg-white shadow fixed w-screen top-0 z-20">
         {({ open }) => (
           <>
             <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
