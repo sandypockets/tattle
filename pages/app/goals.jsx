@@ -1,6 +1,6 @@
 import AppLayout from "../../components/App/Layout/AppLayout";
 import CardTitle from "../../components/Global/CardTitle";
-import Button from "../../components/Utils/Button";
+import Button from "../../components/Global/Button";
 import Card from "../../components/Global/Card";
 import Banner from "../../components/App/Banner";
 import GoalsEmptyState from "../../components/App/GoalsEmptyState";

@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabaseClient";
 import Link from 'next/link'
-import Button from '../../Utils/Button'
-import TextInput from "../../Utils/TextInput";
+import Button from '../../Global/Button'
+import TextInput from "../../Global/TextInput";
 import handleSignIn from "../../../helpers/auth/signin";
 import handleSignUp from "../../../helpers/auth/signup";
 

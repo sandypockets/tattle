@@ -3,7 +3,7 @@ import { supabase } from '../lib/supabaseClient'
 import { useRouter } from 'next/router'
 import HeroSection from "../components/Web/HeroSection";
 import Layout from '../components/Web/Layout/Layout'
-import LoadingWheel from "../components/Utils/LoadingWheel";
+import LoadingWheel from "../components/Global/LoadingWheel";
 import StatsSection from "../components/Web/StatsSection";
 import ImagesWithDescriptions from "../components/Web/ImagesWithDescriptions";
 

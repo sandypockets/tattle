@@ -1,7 +1,7 @@
 import AppLayout from "../../components/App/Layout/AppLayout";
 import Card from "../../components/Global/Card";
 import CardTitle from "../../components/Global/CardTitle";
-import Button from "../../components/Utils/Button";
+import Button from "../../components/Global/Button";
 import ContactsEmptyState from "../../components/App/ContactsEmptyState";
 
 export default function Contacts() {
