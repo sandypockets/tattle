@@ -5,14 +5,18 @@ import Card from "../../components/Global/Card";
 import Banner from "../../components/App/Banner";
 import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import Link from 'next/link'
+import {useState} from "react";
+import CreateGoal from "../../components/App/Goals/CreateGoal";
 
 export default function Goals() {
+  const [displayFormType, setDisplayFormType] = useState('empty')
+
   return (
     <AppLayout>
       <div className="flex justify-between">
         <CardTitle>Goals</CardTitle>
         <div className="max-w-min">
-          <Button>Create</Button>
+          <Button onClickHandler={() => setDisplayFormType('create')}>Create</Button>
         </div>
       </div>
       <Banner>
@@ -29,10 +33,13 @@ export default function Goals() {
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
-      <Card>
-
-        <GoalsEmptyState />
-      </Card>
+      {displayFormType === 'empty' && (
+        <Card>
+          <GoalsEmptyState setState={setDisplayFormType} />
+        </Card>
+      )} { displayFormType === 'create' && (
+        <CreateGoal />
+      )}
     </AppLayout>
   )
 }
