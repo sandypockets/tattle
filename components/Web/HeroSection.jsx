@@ -1,4 +1,4 @@
-export default function HomePage() {
+export default function HeroSection() {
   return (
     <div>
       <main className="lg:relative">
@@ -37,7 +37,7 @@ export default function HomePage() {
         <div className="relative w-full h-64 sm:h-72 md:h-96 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:h-full">
           <img
             className="absolute inset-0 w-full h-full object-cover"
-            src="https://images.unsplash.com/photo-1530811761207-8d9d22f0a141?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c3BlZWNoJTIwYnViYmxlfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+            src="https://images.unsplash.com/photo-1564510714747-69c3bc1fab41?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1470&q=80"
             alt=""
           />
         </div>

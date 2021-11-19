@@ -3,8 +3,9 @@ import { CheckCircleIcon } from '@heroicons/react/solid'
 const includedFeatures = [
   'Create up to 100 goals per month',
   'Set completion dates for goals',
-  'Add up to 2 contacts',
-  'Choose between voice or SMS tattles',
+  'Add up to 10 contacts',
+  'Tattle via voice',
+  'Tattle via SMS',
 ]
 
 export default function PricingSection() {
@@ -15,7 +16,8 @@ export default function PricingSection() {
           <div className="text-center">
             <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">One plan to rule them all</h2>
             <p className="mt-4 text-xl text-gray-600">
-              Tattle is simple, and so is our pricing structure.
+              Tattle is{' '}
+              <span className="text-yellow-400 font-bold">simple</span>, and so is our pricing structure.
             </p>
           </div>
         </div>
@@ -33,7 +35,7 @@ export default function PricingSection() {
                 </p>
                 <div className="mt-8">
                   <div className="flex items-center">
-                    <h4 className="flex-shrink-0 pr-4 bg-white text-sm tracking-wider font-semibold uppercase text-indigo-600">
+                    <h4 className="flex-shrink-0 pr-4 bg-white text-sm tracking-wider font-bold uppercase text-yellow-400">
                       What's included
                     </h4>
                     <div className="flex-1 border-t-2 border-gray-200" />
@@ -42,7 +44,7 @@ export default function PricingSection() {
                     {includedFeatures.map((feature) => (
                       <li key={feature} className="flex items-start lg:col-span-1">
                         <div className="flex-shrink-0">
-                          <CheckCircleIcon className="h-5 w-5 text-green-400" aria-hidden="true" />
+                          <CheckCircleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
                         </div>
                         <p className="ml-3 text-sm text-gray-700">{feature}</p>
                       </li>
@@ -65,7 +67,7 @@ export default function PricingSection() {
                   <div className="rounded-md shadow">
                     <a
                       href="#"
-                      className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-900"
+                      className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500"
                     >
                       Subscribe
                     </a>

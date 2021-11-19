@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { useRouter } from 'next/router'
-import HomePage from "../components/Web/HomePage";
+import HeroSection from "../components/Web/HeroSection";
 import Layout from '../components/Web/Layout/Layout'
 import LoadingWheel from "../components/Utils/LoadingWheel";
 import StatsSection from "../components/Web/StatsSection";
+import ImagesWithDescriptions from "../components/Web/ImagesWithDescriptions";
 
 export default function Index() {
   const [session, setSession] = useState(null)
@@ -32,8 +33,9 @@ export default function Index() {
         </div>
         ) : (
         <Layout>
-          <HomePage />
+          <HeroSection />
           <StatsSection />
+          <ImagesWithDescriptions />
         </Layout>
       )}
     </>
