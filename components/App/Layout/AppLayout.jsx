@@ -242,9 +242,9 @@ export default function AppLayout({ children }) {
                 {/*</div>*/}
                 <div className="px-4 sm:px-6 md:px-0">
 
-                  <div className="py-4">
+                  <main className="py-4">
                     {children}
-                  </div>
+                  </main>
 
                 </div>
               </div>
