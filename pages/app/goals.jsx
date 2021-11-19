@@ -3,7 +3,7 @@ import CardTitle from "../../components/Global/CardTitle";
 import Button from "../../components/Global/Button";
 import Card from "../../components/Global/Card";
 import Banner from "../../components/App/Banner";
-import GoalsEmptyState from "../../components/App/GoalsEmptyState";
+import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import Link from 'next/link'
 
 export default function Goals() {
