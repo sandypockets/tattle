@@ -1,25 +1,24 @@
-import { Fragment, useState } from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
-  BellIcon,
-  CalendarIcon,
-  ChartBarIcon,
-  FolderIcon,
+  UserIcon,
   HomeIcon,
-  InboxIcon,
+  CheckIcon,
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
+  AdjustmentsIcon
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
+import Link from 'next/link'
+import { useRouter } from "next/router";
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: InboxIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartBarIcon, current: false },
+  { name: 'Dashboard', href: '/app', icon: HomeIcon, current: true },
+  { name: 'Goals', href: '/app/goals', icon: CheckIcon, current: false },
+  { name: 'Contacts', href: '/app/contacts', icon: UsersIcon, current: false },
+  { name: 'Profile', href: '/app/profile', icon: UserIcon, current: false },
+  { name: 'Settings', href: '/app/settings', icon: AdjustmentsIcon, current: false },
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -33,6 +32,13 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [currentPage, setCurrentPage] = useState()
+  const router = useRouter()
+
+  useEffect(() => {
+    setCurrentPage(router.pathname)
+  }, [])
+
 
   return (
     <>
@@ -86,25 +92,27 @@ export default function AppLayout({ children }) {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
-                        className={classNames(
-                          item.current
-                            ? 'bg-gray-100 text-gray-900'
-                            : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                          'group rounded-md py-2 px-2 flex items-center text-base font-medium'
-                        )}
-                      >
-                        <item.icon
+                      <Link href={item.href}>
+                        <a
+                          key={item.name}
+                          href={item.href}
                           className={classNames(
-                            item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                            'mr-4 flex-shrink-0 h-6 w-6'
+                            item.href === currentPage
+                              ? 'bg-gray-100 text-gray-900'
+                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                            'group rounded-md py-2 px-2 flex items-center text-base font-medium'
                           )}
-                          aria-hidden="true"
-                        />
-                        {item.name}
-                      </a>
+                        >
+                          <item.icon
+                            className={classNames(
+                              item.href === currentPage ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                              'mr-4 flex-shrink-0 h-6 w-6'
+                            )}
+                            aria-hidden="true"
+                          />
+                          {item.name}
+                        </a>
+                      </Link>
                     ))}
                   </nav>
                 </div>
@@ -124,23 +132,25 @@ export default function AppLayout({ children }) {
             <div className="flex-grow mt-5 flex flex-col">
               <nav className="flex-1 px-2 pb-4 space-y-1">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={classNames(
-                      item.current ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                      'group rounded-md py-2 px-2 flex items-center text-sm font-medium'
-                    )}
-                  >
-                    <item.icon
+                  <Link href={item.href}>
+                    <a
+                      key={item.name}
+                      href={item.href}
                       className={classNames(
-                        item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                        'mr-3 flex-shrink-0 h-6 w-6'
+                        item.href === currentPage ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
+                        'group rounded-md py-2 px-2 flex items-center text-sm font-medium'
                       )}
-                      aria-hidden="true"
-                    />
-                    {item.name}
-                  </a>
+                    >
+                      <item.icon
+                        className={classNames(
+                          item.href === currentPage ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
+                          'mr-3 flex-shrink-0 h-6 w-6'
+                        )}
+                        aria-hidden="true"
+                      />
+                      {item.name}
+                    </a>
+                  </Link>
                 ))}
               </nav>
             </div>
@@ -179,13 +189,7 @@ export default function AppLayout({ children }) {
                   </form>
                 </div>
                 <div className="ml-4 flex items-center md:ml-6">
-                  <button
-                    type="button"
-                    className="bg-white p-1 rounded-full text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                  >
-                    <span className="sr-only">View notifications</span>
-                    <BellIcon className="h-6 w-6" aria-hidden="true" />
-                  </button>
+
 
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
