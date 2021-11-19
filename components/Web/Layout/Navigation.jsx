@@ -25,6 +25,10 @@ const navItems = [
     name: 'Pricing',
     href: '/pricing',
   },
+  {
+    name: 'My Tattle',
+    href: '/tattle',
+  },
 ]
 
 export default function Navigation({ currentUrl }) {
