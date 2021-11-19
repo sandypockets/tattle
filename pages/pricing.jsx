@@ -1,5 +1,5 @@
-import Layout from "../components/Layout/Layout";
-import PricingSection from "../components/PricingSection";
+import Layout from "../components/Web/Layout/Layout";
+import PricingSection from "../components/Web/PricingSection";
 
 export default function Pricing() {
   return (

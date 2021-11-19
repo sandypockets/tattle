@@ -1,5 +1,5 @@
-import Layout from "../components/Layout/Layout";
-import FaqSection from "../components/FaqSection";
+import Layout from "../components/Web/Layout/Layout";
+import FaqSection from "../components/Web/FaqSection";
 
 export default function Faq() {
   return (

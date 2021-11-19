@@ -1,5 +1,5 @@
 import React from 'react'
-import MagicLinkAuth from "../components/Auth/MagicLinkAuth";
+import MagicLinkAuth from "../components/App/Auth/MagicLinkAuth";
 
 export default { title: 'Registration' }
 

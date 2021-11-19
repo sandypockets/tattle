@@ -1,4 +1,4 @@
-import Layout from "../components/Layout/Layout";
+import Layout from "../components/Web/Layout/Layout";
 
 export default function HowItWorks() {
   return (

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useRouter } from "next/router"
-import { supabase } from '../../lib/supabaseClient'
+import { supabase } from '../../../lib/supabaseClient'
 import ProfileForm from "./ProfileForm"
-import getProfile from "../../helpers/profile/getProfile";
+import getProfile from "../../../helpers/profile/getProfile";
 
 export default function Profile() {
   const user = supabase.auth.user()

@@ -1,5 +1,5 @@
 import { Fragment } from 'react'
-import { supabase } from "../../lib/supabaseClient";
+import { supabase } from "../../../lib/supabaseClient";
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
@@ -27,7 +27,7 @@ const navItems = [
   },
   {
     name: 'My Tattle',
-    href: '/tattle',
+    href: '/app',
   },
 ]
 

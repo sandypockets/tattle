@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { supabase } from "../../lib/supabaseClient";
+import { supabase } from "../../../lib/supabaseClient";
 import Link from 'next/link'
-import Button from '../Utils/Button'
-import TextInput from "../Utils/TextInput";
-import handleSignIn from "../../helpers/auth/signin";
-import handleSignUp from "../../helpers/auth/signup";
+import Button from '../../Utils/Button'
+import TextInput from "../../Utils/TextInput";
+import handleSignIn from "../../../helpers/auth/signin";
+import handleSignUp from "../../../helpers/auth/signup";
 
 export default function Auth({ registrationType }) {
   const [email, setEmail] = useState('')
