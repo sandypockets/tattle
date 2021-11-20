@@ -40,7 +40,7 @@ export default function Auth({ registrationType }) {
                 <p className="mt-2 text-sm text-gray-600">
                   Or{' '}
                   <Link href={"/signup"}>
-                    <a className="font-medium text-green-600 hover:text-green-500">
+                    <a className="font-medium text-yellow-500 hover:text-green-500">
                       start your 14-day free trial
                     </a>
                   </Link>
