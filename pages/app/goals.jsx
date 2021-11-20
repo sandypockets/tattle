@@ -1,17 +1,17 @@
+import {useState} from "react";
 import AppLayout from "../../components/App/Layout/AppLayout";
-import CardTitle from "../../components/Global/CardTitle";
+import Banner from "../../components/App/Banner";
 import Button from "../../components/Global/Button";
 import Card from "../../components/Global/Card";
-import Banner from "../../components/App/Banner";
-import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
-import Link from 'next/link'
-import {useState} from "react";
+import CardTitle from "../../components/Global/CardTitle";
 import CreateGoal from "../../components/App/Goals/CreateGoal";
+import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../components/App/Goals/GoalsTable";
+import Link from 'next/link'
 
 export default function Goals() {
   const [displayFormType, setDisplayFormType] = useState('empty')
-  const [hasGoals, setHasGoals] = useState(true)
+  const [hasGoals, setHasGoals] = useState(false)
 
   return (
     <AppLayout>
@@ -35,7 +35,7 @@ export default function Goals() {
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
-      {displayFormType === 'empty' && <GoalsEmptyState setState={setDisplayFormType} />}
+      {displayFormType === 'empty' && !hasGoals && <GoalsEmptyState setState={setDisplayFormType} />}
       {displayFormType === 'create' && <CreateGoal />}
       {hasGoals && (
         <div>
