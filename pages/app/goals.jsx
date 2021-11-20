@@ -7,9 +7,11 @@ import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import Link from 'next/link'
 import {useState} from "react";
 import CreateGoal from "../../components/App/Goals/CreateGoal";
+import GoalsTable from "../../components/App/Goals/GoalsTable";
 
 export default function Goals() {
   const [displayFormType, setDisplayFormType] = useState('empty')
+  const [hasGoals, setHasGoals] = useState(true)
 
   return (
     <AppLayout>
@@ -33,12 +35,12 @@ export default function Goals() {
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
-      {displayFormType === 'empty' && (
-        <Card>
-          <GoalsEmptyState setState={setDisplayFormType} />
-        </Card>
-      )} { displayFormType === 'create' && (
-        <CreateGoal />
+      {displayFormType === 'empty' && <GoalsEmptyState setState={setDisplayFormType} />}
+      {displayFormType === 'create' && <CreateGoal />}
+      {hasGoals && (
+        <div>
+          <GoalsTable />
+        </div>
       )}
     </AppLayout>
   )
