@@ -36,31 +36,13 @@ export default function YourSubscription() {
         </div>
       </div>
       <div className="py-8 px-6 text-center bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
-        <p className="text-lg leading-6 font-medium text-gray-900">Subscription</p>
         <div className="mt-4 flex items-center justify-center text-5xl font-extrabold text-gray-900">
           <span>$3 USD</span>
           <span className="ml-3 text-xl font-medium text-gray-500"> / month</span>
         </div>
-        <p className="mt-4 text-sm">
-          <a href="#" className="font-medium text-gray-500 underline">
-            Learn more about Tattle
-          </a>
-        </p>
-        <div className="mt-6">
-          <div className="rounded-md shadow">
-            <a
-              href="#"
-              className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500"
-            >
-              Subscribe
-            </a>
-          </div>
-        </div>
-        <div className="mt-4 text-sm">
-          <a href="#" className="font-medium text-gray-900">
-            Some link <span className="font-normal text-gray-500">(and more!)</span>
-          </a>
-        </div>
+
+
+
       </div>
     </div>
   )
