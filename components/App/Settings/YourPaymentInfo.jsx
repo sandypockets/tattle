@@ -7,7 +7,7 @@ export default function YourPaymentInfo() {
     <Card>
       <div className="flex justify-between">
         <div className="justify-start">
-          <CardTitle>Payment method</CardTitle>
+          <CardTitle>Payment methods</CardTitle>
         </div>
         <div>
           <p className="w-80 pb-4">Change your payment method, or cancel your subscription.</p>
