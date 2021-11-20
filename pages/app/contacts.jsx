@@ -3,8 +3,11 @@ import Card from "../../components/Global/Card";
 import CardTitle from "../../components/Global/CardTitle";
 import Button from "../../components/Global/Button";
 import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
+import {useState} from "react";
 
 export default function Contacts() {
+  const [displayFormType, setDisplayFormType] = useState('empty')
+
   return (
     <AppLayout>
       <div className="flex justify-between">
@@ -19,10 +22,8 @@ export default function Contacts() {
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
-      <Card>
-
-      <ContactsEmptyState />
-      </Card>
+      {displayFormType === 'empty' && <ContactsEmptyState />}
+      {displayFormType === 'create' && 'Create form'}
     </AppLayout>
   )
 }
