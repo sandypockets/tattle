@@ -4,6 +4,7 @@ import CardTitle from "../../components/Global/CardTitle";
 import Button from "../../components/Global/Button";
 import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
 import {useState} from "react";
+import CreateContact from "../../components/App/Contacts/CreateContact";
 
 export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
@@ -22,8 +23,8 @@ export default function Contacts() {
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
-      {displayFormType === 'empty' && <ContactsEmptyState />}
-      {displayFormType === 'create' && 'Create form'}
+      {displayFormType === 'empty' && <ContactsEmptyState setState={setDisplayFormType} />}
+      {displayFormType === 'create' && <CreateContact />}
     </AppLayout>
   )
 }
