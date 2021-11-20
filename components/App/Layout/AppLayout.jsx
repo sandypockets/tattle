@@ -86,7 +86,7 @@ export default function AppLayout({ children }) {
                     </button>
                   </div>
                 </Transition.Child>
-                <div className="flex-shrink-0 px-4 flex items-center">
+                <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-gray-900 sm:text-3xl">
                   Tattle
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
@@ -126,7 +126,7 @@ export default function AppLayout({ children }) {
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="border-r border-gray-200 pt-5 flex flex-col flex-grow bg-white overflow-y-auto">
-            <div className="flex-shrink-0 px-4 flex items-center">
+            <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-gray-900 sm:text-3xl">
               Tattle
             </div>
             <div className="flex-grow mt-5 flex flex-col">
