@@ -1,13 +1,16 @@
 import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
 import TextInput from "../../Global/TextInput";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import Button from "../../Global/Button";
+import SingleDatePicker from "../DatePicker";
 
 export default function CreateGoal() {
   const [goalTitle, setGoalTitle] = useState('')
   const [goalDesc, setGoalDesc] = useState('')
   const [goalOutcome, setGoalOutcome] = useState('')
   const [goalDueDate, setGoalDueDate] = useState()
+  const [selectedDate, setSelectedDate] = useState(new Date());
 
   return (
     <Card>
@@ -46,7 +49,14 @@ export default function CreateGoal() {
         />
         </div>
       </div>
-      <div className="mt-6">Date picker</div>
+      <div className="my-6">
+        <SingleDatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+      </div>
+
+
+      <Button>
+        Save
+      </Button>
     </Card>
   )
 }
