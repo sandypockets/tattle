@@ -4,6 +4,7 @@ import TextInput from "../../Global/TextInput";
 import {useEffect, useState} from "react";
 import Button from "../../Global/Button";
 import SingleDatePicker from "../DatePicker";
+import ChooseContact from "./ChooseContact";
 
 export default function CreateGoal() {
   const [goalTitle, setGoalTitle] = useState('')
@@ -11,6 +12,7 @@ export default function CreateGoal() {
   const [goalOutcome, setGoalOutcome] = useState('')
   const [goalDueDate, setGoalDueDate] = useState()
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedContact, setSelectedContact] = useState()
 
   return (
     <Card>
@@ -49,14 +51,24 @@ export default function CreateGoal() {
         />
         </div>
       </div>
-      <div className="my-6">
-        <SingleDatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+
+      <ChooseContact selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
+
+      <div className="flex justify-between flex-row-reverse my-6 mx-2">
+        <div>
+          <p className="mb-1">
+            Due date
+          </p>
+          <SingleDatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
+        </div>
+        <p className="self-center max-w-md mt-2">If you do not mark your goal as complete by this date, we'll tattle on you.</p>
       </div>
 
-
-      <Button>
-        Save
-      </Button>
+      <div className="mx-2">
+        <Button>
+          Save
+        </Button>
+      </div>
     </Card>
   )
 }
