@@ -12,13 +12,15 @@ import {
 import { SearchIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 import { useRouter } from "next/router";
+import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
+import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 
 const navigation = [
-  { name: 'Dashboard', href: '/app', icon: HomeIcon, current: true },
-  { name: 'Goals', href: '/app/goals', icon: CheckIcon, current: false },
-  { name: 'Contacts', href: '/app/contacts', icon: UsersIcon, current: false },
-  { name: 'Profile', href: '/app/profile', icon: UserIcon, current: false },
-  { name: 'Settings', href: '/app/settings', icon: AdjustmentsIcon, current: false },
+  { name: 'Dashboard', href: '/app', icon: HomeIcon },
+  { name: 'Goals', href: '/app/goals', icon: CheckIcon },
+  { name: 'Contacts', href: '/app/contacts', icon: UsersIcon },
+  { name: 'Profile', href: '/app/profile', icon: UserIcon },
+  { name: 'Settings', href: '/app/settings', icon: AdjustmentsIcon }
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
@@ -26,9 +28,15 @@ const userNavigation = [
   { name: 'Sign out', href: '#' },
 ]
 
+const customSettings = {
+  name: 'Customize', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon
+}
+
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
+
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -37,6 +45,7 @@ export default function AppLayout({ children }) {
 
   useEffect(() => {
     setCurrentPage(router.pathname)
+    console.log(router.pathname)
   }, [])
 
 
@@ -92,27 +101,7 @@ export default function AppLayout({ children }) {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <Link href={item.href}>
-                        <a
-                          key={item.name}
-                          href={item.href}
-                          className={classNames(
-                            item.href === currentPage
-                              ? 'bg-gray-100 text-gray-900'
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                            'group rounded-md py-2 px-2 flex items-center text-base font-medium'
-                          )}
-                        >
-                          <item.icon
-                            className={classNames(
-                              item.href === currentPage ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                              'mr-4 flex-shrink-0 h-6 w-6'
-                            )}
-                            aria-hidden="true"
-                          />
-                          {item.name}
-                        </a>
-                      </Link>
+                      <MobileLinkWithIcon item={item} currentPage={currentPage} />
                     ))}
                   </nav>
                 </div>
@@ -132,26 +121,9 @@ export default function AppLayout({ children }) {
             <div className="flex-grow mt-5 flex flex-col">
               <nav className="flex-1 px-2 pb-4 space-y-1">
                 {navigation.map((item) => (
-                  <Link href={item.href}>
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className={classNames(
-                        item.href === currentPage ? 'bg-gray-100 text-gray-900' : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900',
-                        'group rounded-md py-2 px-2 flex items-center text-sm font-medium'
-                      )}
-                    >
-                      <item.icon
-                        className={classNames(
-                          item.href === currentPage ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500',
-                          'mr-3 flex-shrink-0 h-6 w-6'
-                        )}
-                        aria-hidden="true"
-                      />
-                      {item.name}
-                    </a>
-                  </Link>
+                  <DesktopLinkWithIcon item={item} currentPage={currentPage} />
                 ))}
+                {currentPage === customSettings.parentHref && <DesktopLinkWithIcon item={customSettings} currentPage={currentPage} /> }
               </nav>
             </div>
           </div>
