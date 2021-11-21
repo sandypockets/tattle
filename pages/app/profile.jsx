@@ -17,8 +17,8 @@ export default function Profile() {
       <Avatar />
       <Email />
       <Password />
-      <CustomSms />
-      <CustomVoice />
+      {/*<CustomSms />*/}
+      {/*<CustomVoice />*/}
     </AppLayout>
   )
 }

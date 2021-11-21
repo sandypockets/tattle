@@ -76,7 +76,7 @@ The above query will create a relational table, connecting the profile the user 
 2. Install dependencies with `yarn install`
 3. Create a new file, `.env.local`
 4. Copy the contents of `.env.example` into `.env.local`
-5. Login to Supabase, and replace the placeholders in the `.env.local` with your real Supabase project information. You can find it in Supabase by clicking **Settings > API**.
+5. Login to Supabase, and replace the placeholders in the `.env.local` with your real Supabase project information. You can find it in Supabase by clicking **Index > API**.
 6. Start the Next development server.
 ```shell
 yarn dev

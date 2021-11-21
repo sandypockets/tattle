@@ -14,6 +14,7 @@ import Link from 'next/link'
 import { useRouter } from "next/router";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
+import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -123,7 +124,8 @@ export default function AppLayout({ children }) {
                 {navigation.map((item) => (
                   <DesktopLinkWithIcon item={item} currentPage={currentPage} />
                 ))}
-                {currentPage === customSettings.parentHref && <DesktopLinkWithIcon item={customSettings} currentPage={currentPage} /> }
+                {currentPage === customSettings.parentHref && <DesktopLinkNoIcon item={customSettings} currentPage={currentPage} /> }
+                {currentPage === customSettings.href && <DesktopLinkNoIcon item={customSettings} currentPage={currentPage} /> }
               </nav>
             </div>
           </div>
