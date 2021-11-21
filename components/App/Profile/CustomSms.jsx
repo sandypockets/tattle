@@ -6,7 +6,7 @@ export default function CustomSms() {
     <Card>
       <CardTitle>Custom SMS message</CardTitle>
       <p>If Tattle sends an SMS to one of your contacts, it cycles through a few predefined responses. Some of which you can see here. The field below allows you to use your own custom Tattle SMS message.</p>
-      <div>
+      <div className="mt-6">
         <label htmlFor="custom-sms" className="block text-sm font-medium text-gray-700">
           Add your custom message
         </label>

@@ -12,15 +12,15 @@ export default function Avatar() {
           <CardTitle>Avatar</CardTitle>
           <p className="mb-8">Update your profile photo</p>
         </div>
-        <div className="flex flex-row-reverse mr-36 mt-4">
+        <div className="flex flex-row-reverse mr-36">
           <Image src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                 height={100}
-                 width={100}
+                 height={120}
+                 width={120}
                  className="rounded-full"
           />
-          <div className="max-w-min mx-auto mt-8 mr-12">
-            <Button>Upload</Button>
-          </div>
+          {/*<div className="max-w-min mx-auto mt-8 mr-12">*/}
+          {/*  <Button>Upload</Button>*/}
+          {/*</div>*/}
         </div>
       </div>
 
