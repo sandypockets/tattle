@@ -5,12 +5,16 @@ import Password from "../../components/App/Profile/Password";
 import CustomSms from "../../components/App/Profile/CustomSms";
 import CustomVoice from "../../components/App/Profile/CustomVoice";
 import Email from "../../components/App/Profile/Email";
+import Avatar from "../../components/App/Profile/Avatar";
+import Username from "../../components/App/Profile/Username";
 
 export default function Profile() {
   return (
     <AppLayout>
       <CardTitle>Profile</CardTitle>
-      <UsernameAvatar />
+      {/*<UsernameAvatar />*/}
+      <Username />
+      <Avatar />
       <Email />
       <Password />
       <CustomSms />
