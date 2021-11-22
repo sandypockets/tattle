@@ -7,6 +7,7 @@ import SingleDatePicker from "../DatePicker";
 import ChooseContact from "./ChooseContact";
 import {supabase} from "../../../lib/supabaseClient";
 import getContacts from "../../../helpers/getContacts";
+import createGoal from "../../../helpers/createGoal";
 
 export default function CreateGoal() {
   const [goalTitle, setGoalTitle] = useState('')
@@ -72,14 +73,11 @@ export default function CreateGoal() {
 
       <div className="mx-2">
         <Button
-          // Current console.log onClickHandler is for debugging
-          onClickHandler={() => console.log("SAVE!!!: ", {
-          goalTitle,
-          goalDesc,
-          goalOutcome,
-          selectedDate,
-          selectedContactId
-        })}
+          onClickHandler={() => {
+            const user = supabase.auth.user()
+            const userId = user.id
+            createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId)
+          }}
         >
           Save
         </Button>
