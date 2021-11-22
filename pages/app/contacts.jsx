@@ -8,11 +8,15 @@ import CreateContact from "../../components/App/Contacts/CreateContact";
 import {supabase} from "../../lib/supabaseClient";
 import getContacts from "../../helpers/getContacts";
 import ContactsTable from "../../components/App/Contacts/ContactsTable";
+import Slideover from "../../components/App/Layout/Slideover";
+import EditContactSlideover from "../../components/App/Contacts/EditContactSlideover";
 
 export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
   const [contacts, setContacts] = useState()
   const [user, setUser] = useState()
+  const [open, setOpen] = useState(true)
+  const [selectedContact, setSelectedContact] = useState()
 
   useEffect(() => {
     setUser(supabase.auth.user())
@@ -48,7 +52,9 @@ export default function Contacts() {
       </Card>
       {displayFormType === 'empty' && !contacts && <ContactsEmptyState setState={setDisplayFormType} />}
       {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
-      {contacts && <ContactsTable contacts={contacts} /> }
+      {contacts && <ContactsTable contacts={contacts} setOpen={setOpen} setSelectedContact={setSelectedContact} /> }
+
+      <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} />
     </AppLayout>
   )
 }

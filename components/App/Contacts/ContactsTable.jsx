@@ -1,6 +1,6 @@
 import Button from "../../Global/Button";
 
-export default function ContactsTable({ contacts }) {
+export default function ContactsTable({ contacts, setOpen, setSelectedContact }) {
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -28,7 +28,7 @@ export default function ContactsTable({ contacts }) {
                   Created at
                 </th>
                 <th scope="col" className="relative px-6 py-3">
-                  <span className="sr-only">Edit</span>
+                  <span className="sr-only">Assign</span>
                 </th>
                 <th scope="col" className="relative px-6 py-3">
                   <span className="sr-only">Edit</span>
@@ -37,7 +37,7 @@ export default function ContactsTable({ contacts }) {
               </thead>
               <tbody>
               {contacts.map((contact) => (
-                <tr key={contact.email} className='bg-white'>
+                <tr key={contact.id} className='bg-white'>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{contact.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact.phone}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact['created_at']}</td>
@@ -49,7 +49,10 @@ export default function ContactsTable({ contacts }) {
                       </Button>
                     </div>
                     <div className="max-w-min">
-                      <Button>
+                      <Button onClickHandler={() => {
+                        setSelectedContact(contact)
+                        setOpen(true)
+                      }}>
                         Edit
                       </Button>
                     </div>
