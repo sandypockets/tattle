@@ -1,6 +1,6 @@
 import { supabase } from "../../../lib/supabaseClient";
 
-async function createContact(req, res) {
+async function createGoal(req, res) {
   const id = req.body['user_id']
   const goalTitle = req.body['goal_title']
   const goalDesc = req.body['goal_description']
@@ -41,11 +41,33 @@ async function createContact(req, res) {
   }
 }
 
+async function getGoals(req, res) {
+  const ownerId = req.query['id']
+  try {
+    const { data, error, status } = await supabase
+      .from('goals')
+      .select()
+      .eq('owner_id', ownerId)
+    if (data) {
+      res.json(data)
+      res.send(200)
+    }
+    // if (error) {
+    //   res.json(error)
+    // }
+  } catch (err) {
+    res.json(err)
+    res.send(400)
+  } finally {
+    res.end()
+  }
+}
+
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    createContact(req, res)
+    createGoal(req, res)
   } else if (req.method === 'GET') {
-    //
+    getGoals(req, res)
   } else {
     res.send("Something's not right. Check your query.")
   }

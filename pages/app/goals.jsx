@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import AppLayout from "../../components/App/Layout/AppLayout";
 import Banner from "../../components/App/Banner";
 import Button from "../../components/Global/Button";
@@ -8,10 +8,22 @@ import CreateGoal from "../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../components/App/Goals/GoalsTable";
 import Link from 'next/link'
+import {supabase} from "../../lib/supabaseClient";
+import getGoals from "../../helpers/getGoals";
 
 export default function Goals() {
   const [displayFormType, setDisplayFormType] = useState('empty')
-  const [hasGoals, setHasGoals] = useState(false)
+  const [goals, setGoals] = useState()
+
+  async function getUserGoals() {
+    const user = await supabase.auth.user()
+    const id = user['id']
+    getGoals(id, setGoals)
+  }
+
+  useEffect(() => {
+    getUserGoals()
+  }, [])
 
   return (
     <AppLayout>
@@ -35,11 +47,11 @@ export default function Goals() {
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
-      {displayFormType === 'empty' && !hasGoals && <GoalsEmptyState setState={setDisplayFormType} />}
+      {displayFormType === 'empty' && !goals && <GoalsEmptyState setState={setDisplayFormType} />}
       {displayFormType === 'create' && <CreateGoal />}
-      {hasGoals && (
+      {goals && (
         <div>
-          <GoalsTable />
+          <GoalsTable goals={goals} />
         </div>
       )}
     </AppLayout>
