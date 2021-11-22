@@ -4,27 +4,32 @@ async function createContact(req, res) {
   const id = req.body['user_id']
   const name = req.body['name']
   const phone = req.body['phone']
-  try {
-    const { data, error } = await supabase
-      .from('contacts')
-      .insert([{
-        "owner_id": id,
-        "name": name,
-        "phone": phone,
-      }])
-    if (data) {
-      console.log("Create Contact Data: ", data)
-      res.json(data)
-      res.send(200)
-    }
-    if (error) {
-      res.json(error)
+  if (name && phone) {
+    try {
+      const { data, error } = await supabase
+        .from('contacts')
+        .insert([{
+          "owner_id": id,
+          "name": name,
+          "phone": phone,
+        }])
+      if (data) {
+        console.log("Create Contact Data: ", data)
+        res.json(data)
+        res.send(200)
+      }
+      if (error) {
+        res.json(error)
+        res.send(400)
+      }
+    } catch (error) {
       res.send(400)
+      res.json(error)
+    } finally {
+      res.end()
     }
-  } catch (error) {
-    res.send(400)
-    res.json(error)
-  } finally {
+  } else {
+    res.json('Error - No content')
     res.end()
   }
 }

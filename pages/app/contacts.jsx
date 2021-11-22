@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import CreateContact from "../../components/App/Contacts/CreateContact";
 import {supabase} from "../../lib/supabaseClient";
 import getContacts from "../../helpers/getContacts";
+import ContactsTable from "../../components/App/Contacts/ContactsTable";
 
 export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
@@ -33,12 +34,16 @@ export default function Contacts() {
     // }
   }, [])
 
+  useEffect(() => {
+    console.log("Contacts!: ", contacts)
+  }, [contacts])
+
   return (
     <AppLayout>
       <div className="flex justify-between">
         <CardTitle>Contacts</CardTitle>
         <div className="max-w-min">
-          <Button>Create</Button>
+          <Button onClickHandler={() => setDisplayFormType('create')}>Create</Button>
         </div>
       </div>
       <Card>
@@ -47,8 +52,9 @@ export default function Contacts() {
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
-      {displayFormType === 'empty' && <ContactsEmptyState setState={setDisplayFormType} />}
+      {displayFormType === 'empty' && !contacts && <ContactsEmptyState setState={setDisplayFormType} />}
       {displayFormType === 'create' && <CreateContact user={user} />}
+      {contacts && <ContactsTable contacts={contacts} /> }
     </AppLayout>
   )
 }

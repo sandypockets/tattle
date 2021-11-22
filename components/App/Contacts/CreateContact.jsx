@@ -23,7 +23,7 @@ export default function CreateContact({ user }) {
           <TextInput type="phone" label="Phone number" value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} />
           <div className="flex justify-end mt-4 mr-2">
             <div className="max-w-min">
-              <Button type="button" onClickHandler={createContact(user.id, contactName, contactPhone)}>
+              <Button type="button" onClickHandler={() => createContact(user.id, contactName, contactPhone)}>
                 Save!
               </Button>
             </div>
