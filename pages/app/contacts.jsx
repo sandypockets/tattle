@@ -6,13 +6,31 @@ import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState
 import {useEffect, useState} from "react";
 import CreateContact from "../../components/App/Contacts/CreateContact";
 import {supabase} from "../../lib/supabaseClient";
+import getContacts from "../../helpers/getContacts";
 
 export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
+  const [contacts, setContacts] = useState()
   const [user, setUser] = useState()
+  //
 
   useEffect(() => {
     setUser(supabase.auth.user())
+  }, [])
+
+  async function getUser() {
+    const user = await supabase.auth.user()
+    const id = user['id']
+    getContacts({ id, setContacts })
+  }
+
+  useEffect(() => {
+    getUser()
+    // if (user && !contacts) {
+    // const user = supabase.auth.user()
+    // const id = user['id']
+    // getContacts({ id, setContacts })
+    // }
   }, [])
 
   return (

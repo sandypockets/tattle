@@ -14,12 +14,12 @@ async function createContact(req, res) {
       }])
     if (data) {
       console.log("Create Contact Data: ", data)
-      res.send(200)
       res.json(data)
+      res.send(200)
     }
     if (error) {
-      res.send(400)
       res.json(error)
+      res.send(400)
     }
   } catch (error) {
     res.send(400)
@@ -29,11 +29,33 @@ async function createContact(req, res) {
   }
 }
 
+async function getContacts(req, res) {
+  const ownerId = req.query['id']
+  try {
+    const { data, error, status } = await supabase
+      .from('contacts')
+      .select()
+      .eq('owner_id', ownerId)
+    if (data) {
+      res.json(data)
+      res.send(200)
+    }
+    // if (error) {
+    //   res.json(error)
+    // }
+  } catch (err) {
+      res.json(err)
+      res.send(400)
+  } finally {
+    res.end()
+  }
+}
+
 export default function handler(req, res) {
   if (req.method === 'POST') {
     createContact(req, res)
   } else if (req.method === 'GET') {
-    //
+    getContacts(req, res)
   } else {
     res.send("Something's not right. Check your query.")
   }
