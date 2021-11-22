@@ -5,13 +5,14 @@ import {useState} from "react";
 import Button from "../../Global/Button";
 import createContact from "../../../helpers/createContact";
 
-export default function CreateContact({ user, getUserContacts }) {
+export default function CreateContact({ user, getUserContacts, setDisplayFormType }) {
   const [contactName, setContactName] = useState('')
   const [contactPhone, setContactPhone] = useState('')
 
   async function submitAndRefreshData() {
     await createContact(user.id, contactName, contactPhone)
     getUserContacts()
+    setDisplayFormType('empty')
   }
 
   return (

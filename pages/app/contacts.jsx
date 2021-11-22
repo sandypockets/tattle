@@ -47,7 +47,7 @@ export default function Contacts() {
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
       {displayFormType === 'empty' && !contacts && <ContactsEmptyState setState={setDisplayFormType} />}
-      {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} />}
+      {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
       {contacts && <ContactsTable contacts={contacts} /> }
     </AppLayout>
   )
