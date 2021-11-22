@@ -13,7 +13,6 @@ export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
   const [contacts, setContacts] = useState()
   const [user, setUser] = useState()
-  //
 
   useEffect(() => {
     setUser(supabase.auth.user())
@@ -27,11 +26,6 @@ export default function Contacts() {
 
   useEffect(() => {
     getUser()
-    // if (user && !contacts) {
-    // const user = supabase.auth.user()
-    // const id = user['id']
-    // getContacts({ id, setContacts })
-    // }
   }, [])
 
   useEffect(() => {
