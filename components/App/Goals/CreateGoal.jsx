@@ -71,7 +71,16 @@ export default function CreateGoal() {
       </div>
 
       <div className="mx-2">
-        <Button>
+        <Button
+          // Current console.log onClickHandler is for debugging
+          onClickHandler={() => console.log("SAVE!!!: ", {
+          goalTitle,
+          goalDesc,
+          goalOutcome,
+          selectedDate,
+          selectedContactId
+        })}
+        >
           Save
         </Button>
       </div>

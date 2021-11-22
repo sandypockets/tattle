@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export default function createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContact){
+export default function createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId){
   axios
     .post('/api/v1/goals', {
       'user_id': userId,
