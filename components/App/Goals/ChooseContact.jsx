@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import getContacts from "../../../helpers/getContacts";
 
-export default function ChooseContact({ selectedContact, setSelectedContact }) {
+export default function ChooseContact({ selectedContactId, setSelectedContactId }) {
   const [contacts, setContacts] = useState()
 
   async function getUserContacts() {
@@ -19,9 +19,9 @@ export default function ChooseContact({ selectedContact, setSelectedContact }) {
     <div className="flex mx-2 mt-6 justify-between flex-row-reverse">
       <div className="flex flex-col">
         <p>Choose a contact</p>
-        <select className="w-56" onChange={(e) => setSelectedContact(event.target.value)}>
+        <select className="w-56" onChange={(e) => setSelectedContactId(event.target.value)}>
           {contacts && contacts.map((option) => (
-            <option value={option.name} key={option.id}>{option.name} - {option.phone}</option>
+            <option value={option.id} key={option.id}>{option.name} - {option.phone}</option>
           ) )}
         </select>
       </div>

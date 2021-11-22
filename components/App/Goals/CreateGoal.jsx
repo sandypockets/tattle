@@ -14,7 +14,11 @@ export default function CreateGoal() {
   const [goalOutcome, setGoalOutcome] = useState('')
   const [goalDueDate, setGoalDueDate] = useState()
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedContact, setSelectedContact] = useState()
+  const [selectedContactId, setSelectedContactId] = useState()
+
+  useEffect(() => {
+    console.log("selectedContactId: ", selectedContactId)
+  }, [selectedContactId])
 
   return (
     <Card>
@@ -54,7 +58,7 @@ export default function CreateGoal() {
         </div>
       </div>
 
-      <ChooseContact selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
+      <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} />
 
       <div className="flex justify-between flex-row-reverse my-6 mx-2">
         <div>
