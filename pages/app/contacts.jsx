@@ -18,14 +18,14 @@ export default function Contacts() {
     setUser(supabase.auth.user())
   }, [])
 
-  async function getUser() {
+  async function getUserContacts() {
     const user = await supabase.auth.user()
     const id = user['id']
-    getContacts({ id, setContacts })
+    getContacts(id, setContacts)
   }
 
   useEffect(() => {
-    getUser()
+    getUserContacts()
   }, [])
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function Contacts() {
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
       {displayFormType === 'empty' && !contacts && <ContactsEmptyState setState={setDisplayFormType} />}
-      {displayFormType === 'create' && <CreateContact user={user} />}
+      {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} />}
       {contacts && <ContactsTable contacts={contacts} /> }
     </AppLayout>
   )

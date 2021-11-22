@@ -5,10 +5,14 @@ import {useState} from "react";
 import Button from "../../Global/Button";
 import createContact from "../../../helpers/createContact";
 
-export default function CreateContact({ user }) {
+export default function CreateContact({ user, getUserContacts }) {
   const [contactName, setContactName] = useState('')
   const [contactPhone, setContactPhone] = useState('')
 
+  async function submitAndRefreshData() {
+    await createContact(user.id, contactName, contactPhone)
+    getUserContacts()
+  }
 
   return (
     <Card>
@@ -23,7 +27,9 @@ export default function CreateContact({ user }) {
           <TextInput type="phone" label="Phone number" value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} />
           <div className="flex justify-end mt-4 mr-2">
             <div className="max-w-min">
-              <Button type="button" onClickHandler={() => createContact(user.id, contactName, contactPhone)}>
+              <Button type="button" onClickHandler={() => {
+                submitAndRefreshData()
+              }}>
                 Save!
               </Button>
             </div>
