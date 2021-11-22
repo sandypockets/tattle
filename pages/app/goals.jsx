@@ -1,4 +1,6 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabaseClient";
+import Link from 'next/link'
 import AppLayout from "../../components/App/Layout/AppLayout";
 import Banner from "../../components/App/Banner";
 import Button from "../../components/Global/Button";
@@ -7,8 +9,6 @@ import CardTitle from "../../components/Global/CardTitle";
 import CreateGoal from "../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../components/App/Goals/GoalsTable";
-import Link from 'next/link'
-import {supabase} from "../../lib/supabaseClient";
 import getGoals from "../../helpers/getGoals";
 
 export default function Goals() {
@@ -33,27 +33,25 @@ export default function Goals() {
           <Button onClickHandler={() => setDisplayFormType('create')}>Create</Button>
         </div>
       </div>
-      <Banner>
-        <p className="h-12">Before you can create a goal, you need to{' '}
-          <Link href="/app/contacts">
-            <a className="text-yellow-200">
-              create a contact
-            </a>
-          </Link>
-          .</p>
-      </Banner>
+      {!goals && (
+        <Banner>
+          <p className="h-12">Before you can create a goal, you need to{' '}
+            <Link href="/app/contacts">
+              <a className="text-yellow-200">
+                create a contact
+              </a>
+            </Link>
+            .</p>
+        </Banner>
+      )}
       <Card>
         <CardTitle>Manage your goals</CardTitle>
         <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
       {displayFormType === 'empty' && !goals && <GoalsEmptyState setState={setDisplayFormType} />}
-      {displayFormType === 'create' && <CreateGoal />}
-      {goals && (
-        <div>
-          <GoalsTable goals={goals} />
-        </div>
-      )}
+      {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
+      {goals && <GoalsTable goals={goals} />}
     </AppLayout>
   )
 }

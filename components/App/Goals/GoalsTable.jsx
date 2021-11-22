@@ -1,6 +1,7 @@
 import Button from '../../Global/Button'
 
 export default function GoalsTable({ goals }) {
+
   return (
     <div className="flex flex-col my-6 shadow-sm ring-1 ring-black rounded-md ring-opacity-5">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -46,15 +47,13 @@ export default function GoalsTable({ goals }) {
               </thead>
               <tbody>
               {goals.map((goal, index) => (
-                <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{goal.title}</td>
-                  <div className="w-52">
-                    <td className="px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal.outcome}</td>
-                  </div>
-                  <td className="px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal.description}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-500">{goal['due_date']}</td>
-                  <td className="px-8 py-4 whitespace-nowrap text-sm text-gray-500">Tatle contact Id: {goal['contact_id']}</td>
-                  <td className="px-4 py-4 whitespace-nowrap text-right text-sm font-medium">
+                <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
+                  <td className="w-36 px-4 py-4 whitespace-pre-line text-sm font-medium text-gray-900">{goal.title}</td>
+                  <td className="w-48 px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal.outcome}</td>
+                  <td className="w-80 px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal.description}</td>
+                  <td className="px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal['due_date']}</td>
+                  <td className="w-24 px-8 py-4 whitespace-pre-line text-sm text-gray-500">Tattle contact Id: {goal['contact_id']}</td>
+                  <td className="px-6 py-4 whitespace-pre-line text-right text-sm font-medium">
                     <Button>
                       Edit
                     </Button>

@@ -1,32 +1,33 @@
+import { useState } from "react";
+import { supabase } from "../../../lib/supabaseClient";
+import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
-import TextInput from "../../Global/TextInput";
-import {useEffect, useState} from "react";
-import Button from "../../Global/Button";
-import SingleDatePicker from "../DatePicker";
 import ChooseContact from "./ChooseContact";
-import {supabase} from "../../../lib/supabaseClient";
-import getContacts from "../../../helpers/getContacts";
+import SingleDatePicker from "../DatePicker";
+import TextInput from "../../Global/TextInput";
 import createGoal from "../../../helpers/createGoal";
 
-export default function CreateGoal() {
+export default function CreateGoal({ setDisplayFormType, getUserGoals }) {
   const [goalTitle, setGoalTitle] = useState('')
   const [goalDesc, setGoalDesc] = useState('')
   const [goalOutcome, setGoalOutcome] = useState('')
-  const [goalDueDate, setGoalDueDate] = useState()
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedContactId, setSelectedContactId] = useState()
 
-  useEffect(() => {
-    console.log("selectedContactId: ", selectedContactId)
-  }, [selectedContactId])
+  async function handleCreateGoal() {
+    const user = await supabase.auth.user()
+    const userId = user.id
+    await createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId)
+    setDisplayFormType('empty')
+    getUserGoals()
+  }
 
   return (
     <Card>
       <CardTitle>Create a goal</CardTitle>
       <p>Create a new goal</p>
       <TextInput type="text" label="Goal title" value={goalTitle} onChangeHandler={(e) => setGoalTitle(e.target.value)} />
-
       <div className="my-6">
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mx-2">
           Goal description
@@ -42,7 +43,6 @@ export default function CreateGoal() {
         />
         </div>
       </div>
-
       <div>
         <label htmlFor="outcomes" className="block text-sm font-medium text-gray-700 mx-2">
           How will you know that this goal is achieved?
@@ -58,9 +58,7 @@ export default function CreateGoal() {
         />
         </div>
       </div>
-
       <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} />
-
       <div className="flex justify-between flex-row-reverse my-6 mx-2">
         <div>
           <p className="mb-1">
@@ -70,13 +68,10 @@ export default function CreateGoal() {
         </div>
         <p className="self-center max-w-md mt-2">If you do not mark your goal as complete by this date, we'll tattle on you.</p>
       </div>
-
       <div className="mx-2">
         <Button
           onClickHandler={() => {
-            const user = supabase.auth.user()
-            const userId = user.id
-            createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId)
+            handleCreateGoal()
           }}
         >
           Save
