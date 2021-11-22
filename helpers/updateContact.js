@@ -1,10 +1,11 @@
 import axios from 'axios'
 
-export default function createContact(userId, name, phone){
+export default function updateContact(userId, contactId, name, phone){
   axios
     .post('/api/v1/contacts', {
-      'type': 'create',
+      'type': 'update',
       'user_id': userId,
+      'contact_id': contactId,
       'name': name,
       'phone': phone
     })
@@ -12,6 +13,6 @@ export default function createContact(userId, name, phone){
       console.log(response);
     })
     .catch(function (error) {
-      console.log(error);
+      console.log("Update error", error);
     });
 }

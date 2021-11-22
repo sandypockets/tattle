@@ -54,7 +54,7 @@ export default function Contacts() {
       {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
       {contacts && <ContactsTable contacts={contacts} setOpen={setOpen} setSelectedContact={setSelectedContact} /> }
 
-      <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} />
+      <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
     </AppLayout>
   )
 }

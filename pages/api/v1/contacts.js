@@ -34,6 +34,35 @@ async function createContact(req, res) {
   }
 }
 
+async function updateContact(req, res) {
+  const userId = req.body['user_id']
+  const contactId = req.body['contact_id']
+  const name = req.body['name']
+  const phone = req.body['phone']
+  console.log("UPDATE contact: ", req.body) // Debug
+  try {
+    const { data, error } = await supabase
+      .from('contacts')
+      .update({
+        name: name,
+        phone: phone
+      })
+      .match({id: contactId, "owner_id": userId})
+    if (data) {
+      console.log("Contact updated.")
+      res.json(data)
+      res.send(200)
+    }
+    if (error) {
+      res.json(error)
+    }
+  } catch (err) {
+    res.json(err)
+  } finally {
+    res.end()
+  }
+}
+
 async function getContacts(req, res) {
   const ownerId = req.query['id']
   try {
@@ -58,7 +87,11 @@ async function getContacts(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    createContact(req, res)
+    if (req.body.type === 'create') {
+      createContact(req, res)
+    } else if (req.body.type === 'update') {
+      updateContact(req, res)
+    }
   } else if (req.method === 'GET') {
     getContacts(req, res)
   } else {
