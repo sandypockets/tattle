@@ -3,10 +3,12 @@ import CardTitle from "../../Global/CardTitle";
 import TextInput from "../../Global/TextInput";
 import {useState} from "react";
 import Button from "../../Global/Button";
+import createContact from "../../../helpers/createContact";
 
-export default function CreateContact() {
+export default function CreateContact({ user }) {
   const [contactName, setContactName] = useState('')
   const [contactPhone, setContactPhone] = useState('')
+
 
   return (
     <Card>
@@ -21,8 +23,8 @@ export default function CreateContact() {
           <TextInput type="phone" label="Phone number" value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} />
           <div className="flex justify-end mt-4 mr-2">
             <div className="max-w-min">
-              <Button type="button">
-                Save
+              <Button type="button" onClickHandler={createContact(user.id, contactName, contactPhone)}>
+                Save!
               </Button>
             </div>
           </div>

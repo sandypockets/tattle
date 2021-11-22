@@ -3,11 +3,17 @@ import Card from "../../components/Global/Card";
 import CardTitle from "../../components/Global/CardTitle";
 import Button from "../../components/Global/Button";
 import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import CreateContact from "../../components/App/Contacts/CreateContact";
+import {supabase} from "../../lib/supabaseClient";
 
 export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    setUser(supabase.auth.user())
+  }, [])
 
   return (
     <AppLayout>
@@ -24,7 +30,7 @@ export default function Contacts() {
         <p>After saving a contact, you can assign the contact to any goals you create.</p>
       </Card>
       {displayFormType === 'empty' && <ContactsEmptyState setState={setDisplayFormType} />}
-      {displayFormType === 'create' && <CreateContact />}
+      {displayFormType === 'create' && <CreateContact user={user} />}
     </AppLayout>
   )
 }
