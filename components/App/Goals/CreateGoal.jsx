@@ -5,6 +5,8 @@ import {useEffect, useState} from "react";
 import Button from "../../Global/Button";
 import SingleDatePicker from "../DatePicker";
 import ChooseContact from "./ChooseContact";
+import {supabase} from "../../../lib/supabaseClient";
+import getContacts from "../../../helpers/getContacts";
 
 export default function CreateGoal() {
   const [goalTitle, setGoalTitle] = useState('')
