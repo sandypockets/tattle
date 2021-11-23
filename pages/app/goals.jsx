@@ -10,13 +10,18 @@ import CreateGoal from "../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../components/App/Goals/GoalsTable";
 import getGoals from "../../helpers/getGoals";
+import EditGoalSlideover from "../../components/App/Goals/EditGoalSlideover";
 
 export default function Goals() {
   const [displayFormType, setDisplayFormType] = useState('empty')
   const [goals, setGoals] = useState()
+  const [open, setOpen] = useState(false)
+  const [user, setUser] = useState()
+  const [selectedGoal, setSelectedGoal] = useState()
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
+    setUser(user)
     const id = user['id']
     getGoals(id, setGoals)
   }
@@ -51,7 +56,8 @@ export default function Goals() {
       </Card>
       {displayFormType === 'empty' && !goals && <GoalsEmptyState setState={setDisplayFormType} />}
       {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
-      {goals && <GoalsTable goals={goals} />}
+      {goals && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
+      <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} />
     </AppLayout>
   )
 }

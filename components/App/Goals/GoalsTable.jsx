@@ -1,6 +1,6 @@
 import Button from '../../Global/Button'
 
-export default function GoalsTable({ goals }) {
+export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
 
   return (
     <div className="flex flex-col my-6 shadow-sm ring-1 ring-black rounded-md ring-opacity-5">
@@ -54,7 +54,11 @@ export default function GoalsTable({ goals }) {
                   <td className="px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal['due_date']}</td>
                   <td className="w-24 px-8 py-4 whitespace-pre-line text-sm text-gray-500">Tattle contact Id: {goal['contact_id']}</td>
                   <td className="px-6 py-4 whitespace-pre-line text-right text-sm font-medium">
-                    <Button>
+                    <Button onClickHandler={() => {
+                      setSelectedGoal(goal)
+                      setOpen(true)
+                      console.log("GOAL", goal)
+                    }}>
                       Edit
                     </Button>
                   </td>

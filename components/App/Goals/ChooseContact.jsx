@@ -8,7 +8,7 @@ export default function ChooseContact({ selectedContactId, setSelectedContactId 
   async function getUserContacts() {
     const user = await supabase.auth.user()
     const id = user['id']
-    getContacts({ id, setContacts })
+    getContacts(id, setContacts)
   }
 
   useEffect(() => {
