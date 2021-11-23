@@ -7,7 +7,7 @@ import SingleDatePicker from "../DatePicker";
 import Button from "../../Global/Button";
 import updateGoal from "../../../helpers/updateGoal";
 
-export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, user }) {
+export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, user, getUserGoals }) {
   const [goalTitle, setGoalTitle] = useState('')
   const [goalDesc, setGoalDesc] = useState('')
   const [goalOutcome, setGoalOutcome] = useState('')
@@ -22,9 +22,18 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
       setSelectedContactId(selectedGoal['contact_id'])
       // Convert yyyy-mm-dd into unix
       const unixTime = new Date(selectedGoal['due_date']).getTime() + 100000000
-      setSelectedDate(unixTime)
+      console.log("DATE!", selectedGoal['due_date'])
+      console.log("DATE 2!", new Date(unixTime))
+      setSelectedDate(new Date(unixTime))
+      // setSelectedDate(unixTime)
     }
   }, [selectedGoal])
+
+  async function updateGoalWrapper() {
+    await updateGoal( user.id, selectedContactId, selectedGoal.id, goalTitle, goalDesc, goalOutcome, selectedDate )
+    await getUserGoals()
+    setOpen(false)
+  }
 
 
   return (
@@ -76,7 +85,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
         <div className="mx-2 mb-12">
           <Button
             onClickHandler={() => {
-              updateGoal( user.id, selectedContactId, selectedGoal.id, goalTitle, goalDesc, goalOutcome, selectedDate )
+              updateGoalWrapper()
             }}
           >
             Save

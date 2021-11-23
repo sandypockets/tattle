@@ -5,15 +5,22 @@ import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import updateContact from "../../../helpers/updateContact";
 
-export default function EditContactSlideover({ title, open, setOpen, selectedContact, user}) {
+export default function EditContactSlideover({ open, setOpen, selectedContact, user }) {
   const [name, setName] = useState()
   const [phone, setPhone] = useState()
 
+  useEffect(() => {
+    if (selectedContact) {
+      setName(selectedContact.name)
+      setPhone(selectedContact.phone)
+    }
+  }, [selectedContact])
+
   return (
-    <Slideover title={title} open={open} setOpen={setOpen}>
+    <Slideover open={open} setOpen={setOpen}>
       {user && selectedContact && (
-        <Card>
-          <div className="-m-8">
+        <div>
+          <div>
             <h3 className="font-bold mb-2">Editing {selectedContact.name} - {selectedContact.phone}</h3>
             <TextInput value={name} type="text" label="Name" onChangeHandler={(e) => setName(e.target.value)} />
             <TextInput value={phone} type="phone" label="Phone" onChangeHandler={(e) => setPhone(e.target.value)} />
@@ -25,13 +32,12 @@ export default function EditContactSlideover({ title, open, setOpen, selectedCon
               </Button>
             </div>
           </div>
-        </Card>
-      )}
-      <Card>
-        <div className="-m-8">
-          Editing a contact only updates their phone number moving forward. Any existing goals will still use the old number.
         </div>
-      </Card>
+      )}
+      <div className="mx-4 mt-8">
+        <p className="mb-4">Editing a contact's phone number changes the phone number for all goals the contact is assigned to.</p>
+        <p>Once the old phone number is overwritten, it cannot be recovered.</p>
+      </div>
     </Slideover>
   )
 }

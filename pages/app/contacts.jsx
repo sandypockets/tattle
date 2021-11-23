@@ -15,7 +15,7 @@ export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
   const [contacts, setContacts] = useState()
   const [user, setUser] = useState()
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
   const [selectedContact, setSelectedContact] = useState()
 
   useEffect(() => {

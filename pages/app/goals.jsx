@@ -30,6 +30,8 @@ export default function Goals() {
     getUserGoals()
   }, [])
 
+  goals && goals.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+
   return (
     <AppLayout>
       <div className="flex justify-between">
@@ -57,7 +59,7 @@ export default function Goals() {
       {displayFormType === 'empty' && !goals && <GoalsEmptyState setState={setDisplayFormType} />}
       {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
       {goals && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
-      <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} />
+      <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
     </AppLayout>
   )
 }

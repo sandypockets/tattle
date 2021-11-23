@@ -54,13 +54,13 @@ async function updateUserGoal(req, res) {
     const { data, error } = await supabase
       .from('goals')
       .update({
-        title: goalTitle,
-        description: goalDesc,
-        outcome: goalOutcome,
-        due_date: dueDate,
-        contact_id: contactId
+        "title": goalTitle,
+        "description": goalDesc,
+        "outcome": goalOutcome,
+        "due_date": dueDate,
+        "contact_id": contactId
       })
-      .match({ id: goalId, owner_id: id })
+      .match({ "id": goalId, "owner_id": id })
     if (data) {
       res.json(data)
       res.send(200)
