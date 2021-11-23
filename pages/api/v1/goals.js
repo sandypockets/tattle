@@ -41,6 +41,41 @@ async function createGoal(req, res) {
   }
 }
 
+async function updateUserGoal(req, res) {
+  const id = req.body['user_id']
+  const goalId = req.body['goal_id']
+  const goalTitle = req.body['goal_title']
+  const goalDesc = req.body['goal_description']
+  const goalOutcome = req.body['goal_outcome']
+  const dueDate = req.body['due_date']
+  const contactId = req.body['selected_contact_id']
+  console.log("UPDATE goal: ", req.body)
+  try {
+    const { data, error } = await supabase
+      .from('goals')
+      .update({
+        title: goalTitle,
+        description: goalDesc,
+        outcome: goalOutcome,
+        due_date: dueDate,
+        contact_id: contactId
+      })
+      .match({ id: goalId, owner_id: id })
+    if (data) {
+      res.json(data)
+      res.send(200)
+    }
+    if (error) {
+      res.json(error)
+      res.send(400)
+    }
+  } catch (err) {
+    console.error("Error!", err)
+  } finally {
+    res.end()
+  }
+}
+
 async function getGoals(req, res) {
   const ownerId = req.query['id']
   try {
@@ -65,7 +100,11 @@ async function getGoals(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    createGoal(req, res)
+    if (req.body.type === 'update') {
+      updateUserGoal(req, res)
+    } else if (req.body.type === 'create') {
+      createGoal(req, res)
+    }
   } else if (req.method === 'GET') {
     getGoals(req, res)
   } else {

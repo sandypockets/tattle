@@ -5,6 +5,7 @@ import TextInput from "../../Global/TextInput";
 import ChooseContact from "./ChooseContact";
 import SingleDatePicker from "../DatePicker";
 import Button from "../../Global/Button";
+import updateGoal from "../../../helpers/updateGoal";
 
 export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, user }) {
   const [goalTitle, setGoalTitle] = useState('')
@@ -75,7 +76,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
         <div className="mx-2 mb-12">
           <Button
             onClickHandler={() => {
-
+              updateGoal( user.id, selectedContactId, selectedGoal.id, goalTitle, goalDesc, goalOutcome, selectedDate )
             }}
           >
             Save
