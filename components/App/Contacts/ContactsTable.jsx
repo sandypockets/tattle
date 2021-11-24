@@ -36,7 +36,7 @@ export default function ContactsTable({ contacts, setOpen, setSelectedContact })
               </tr>
               </thead>
               <tbody>
-              {contacts.map((contact) => (
+              {contacts && contacts.map((contact) => (
                 <tr key={contact.id} className='bg-white'>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{contact.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact.phone}</td>

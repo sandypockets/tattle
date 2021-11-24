@@ -51,7 +51,6 @@ async function updateContact(req, res) {
     if (data) {
       console.log("Contact updated.")
       res.json(data)
-      res.send(200)
     }
     if (error) {
       res.json(error)
@@ -72,14 +71,12 @@ async function getContacts(req, res) {
       .eq('owner_id', ownerId)
     if (data) {
       res.json(data)
-      res.send(200)
     }
-    // if (error) {
-    //   res.json(error)
-    // }
+    if (error) {
+      res.json(error)
+    }
   } catch (err) {
       res.json(err)
-      res.send(400)
   } finally {
     res.end()
   }

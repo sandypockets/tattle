@@ -63,11 +63,9 @@ async function updateUserGoal(req, res) {
       .match({ "id": goalId, "owner_id": id })
     if (data) {
       res.json(data)
-      res.send(200)
     }
     if (error) {
       res.json(error)
-      res.send(400)
     }
   } catch (err) {
     console.error("Error!", err)
@@ -85,14 +83,12 @@ async function getGoals(req, res) {
       .eq('owner_id', ownerId)
     if (data) {
       res.json(data)
-      res.send(200)
     }
     // if (error) {
     //   res.json(error)
     // }
   } catch (err) {
     res.json(err)
-    res.send(400)
   } finally {
     res.end()
   }

@@ -119,7 +119,7 @@ export default function AppLayout({ children }) {
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
                   <nav className="px-2 space-y-1">
                     {navigation.map((item) => (
-                      <MobileLinkWithIcon item={item} currentPage={currentPage} />
+                      <MobileLinkWithIcon key={item.href} item={item} currentPage={currentPage} />
                     ))}
                   </nav>
                 </div>
