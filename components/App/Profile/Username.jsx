@@ -20,9 +20,9 @@ export default function Username() {
           <div className="w-72">
             <TextInput value={username} type="text" label="Username" onChangeHandler={(e) => setUsername(e.target.value)} />
           </div>
-          {/*<div className="max-w-min mt-8">*/}
-          {/*  <Button>Save</Button>*/}
-          {/*</div>*/}
+          <div className="max-w-min mt-8">
+            <Button>Save</Button>
+          </div>
         </div>
       </div>
     </Card>

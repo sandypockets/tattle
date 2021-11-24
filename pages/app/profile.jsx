@@ -12,13 +12,8 @@ export default function Profile() {
   return (
     <AppLayout>
       <CardTitle>Profile</CardTitle>
-      {/*<UsernameAvatar />*/}
-      <Username />
-      <Avatar />
       <Email />
       <Password />
-      {/*<CustomSms />*/}
-      {/*<CustomVoice />*/}
     </AppLayout>
   )
 }
