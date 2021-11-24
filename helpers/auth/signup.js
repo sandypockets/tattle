@@ -18,7 +18,7 @@ export default async function handleSignUp(userEmail, userPassword, router) {
     console.error(error.error_description || error.message)
   } finally {
     if (await supabase.auth.session()) {
-      router.push('/')
+      router.push('/app')
     }
   }
 }

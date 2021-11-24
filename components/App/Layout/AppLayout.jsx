@@ -15,6 +15,8 @@ import { useRouter } from "next/router";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
+import {supabase} from "../../../lib/supabaseClient";
+import LoadingWheel from "../../Global/LoadingWheel";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -42,12 +44,27 @@ function classNames(...classes) {
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState()
+  const [session, setSession] = useState(null)
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
     setCurrentPage(router.pathname)
     console.log(router.pathname)
   }, [])
+
+  useEffect(() => {
+    setSession(supabase.auth.session())
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
+
+  useEffect(() => {
+    if (!supabase.auth.session()) {
+      router.push('/app/signin')
+    }
+  }, [session])
 
 
   return (

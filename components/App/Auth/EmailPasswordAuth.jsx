@@ -25,7 +25,7 @@ export default function Auth({ registrationType }) {
 
   useEffect(() => {
     if (supabase.auth.session()) {
-      router.push('/')
+      router.push('/app/')
     }
   }, [])
 
