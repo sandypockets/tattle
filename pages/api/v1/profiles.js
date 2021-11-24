@@ -25,26 +25,13 @@ async function updateProfileEmail(req, res) {
   }
 }
 
-// Not actually updating yet. Have not received confirm email
-async function updateAuthEmail(req, res) {
-  const email = req.body['email']
-  try {
-    const { user, error } = await supabase.auth.update({email: email})
-    if (user) {
-      console.log("Auth success", user)
-    }
-  } catch (err) {
-    console.error(err)
-  }
-}
-
 export default function handler(req, res) {
   if (req.method === 'POST') {
     if (req.body.type === 'update') {
       if (req.body.content === 'email') {
         // update email
         updateProfileEmail(req, res)
-        updateAuthEmail(req, res)
+        // updateAuthEmail(req, res)
       }
       if (req.body.content === 'password') {
         // update password

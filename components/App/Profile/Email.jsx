@@ -10,6 +10,20 @@ export default function Email() {
   const [email, setEmail] = useState()
   const [user, setUser] = useState()
 
+  async function updateAuthEmail(email) {
+    try {
+      const { user, error } = await supabase.auth.update({email: email})
+      if (user) {
+        console.log("Auth success", user)
+      }
+      if (error) {
+        console.error("Supabase Auth Error: ", error)
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   useEffect(() => {
     const user = supabase.auth.user()
     user && setEmail(user.email)
@@ -32,6 +46,7 @@ export default function Email() {
           <div className="max-w-min mt-8">
             <Button onClickHandler={() => {
               email && updateEmail(user['id'], email)
+              user && updateAuthEmail(email)
             }}>Save</Button>
           </div>
         </div>
