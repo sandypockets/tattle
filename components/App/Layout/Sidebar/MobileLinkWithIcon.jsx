@@ -6,9 +6,8 @@ function classNames(...classes) {
 
 export default function MobileLinkWithIcon({ item, currentPage }) {
   return (
-    <Link href={item.href}>
+    <Link key={item.href} href={item.href}>
       <a
-        key={item.href}
         className={classNames(
           item.href === currentPage
             ? 'bg-gray-100 text-gray-900'
