@@ -1,9 +1,9 @@
-import CardTitle from "../../Global/CardTitle";
-import Card from "../../Global/Card";
-import TextInput from "../../Global/TextInput";
-import {useState} from "react";
+import { useState } from "react";
 import Button from "../../Global/Button";
+import Card from "../../Global/Card";
+import CardTitle from "../../Global/CardTitle";
 import Image from 'next/image'
+import TextInput from "../../Global/TextInput";
 
 export default function UsernameAvatar() {
   const [username, setUsername] = useState()

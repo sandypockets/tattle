@@ -1,6 +1,6 @@
-import {useEffect} from "react";
+import { useEffect } from "react";
 
-export function Message({ showMessage, setShowMessage, isSuccess, sectionName }) {
+export default function Message({ showMessage, setShowMessage, isSuccess, sectionName }) {
 
   useEffect(() => {
     if (showMessage) {

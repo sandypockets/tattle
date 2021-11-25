@@ -1,9 +1,9 @@
+import { useState } from "react";
 import AppLayout from "../../components/App/Layout/AppLayout";
 import CardTitle from "../../components/Global/CardTitle";
-import Password from "../../components/App/Profile/Password";
 import Email from "../../components/App/Profile/Email";
-import {Message} from "../../components/App/Profile/Message";
-import {useState} from "react";
+import Message from "../../components/App/Profile/Message";
+import Password from "../../components/App/Profile/Password";
 
 export default function Profile() {
   const [showMessage, setShowMessage] = useState(false)

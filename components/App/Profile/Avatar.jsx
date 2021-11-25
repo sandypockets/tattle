@@ -1,10 +1,8 @@
-import CardTitle from "../../Global/CardTitle";
 import Card from "../../Global/Card";
-import Button from "../../Global/Button";
+import CardTitle from "../../Global/CardTitle";
 import Image from 'next/image'
 
 export default function Avatar() {
-
   return (
     <Card>
       <div className="flex justify-between">

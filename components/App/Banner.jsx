@@ -1,4 +1,4 @@
-import {LightBulbIcon} from "@heroicons/react/outline";
+import { LightBulbIcon } from "@heroicons/react/outline";
 
 export default function Banner({ children }) {
   return (

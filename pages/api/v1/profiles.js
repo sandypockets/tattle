@@ -1,4 +1,4 @@
-import {supabase} from "../../../lib/supabaseClient";
+import { supabase } from "../../../lib/supabaseClient";
 
 async function updateProfileEmail(req, res) {
   const { userId, email } = req.body

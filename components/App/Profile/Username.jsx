@@ -1,8 +1,8 @@
-import CardTitle from "../../Global/CardTitle";
-import Card from "../../Global/Card";
-import TextInput from "../../Global/TextInput";
-import {useState} from "react";
+import { useState } from "react";
 import Button from "../../Global/Button";
+import Card from "../../Global/Card";
+import CardTitle from "../../Global/CardTitle";
+import TextInput from "../../Global/TextInput";
 
 export default function Username() {
   const [username, setUsername] = useState()
@@ -10,12 +10,10 @@ export default function Username() {
   return (
     <Card>
       <div className="flex justify-between">
-
         <div>
           <CardTitle>Username</CardTitle>
           <p>Update your username address.</p>
         </div>
-
         <div className="flex mr-16">
           <div className="w-72">
             <TextInput value={username} type="text" label="Username" onChangeHandler={(e) => setUsername(e.target.value)} />

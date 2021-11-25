@@ -10,13 +10,11 @@ import {
   AdjustmentsIcon
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import Link from 'next/link'
 import { useRouter } from "next/router";
+import { supabase } from "../../../lib/supabaseClient";
+import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
-import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
-import {supabase} from "../../../lib/supabaseClient";
-import LoadingWheel from "../../Global/LoadingWheel";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -38,8 +36,6 @@ const customSettings = {
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-
-
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -65,7 +61,6 @@ export default function AppLayout({ children }) {
       router.push('/app/signin')
     }
   }, [session])
-
 
   return (
     <>

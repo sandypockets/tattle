@@ -1,10 +1,10 @@
-import Slideover from "../Layout/Slideover";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import Button from "../../Global/Button";
 import CardTitle from "../../Global/CardTitle";
-import TextInput from "../../Global/TextInput";
 import ChooseContact from "./ChooseContact";
 import SingleDatePicker from "../DatePicker";
-import Button from "../../Global/Button";
+import Slideover from "../Layout/Slideover";
+import TextInput from "../../Global/TextInput";
 import updateGoal from "../../../helpers/updateGoal";
 
 export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, user, getUserGoals }) {
