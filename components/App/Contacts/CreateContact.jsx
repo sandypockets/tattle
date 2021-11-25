@@ -1,8 +1,8 @@
+import { useState } from "react";
+import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
 import TextInput from "../../Global/TextInput";
-import {useState} from "react";
-import Button from "../../Global/Button";
 import createContact from "../../../helpers/createContact";
 
 export default function CreateContact({ user, getUserContacts, setDisplayFormType }) {
