@@ -11,7 +11,9 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
 
   async function submitAndRefreshData() {
     await createContact(user.id, contactName, contactPhone)
-    getUserContacts()
+    setTimeout(() => {
+      return getUserContacts()
+    }, 1000)
     setDisplayFormType('empty')
   }
 
@@ -29,7 +31,7 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
           <div className="flex justify-end mt-4 mr-2">
             <div className="max-w-min">
               <Button type="button" onClickHandler={() => {
-                submitAndRefreshData()
+                return submitAndRefreshData()
               }}>
                 Save!
               </Button>
