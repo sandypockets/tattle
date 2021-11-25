@@ -24,9 +24,9 @@ const navigation = [
   { name: 'Settings', href: '/app/settings', icon: AdjustmentsIcon }
 ]
 const userNavigation = [
-  { name: 'Your Profile', href: '#' },
-  { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' },
+  { name: 'Your Profile', href: '/app/profile' },
+  { name: 'Settings', href: '/app/settings' },
+  { name: 'Sign out', href: '/' },
 ]
 
 const customSettings = {
@@ -123,10 +123,9 @@ export default function AppLayout({ children }) {
             <div className="flex-shrink-0 w-14">{/* Dummy element to force sidebar to shrink to fit close icon */}</div>
           </Dialog>
         </Transition.Root>
-
         {/* Static sidebar for desktop */}
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
-          {/* Sidebar component, swap this element with another sidebar if you like */}
+          {/* Sidebar component */}
           <div className="border-r border-gray-200 pt-5 flex flex-col flex-grow bg-white overflow-y-auto">
             <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-gray-900 sm:text-3xl">
               Tattle
@@ -203,6 +202,11 @@ export default function AppLayout({ children }) {
                           <Menu.Item key={item.name}>
                             {({ active }) => (
                               <a
+                                onClick={() => {
+                                  if (item.name === 'Sign out') {
+                                    return supabase.auth.signOut()
+                                  }
+                                }}
                                 href={item.href}
                                 className={classNames(
                                   active ? 'bg-gray-100' : '',
