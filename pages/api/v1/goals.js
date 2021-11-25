@@ -98,12 +98,12 @@ async function getGoals(req, res) {
 export default function handler(req, res) {
   if (req.method === 'POST') {
     if (req.body.type === 'update') {
-      updateUserGoal(req, res)
+      return updateUserGoal(req, res)
     } else if (req.body.type === 'create') {
-      createGoal(req, res)
+      return createGoal(req, res)
     }
   } else if (req.method === 'GET') {
-    getGoals(req, res)
+    return getGoals(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()
   }
