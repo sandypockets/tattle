@@ -1,71 +1,72 @@
 import { supabase } from "../../../lib/supabaseClient";
 
 async function createGoal(req, res) {
-  const id = req.body['user_id']
-  const goalTitle = req.body['goal_title']
-  const goalDesc = req.body['goal_description']
-  const goalOutcome = req.body['goal_outcome']
-  const dueDate = req.body['due_date']
-  const contactId = req.body['selected_contact_id']
-  if (goalTitle && dueDate && contactId) {
+  const {
+    userId,
+    goalTitle,
+    goalDesc,
+    goalOutcome,
+    dueDate,
+    selectedContactId
+  } = req.body
+
+  if (goalTitle && dueDate && selectedContactId) {
     try {
-      const { data, error } = await supabase
+      const { data, error, status } = await supabase
         .from('goals')
         .insert([{
           "title": goalTitle,
           "due_date": dueDate,
           "outcome": goalOutcome,
-          "owner_id": id,
-          "contact_id": contactId,
+          "owner_id": userId,
+          "contact_id": selectedContactId,
           "is_completed": false,
           "description": goalDesc
         }])
       if (data) {
         console.log("Create new goal data: ", data)
-        res.json(data)
-        res.send(200)
+        res.status(status).json(data)
       }
       if (error) {
-        res.json(error)
-        res.send(400)
+        res.status(status).json(error)
       }
     } catch (error) {
-      res.send(400)
       res.json(error)
     } finally {
       res.end()
     }
   } else {
-    res.json('Error - No content')
-    res.end()
+    res.json('Error - No content').end()
   }
 }
 
 async function updateUserGoal(req, res) {
-  const id = req.body['user_id']
-  const goalId = req.body['goal_id']
-  const goalTitle = req.body['goal_title']
-  const goalDesc = req.body['goal_description']
-  const goalOutcome = req.body['goal_outcome']
-  const dueDate = req.body['due_date']
-  const contactId = req.body['selected_contact_id']
-  console.log("UPDATE goal: ", req.body)
+  const {
+    userId,
+    goalId,
+    goalTitle,
+    goalDesc,
+    goalOutcome,
+    dueDate,
+    selectedContactId
+  } = req.body
+
   try {
-    const { data, error } = await supabase
+    const { data, error, status } = await supabase
       .from('goals')
       .update({
         "title": goalTitle,
         "description": goalDesc,
         "outcome": goalOutcome,
         "due_date": dueDate,
-        "contact_id": contactId
+        "contact_id": selectedContactId
       })
-      .match({ "id": goalId, "owner_id": id })
+      .match({ "id": goalId, "owner_id": userId })
     if (data) {
-      res.json(data)
+      res.status(status).json(data)
     }
     if (error) {
-      res.json(error)
+      res.status(status).json(error)
     }
   } catch (err) {
     console.error("Error!", err)
@@ -75,18 +76,18 @@ async function updateUserGoal(req, res) {
 }
 
 async function getGoals(req, res) {
-  const ownerId = req.query['id']
+  const { ownerId } = req.query
   try {
     const { data, error, status } = await supabase
       .from('goals')
       .select()
       .eq('owner_id', ownerId)
     if (data) {
-      res.json(data)
+      res.status(status).json(data)
     }
-    // if (error) {
-    //   res.json(error)
-    // }
+    if (error) {
+      res.status(status).json(error)
+    }
   } catch (err) {
     res.json(err)
   } finally {
@@ -104,6 +105,6 @@ export default function handler(req, res) {
   } else if (req.method === 'GET') {
     getGoals(req, res)
   } else {
-    res.send("Something's not right. Check your query.")
+    res.send("Something's not right. Check your query.").end()
   }
 }

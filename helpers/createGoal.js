@@ -4,12 +4,12 @@ export default function createGoal(userId, goalTitle, goalDesc, goalOutcome, sel
   axios
     .post('/api/v1/goals', {
       'type': 'create',
-      'user_id': userId,
-      'goal_title': goalTitle,
-      'goal_description': goalDesc,
-      'goal_outcome': goalOutcome,
-      'due_date': selectedDate,
-      'selected_contact_id': selectedContactId
+      userId,
+      goalTitle,
+      goalDesc,
+      goalOutcome,
+      'dueDate': selectedDate,
+      selectedContactId
     })
     .then(function (response) {
       console.log(response);
