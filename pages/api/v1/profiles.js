@@ -2,9 +2,6 @@ import {supabase} from "../../../lib/supabaseClient";
 
 async function updateProfileEmail(req, res) {
   const { userId, email } = req.body
-  // const userId = req.body['user_id']
-  // const email = req.body['email']
-  // console.log("UPDATE profile: ", req.body) // Debug
   try {
     const { data, error } = await supabase
       .from('profiles')

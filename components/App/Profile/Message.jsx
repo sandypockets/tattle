@@ -1,4 +1,15 @@
-export function Message({ setShowMessage, isSuccess, sectionName }) {
+import {useEffect} from "react";
+
+export function Message({ showMessage, setShowMessage, isSuccess, sectionName }) {
+
+  useEffect(() => {
+    if (showMessage) {
+      setTimeout(() => {
+        setShowMessage(false)
+      }, 10000)
+    }
+  }, [showMessage])
+
   if (isSuccess) {
     return (
       <div className="bg-green-300 h-8 px-2 rounded-lg">

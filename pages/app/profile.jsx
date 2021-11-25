@@ -14,9 +14,9 @@ export default function Profile() {
     <AppLayout>
       <div className="flex justify-between">
         <CardTitle>Profile</CardTitle>
-        {showMessage && <Message setShowMessage={setShowMessage} isSuccess={isSuccess} sectionName={sectionName} />}
+        {showMessage && <Message showMessage={showMessage} setShowMessage={setShowMessage} isSuccess={isSuccess} sectionName={sectionName} />}
       </div>
-      <Email />
+      <Email setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
       <Password setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
     </AppLayout>
   )
