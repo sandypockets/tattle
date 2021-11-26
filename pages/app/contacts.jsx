@@ -1,15 +1,14 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../../lib/supabaseClient";
 import AppLayout from "../../components/App/Layout/AppLayout";
+import Button from "../../components/Global/Button";
 import Card from "../../components/Global/Card";
 import CardTitle from "../../components/Global/CardTitle";
-import Button from "../../components/Global/Button";
 import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
-import {useEffect, useState} from "react";
 import CreateContact from "../../components/App/Contacts/CreateContact";
-import {supabase} from "../../lib/supabaseClient";
-import getContacts from "../../helpers/getContacts";
 import ContactsTable from "../../components/App/Contacts/ContactsTable";
-import Slideover from "../../components/App/Layout/Slideover";
 import EditContactSlideover from "../../components/App/Contacts/EditContactSlideover";
+import getContacts from "../../helpers/getContacts";
 
 export default function Contacts() {
   const [displayFormType, setDisplayFormType] = useState('empty')
