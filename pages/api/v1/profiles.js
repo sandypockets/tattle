@@ -3,18 +3,17 @@ import { supabase } from "../../../lib/supabaseClient";
 async function updateProfileEmail(req, res) {
   const { userId, email } = req.body
   try {
-    const { data, error } = await supabase
+    const { data, error, status } = await supabase
       .from('profiles')
       .update({
         email: email,
       })
       .match({"id": userId})
     if (data) {
-      console.log("Profile updated.")
-      res.json(data)
+      res.status(status).json(data)
     }
     if (error) {
-      res.json(error)
+      res.status(status).json(error)
     }
   } catch (err) {
     res.json(err)
@@ -25,13 +24,8 @@ async function updateProfileEmail(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    if (req.body.type === 'update') {
-      if (req.body.content === 'email') {
-        updateProfileEmail(req, res)
-      }
-      if (req.body.content === 'password') {
-        // update password
-      }
+    if (req.body.type === 'update' && req.body.content === 'email ') {
+      return updateProfileEmail(req, res)
     }
   } else if (req.method === 'GET') {
     // get profile data
