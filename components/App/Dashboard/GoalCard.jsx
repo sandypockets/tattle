@@ -20,7 +20,7 @@ export default function GoalCard({ goal }) {
       <p className="text-sm h-10 overflow-hidden mb-4">
         {goal.description}
       </p>
-      <p className={isUrgent && 'text-red-500'}>Due by: {goal['due_date']}</p>
+      <p><span className="text-gray-400">Due by: </span><span className={isUrgent ? 'text-red-500' : 'text-gray-500'}>{goal['due_date']}</span></p>
     </GridCard>
   )
 }
