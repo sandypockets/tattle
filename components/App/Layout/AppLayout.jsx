@@ -132,8 +132,10 @@ export default function AppLayout({ children }) {
             </div>
             <div className="flex-grow mt-5 flex flex-col">
               <nav className="flex-1 px-2 pb-4 space-y-1">
-                {navigation.map((item) => (
-                  <DesktopLinkWithIcon item={item} currentPage={currentPage} />
+                {navigation.map((item, index) => (
+                  <div key={index}>
+                    <DesktopLinkWithIcon item={item} currentPage={currentPage} />
+                  </div>
                 ))}
                 {currentPage === customSettings.parentHref && <DesktopLinkNoIcon item={customSettings} currentPage={currentPage} /> }
                 {currentPage === customSettings.href && <DesktopLinkNoIcon item={customSettings} currentPage={currentPage} /> }
