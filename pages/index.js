@@ -3,7 +3,6 @@ import Layout from '../components/Web/Layout/Layout'
 import StatsSection from "../components/Web/StatsSection";
 import ImagesWithDescriptions from "../components/Web/ImagesWithDescriptions";
 
-
 const statProps = {
   'heading': 'Pressuring people to keep their goals since 2021.',
   'subHeading': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.',
@@ -16,7 +15,6 @@ const statProps = {
 }
 
 export default function Index() {
-
   return (
     <>
       <Layout>
