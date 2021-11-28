@@ -8,11 +8,14 @@ import GridCard from "../../../components/Global/GridCard";
 import getGoal from "../../../helpers/getGoal";
 import Button from "../../../components/Global/Button";
 import getContact from "../../../helpers/getContact";
+import LoadingWheel from "../../../components/Global/LoadingWheel";
+import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
 
 export default function SingleGoal() {
   const [goal, setGoal] = useState()
   const [contact, setContact] = useState()
   const [timeLeft, setTimeLeft] = useState()
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
   const user = supabase.auth.user()
 
@@ -31,12 +34,17 @@ export default function SingleGoal() {
       const numberOfDaysRemaining = Math.round(Math.round(unixTimeRemaining / 86400) / 1000)
       setTimeLeft(numberOfDaysRemaining)
     }
-
+    setLoading(true)
   }, [goal])
 
   return (
     <AppLayout>
-      {goal && (
+      {loading && (
+        <LoadingWheelWrapper>
+          <LoadingWheel />
+        </LoadingWheelWrapper>
+      )}
+      {!loading && goal && (
         <>
           <section className="flex justify-between">
             <CardTitle>{goal['title']}</CardTitle>
@@ -70,14 +78,6 @@ export default function SingleGoal() {
               <h2>Assigned to</h2>
               <CardTitle>{contact && contact.name}</CardTitle>
             </GridCard>
-            {/*<GridCard>*/}
-            {/*  <h2>Status</h2>*/}
-            {/*  {goal['isCompleted'] ? (*/}
-            {/*    <CardTitle>Done</CardTitle>*/}
-            {/*  ) : (*/}
-            {/*    <CardTitle>Incomplete</CardTitle>*/}
-            {/*  )}*/}
-            {/*</GridCard>*/}
           </div>
 
           <Card>
