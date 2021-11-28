@@ -6,40 +6,50 @@ import CardTitle from "../../components/Global/CardTitle";
 import GoalCard from "../../components/App/Dashboard/GoalCard";
 import StatsSection from "../../components/Web/StatsSection";
 import getGoals from "../../helpers/getGoals";
+import getTattleStats from "../../helpers/getTattleStats";
 
 export default function Index() {
   const [goals, setGoals] = useState()
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
   const [userStats, setUserStats] = useState({
-    'heading': 'Pressuring people to keep their goals since 2021.',
-    'subHeading': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.',
     'statOne': '4',
     'statOneText': 'Goals created',
     'statTwo': '2',
     'statTwoText': 'Completed on time',
-    'statThree': '1',
+    'statThree': '0',
     'statThreeText': 'times Tattled on',
   })
 
   useEffect(() => {
-    async function getUserGoals() {
+    async function getGoalsAndStats() {
       const user = await supabase.auth.user()
       const id = user['id']
       getGoals(id, setGoals)
+      getTattleStats(id, setUserStats)
     }
-    getUserGoals()
+    getGoalsAndStats()
   }, [])
 
   useEffect(() => {
-    goals && setUserStats({
-      'statOne': goals.length,
-      'statOneText': 'Goals created',
-      'statTwo': '2',
-      'statTwoText': 'Goals due this week',
-      'statThree': '1',
-      'statThreeText': 'times Tattled on'
-    })
-  }, [])
+    if (goals) {
+      setUserStats({
+        'statOne': goals.length,
+        'statOneText': 'Goals created',
+        'statTwo': '2',
+        'statTwoText': 'Goals completed on time',
+        'statThree': '1',
+        'statThreeText': 'times Tattled on',
+        'statFourText':'Goals due this week',
+        'statFour':'1'
+      })
+      setUserStats(prev => ({ ...prev, statOne: goals.length }))
+      let goalsCompletedOnTime = 0
+      for (const goal of goals) {
+        goal['is_completed_on_time'] === true && goalsCompletedOnTime++
+      }
+      setUserStats(prev => ({ ...prev, statTwo: goalsCompletedOnTime }))
+    }
+  }, [goals])
 
   // Sort goals by due_date, then by id
   goals && goals.sort(
