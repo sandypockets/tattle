@@ -1,8 +1,12 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
+import Card from "../../../components/Global/Card";
+import CardTitle from "../../../components/Global/CardTitle";
+import GridCard from "../../../components/Global/GridCard";
 import getGoal from "../../../helpers/getGoal";
-import {supabase} from "../../../lib/supabaseClient";
+import Button from "../../../components/Global/Button";
 
 export default function SingleGoal() {
   const [goal, setGoal] = useState()
@@ -15,21 +19,61 @@ export default function SingleGoal() {
     getGoal(user.id, id, setGoal)
   }, [])
 
-
   return (
     <AppLayout>
-      <p>Time remaining until due date</p>
       {goal && (
-        <div>
-          <p>ID: <span>{goal['id']}</span></p>
-          <p>Contact ID: <span>{goal['contact_id']}</span></p>
-          <p>Created At: <span>{goal['created_at']}</span></p>
-          <p>Description: <span>{goal['description']}</span></p>
-          <p>Is completed: <span>{goal['is_completed'] ? "true" : "false"}</span></p>
-          <p>Outcome: <span>{goal['outcome']}</span></p>
-          <p>Owner ID: <span>{goal['owner_id']}</span></p>
-          <p>Title: <span>{goal['title']}</span></p>
-        </div>
+        <>
+          <section className="flex justify-between">
+            <CardTitle>{goal['title']}</CardTitle>
+            <div className="flex">
+              <div className="w-36 mx-4">
+                <Button>
+                  Update contact
+                </Button>
+              </div>
+              <div className="w-36">
+                <Button>
+                  Mark as done
+                </Button>
+              </div>
+            </div>
+          </section>
+          <div className="grid grid-cols-4 gap-6">
+            <GridCard>
+              <h2>Time remaining</h2>
+              <CardTitle>10 days</CardTitle>
+            </GridCard>
+            <GridCard>
+              <h2>Created on</h2>
+              <CardTitle>{new Date(goal['created_at']).toLocaleDateString("en-UK")}</CardTitle>
+            </GridCard>
+            <GridCard>
+              <h2>Due on</h2>
+              <CardTitle>{new Date(goal['due_date']).toLocaleDateString("en-UK")}</CardTitle>
+            </GridCard>
+            <GridCard>
+              <h2>Assigned to</h2>
+              <CardTitle>Name {goal['contact_id']}</CardTitle>
+            </GridCard>
+            {/*<GridCard>*/}
+            {/*  <h2>Status</h2>*/}
+            {/*  {goal['isCompleted'] ? (*/}
+            {/*    <CardTitle>Done</CardTitle>*/}
+            {/*  ) : (*/}
+            {/*    <CardTitle>Incomplete</CardTitle>*/}
+            {/*  )}*/}
+            {/*</GridCard>*/}
+          </div>
+
+          <Card>
+            <CardTitle>Description</CardTitle>
+            <p>Description: <span>{goal['description']}</span></p>
+          </Card>
+          <Card>
+            <CardTitle>Outcome</CardTitle>
+            <p>Outcome: <span>{goal['outcome']}</span></p>
+          </Card>
+        </>
       )}
     </AppLayout>
   )
