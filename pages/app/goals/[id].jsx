@@ -7,17 +7,23 @@ import CardTitle from "../../../components/Global/CardTitle";
 import GridCard from "../../../components/Global/GridCard";
 import getGoal from "../../../helpers/getGoal";
 import Button from "../../../components/Global/Button";
+import getContact from "../../../helpers/getContact";
 
 export default function SingleGoal() {
   const [goal, setGoal] = useState()
+  const [contact, setContact] = useState()
   const router = useRouter()
+  const user = supabase.auth.user()
 
   useEffect(() => {
-    const user = supabase.auth.user()
     const { id } = router.query
     console.log("goalId", id)
     getGoal(user.id, id, setGoal)
   }, [])
+
+  useEffect(() => {
+    goal && getContact(user.id, goal['contact_id'], setContact)
+  }, [goal])
 
   return (
     <AppLayout>
@@ -53,7 +59,7 @@ export default function SingleGoal() {
             </GridCard>
             <GridCard>
               <h2>Assigned to</h2>
-              <CardTitle>Name {goal['contact_id']}</CardTitle>
+              <CardTitle>{contact && contact.name}</CardTitle>
             </GridCard>
             {/*<GridCard>*/}
             {/*  <h2>Status</h2>*/}
