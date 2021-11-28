@@ -35,7 +35,7 @@ export default function ImagesWithDescriptions() {
               <img
                 className="w-full rounded-xl lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
                 src="/goals-screenshot.png"
-                alt="Goals page interface"
+                alt="Index page interface"
               />
             </div>
           </div>
@@ -76,7 +76,7 @@ export default function ImagesWithDescriptions() {
               <img
                 className="w-full rounded-xl lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
                 src="/goals-screenshot.png"
-                alt="Goals page interface"
+                alt="Index page interface"
               />
             </div>
           </div>

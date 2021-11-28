@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabaseClient";
+import { supabase } from "../../../lib/supabaseClient";
 import Link from 'next/link'
-import AppLayout from "../../components/App/Layout/AppLayout";
-import Banner from "../../components/App/Banner";
-import Button from "../../components/Global/Button";
-import Card from "../../components/Global/Card";
-import CardTitle from "../../components/Global/CardTitle";
-import CreateGoal from "../../components/App/Goals/CreateGoal";
-import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
-import GoalsTable from "../../components/App/Goals/GoalsTable";
-import getGoals from "../../helpers/getGoals";
-import EditGoalSlideover from "../../components/App/Goals/EditGoalSlideover";
+import AppLayout from "../../../components/App/Layout/AppLayout";
+import Banner from "../../../components/App/Banner";
+import Button from "../../../components/Global/Button";
+import Card from "../../../components/Global/Card";
+import CardTitle from "../../../components/Global/CardTitle";
+import CreateGoal from "../../../components/App/Goals/CreateGoal";
+import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
+import GoalsTable from "../../../components/App/Goals/GoalsTable";
+import getGoals from "../../../helpers/getGoals";
+import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
 
-export default function Goals() {
+export default function Index() {
   const [displayFormType, setDisplayFormType] = useState('empty')
   const [goals, setGoals] = useState()
   const [open, setOpen] = useState(false)
