@@ -16,7 +16,7 @@ export default function GoalCard({ goal }) {
 
   return (
     <GridCard>
-      <h2 className="font-extrabold text-gray-900 text-lg mb-2">{goal.title}</h2>
+      <h2 className="font-extrabold text-gray-900 text-lg mb-2 truncate">{goal.title}</h2>
       <p className="text-sm h-10 overflow-hidden mb-4">
         {goal.description}
       </p>

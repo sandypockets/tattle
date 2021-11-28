@@ -9,7 +9,7 @@ import getGoals from "../../helpers/getGoals";
 
 export default function Index() {
   const [goals, setGoals] = useState()
-  const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(3)
+  const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
   const [userStats, setUserStats] = useState({
     'heading': 'Pressuring people to keep their goals since 2021.',
     'subHeading': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.',
@@ -61,7 +61,7 @@ export default function Index() {
     <AppLayout>
       <StatsSection statProps={userStats} showHeadings={false} />
       <CardTitle>Goals due soon</CardTitle>
-      <div className="grid grid-cols-3 gap-5">
+      <div className="grid grid-cols-4 gap-5">
         {goals && goals.map((goal, index) => {
           if (index < numberOfGoalsToShow) {
             return (
@@ -73,7 +73,7 @@ export default function Index() {
         })}
       </div>
       <div className="w-36 mx-auto mt-10">
-        <Button onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 3)}>Show more</Button>
+        {goals && goals.length > 3 && <Button onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>Show more</Button>}
       </div>
     </AppLayout>
   )
