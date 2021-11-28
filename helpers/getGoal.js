@@ -7,7 +7,6 @@ export default function getGoal(ownerId, id, setGoal){
     .then(function (response) {
       console.log(response.data)
       setGoal(response.data[0])
-
     })
     .catch(function (error) {
       console.error("Error!", error)
