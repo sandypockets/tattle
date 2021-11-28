@@ -5,11 +5,11 @@ import AppLayout from "../../../components/App/Layout/AppLayout";
 import Card from "../../../components/Global/Card";
 import CardTitle from "../../../components/Global/CardTitle";
 import GridCard from "../../../components/Global/GridCard";
+import LoadingWheel from "../../../components/Global/LoadingWheel";
+import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
 import getGoal from "../../../helpers/getGoal";
 import Button from "../../../components/Global/Button";
 import getContact from "../../../helpers/getContact";
-import LoadingWheel from "../../../components/Global/LoadingWheel";
-import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
 
 export default function SingleGoal() {
   const [goal, setGoal] = useState()
@@ -34,8 +34,11 @@ export default function SingleGoal() {
       const numberOfDaysRemaining = Math.round(Math.round(unixTimeRemaining / 86400) / 1000)
       setTimeLeft(numberOfDaysRemaining)
     }
-    setLoading(true)
   }, [goal])
+
+  useEffect(() => {
+    goal && contact && setLoading(false)
+  }, [goal, contact])
 
   return (
     <AppLayout>
