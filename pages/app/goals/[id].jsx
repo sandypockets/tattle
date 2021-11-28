@@ -12,6 +12,7 @@ import getContact from "../../../helpers/getContact";
 export default function SingleGoal() {
   const [goal, setGoal] = useState()
   const [contact, setContact] = useState()
+  const [timeLeft, setTimeLeft] = useState()
   const router = useRouter()
   const user = supabase.auth.user()
 
@@ -22,7 +23,15 @@ export default function SingleGoal() {
   }, [])
 
   useEffect(() => {
-    goal && getContact(user.id, goal['contact_id'], setContact)
+    if (goal) {
+      getContact(user.id, goal['contact_id'], setContact)
+      const unixDueDate = new Date(goal['due_date']).getTime()
+      const unixDateNow = Date.now()
+      const unixTimeRemaining = unixDueDate - unixDateNow
+      const numberOfDaysRemaining = Math.round(Math.round(unixTimeRemaining / 86400) / 1000)
+      setTimeLeft(numberOfDaysRemaining)
+    }
+
   }, [goal])
 
   return (
@@ -47,7 +56,7 @@ export default function SingleGoal() {
           <div className="grid grid-cols-4 gap-6">
             <GridCard>
               <h2>Time remaining</h2>
-              <CardTitle>10 days</CardTitle>
+              <CardTitle>{timeLeft}{timeLeft === 1 ? " day" : " days"}</CardTitle>
             </GridCard>
             <GridCard>
               <h2>Created on</h2>
