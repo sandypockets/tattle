@@ -1,19 +1,22 @@
-import {supabase} from "../../../lib/supabaseClient";
+import { supabase } from "../../../lib/supabaseClient";
 
 async function cronCheck(req, res) {
-  const todayDate = new Date()
+  const todayDate = new Date().toLocaleDateString('en-CA').toString()
   console.log("today date: ", todayDate)
   try {
     const { data, error, status } = await supabase
       .from('goals')
-      .select()
-      .gte('due_date', todayDate)
+      .select('due_date, id')
+      .eq('due_date', todayDate)
     if (data) {
-      console.log("DATA", data)
-      // res.status(status).json(data)
+      console.log("Data: ", data)
+      // API call to api/v1/message to trigger a message for each due goal
     }
     if (error) {
-      // res.status(status).json(error)
+      console.error("Error: ", error)
+    }
+    if (status) {
+      console.log("Status: ", status)
     }
   } catch (err) {
     res.json(err)
