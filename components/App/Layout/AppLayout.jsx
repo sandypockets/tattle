@@ -25,11 +25,11 @@ const navigation = [
   { name: 'Settings', href: '/app/settings', icon: AdjustmentsIcon }
 ]
 const subNavigation = [
-  {name: 'New', href: '/app/goals/new', parentHref: '/app/goals', icon: AdjustmentsIcon},
-  {name: 'Upcoming', href: '/app/goals/upcoming', parentHref: '/app/goals', icon: AdjustmentsIcon},
-  {name: 'Completed', href: '/app/goals/completed', parentHref: '/app/goals', icon: AdjustmentsIcon},
-  {name: 'New', href: '/app/contacts/new', parentHref: '/app/contacts', icon: AdjustmentsIcon},
-  {name: 'Customize', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon}
+  {name: 'New', category: 'goals', href: '/app/goals/new', parentHref: '/app/goals', icon: AdjustmentsIcon},
+  {name: 'Upcoming', category: 'goals', href: '/app/goals/upcoming', parentHref: '/app/goals', icon: AdjustmentsIcon},
+  {name: 'Completed', category: 'goals', href: '/app/goals/completed', parentHref: '/app/goals', icon: AdjustmentsIcon},
+  {name: 'New', category: 'contacts', href: '/app/contacts/new', parentHref: '/app/contacts', icon: AdjustmentsIcon},
+  {name: 'Customize', category: 'settings', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon}
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '/app/profile' },
@@ -139,7 +139,7 @@ export default function AppLayout({ children }) {
                   <div key={index}>
                     <DesktopLinkWithIcon item={item} currentPage={currentPage} />
                     {subNavigation.map((subItem, subItemIndex) => {
-                      if (subItem.parentHref === item.href && currentPage === item.href) {
+                      if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
                         return (
                           <DesktopLinkNoIcon item={subItem} currentPage={currentPage} />
                         )
