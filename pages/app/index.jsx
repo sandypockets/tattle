@@ -97,7 +97,12 @@ export default function Index() {
             })}
           </div>
           <div className="w-36 mx-auto mt-10">
-            {goals && goals.length > 3 && <Button onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>Show more</Button>}
+            {
+              goals && goals.length > 3 &&
+                <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                  Show more
+                </Button>
+            }
           </div>
         </>
       )}
