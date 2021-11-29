@@ -19,7 +19,9 @@ export default function Index() {
     <>
       <Layout>
         <HeroSection />
-        <StatsSection statProps={statProps} />
+        <div className="pt-24">
+          <StatsSection statProps={statProps} />
+        </div>
         <ImagesWithDescriptions />
       </Layout>
     </>
