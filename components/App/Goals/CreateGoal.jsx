@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
 import Card from "../../Global/Card";
@@ -8,19 +9,20 @@ import SingleDatePicker from "../DatePicker";
 import TextInput from "../../Global/TextInput";
 import createGoal from "../../../helpers/createGoal";
 
-export default function CreateGoal({ setDisplayFormType, getUserGoals }) {
+export default function CreateGoal({ getUserGoals }) {
   const [goalTitle, setGoalTitle] = useState('')
   const [goalDesc, setGoalDesc] = useState('')
   const [goalOutcome, setGoalOutcome] = useState('')
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedContactId, setSelectedContactId] = useState()
+  const router = useRouter()
 
   async function handleCreateGoal() {
     const user = await supabase.auth.user()
     const userId = user.id
     await createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId)
-    setDisplayFormType('empty')
     getUserGoals()
+    router.push('/app/goals')
   }
 
   return (
