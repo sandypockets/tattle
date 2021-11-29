@@ -35,7 +35,12 @@ export default function GoalCard({ goal }) {
             <span className={isUrgent ? 'text-red-500' : 'text-gray-500'}>{goal['due_date']}</span>
           </>
         }
-        {goal['is_completed'] === true && <span className="text-gray-400">Completed</span>}
+        {goal['is_completed'] === true &&
+          <>
+            <span className="text-gray-400">Completed</span>
+            {goal['is_completed_on_time'] === false && <span className="text-red-400"> late</span>}
+          </>
+        }
       </p>
     </GridCard>
     </div>

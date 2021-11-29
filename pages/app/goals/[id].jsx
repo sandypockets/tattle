@@ -87,7 +87,7 @@ export default function SingleGoal() {
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
             <GridCard>
               {goal['is_completed'] === true && (
-                <CardTitle><span>Complete</span></CardTitle>
+                <CardTitle>Complete</CardTitle>
               )}
               { goal['is_completed'] === false && (
                 <>
