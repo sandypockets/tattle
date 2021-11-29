@@ -7,14 +7,17 @@ import GoalCard from "../../components/App/Dashboard/GoalCard";
 import StatsSection from "../../components/Web/StatsSection";
 import getGoals from "../../helpers/getGoals";
 import getTattleStats from "../../helpers/getTattleStats";
+import LoadingWheelWrapper from "../../components/Global/LoadingWheelWrapper";
+import LoadingWheel from "../../components/Global/LoadingWheel";
 
 export default function Index() {
+  const [loading, setLoading] = useState(true)
   const [goals, setGoals] = useState()
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
   const [userStats, setUserStats] = useState({
-    'statOne': '4',
+    'statOne': '0',
     'statOneText': 'Goals created',
-    'statTwo': '2',
+    'statTwo': '0',
     'statTwoText': 'Completed on time',
     'statThree': '0',
     'statThreeText': 'times Tattled on',
@@ -51,6 +54,10 @@ export default function Index() {
     }
   }, [goals])
 
+  useEffect(() => {
+    userStats && goals && setLoading(false)
+  }, [userStats])
+
   // Sort goals by due_date, then by id
   goals && goals.sort(
     function(a, b) {
@@ -69,22 +76,31 @@ export default function Index() {
 
   return (
     <AppLayout>
-      <StatsSection statProps={userStats} showHeadings={false} />
-      <CardTitle>Goals due soon</CardTitle>
-      <div className="grid grid-cols-4 gap-5">
-        {goals && goals.map((goal, index) => {
-          if (index < numberOfGoalsToShow) {
-            return (
-              <article key={index}>
-                <GoalCard goal={goal} />
-              </article>
-            )
-          }
-        })}
-      </div>
-      <div className="w-36 mx-auto mt-10">
-        {goals && goals.length > 3 && <Button onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>Show more</Button>}
-      </div>
+      {loading && (
+        <LoadingWheelWrapper>
+          <LoadingWheel />
+        </LoadingWheelWrapper>
+      )}
+      {!loading && (
+        <>
+          <StatsSection statProps={userStats} showHeadings={false} />
+          <CardTitle>Goals due soon</CardTitle>
+          <div className="grid grid-cols-4 gap-5">
+            {goals && goals.map((goal, index) => {
+              if (index < numberOfGoalsToShow) {
+                return (
+                  <article key={index}>
+                    <GoalCard goal={goal} />
+                  </article>
+                )
+              }
+            })}
+          </div>
+          <div className="w-36 mx-auto mt-10">
+            {goals && goals.length > 3 && <Button onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>Show more</Button>}
+          </div>
+        </>
+      )}
     </AppLayout>
   )
 }
