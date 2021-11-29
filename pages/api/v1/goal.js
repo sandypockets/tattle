@@ -39,10 +39,31 @@ async function markGoalComplete(req, res) {
   }
 }
 
+async function assignContactToGoal(req, res) {
+  const { userId, goalId, contactId } = req.body
+  try {
+    const { data, status, error } = await supabase
+      .from('goals')
+      .update({
+        contact_id: contactId,
+      })
+      .match({ id: goalId, owner_id: userId })
+    data && status && res.status(status).json(data)
+    error && status && res.status(status).json(error)
+  } catch (err) {
+    res.json(err)
+  } finally {
+    res.end()
+  }
+}
+
 export default function handler(req, res) {
   if (req.method === 'POST') {
     if (req.body.type === 'complete') {
       return markGoalComplete(req, res)
+    }
+    if (req.body.type === 'assign') {
+      return assignContactToGoal(req, res)
     }
   } else if (req.method === 'GET') {
     return getSingleGoal(req, res)

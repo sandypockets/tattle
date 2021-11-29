@@ -1,6 +1,38 @@
 import Button from "../../Global/Button";
+import Slideover from "../Layout/Slideover";
+import {useEffect, useState} from "react";
+import getGoals from "../../../helpers/getGoals";
+import {supabase} from "../../../lib/supabaseClient";
+import updateGoal from "../../../helpers/updateGoal";
+import updateGoalContact from "../../../helpers/updateGoalContact";
 
-export default function ContactsTable({ contacts, setOpen, setSelectedContact }) {
+export default function ContactsTable({ contacts, setOpen, selectedContact, setSelectedContact }) {
+  const [assignSlideoverOpen, setAssignSlideoverOpen] = useState(false)
+  const [goals, setGoals] = useState()
+  const [selectedGoalId, setSelectedGoalId] = useState()
+  const [user, setUser] = useState()
+
+  useEffect(() => {
+    const user = supabase.auth.user()
+    setUser(user)
+    getGoals(user.id, setGoals)
+  }, [])
+
+  goals && goals.sort(
+    function(a, b) {
+      if (a['due_date'] > b['due_date']) {
+        return -1
+      } else if (a['due_date'] < b['due_date']) {
+        return 1
+      }
+      if (a['id'] > b['id']) {
+        return -1
+      } else if (a['id'] < b['id']) {
+        return 1
+      }
+    }
+  ).reverse()
+
   return (
     <div className="flex flex-col">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -40,10 +72,13 @@ export default function ContactsTable({ contacts, setOpen, setSelectedContact })
                 <tr key={contact.id} className='bg-white'>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{contact.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact.phone}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact['created_at']}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(contact['created_at']).toLocaleDateString('en-CA')}</td>
                   <td className="pl-2 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="max-w-min mx-4">
-                      <Button>
+                      <Button onClickHandler={() => {
+                        setSelectedContact(contact)
+                        setAssignSlideoverOpen(true)
+                      }}>
                         Assign
                       </Button>
                     </div>
@@ -65,6 +100,28 @@ export default function ContactsTable({ contacts, setOpen, setSelectedContact })
           </div>
         </div>
       </div>
+      <Slideover setOpen={setAssignSlideoverOpen} open={assignSlideoverOpen} title="Assign contact">
+        <section className="mx-auto">
+          <p className="my-2">Assign {selectedContact && selectedContact.name} to one of your goals.</p>
+          <select onChange={(e) => setSelectedGoalId(e.target.value)}>
+            {goals && goals.map((goal, index) => (
+              <option
+                key={index}
+                value={goal.id}
+              >
+                {goal.title} - {new Date(goal['created_at']).toLocaleDateString('en-CA')}
+              </option>
+            ))}
+          </select>
+          <div className="max-w-min mt-4">
+            <Button onClickHandler={() => {
+             user && updateGoalContact(user['id'], selectedContact.id, selectedGoalId)
+            }}>
+              Save
+            </Button>
+          </div>
+        </section>
+      </Slideover>
     </div>
   )
 }

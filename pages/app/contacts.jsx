@@ -65,7 +65,7 @@ export default function Contacts() {
           </Card>
           {displayFormType === 'empty' && !contacts && <ContactsEmptyState setState={setDisplayFormType} />}
           {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
-          {contacts && <ContactsTable contacts={contacts} setOpen={setOpen} setSelectedContact={setSelectedContact} /> }
+          {contacts && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }
           <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
         </>
       )}
