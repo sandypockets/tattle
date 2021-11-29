@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { supabase } from "../../../lib/supabaseClient";
 import { useRouter } from "next/router";
 import Link from 'next/link'
@@ -42,7 +42,6 @@ export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState()
   const [session, setSession] = useState(null)
-  const [loading, setLoading] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -177,8 +176,6 @@ export default function AppLayout({ children }) {
                   </form>
                 </div>
                 <div className="ml-4 flex items-center md:ml-6">
-
-
                   {/* Profile dropdown */}
                   <Menu as="div" className="ml-3 relative">
                     <div>
@@ -231,15 +228,10 @@ export default function AppLayout({ children }) {
 
             <main className="flex-1">
               <div className="py-6">
-                {/*<div className="px-4 sm:px-6 md:px-0">*/}
-                {/*  <h1 className="text-2xl font-semibold text-gray-900">{`${currentPage.split('/')[2].charAt(0).toUpperCase()}${currentPage.split('/')[2].slice(1)}`}</h1>*/}
-                {/*</div>*/}
                 <div className="px-4 sm:px-6 md:px-0">
-
                   <main className="py-4">
                     {children}
                   </main>
-
                 </div>
               </div>
             </main>
