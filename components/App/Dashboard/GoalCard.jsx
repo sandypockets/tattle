@@ -1,6 +1,6 @@
-import GridCard from "../../Global/GridCard";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import GridCard from "../../Global/GridCard";
 
 export default function GoalCard({ goal }) {
   const [isUrgent, setIsUrgent] = useState()

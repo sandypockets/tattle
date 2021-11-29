@@ -1,4 +1,6 @@
 import {Fragment, useEffect, useState} from 'react'
+import { supabase } from "../../../lib/supabaseClient";
+import { useRouter } from "next/router";
 import Link from 'next/link'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
@@ -11,8 +13,6 @@ import {
   AdjustmentsIcon
 } from '@heroicons/react/outline'
 import { SearchIcon } from '@heroicons/react/solid'
-import { useRouter } from "next/router";
-import { supabase } from "../../../lib/supabaseClient";
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";

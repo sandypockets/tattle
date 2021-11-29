@@ -1,4 +1,4 @@
-import {CheckCircleIcon} from "@heroicons/react/solid";
+import { CheckCircleIcon } from "@heroicons/react/solid";
 
 const includedFeatures = [
   'Create up to 100 goals per month',

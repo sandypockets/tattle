@@ -1,5 +1,5 @@
-import Button from '../../Global/Button'
 import { useRouter } from "next/router";
+import Button from '../../Global/Button'
 
 export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
   const router = useRouter()

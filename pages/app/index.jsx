@@ -5,10 +5,10 @@ import Button from "../../components/Global/Button";
 import CardTitle from "../../components/Global/CardTitle";
 import GoalCard from "../../components/App/Dashboard/GoalCard";
 import StatsSection from "../../components/Web/StatsSection";
-import getGoals from "../../helpers/getGoals";
-import getTattleStats from "../../helpers/getTattleStats";
 import LoadingWheelWrapper from "../../components/Global/LoadingWheelWrapper";
 import LoadingWheel from "../../components/Global/LoadingWheel";
+import getGoals from "../../helpers/getGoals";
+import getTattleStats from "../../helpers/getTattleStats";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)

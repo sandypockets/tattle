@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
+import Button from "../Button";
+import TextInput from "../TextInput";
 import updateProfile from "../../../helpers/profile/updateProfile";
 import updateAuthProfile from "../../../helpers/auth/updateAuthProfile";
-import TextInput from "../TextInput";
-import Button from "../Button";
 
 export default function ProfileForm({ username, email, user, password, website, setUsername, setEmail, setPassword, setConfirmPassword, setWebsite, confirmPassword, router }) {
   const [loading, setLoading] = useState(false)

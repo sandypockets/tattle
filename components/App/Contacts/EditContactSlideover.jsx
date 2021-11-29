@@ -1,8 +1,7 @@
+import { useEffect, useState } from "react";
+import Button from "../../Global/Button";
 import Slideover from "../Layout/Slideover";
 import TextInput from "../../Global/TextInput";
-import {useEffect, useState} from "react";
-import Button from "../../Global/Button";
-import Card from "../../Global/Card";
 import updateContact from "../../../helpers/updateContact";
 
 export default function EditContactSlideover({ open, setOpen, selectedContact, user }) {

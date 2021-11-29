@@ -9,10 +9,10 @@ import CardTitle from "../../../components/Global/CardTitle";
 import CreateGoal from "../../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../../components/App/Goals/GoalsTable";
-import getGoals from "../../../helpers/getGoals";
 import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
 import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
 import LoadingWheel from "../../../components/Global/LoadingWheel";
+import getGoals from "../../../helpers/getGoals";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
