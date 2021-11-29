@@ -1,6 +1,8 @@
 import Button from '../../Global/Button'
+import { useRouter } from "next/router";
 
 export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
+  const router = useRouter()
 
   return (
     <div className="flex flex-col my-6 shadow-sm ring-1 ring-black rounded-md ring-opacity-5">
@@ -41,6 +43,9 @@ export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
                   Tattle contact
                 </th>
                 <th scope="col" className="relative px-6 py-3">
+                  <span className="sr-only">View</span>
+                </th>
+                <th scope="col" className="relative px-6 py-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
@@ -53,7 +58,18 @@ export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
                   <td className="w-80 px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal.description}</td>
                   <td className="px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal['due_date']}</td>
                   <td className="w-24 px-8 py-4 whitespace-pre-line text-sm text-gray-500">Tattle contact Id: {goal['contact_id']}</td>
-                  <td className="px-6 py-4 whitespace-pre-line text-right text-sm font-medium">
+                  <td className="px-2 py-4 whitespace-pre-line text-right text-sm font-medium">
+                    <Button onClickHandler={() => {
+                      setSelectedGoal(goal)
+                      router.push({
+                        pathname: '/app/goals/[id]',
+                        query: { id: goal.id },
+                      })
+                    }}>
+                      View
+                    </Button>
+                  </td>
+                  <td className="pr-4 py-4 whitespace-pre-line text-right text-sm font-medium">
                     <Button onClickHandler={() => {
                       setSelectedGoal(goal)
                       setOpen(true)
