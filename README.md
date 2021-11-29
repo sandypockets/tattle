@@ -1,11 +1,22 @@
-<p align="center">
-<img src="./public/nextdotjs.svg" alt="Next.js" />
-<img src="./public/tailwindcss.svg" alt="Tailwind CSS" />
-<img src="./public/storybook.svg" alt="Storybook" />
-</p>
+# Tattle
+Tattle is a goal tracking and accountability platform, with a fun spin. If you don't achieve your goal, we'll tattle on you. We'll give your mom a ring, or send her an SMS to let her know of your disappointment. Don't want to rope dear old mom into this? Use any phone number you want, as long as it will help keep you accountable.
 
-# Next.js, Tailwind CSS, Supabase, and Storybook
-A quick start template for full stack projects with Next.js, Tailwind CSS, Supabase, and Storybook.
+## Features
+- Create, edit, delete goals
+- Create edit, delete contacts
+- Assign contacts to goals
+- Choose to send either SMS or voice message
+- Create custom SMS or voice message
+- Stats and reporting
+
+## Tech stack
+- Next.js
+- React
+- Tailwind CSS
+- Supabase
+- Storybook
+
+---
 
 # Get Started
 Storybook has built-in TypeScript support, but Next.js requires [some configuration](https://nextjs.org/docs/basic-features/typescript#existing-projects). If you want to customize the default configuration, refer to the [TypeScript docs](https://storybook.js.org/docs/react/configure/typescript).
