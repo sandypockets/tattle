@@ -17,7 +17,9 @@ export default function GoalCard({ goal }) {
 
 
   return (
-    <div onClick={() => {
+    <div
+      className="cursor-pointer"
+      onClick={() => {
       router.push({
         pathname: '/app/goals/[id]',
         query: { id: goal.id },
