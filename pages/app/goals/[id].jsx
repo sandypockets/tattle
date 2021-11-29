@@ -22,6 +22,7 @@ export default function SingleGoal() {
   const user = supabase.auth.user()
 
   useEffect(() => {
+    const user = supabase.auth.user()
     const { id } = router.query
     getGoal(user.id, id, setGoal)
   }, [])
@@ -46,6 +47,16 @@ export default function SingleGoal() {
     goal && contact && setLoading(false)
   }, [goal, contact])
 
+ function markGoalAsDone() {
+    if (user && goal) {
+      markAsDone(user.id, goal['id'], isCompletedOnTime)
+      setTimeout(() => {
+        const { id } = router.query
+        return getGoal(user.id, id, setGoal)
+      }, 50)
+    }
+  }
+
   return (
     <AppLayout>
       {loading && (
@@ -65,7 +76,8 @@ export default function SingleGoal() {
               </div>
               <div className="w-36">
                 <Button onClickHandler={() => {
-                  user && goal && markAsDone(user.id, goal['id'], isCompletedOnTime)
+                  user && goal && markGoalAsDone(user.id, goal['id'], isCompletedOnTime)
+                  // user && goal && markAsDone(user.id, goal['id'], isCompletedOnTime)
                 }}>
                   Mark as done
                 </Button>
