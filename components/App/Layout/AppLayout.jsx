@@ -1,4 +1,5 @@
 import {Fragment, useEffect, useState} from 'react'
+import Link from 'next/link'
 import { Dialog, Menu, Transition } from '@headlessui/react'
 import {
   UserIcon,
@@ -203,20 +204,21 @@ export default function AppLayout({ children }) {
                         {userNavigation.map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
-                              <a
-                                onClick={() => {
-                                  if (item.name === 'Sign out') {
-                                    return supabase.auth.signOut()
-                                  }
-                                }}
-                                href={item.href}
-                                className={classNames(
-                                  active ? 'bg-gray-100' : '',
-                                  'block py-2 px-4 text-sm text-gray-700'
-                                )}
-                              >
-                                {item.name}
-                              </a>
+                              <Link href={item.href}>
+                                <a
+                                  onClick={() => {
+                                    if (item.name === 'Sign out') {
+                                      return supabase.auth.signOut()
+                                    }
+                                  }}
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'block py-2 px-4 text-sm text-gray-700'
+                                  )}
+                                >
+                                  {item.name}
+                                </a>
+                              </Link>
                             )}
                           </Menu.Item>
                         ))}
