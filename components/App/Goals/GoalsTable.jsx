@@ -73,7 +73,6 @@ export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
                     <Button onClickHandler={() => {
                       setSelectedGoal(goal)
                       setOpen(true)
-                      console.log("GOAL", goal)
                     }}>
                       Edit
                     </Button>
