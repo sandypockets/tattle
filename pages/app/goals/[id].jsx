@@ -10,12 +10,14 @@ import LoadingWheel from "../../../components/Global/LoadingWheel";
 import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
 import getGoal from "../../../helpers/getGoal";
 import getContact from "../../../helpers/getContact";
+import markAsDone from "../../../helpers/markAsDone";
 
 export default function SingleGoal() {
   const [contact, setContact] = useState()
   const [goal, setGoal] = useState()
   const [loading, setLoading] = useState(true)
   const [timeLeft, setTimeLeft] = useState()
+  const [isCompletedOnTime, setIsCompletedOnTime] = useState(false)
   const router = useRouter()
   const user = supabase.auth.user()
 
@@ -32,6 +34,11 @@ export default function SingleGoal() {
       const unixTimeRemaining = unixDueDate - unixDateNow
       const numberOfDaysRemaining = Math.round(Math.round(unixTimeRemaining / 86400) / 1000)
       setTimeLeft(numberOfDaysRemaining)
+      if (unixTimeRemaining < 0) {
+        setIsCompletedOnTime(false)
+      } else {
+        setIsCompletedOnTime(true)
+      }
     }
   }, [goal])
 
@@ -57,7 +64,9 @@ export default function SingleGoal() {
                 </Button>
               </div>
               <div className="w-36">
-                <Button>
+                <Button onClickHandler={() => {
+                  user && goal && markAsDone(user.id, goal['id'], isCompletedOnTime)
+                }}>
                   Mark as done
                 </Button>
               </div>
@@ -65,8 +74,15 @@ export default function SingleGoal() {
           </section>
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
             <GridCard>
-              <h2>{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h2>
-              <CardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500" : "text-black"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></CardTitle>
+              {goal['is_completed'] === true && (
+                <CardTitle><span>Complete</span></CardTitle>
+              )}
+              { goal['is_completed'] === false && (
+                <>
+                  <h2>{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h2>
+                  <CardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500" : "text-black"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></CardTitle>
+                </>
+              )}
             </GridCard>
             <GridCard>
               <h2>Created on</h2>

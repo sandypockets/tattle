@@ -20,9 +20,30 @@ async function getSingleGoal(req, res) {
   }
 }
 
+async function markGoalComplete(req, res) {
+  const { userId, goalId, isCompletedOnTime } = req.body
+  try {
+    const { data, status, error } = await supabase
+      .from('goals')
+      .update({
+        is_completed: true,
+        is_completed_on_time: isCompletedOnTime
+      })
+      .match({ id: goalId, owner_id: userId })
+    data && status && res.status(status).json(data)
+    error && status && res.status(status).json(error)
+  } catch (err) {
+    res.json(err)
+  } finally {
+    res.end()
+  }
+}
+
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    //
+    if (req.body.type === 'complete') {
+      return markGoalComplete(req, res)
+    }
   } else if (req.method === 'GET') {
     return getSingleGoal(req, res)
   } else {
