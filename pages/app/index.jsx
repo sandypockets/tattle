@@ -85,7 +85,7 @@ export default function Index() {
         <>
           <StatsSection statProps={userStats} showHeadings={false} />
           <CardTitle>Goals due soon</CardTitle>
-          <div className="grid grid-cols-4 gap-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
             {goals && goals.map((goal, index) => {
               if (index < numberOfGoalsToShow) {
                 return (
