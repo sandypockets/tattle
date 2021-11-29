@@ -1,9 +1,7 @@
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    if (req.body.type === 'cron') {
-      console.log("CRON FIRED!")
-      //
-    }
+    console.log("CRON FIRED!")
+    res.status(200).json('Cron job fired!')
   } else if (req.method === 'GET') {
     //
   } else {
