@@ -24,15 +24,18 @@ const navigation = [
   { name: 'Profile', href: '/app/profile', icon: UserIcon },
   { name: 'Settings', href: '/app/settings', icon: AdjustmentsIcon }
 ]
+const subNavigation = [
+  {name: 'New', href: '/app/goals/new', parentHref: '/app/goals', icon: AdjustmentsIcon},
+  {name: 'Upcoming', href: '/app/goals/upcoming', parentHref: '/app/goals', icon: AdjustmentsIcon},
+  {name: 'Completed', href: '/app/goals/completed', parentHref: '/app/goals', icon: AdjustmentsIcon},
+  {name: 'New', href: '/app/contacts/new', parentHref: '/app/contacts', icon: AdjustmentsIcon},
+  {name: 'Customize', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon}
+]
 const userNavigation = [
   { name: 'Your Profile', href: '/app/profile' },
   { name: 'Settings', href: '/app/settings' },
   { name: 'Sign out', href: '/' },
 ]
-
-const customSettings = {
-  name: 'Customize', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon
-}
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -135,10 +138,15 @@ export default function AppLayout({ children }) {
                 {navigation.map((item, index) => (
                   <div key={index}>
                     <DesktopLinkWithIcon item={item} currentPage={currentPage} />
+                    {subNavigation.map((subItem, subItemIndex) => {
+                      if (subItem.parentHref === item.href && currentPage === item.href) {
+                        return (
+                          <DesktopLinkNoIcon item={subItem} currentPage={currentPage} />
+                        )
+                      }
+                    })}
                   </div>
                 ))}
-                {currentPage === customSettings.parentHref && <DesktopLinkNoIcon item={customSettings} currentPage={currentPage} /> }
-                {currentPage === customSettings.href && <DesktopLinkNoIcon item={customSettings} currentPage={currentPage} /> }
               </nav>
             </div>
           </div>
