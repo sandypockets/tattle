@@ -66,7 +66,7 @@ export default function SingleGoal() {
           <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
             <GridCard>
               <h2>{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h2>
-              <CardTitle>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</CardTitle>
+              <CardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500" : "text-black"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></CardTitle>
             </GridCard>
             <GridCard>
               <h2>Created on</h2>
