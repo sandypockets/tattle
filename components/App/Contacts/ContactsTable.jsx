@@ -27,10 +27,10 @@ export default function ContactsTable({ contacts, setOpen, setSelectedContact })
                 >
                   Created at
                 </th>
-                <th scope="col" className="relative px-6 py-3">
+                <th scope="col" className="relative px-2 py-3">
                   <span className="sr-only">Assign</span>
                 </th>
-                <th scope="col" className="relative px-6 py-3">
+                <th scope="col" className="relative px-2 py-3">
                   <span className="sr-only">Edit</span>
                 </th>
               </tr>
@@ -41,13 +41,14 @@ export default function ContactsTable({ contacts, setOpen, setSelectedContact })
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{contact.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact.phone}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact['created_at']}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                  <div className="flex w-full">
+                  <td className="pl-2 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="max-w-min mx-4">
                       <Button>
                         Assign
                       </Button>
                     </div>
+                  </td>
+                  <td className="pr-2 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="max-w-min">
                       <Button onClickHandler={() => {
                         setSelectedContact(contact)
@@ -56,7 +57,6 @@ export default function ContactsTable({ contacts, setOpen, setSelectedContact })
                         Edit
                       </Button>
                     </div>
-                  </div>
                   </td>
                 </tr>
               ))}
