@@ -1,24 +1,40 @@
 import { supabase } from "../../../lib/supabaseClient";
 
-export async function sendMessage(contactId, goalId){
+const accountSid = process.env.NEXT_TWILIO_ACCOUNT_SID;
+const authToken = process.env.NEXT_TWILIO_AUTH_TOKEN;
+const toPhoneNumber = process.env.NEXT_TEST_TO_PHONE_NUMBER;
+const fromPhoneNumber = process.env.NEXT_TEST_FROM_PHONE_NUMBER;
+const client = require('twilio')(accountSid, authToken);
+
+function sendSmsMessage(contactName, goalTitle, ownerName) {
+  client.messages
+    .create({
+      body: `Hey ${contactName}! ${ownerName} didn't achieve their goal: ${goalTitle}`,
+      from: fromPhoneNumber,
+      to: toPhoneNumber
+    })
+    .then(message => console.log(message.sid))
+    .catch((err) => console.error(err));
+}
+
+export async function getContactData(contactId, goalId, goalTitle, ownerName){
   try {
     const { data, error, status } = await supabase
       .from('contacts')
-      .select('phone, id')
+      .select('name, phone, id')
       .eq('id', contactId)
     if (data) {
-      console.log("contact Data: ", data)
       return {
         "phone": data[0].phone,
         "contact_id": data[0]['id'],
-        "goal_id": goalId
+        "contact_name": data[0]['name'],
+        "goal_id": goalId,
+        "goal_title": goalTitle,
+        "owner_name": ownerName
       }
     }
     if (error) {
       console.error("contact Error: ", error)
-    }
-    if (status) {
-      console.log("contact Status: ", status)
     }
   } catch (err) {
     console.error(err)
@@ -27,29 +43,24 @@ export async function sendMessage(contactId, goalId){
 
 async function cronCheck(req, res) {
   const todayDate = new Date().toLocaleDateString('en-CA').toString()
-  console.log("today date: ", todayDate)
   try {
     const { data, error, status } = await supabase
       .from('goals')
-      .select('due_date, id, contact_id')
+      .select('due_date, id, contact_id, title, owner_name')
       .eq('due_date', todayDate)
     if (data) {
-      console.log("Data: ", data)
-      // API call to api/v1/message to trigger a message for each due goal
-      console.log("data[0]id", data[0].id)
       let dataArr = []
       for (const item in data) {
-        const phoneNum = await sendMessage(data[item]['contact_id'], data[item]['id'])
-        dataArr.push(phoneNum)
+        const contactData = await getContactData(data[item]['contact_id'], data[item]['id'], data[item]['title'], data[item]['owner_name'])
+        dataArr.push(contactData)
       }
-      // sendMessage(data[0].contact_id)
       console.log("dataArr: ", dataArr)
+      for (const item in dataArr) {
+        sendSmsMessage(dataArr[item]['contact_name'], dataArr[item]['goal_title'], dataArr[item]['owner_name'])
+      }
     }
     if (error) {
-      console.error("Error: ", error)
-    }
-    if (status) {
-      console.log("Status: ", status)
+      console.error(error)
     }
   } catch (err) {
     res.json(err)
