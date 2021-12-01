@@ -1,16 +1,18 @@
-import CardTitle from "../../Global/CardTitle";
-import Card from "../../Global/Card";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
-
-const bills = [
-  { id: '1', title: 'Tattle Monthly', billDate: 'September 1, 2021', amount: '$3 USD' },
-  { id: '2', title: 'Tattle Monthly', billDate: 'October 1, 2021', amount: '$3 USD' },
-  { id: '23', title: 'Tattle Monthly', billDate: 'November 1, 2021', amount: '$3 USD' },
-  { id: '32', title: 'Tattle Monthly', billDate: 'December 1, 2021', amount: '$3 USD' },
-  { id: '45', title: 'Tattle Monthly', billDate: 'January 1, 2022', amount: '$3 USD' },
-]
+import Card from "../../Global/Card";
+import CardTitle from "../../Global/CardTitle";
+import getBillingHistory from "../../../helpers/getBillingHistory";
 
 export default function YourBillingHistory() {
+  const [billingHistory, setBillingHistory] = useState()
+
+  useEffect(() => {
+    const user = supabase.auth.user()
+    getBillingHistory(user.id, setBillingHistory)
+  }, [])
+
   return (
     <Card>
       <CardTitle>Billing history</CardTitle>
@@ -51,12 +53,12 @@ export default function YourBillingHistory() {
                 </tr>
                 </thead>
                 <tbody>
-                {bills.map((bill, index) => (
+                {billingHistory && billingHistory.map((bill, index) => (
                   <tr key={bill.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{bill.title}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{bill.billDate}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{bill.amount}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{bill['type']}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill['created_at']).toLocaleDateString('en-CA')}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill['amount_cents'] / 1000} USD</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="max-w-min">
                         <Button>
