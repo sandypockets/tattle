@@ -9,30 +9,17 @@ const includedFeatures = [
   'Tattle via SMS',
 ]
 
-export default function PricingSection() {
+export default function Subscribe() {
   return (
-    <div className="bg-gray-100">
-      <div className="pt-12 sm:pt-16 lg:pt-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl lg:text-5xl">One plan to rule them all</h2>
-            <p className="mt-4 text-xl text-gray-600">
-              Tattle is{' '}
-              <span className="text-yellow-400 font-bold">simple</span>, and so is our pricing structure.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div>
       <div className="mt-8 bg-white pb-16 sm:mt-12 sm:pb-20 lg:pb-28">
         <div className="relative">
-          <div className="absolute inset-0 h-1/2 bg-gray-100" />
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-lg mx-auto rounded-lg shadow-lg overflow-hidden lg:max-w-none lg:flex">
               <div className="flex-1 bg-white px-6 py-8 lg:p-12">
                 <h3 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">Monthly</h3>
                 <p className="mt-6 text-base text-gray-500">
                   Tattle offers a monthly subscription, which you can cancel or start back up anytime.
-
                 </p>
                 <div className="mt-8">
                   <div className="flex items-center">
@@ -66,7 +53,7 @@ export default function PricingSection() {
                 </p>
                 <div className="mt-6">
                   <div className="rounded-md shadow">
-                    <Link href="/signup">
+                    <Link href="https://buy.stripe.com/test_7sI3dz0Qo7751Z6bIJ">
                       <a
                         className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500"
                       >

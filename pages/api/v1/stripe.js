@@ -1,8 +1,14 @@
+import Stripe from 'stripe';
+
 const stripeApiKey = process.env.NEXT_STRIPE_SECRET_KEY;
 const stripeTestEmail = process.env.NEXT_STRIPE_TEST_RECEIPT_EMAIL_ADDRESS;
+const stripe = new Stripe(stripeApiKey);
 
 async function createStripeSubscription() {
-  // Do stuff
+  const customer = await stripe.customers.create({
+    email: stripeTestEmail,
+  });
+  console.log("Stripe Customer ID: ", customer.id);
 }
 
 export default function handler(req, res) {

@@ -16,6 +16,9 @@ import { SearchIcon } from '@heroicons/react/solid'
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
+import getUserPlan from "../../../helpers/getUserPlan";
+import PricingSection from "../../Web/PricingSection";
+import Subscribe from "../Subscribe";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -45,6 +48,7 @@ export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [currentPage, setCurrentPage] = useState()
   const [session, setSession] = useState(null)
+  const [hasSubscription, setHasSubscription] = useState(false)
   const router = useRouter()
 
   useEffect(() => {
@@ -64,6 +68,12 @@ export default function AppLayout({ children }) {
       router.push('/app/signin')
     }
   }, [session])
+
+  useEffect(() => {
+    const user = supabase.auth.user()
+    getUserPlan(user.id, setHasSubscription)
+  }, [])
+
 
   return (
     <>
@@ -238,7 +248,8 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {children}
+                    {!hasSubscription && <Subscribe />}
+                    {hasSubscription && children}
                   </main>
                 </div>
               </div>
