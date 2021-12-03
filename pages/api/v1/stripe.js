@@ -7,7 +7,8 @@
 //
 // export default function handler(req, res) {
 //   if (req.method === 'POST') {
-//     const sig = req.rawHeaders['stripe-signature'];
+//     const sig = req.rawHeaders[13];
+//     console.log("SIG: ", sig)
 //     const payload = req.body.data.object
 //     // console.log("req.body.data.object: ", req.body.data.object)
 //
@@ -15,7 +16,7 @@
 //     try {
 //       event = stripe.webhooks.constructEvent(req.headers, sig, endpointSecret)
 //     } catch (err) {
-//       // console.log("Webhook error: ", err)
+//       console.log("Webhook error: ", err)
 //       res.status(400).send(`Webhook Error: ${err.message}`);
 //     }
 //
@@ -26,7 +27,7 @@
 //     }
 //     if (payload.object === 'payment_intent') {
 //       console.log("payment intent event!")
-//       console.log("Payload: ", payload)
+//       // console.log("Payload: ", payload)
 //     }
 //
 //
