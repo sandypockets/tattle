@@ -19,6 +19,7 @@ import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 import getUserPlan from "../../../helpers/getUserPlan";
 import PricingSection from "../../Web/PricingSection";
 import Subscribe from "../Subscribe";
+import Checkout from "../Checkout/Checkout";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -248,7 +249,8 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {!hasSubscription && <Subscribe />}
+                    {!hasSubscription && <Checkout />}
+                    {/*{!hasSubscription && <Subscribe />}*/}
                     {hasSubscription && children}
                   </main>
                 </div>
