@@ -4,11 +4,18 @@ async function checkUserPlan(req, res) {
   const { ownerId } = req.query
   try {
     const { data, error, status } = await supabase
-      .from('profiles')
-      .select('is_subscribed')
-      .eq('id', ownerId)
+      .from('stripe')
+      .select('payment_successful')
+      .eq('user_id', ownerId)
     if (data) {
-      res.status(status).json(data)
+      let counter = 0;
+      for (const item in data) {
+        if (data[item]['payment_successful'] === true && counter <= 1) {
+          counter++
+          res.status(status).json(data[item]['payment_successful'])
+          break;
+        }
+      }
     }
     if (error) {
       res.status(status).json(error)

@@ -22,6 +22,7 @@ import Subscribe from "../Subscribe";
 import Checkout from "../Checkout/Checkout";
 import LoadingWheelWrapper from "../../Global/LoadingWheelWrapper";
 import LoadingWheel from "../../Global/LoadingWheel";
+import CardTitle from "../../Global/CardTitle";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -76,7 +77,7 @@ export default function AppLayout({ children }) {
   useEffect(() => {
     const user = supabase.auth.user()
     if (user) {
-      getUserPlan(user.id, setHasSubscription)
+      getUserPlan(user.id, setHasSubscription, setLoading)
     }
   }, [])
 
@@ -260,9 +261,30 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {!hasSubscription && <Checkout session={session} /> }
+                    {loading && (
+                      <LoadingWheelWrapper>
+                        <LoadingWheel />
+                      </LoadingWheelWrapper>
+                    )}
+                    {!hasSubscription && !loading && (
+                      <>
+                      <CardTitle>Checkout</CardTitle>
+                        <div className="grid grid-cols-2">
+                          <div>
+                            <h3>Some title</h3>
+                            <p>Some summary</p>
+                            <div>$3 USD / month</div>
+                            <div>Terms and conditions</div>
+                            <div>Powered by Stripe</div>
+                          </div>
+                          <div>
+                            <Checkout session={session} />
+                          </div>
+                        </div>
+                      </>
+                    )}
                     {/*{!hasSubscription && <Subscribe />}*/}
-                    {hasSubscription && children}
+                    {hasSubscription && !loading && children}
                   </main>
                 </div>
               </div>
