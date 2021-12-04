@@ -20,6 +20,8 @@ import getUserPlan from "../../../helpers/getUserPlan";
 import PricingSection from "../../Web/PricingSection";
 import Subscribe from "../Subscribe";
 import Checkout from "../Checkout/Checkout";
+import LoadingWheelWrapper from "../../Global/LoadingWheelWrapper";
+import LoadingWheel from "../../Global/LoadingWheel";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -50,6 +52,7 @@ export default function AppLayout({ children }) {
   const [currentPage, setCurrentPage] = useState()
   const [session, setSession] = useState(null)
   const [hasSubscription, setHasSubscription] = useState(false)
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
@@ -72,8 +75,16 @@ export default function AppLayout({ children }) {
 
   useEffect(() => {
     const user = supabase.auth.user()
-    getUserPlan(user.id, setHasSubscription)
+    if (user) {
+      getUserPlan(user.id, setHasSubscription)
+    }
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [session])
 
 
   return (
@@ -249,7 +260,7 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {!hasSubscription && <Checkout />}
+                    {!hasSubscription && <Checkout session={session} /> }
                     {/*{!hasSubscription && <Subscribe />}*/}
                     {hasSubscription && children}
                   </main>
