@@ -6,7 +6,7 @@ const calculateOrderAmount = (items) => {
   // Replace this constant with a calculation of the order's amount
   // Calculate the order total on the server to prevent
   // people from directly manipulating the amount on the client
-  return 3000;
+  return 300;
 };
 
 // Create a PaymentIntent with the order amount and currency
@@ -21,10 +21,11 @@ async function createPaymentIntent(req, res) {
   });
 
   try {
+    console.log("PAYMENT INTENT: ", paymentIntent)
     const { data, error } = await supabase
       .from('stripe')
       .insert([
-        { user_id: user, stripe_client_secret: paymentIntent.client_secret }
+        { user_id: user, stripe_client_secret: paymentIntent.client_secret, stripe_payment_intent_id: paymentIntent.id }
       ])
     data && console.log(data)
     error && console.error(error)

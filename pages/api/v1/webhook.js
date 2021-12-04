@@ -2,14 +2,17 @@ import { supabase } from "../../../lib/supabaseClient";
 
 async function markAsPaid(req, res) {
   const payload = req.body.data.object
+  console.log(payload.client_secret)
+  console.log("WEBHOOK PAYLOAD: ", payload)
   if (payload.object === 'payment_intent' && payload.status === 'succeeded') {
     console.log("Webhook type: ", payload.object)
-    const clientSecret = payload.clientSecret
+    const paymentId = payload.id
+    // const clientSecret = payload.client_secret
     try {
       const { data, error, status } = await supabase
         .from('stripe')
         .update({ payment_successful: true })
-        .match({ stripe_client_secret: clientSecret })
+        .match({ stripe_payment_intent_id: paymentId })
       if (data) {
         res.status(200).json(data)
       }
