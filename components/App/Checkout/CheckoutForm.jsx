@@ -9,6 +9,8 @@ export default function CheckoutForm() {
 
   useEffect(() => {
     if (!stripe) {
+      console.log("!stripe")
+      console.log(stripe)
       return;
     }
     const clientSecret = new URLSearchParams(window.location.search).get(
