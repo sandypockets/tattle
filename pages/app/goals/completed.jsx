@@ -7,7 +7,6 @@ import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import getGoals from "../../../helpers/getGoals";
 import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
 import LoadingWheel from "../../../components/Global/LoadingWheel";
-import {loadGetInitialProps} from "next/dist/shared/lib/utils";
 
 export default function Completed() {
   const [goals, setGoals] = useState()
@@ -18,9 +17,9 @@ export default function Completed() {
   const [numOfCols, setNumOfCols] = useState(4)
 
   async function getUserGoals() {
-    const user = await supabase.auth.user()
-    setUser(user)
-    const id = user['id']
+    const supabaseUser = await supabase.auth.user()
+    setUser(supabaseUser)
+    const id = supabaseUser['id']
     getGoals(id, setGoals)
   }
 
