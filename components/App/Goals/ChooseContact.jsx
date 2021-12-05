@@ -15,11 +15,18 @@ export default function ChooseContact({ selectedContactId, setSelectedContactId 
     getUserContacts()
   }, [])
 
+  // Create default select value
+  if (contacts) {
+    !selectedContactId && setSelectedContactId(contacts[0]['id'])
+  } else {
+    setSelectedContactId(null)
+  }
+
   return (
     <div className="flex mx-2 mt-6 justify-between flex-row-reverse">
       <div className="flex flex-col">
         <p>Choose a contact</p>
-        <select defaultValue={selectedContactId ? selectedContactId : setSelectedContactId(contacts[0]['id'])} className="w-56" onChange={(e) => setSelectedContactId(event.target.value)}>
+        <select defaultValue={selectedContactId} className="w-56" onChange={(e) => setSelectedContactId(event.target.value)}>
           {contacts && contacts.map((option) => (
             <option value={option.id} key={option.id}>{option.name} - {option.phone}</option>
           ) )}

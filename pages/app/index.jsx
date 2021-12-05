@@ -74,6 +74,10 @@ export default function Index() {
     }
   ).reverse()
 
+  // determine grid sizing
+  let numOfGoals = goals && goals.length < 4 ? goals.length : 4;
+  console.log(numOfGoals)
+
   return (
     <AppLayout>
       {loading && (
@@ -85,7 +89,7 @@ export default function Index() {
         <>
           <StatsSection statProps={userStats} showHeadings={false} />
           <CardTitle>Goals due soon</CardTitle>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfGoals} gap-5`}>
             {goals && goals.filter(item => item['is_completed'] === false).map((goal, index) => {
               if (index < numberOfGoalsToShow) {
                 return (

@@ -9,7 +9,7 @@ import SingleDatePicker from "../DatePicker";
 import TextInput from "../../Global/TextInput";
 import createGoal from "../../../helpers/createGoal";
 
-export default function CreateGoal({ getUserGoals }) {
+export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
   const [goalTitle, setGoalTitle] = useState('')
   const [goalDesc, setGoalDesc] = useState('')
   const [goalOutcome, setGoalOutcome] = useState('')
@@ -21,8 +21,11 @@ export default function CreateGoal({ getUserGoals }) {
     const user = await supabase.auth.user()
     const userId = user.id
     await createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId)
-    getUserGoals()
-    router.push('/app/goals')
+    setDisplayFormType('empty')
+    setTimeout(() => {
+      getUserGoals()
+      router.push('/app/goals')
+    }, 200)
   }
 
   return (
