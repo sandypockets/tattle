@@ -111,11 +111,11 @@ export default function SingleGoal() {
           </div>
           <Card>
             <CardTitle>Description</CardTitle>
-            <p>Description: <span>{goal['description']}</span></p>
+            <p>{goal['description']}</p>
           </Card>
           <Card>
             <CardTitle>Outcome</CardTitle>
-            <p>Outcome: <span>{goal['outcome']}</span></p>
+            <p>{goal['outcome']}</p>
           </Card>
         </>
       )}
