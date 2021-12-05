@@ -13,6 +13,8 @@ export default function Upcoming() {
   const [user, setUser] = useState()
   const [loading, setLoading] = useState(true)
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
+  const [upcomingGoals, setUpcomingGoals] = useState()
+  const [numOfCols, setNumOfCols] = useState(4)
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
@@ -26,23 +28,29 @@ export default function Upcoming() {
   }, [])
 
   useEffect(() => {
-    goals && setLoading(false)
+    goals && goals.sort(
+      function(a, b) {
+        if (a['due_date'] > b['due_date']) {
+          return -1
+        } else if (a['due_date'] < b['due_date']) {
+          return 1
+        }
+        if (a['id'] > b['id']) {
+          return -1
+        } else if (a['id'] < b['id']) {
+          return 1
+        }
+      }
+    ).reverse()
+    goals && setUpcomingGoals(goals.filter(item => item['is_completed'] === false))
   }, [goals])
 
-  goals && goals.sort(
-    function(a, b) {
-      if (a['due_date'] > b['due_date']) {
-        return -1
-      } else if (a['due_date'] < b['due_date']) {
-        return 1
-      }
-      if (a['id'] > b['id']) {
-        return -1
-      } else if (a['id'] < b['id']) {
-        return 1
-      }
+  useEffect(() => {
+    if (upcomingGoals) {
+      setNumOfCols(upcomingGoals.length <= 4 ? upcomingGoals : 4)
+      setLoading(false)
     }
-  ).reverse()
+  }, [upcomingGoals])
 
   return (
     <AppLayout>
@@ -54,8 +62,8 @@ export default function Upcoming() {
       {!loading && (
         <>
           <CardTitle>Goals due soon</CardTitle>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
-            {goals && goals.filter(item => item['is_completed'] === false).map((goal, index) => {
+          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
+            {upcomingGoals && upcomingGoals.map((goal, index) => {
               if (index < numberOfGoalsToShow) {
                 return (
                   <article key={index}>
@@ -67,8 +75,8 @@ export default function Upcoming() {
           </div>
           <div className="w-36 mx-auto mt-10">
             {
-              goals && goals.length > 3 &&
-              <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+              upcomingGoals && upcomingGoals.length > 3 &&
+              <Button disabled={numberOfGoalsToShow > upcomingGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
                 Show more
               </Button>
             }
