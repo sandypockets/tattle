@@ -21,6 +21,7 @@ export default function Index() {
   const [open, setOpen] = useState(false)
   const [user, setUser] = useState()
   const [selectedGoal, setSelectedGoal] = useState()
+  const [numOfCols, setNumOfCols] = useState(4)
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
@@ -34,10 +35,12 @@ export default function Index() {
   }, [])
 
   useEffect(() => {
-    user && goals && setLoading(false)
+    if (goals) {
+      setNumOfCols(goals.length <= 4 ? goals.length : 4)
+      user && setLoading(false)
+      goals.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+    }
   }, [goals])
-
-  goals && goals.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
 
   return (
     <AppLayout>
