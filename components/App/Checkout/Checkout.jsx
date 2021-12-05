@@ -27,7 +27,7 @@ export default function Checkout({ session }) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           items: [{ id: "Tattle Monthly" }],
-          user: session.user.id
+          user: session.user
         }),
       })
         .then((res) => res.json())
