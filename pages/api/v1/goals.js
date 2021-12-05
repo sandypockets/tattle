@@ -36,7 +36,7 @@ async function createGoal(req, res) {
       res.end()
     }
   } else {
-    res.json('Error - No content').end()
+    res.json('Error - No content')
   }
 }
 
