@@ -22,6 +22,8 @@ export default function Index() {
     'statThree': '0',
     'statThreeText': 'times Tattled on',
   })
+  const [numOfCols, setNumOfCols] = useState(4)
+  const [incompleteGoals, setIncompleteGoals] = useState()
 
   useEffect(() => {
     async function getGoalsAndStats() {
@@ -55,28 +57,28 @@ export default function Index() {
   }, [goals])
 
   useEffect(() => {
-    userStats && goals && setLoading(false)
-  }, [userStats])
-
-  // Sort goals by due_date, then by id
-  goals && goals.sort(
-    function(a, b) {
-      if (a['due_date'] > b['due_date']) {
-        return -1
-      } else if (a['due_date'] < b['due_date']) {
-        return 1
-      }
-      if (a['id'] > b['id']) {
-        return -1
-      } else if (a['id'] < b['id']) {
-        return 1
-      }
+    if (goals) {
+      const outstandingGoals = goals.filter(item => item['is_completed'] === false)
+      setNumOfCols(outstandingGoals.length <= 4 ? outstandingGoals.length : 4)
+      // Sort goals by due_date, then by id
+      outstandingGoals.sort(
+        function(a, b) {
+          if (a['due_date'] > b['due_date']) {
+            return -1
+          } else if (a['due_date'] < b['due_date']) {
+            return 1
+          }
+          if (a['id'] > b['id']) {
+            return -1
+          } else if (a['id'] < b['id']) {
+            return 1
+          }
+        }
+      ).reverse()
+      setIncompleteGoals(outstandingGoals)
+      userStats && setLoading(false)
     }
-  ).reverse()
-
-  // determine grid sizing
-  let numOfGoals = goals && goals.length < 4 ? goals.length : 4;
-  console.log(numOfGoals)
+  }, [userStats, goals])
 
   return (
     <AppLayout>
@@ -89,8 +91,8 @@ export default function Index() {
         <>
           <StatsSection statProps={userStats} showHeadings={false} />
           <CardTitle>Goals due soon</CardTitle>
-          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfGoals} gap-5`}>
-            {goals && goals.filter(item => item['is_completed'] === false).map((goal, index) => {
+          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
+            {incompleteGoals && incompleteGoals.map((goal, index) => {
               if (index < numberOfGoalsToShow) {
                 return (
                   <article key={index}>
@@ -102,8 +104,8 @@ export default function Index() {
           </div>
           <div className="w-36 mx-auto mt-10">
             {
-              goals && goals.length > 3 &&
-                <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+              incompleteGoals && incompleteGoals.length > 3 &&
+                <Button disabled={numberOfGoalsToShow > incompleteGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
                   Show more
                 </Button>
             }
