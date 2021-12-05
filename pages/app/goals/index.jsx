@@ -54,10 +54,10 @@ export default function Index() {
           <div className="flex justify-between">
             <CardTitle>Goals</CardTitle>
             <div className="max-w-min">
-              <Button onClickHandler={() => setDisplayFormType('create')}>Create</Button>
+              <Button disabled={!goals || goals.length === 0} onClickHandler={() => setDisplayFormType('create')}>Create</Button>
             </div>
           </div>
-          {!goals && (
+          {!goals || goals.length === 0 && (
             <Banner>
               <p className="h-12">Before you can create a goal, you need to{' '}
                 <Link href="/app/contacts">
@@ -75,7 +75,7 @@ export default function Index() {
           </Card>
           {displayFormType === 'empty' && !goals && <GoalsEmptyState setState={setDisplayFormType} />}
           {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
-          {goals && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
+          {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
           <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
         </>
       )}
