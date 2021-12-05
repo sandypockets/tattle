@@ -24,9 +24,12 @@ async function createPaymentIntent(req, res) {
     console.log("PAYMENT INTENT: ", paymentIntent)
     const { data, error } = await supabase
       .from('stripe')
-      .insert([
-        { user_id: user, stripe_client_secret: paymentIntent.client_secret, stripe_payment_intent_id: paymentIntent.id }
-      ])
+      .insert([{
+        user_id: user.id,
+        receipt_email: user.email,
+        stripe_client_secret: paymentIntent.client_secret,
+        stripe_payment_intent_id: paymentIntent.id
+      }])
     data && console.log(data)
     error && console.error(error)
   } catch (err) {
