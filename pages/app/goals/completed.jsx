@@ -36,7 +36,7 @@ export default function Completed() {
   }, [goals])
 
   useEffect(() => {
-    completedGoals && setNumOfCols(completedGoals.length <= 4 ? completedGoals.length : 4)
+    completedGoals && setNumOfCols(completedGoals.length <= 3 ? completedGoals.length + 1 : 4)
   }, [completedGoals])
 
   completedGoals && completedGoals.sort(

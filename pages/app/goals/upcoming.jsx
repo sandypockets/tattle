@@ -47,7 +47,7 @@ export default function Upcoming() {
 
   useEffect(() => {
     if (upcomingGoals) {
-      setNumOfCols(upcomingGoals.length <= 4 ? upcomingGoals : 4)
+      setNumOfCols(upcomingGoals.length <= 3 ? upcomingGoals + 1 : 4)
       setLoading(false)
     }
   }, [upcomingGoals])

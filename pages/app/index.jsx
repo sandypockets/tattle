@@ -59,7 +59,7 @@ export default function Index() {
   useEffect(() => {
     if (goals) {
       const outstandingGoals = goals.filter(item => item['is_completed'] === false)
-      setNumOfCols(outstandingGoals.length <= 4 ? outstandingGoals.length : 4)
+      setNumOfCols(outstandingGoals.length <= 3 ? outstandingGoals.length + 1 : 4)
       // Sort goals by due_date, then by id
       outstandingGoals.sort(
         function(a, b) {
