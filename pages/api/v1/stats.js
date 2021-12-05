@@ -3,16 +3,11 @@ import { supabase } from "../../../lib/supabaseClient";
 async function getTattleCount(req, res) {
   const { ownerId } = req.query
   try {
-    const { error, status, count } = await supabase
+    const { count } = await supabase
       .from('tattles')
       .select('*', { head: true, count: 'exact' })
       .match({ owner_id: ownerId })
-    if (count) {
-      res.status(status).json(count)
-    }
-    if (error) {
-      res.status(status).json(error)
-    }
+    res.status(200).json(count)
   } catch (err) {
     res.json(err)
   } finally {
