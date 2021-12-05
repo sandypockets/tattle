@@ -13,6 +13,7 @@ export default function Completed() {
   const [user, setUser] = useState()
   const [loading, setLoading] = useState(true)
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
+  const [numOfCols, setNumOfCols] = useState(4)
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
@@ -44,6 +45,14 @@ export default function Completed() {
     }
   ).reverse()
 
+  useEffect(() => {
+    if (goals) {
+      const completedGoals = goals.filter(item => item['is_completed'] === true).length
+      setNumOfCols(completedGoals <= 4 ? completedGoals : 4)
+    }
+  }, [])
+
+
   return (
     <AppLayout>
       {loading && (
@@ -51,10 +60,10 @@ export default function Completed() {
           <LoadingWheel />
         </LoadingWheelWrapper>
       )}
-      {!loading && (
+      {!loading && numOfCols && (
         <>
           <CardTitle>Completed goals</CardTitle>
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5">
+          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
             {goals && goals.filter(item => item['is_completed'] === true).map((goal, index) => {
               if (index < numberOfGoalsToShow) {
                 return (
