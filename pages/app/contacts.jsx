@@ -52,7 +52,7 @@ export default function Contacts() {
   } else {
     return (
       <AppLayout>
-        <Heading />
+        <Heading setDisplayFormType={setDisplayFormType} />
         <IntroCard />
         {displayFormType === 'empty' && contacts.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
         {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}

@@ -1,7 +1,7 @@
 import Button from "../../Global/Button";
 import CardTitle from "../../Global/CardTitle";
 
-export default function Heading() {
+export default function Heading({ setDisplayFormType }) {
   return (
     <div className="flex justify-between">
       <CardTitle>Contacts</CardTitle>
