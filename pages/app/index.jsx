@@ -10,17 +10,18 @@ import LoadingWheel from "../../components/Global/LoadingWheel";
 import getGoals from "../../helpers/getGoals";
 import getTattleStats from "../../helpers/getTattleStats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
+import Stats from "../../components/App/Dashboard/Stats";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
   const [goals, setGoals] = useState()
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
   const [userStats, setUserStats] = useState({
-    'statOne': '0',
+    'statOne': 0,
     'statOneText': 'Goals created',
-    'statTwo': '0',
+    'statTwo': 0,
     'statTwoText': 'Completed on time',
-    'statThree': '0',
+    'statThree': 0,
     'statThreeText': 'times Tattled on',
   })
   const [numOfCols, setNumOfCols] = useState(4)
@@ -81,6 +82,8 @@ export default function Index() {
     }
   }, [userStats, goals])
 
+  console.log("userStats: ", userStats)
+
   if (loading) {
     return (
       <AppLayout>
@@ -92,7 +95,8 @@ export default function Index() {
   } else {
     return (
       <AppLayout>
-        <StatsSection statProps={userStats} showHeadings={false} />
+        {/*<StatsSection statProps={userStats} showHeadings={false} />*/}
+        <Stats statProps={userStats} />
         {goals.length > 0 && (
           <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
         )}
