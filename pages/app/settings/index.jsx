@@ -7,20 +7,13 @@ import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
 import YourBillingHistory from "../../../components/App/Settings/YourBillingHistory";
 
 import getSubscriptionData from "../../../helpers/getSubscriptionData";
-import getBillingHistory from "../../../helpers/getBillingHistory";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()
-  const [billingHistory, setBillingHistory] = useState()
 
   useEffect(() => {
     const user = supabase.auth.user()
     getSubscriptionData(user.id, setSubscriptionData)
-  }, [])
-
-  useEffect(() => {
-    const user = supabase.auth.user()
-    getBillingHistory(user.id, setBillingHistory)
   }, [])
 
   return (
@@ -28,7 +21,7 @@ export default function Index() {
       <CardTitle>Settings</CardTitle>
       <YourSubscription subscriptionData={subscriptionData} />
       <YourPaymentInfo />
-      <YourBillingHistory billingHistory={billingHistory} />
+      <YourBillingHistory billingHistory={subscriptionData} />
     </AppLayout>
   )
 }

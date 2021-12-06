@@ -5,34 +5,10 @@ async function getSubscription(req, res) {
   try {
     const { data, error, status } = await supabase
       .from('stripe')
-      .select('billing_frequency, amount_cents, created_at')
+      .select('id, subscription_type, created_at, amount_cents, stripe_receipt_url, billing_frequency')
       .match({user_id: ownerId, payment_successful: true})
     if (data) {
-      for (const item in data) {
-        const dateString = data[item]['created_at']
-        data[item]['created_at'] = new Date(dateString).getTime()
-      }
-
       console.log("data", data)
-
-      // Sort newest to oldest
-      data.sort(
-        function(a, b) {
-          if (a['created_at'] > b['created_at']) {
-            return -1
-          } else if (a['created_at'] < b['created_at']) {
-            return 1
-          }
-          if (a['id'] > b['id']) {
-            return -1
-          } else if (a['id'] < b['id']) {
-            return 1
-          }
-        }
-      ).reverse()
-
-      console.log("sorted data", data)
-
       res.status(status).json(data[0])
     }
     if (error) {
