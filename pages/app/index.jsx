@@ -9,6 +9,7 @@ import LoadingWheelWrapper from "../../components/Global/LoadingWheelWrapper";
 import LoadingWheel from "../../components/Global/LoadingWheel";
 import getGoals from "../../helpers/getGoals";
 import getTattleStats from "../../helpers/getTattleStats";
+import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -80,38 +81,22 @@ export default function Index() {
     }
   }, [userStats, goals])
 
-  return (
-    <AppLayout>
-      {loading && (
+  if (loading) {
+    return (
+      <AppLayout>
         <LoadingWheelWrapper>
           <LoadingWheel />
         </LoadingWheelWrapper>
-      )}
-      {!loading && (
-        <>
-          <StatsSection statProps={userStats} showHeadings={false} />
-          <CardTitle>Goals due soon</CardTitle>
-          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-            {incompleteGoals && incompleteGoals.map((goal, index) => {
-              if (index < numberOfGoalsToShow) {
-                return (
-                  <article key={index}>
-                    <GoalCard goal={goal} />
-                  </article>
-                )
-              }
-            })}
-          </div>
-          <div className="w-36 mx-auto mt-10">
-            {
-              incompleteGoals && incompleteGoals.length > 3 &&
-                <Button disabled={numberOfGoalsToShow > incompleteGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
-                  Show more
-                </Button>
-            }
-          </div>
-        </>
-      )}
-    </AppLayout>
-  )
+      </AppLayout>
+    )
+  } else {
+    return (
+      <AppLayout>
+        <StatsSection statProps={userStats} showHeadings={false} />
+        {goals.length > 0 && (
+          <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
+        )}
+      </AppLayout>
+    )
+  }
 }
