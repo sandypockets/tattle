@@ -2,8 +2,8 @@ import { supabase } from "../../../lib/supabaseClient";
 
 async function markAsPaid(req, res) {
   const payload = req.body.data.object
-  console.log(payload.client_secret)
-  console.log("WEBHOOK PAYLOAD: ", payload)
+  // console.log(payload.client_secret)
+  // console.log("WEBHOOK PAYLOAD: ", payload)
 
   if (payload.object === 'payment_intent' && payload.status === 'succeeded') {
     console.log("Webhook type: ", payload.object)
@@ -34,6 +34,8 @@ async function markAsPaid(req, res) {
   }
 
   if (payload.object === 'charge') {
+    console.log("CHARGE PAYLOAD: ", payload)
+    console.log("CHARGE FIRED!")
     try {
       const { data, error, status } = await supabase
         .from('stripe')
@@ -56,7 +58,7 @@ async function markAsPaid(req, res) {
           risk_level: payload.outcome.risk_level,
           risk_score: payload.outcome.risk_score,
           seller_message: payload.outcome.seller_message,
-          payment_intent: payload.payment_intent,
+          stripe_payment_intent_id: payload.payment_intent,
           payment_method: payload.payment_method,
           card_type: payload.payment_method_details.card.brand,
           card_postal_code_check: payload.payment_method_details.card.checks.address_postal_code_check,
@@ -65,11 +67,12 @@ async function markAsPaid(req, res) {
           stripe_receipt_url: payload.receipt_url
 
         })
-        .match({ stripe_payment_intent_id: paymentId })
+        .match({ stripe_payment_intent_id: payload.payment_intent })
       if (data) {
         res.status(200).json(data)
       }
       if (error || status !== 200) {
+        console.log("Error! ", error)
         console.log("No records found.")
         res.status(200).json(error)
       }
