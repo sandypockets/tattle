@@ -9,7 +9,10 @@ async function getSubscription(req, res) {
       .match({user_id: ownerId, payment_successful: true})
     if (data) {
       console.log("data", data)
-      res.status(status).json(data[0])
+      let dataArr = []
+      // Should be sorted first
+      dataArr.push(data[0])
+      res.status(status).json(dataArr)
     }
     if (error) {
       res.status(status).json(error)

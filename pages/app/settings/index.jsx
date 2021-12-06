@@ -7,9 +7,12 @@ import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
 import YourBillingHistory from "../../../components/App/Settings/YourBillingHistory";
 
 import getSubscriptionData from "../../../helpers/getSubscriptionData";
+import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
+import LoadingWheel from "../../../components/Global/LoadingWheel";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const user = supabase.auth.user()
@@ -17,17 +20,27 @@ export default function Index() {
   }, [])
 
   useEffect(() => {
-    if (!Array.isArray(subscriptionData)) {
-      setSubscriptionData([subscriptionData].flat())
+    if (subscriptionData) {
+      setLoading(false)
     }
   }, [subscriptionData])
 
-  return (
-    <AppLayout>
-      <CardTitle>Settings</CardTitle>
-      <YourSubscription subscriptionData={subscriptionData} />
-      <YourPaymentInfo subscriptionData={subscriptionData} />
-      <YourBillingHistory billingHistory={subscriptionData} />
-    </AppLayout>
-  )
+  if (loading) {
+    return (
+      <AppLayout>
+        <LoadingWheelWrapper>
+          <LoadingWheel />
+        </LoadingWheelWrapper>
+      </AppLayout>
+    )
+  } else {
+    return (
+      <AppLayout>
+        <CardTitle>Settings</CardTitle>
+        <YourSubscription subscriptionData={subscriptionData} />
+        <YourPaymentInfo subscriptionData={subscriptionData} />
+        <YourBillingHistory billingHistory={subscriptionData} />
+      </AppLayout>
+    )
+  }
 }
