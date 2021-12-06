@@ -6,7 +6,7 @@ async function markAsPaid(req, res) {
   // console.log("WEBHOOK PAYLOAD: ", payload)
 
   if (payload.object === 'payment_intent' && payload.status === 'succeeded') {
-    console.log("Webhook type: ", payload.object)
+    console.log("Webhook type: ", payload)
     const paymentId = payload.id
     const amountCents = payload.amount
     // const clientSecret = payload.client_secret
@@ -34,8 +34,8 @@ async function markAsPaid(req, res) {
   }
 
   if (payload.object === 'charge') {
-    console.log("CHARGE PAYLOAD: ", payload)
-    console.log("CHARGE FIRED!")
+    // console.log("CHARGE PAYLOAD: ", payload)
+    // console.log("CHARGE FIRED!")
     try {
       const { data, error, status } = await supabase
         .from('stripe')
@@ -52,7 +52,6 @@ async function markAsPaid(req, res) {
           postal_code: payload.billing_details.address.postal_code,
           calculated_statement_descriptor: payload.calculated_statement_descriptor,
           is_captured: payload.captured,
-          stripe_created_at: payload.created,
           currency: payload.currency,
           network_status: payload.outcome.network_status,
           risk_level: payload.outcome.risk_level,
@@ -65,7 +64,6 @@ async function markAsPaid(req, res) {
           card_cvc_check: payload.payment_method_details.card.checks.cvc_check,
           card_last_four: payload.payment_method_details.card.last4,
           stripe_receipt_url: payload.receipt_url
-
         })
         .match({ stripe_payment_intent_id: payload.payment_intent })
       if (data) {
@@ -84,6 +82,13 @@ async function markAsPaid(req, res) {
   } else {
     res.status(400).end()
   }
+  // Create row in subscriptions table
+  // try {
+  //
+  // } catch (err) {
+  //
+  // }
+
 }
 
 export default function handler(req, res) {
