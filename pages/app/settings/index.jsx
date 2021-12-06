@@ -16,11 +16,17 @@ export default function Index() {
     getSubscriptionData(user.id, setSubscriptionData)
   }, [])
 
+  useEffect(() => {
+    if (!Array.isArray(subscriptionData)) {
+      setSubscriptionData([subscriptionData].flat())
+    }
+  }, [subscriptionData])
+
   return (
     <AppLayout>
       <CardTitle>Settings</CardTitle>
       <YourSubscription subscriptionData={subscriptionData} />
-      <YourPaymentInfo />
+      <YourPaymentInfo subscriptionData={subscriptionData} />
       <YourBillingHistory billingHistory={subscriptionData} />
     </AppLayout>
   )

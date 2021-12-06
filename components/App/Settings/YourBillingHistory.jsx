@@ -5,35 +5,32 @@ import CardTitle from "../../Global/CardTitle";
 export default function YourBillingHistory({ billingHistory }) {
   console.log("billingHistory", billingHistory)
 
-
   function sortByDateDescending() {
     for (const item in billingHistory) {
       const dateString = billingHistory[item]['created_at']
       // billingHistory[item]['created_at'] = new Date(dateString).getTime()
       console.log("lkj", billingHistory[item]['created_at'])
     }
-    return billingHistory.sort(
-      function(a, b) {
-        if (a['created_at'] > b['created_at']) {
-          return -1
-        } else if (a['created_at'] < b['created_at']) {
-          return 1
-        }
-        if (a['id'] > b['id']) {
-          return -1
-        } else if (a['id'] < b['id']) {
-          return 1
-        }
-      }
-    ).reverse()
+    // return billingHistory.sort(
+    //   function(a, b) {
+    //     if (a['created_at'] > b['created_at']) {
+    //       return -1
+    //     } else if (a['created_at'] < b['created_at']) {
+    //       return 1
+    //     }
+    //     if (a['id'] > b['id']) {
+    //       return -1
+    //     } else if (a['id'] < b['id']) {
+    //       return 1
+    //     }
+    //   }
+    // ).reverse()
   }
 
-  if (billingHistory && Array.isArray(billingHistory)) {
-    return sortByDateDescending()
-  }
-  if (!Array.isArray(billingHistory)) {
-    billingHistory = [billingHistory].flat()
-  }
+  // if (billingHistory && Array.isArray(billingHistory)) {
+  //   return sortByDateDescending()
+  // }
+
 
   return (
     <Card>

@@ -5,7 +5,7 @@ async function getSubscription(req, res) {
   try {
     const { data, error, status } = await supabase
       .from('stripe')
-      .select('id, subscription_type, created_at, amount_cents, stripe_receipt_url, billing_frequency')
+      .select('id, subscription_type, created_at, amount_cents, stripe_receipt_url, billing_frequency, card_last_four, card_type')
       .match({user_id: ownerId, payment_successful: true})
     if (data) {
       console.log("data", data)

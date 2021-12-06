@@ -18,7 +18,7 @@ export default function YourSubscription({ subscriptionData }) {
         <h3 className="text-2xl font-extrabold text-gray-900 sm:text-3xl">Subscription</h3>
       {subscriptionData && (
         <p className="mt-6 text-base text-gray-500">
-          You're currently on Tattle's <strong>{subscriptionData['billing_frequency']}</strong> plan, at <strong>${subscriptionData['amount_cents'] / 100} {subscriptionData['billing_frequency'] === 'monthly' ? 'per month' : 'annually'}.</strong>
+          You're currently on Tattle's <strong>{subscriptionData[0]['billing_frequency']}</strong> plan, at <strong>${subscriptionData[0]['amount_cents'] / 100} {subscriptionData[0]['billing_frequency'] === 'monthly' ? 'per month' : 'annually'}.</strong>
         </p>
       )}
         <div className="mt-8">
@@ -43,8 +43,8 @@ export default function YourSubscription({ subscriptionData }) {
       <div className="py-8 px-6 text-center bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
         {subscriptionData && (
           <div className="mt-4 flex items-center justify-center text-5xl font-extrabold text-gray-900">
-            <span>${subscriptionData['amount_cents'] / 100} USD</span>
-            <span className="ml-3 text-xl font-medium text-gray-500"> / {subscriptionData['billing_frequency'] === 'monthly' ? 'month' : 'year'}</span>
+            <span>${subscriptionData[0]['amount_cents'] / 100} USD</span>
+            <span className="ml-3 text-xl font-medium text-gray-500"> / {subscriptionData[0]['billing_frequency'] === 'monthly' ? 'month' : 'year'}</span>
           </div>
         )}
 
