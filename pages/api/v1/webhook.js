@@ -1,28 +1,28 @@
 import { supabase } from "../../../lib/supabaseClient";
 
-async function createSubscription(argData, req, res) {
-  try {
-    const { data, error } = await supabase
-      .from('subscriptions')
-      .insert({
-        owner_id: argData[0]['user_id'],
-        plan_amount_cents: argData[0]['amount_cents'],
-        stripe_id: argData[0]['stripe_id'],
-        amount_cents_captured: argData[0]['amount_cents_captured'],
-        balance_transaction: argData[0]['balance_transaction'],
-        city: argData[0]['city'],
-        country: argData[0]['country'],
-      })
-    if (data) {
-      console.log("Create subscription successful.")
-    }
-    if (error) {
-      console.log("Error creating subscription: ", error)
-    }
-  } catch (err) {
-    console.log(err)
-  }
-}
+// async function createSubscription(argData, req, res) {
+//   try {
+//     const { data, error } = await supabase
+//       .from('subscriptions')
+//       .insert({
+//         owner_id: argData[0]['user_id'],
+//         plan_amount_cents: argData[0]['amount_cents'],
+//         stripe_id: argData[0]['stripe_id'],
+//         amount_cents_captured: argData[0]['amount_cents_captured'],
+//         balance_transaction: argData[0]['balance_transaction'],
+//         city: argData[0]['city'],
+//         country: argData[0]['country'],
+//       })
+//     if (data) {
+//       console.log("Create subscription successful.")
+//     }
+//     if (error) {
+//       console.log("Error creating subscription: ", error)
+//     }
+//   } catch (err) {
+//     console.log(err)
+//   }
+// }
 
 async function markAsPaid(req, res) {
   const payload = req.body.data.object
@@ -86,8 +86,7 @@ async function markAsPaid(req, res) {
           })
           .match({ stripe_payment_intent_id: payload.payment_intent })
         if (data) {
-          // console.log("DATA!!!! ", data)
-          await createSubscription(data, req, res)
+          // await createSubscription(data, req, res)
           res.status(200).json(data)
         }
         if (error || status !== 200) {

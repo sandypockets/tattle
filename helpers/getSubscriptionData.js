@@ -5,8 +5,7 @@ export default function getSubscriptionData(ownerId, setSubscriptionData){
     params: { ownerId: ownerId }
   })
     .then(function (response) {
-      console.log(response.data)
-      setSubscriptionData(response.data[0])
+      setSubscriptionData(response.data)
     })
     .catch(function (error) {
       console.error("Error!", error)

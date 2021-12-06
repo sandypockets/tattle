@@ -4,9 +4,9 @@ async function getBills(req, res) {
   const { ownerId } = req.query
   try {
     const { data, error, status } = await supabase
-      .from('payments')
-      .select('id, type, created_at, amount_cents')
-      .eq('owner_id', ownerId)
+      .from('stripe')
+      .select('id, subscription_type, created_at, amount_cents, stripe_receipt_url')
+      .match({user_id: ownerId, payment_successful: true})
     if (data) {
       res.status(status).json(data)
     }

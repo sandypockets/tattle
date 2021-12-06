@@ -56,9 +56,9 @@ export default function YourBillingHistory() {
                 {billingHistory && billingHistory.map((bill, index) => (
                   <tr key={bill.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{bill['type']}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{bill['subscription_type'].charAt(0).toUpperCase() + bill['subscription_type'].slice(1).split('_').join(' ')}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill['created_at']).toLocaleDateString('en-CA')}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill['amount_cents'] / 1000} USD</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill['amount_cents'] / 100} USD</td>
                     <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                       <div className="max-w-min">
                         <Button>
