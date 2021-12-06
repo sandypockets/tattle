@@ -1,7 +1,4 @@
 import { CheckCircleIcon } from "@heroicons/react/solid";
-import {useEffect, useState} from "react";
-import { supabase } from "../../../lib/supabaseClient";
-import getSubscriptionData from "../../../helpers/getSubscriptionData";
 
 const includedFeatures = [
   'Create up to 100 goals per month',
@@ -11,16 +8,9 @@ const includedFeatures = [
   'Tattle via SMS',
 ]
 
-export default function YourSubscription() {
-  const [subscriptionData, setSubscriptionData] = useState()
-
-  useEffect(() => {
-    const user = supabase.auth.user()
-    getSubscriptionData(user.id, setSubscriptionData)
-  }, [])
-
+export default function YourSubscription({ subscriptionData }) {
   subscriptionData && console.log("subscriptionData: ", subscriptionData)
-console.log(new Date("2021-12-06T01:17:00.833+00:00").getTime())
+  console.log(new Date("2021-12-06T01:17:00.833+00:00").getTime())
 
   return (
     <div className="my-6 max-w-lg mx-auto rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden lg:max-w-none lg:flex">

@@ -1,18 +1,8 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
-import getBillingHistory from "../../../helpers/getBillingHistory";
 
-export default function YourBillingHistory() {
-  const [billingHistory, setBillingHistory] = useState()
-
-  useEffect(() => {
-    const user = supabase.auth.user()
-    getBillingHistory(user.id, setBillingHistory)
-  }, [])
-
+export default function YourBillingHistory({ billingHistory }) {
   return (
     <Card>
       <CardTitle>Billing history</CardTitle>
