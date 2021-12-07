@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
+import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import Button from "../../../components/Global/Button";
 import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import getGoals from "../../../helpers/getGoals";
-import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 
 export default function Upcoming() {
   const [goals, setGoals] = useState()
@@ -50,7 +50,7 @@ export default function Upcoming() {
   }, [upcomingGoals])
 
   if (loading) {
-    return ( <AppLoadingState /> )
+    return (<AppLoadingState />)
   } else {
     return (
       <AppLayout>

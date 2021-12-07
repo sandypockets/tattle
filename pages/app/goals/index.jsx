@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
+import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import CreateGoal from "../../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../../components/App/Goals/GoalsTable";
 import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
-import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
-import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
 import getGoals from "../../../helpers/getGoals";
 import HasNoGoalsBanner from "../../../components/App/Goals/HasNoGoalsBanner";
 import Header from "../../../components/App/Goals/Header";
@@ -41,13 +40,7 @@ export default function Index() {
   }, [goals])
 
   if (loading) {
-    return (
-      <AppLayout>
-        <LoadingWheelWrapper>
-          <LoadingWheel />
-        </LoadingWheelWrapper>
-      </AppLayout>
-    )
+    return (<AppLoadingState />)
   } else {
     return (
       <AppLayout>

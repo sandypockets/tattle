@@ -18,8 +18,6 @@ import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 import getUserPlan from "../../../helpers/getUserPlan";
 import Checkout from "../Checkout/Checkout";
-import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
-import LoadingWheel from "../../Global/Loading/LoadingWheel";
 import CardTitle from "../../Global/CardTitle";
 
 const navigation = [
@@ -263,11 +261,6 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {loading && (
-                      <LoadingWheelWrapper>
-                        <LoadingWheel />
-                      </LoadingWheelWrapper>
-                    )}
                     {!hasSubscription && !loading && (
                       <>
                       <CardTitle>Checkout</CardTitle>
@@ -286,7 +279,7 @@ export default function AppLayout({ children }) {
                       </>
                     )}
                     {/*{!hasSubscription && <Subscribe />}*/}
-                    {hasSubscription && !loading && children}
+                    {hasSubscription && children}
                   </main>
                 </div>
               </div>

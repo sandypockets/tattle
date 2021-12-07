@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { supabase } from "../../lib/supabaseClient";
 import AppLayout from "../../components/App/Layout/AppLayout";
-import LoadingWheelWrapper from "../../components/Global/Loading/LoadingWheelWrapper";
-import LoadingWheel from "../../components/Global/Loading/LoadingWheel";
+import AppLoadingState from "../../components/App/Utils/AppLoadingState";
+import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
+import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
+import Stats from "../../components/App/Dashboard/Stats";
+import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
 import getGoals from "../../helpers/getGoals";
 import getTattleStats from "../../helpers/getTattleStats";
-import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
-import Stats from "../../components/App/Dashboard/Stats";
-import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
-import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
-import { useRouter } from "next/router";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -41,16 +40,6 @@ export default function Index() {
 
   useEffect(() => {
     if (goals) {
-      setUserStats({
-        'statOne': goals.length,
-        'statOneText': 'Goals created',
-        'statTwo': '2',
-        'statTwoText': 'Goals completed on time',
-        'statThree': '1',
-        'statThreeText': 'times Tattled on',
-        'statFourText':'Goals due this week',
-        'statFour':'1'
-      })
       setUserStats(prev => ({ ...prev, statOne: goals.length }))
       let goalsCompletedOnTime = 0
       for (const goal of goals) {
@@ -92,21 +81,13 @@ export default function Index() {
     return router.push('/app/contacts/new')
   }
 
-
   if (loading) {
-    return (
-      <AppLayout>
-        <LoadingWheelWrapper>
-          <LoadingWheel />
-        </LoadingWheelWrapper>
-      </AppLayout>
-    )
+    return (<AppLoadingState /> )
   } else {
     return (
       <AppLayout>
-        {/*<StatsSection statProps={userStats} showHeadings={false} />*/}
         <Stats statProps={userStats} />
-        {goals.length > 0 ? (
+        {goals && goals.length > 0 ? (
           <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
         ) : (
           <>

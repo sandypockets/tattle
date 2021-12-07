@@ -1,13 +1,13 @@
 import AppLayout from "../Layout/AppLayout";
-import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
-import LoadingWheel from "../../Global/Loading/LoadingWheel";
+// import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
+// import LoadingWheel from "../../Global/Loading/LoadingWheel";
 
 export default function AppLoadingState() {
   return (
     <AppLayout>
-      <LoadingWheelWrapper>
-        <LoadingWheel />
-      </LoadingWheelWrapper>
+      {/*<LoadingWheelWrapper>*/}
+      {/*  <LoadingWheel />*/}
+      {/*</LoadingWheelWrapper>*/}
     </AppLayout>
   )
 }

@@ -1,27 +1,22 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
+import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import ContactsEmptyState from "../../../components/App/Contacts/ContactsEmptyState";
 import CreateContact from "../../../components/App/Contacts/CreateContact";
 import ContactsTable from "../../../components/App/Contacts/ContactsTable";
 import EditContactSlideover from "../../../components/App/Contacts/EditContactSlideover";
 import Heading from "../../../components/App/Contacts/Heading";
 import IntroCard from "../../../components/App/Contacts/IntroCard";
-import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
-import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
 import getContacts from "../../../helpers/getContacts";
 
 export default function Index() {
-  const [loading, setLoading] = useState(true)
-  const [displayFormType, setDisplayFormType] = useState('empty')
   const [contacts, setContacts] = useState()
-  const [user, setUser] = useState()
+  const [displayFormType, setDisplayFormType] = useState('empty')
+  const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState(false)
   const [selectedContact, setSelectedContact] = useState()
-
-  useEffect(() => {
-    setUser(supabase.auth.user())
-  }, [])
+  const [user, setUser] = useState()
 
   async function getUserContacts() {
     const user = await supabase.auth.user()
@@ -30,25 +25,19 @@ export default function Index() {
   }
 
   useEffect(() => {
-    getUserContacts()
+    setUser(supabase.auth.user())
   }, [])
 
   useEffect(() => {
-    console.log("Contacts!: ", contacts)
-  }, [contacts])
+    getUserContacts()
+  }, [user])
 
   useEffect(() => {
     user && contacts && setLoading(false)
   }, [contacts])
 
   if (loading) {
-    return (
-      <AppLayout>
-        <LoadingWheelWrapper>
-          <LoadingWheel />
-        </LoadingWheelWrapper>
-      </AppLayout>
-    )
+    return (<AppLoadingState />)
   } else {
     return (
       <AppLayout>
