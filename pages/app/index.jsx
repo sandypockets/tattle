@@ -30,9 +30,11 @@ export default function Index() {
   useEffect(() => {
     async function getGoalsAndStats() {
       const user = await supabase.auth.user()
-      const id = user['id']
-      getGoals(id, setGoals)
-      getTattleStats(id, setUserStats)
+      if (user) {
+        const id = user['id']
+        getGoals(id, setGoals)
+        getTattleStats(id, setUserStats)
+      }
     }
     getGoalsAndStats()
   }, [])
