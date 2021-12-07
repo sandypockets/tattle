@@ -107,6 +107,7 @@ async function markAsPaid(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
+    console.log("WEBHOOK REQ.BODY: ", req.body)
     return markAsPaid(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()

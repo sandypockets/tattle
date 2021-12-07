@@ -3,21 +3,33 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { supabase } from "../../../lib/supabaseClient";
 import CheckoutForm from "./CheckoutForm";
+import getStripeCustomerId from "../../../helpers/getStripeCustomerId";
+
+const stripePublishableKey = process.env.NEXT_STRIPE_PUBLISHABLE_KEY
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // loadStripe is initialized with a fake API key.
-const stripePromise = loadStripe('pk_test_51IkyECLSQuRsBVHwF7qm2tCexmpVUdG2fMphLozNAwUelsH4aklQqXVOu8HjkJjq0dWcALrjPfnAQerGxlEpQI8000E8OwzIHi');
+const stripePromise = loadStripe(stripePublishableKey);
 
 
 export default function Checkout({ session }) {
   const [clientSecret, setClientSecret] = useState("");
   const [user, setUser] = useState()
+  const [stripeCustomerId, setStripeCustomerId] = useState('')
 
   useEffect(() => {
     const user = supabase.auth.user()
     setUser(user)
   }, [])
+
+  useEffect(() => {
+    // get user's stripe ID
+    if (user) {
+      const userId = user['id']
+      getStripeCustomerId(user.id, setStripeCustomerId)
+    }
+  }, [user])
 
   useEffect(() => {
     if (session || user) {
@@ -26,8 +38,9 @@ export default function Checkout({ session }) {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          items: [{ id: "Tattle Monthly" }],
-          user: session.user
+          user: session.user,
+          stripeCustomerId: stripeCustomerId,
+          items: [{price: 'price_1K252ULSQuRsBVHwBmVYETzD'}]
         }),
       })
         .then((res) => res.json())
@@ -35,7 +48,7 @@ export default function Checkout({ session }) {
           setClientSecret(data.clientSecret)
         });
     }
-  }, [user, session]);
+  }, [stripeCustomerId]);
 
   const appearance = {
     theme: 'stripe',
@@ -49,7 +62,7 @@ export default function Checkout({ session }) {
     <div className="App">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm stripeCustomerId={stripeCustomerId} />
         </Elements>
       )}
     </div>

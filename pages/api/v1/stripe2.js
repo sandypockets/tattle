@@ -11,13 +11,15 @@ const calculateOrderAmount = (items) => {
 
 // Create a PaymentIntent with the order amount and currency
 async function createPaymentIntent(req, res) {
-  const { items, user } = req.body;
+  const { items, user, stripeCustomerId } = req.body;
   const paymentIntent = await stripe.paymentIntents.create({
+    customer: stripeCustomerId,
     amount: calculateOrderAmount(items),
     currency: "usd",
     automatic_payment_methods: {
       enabled: true,
     },
+    setup_future_usage: "off_session"
   });
 
   try {
