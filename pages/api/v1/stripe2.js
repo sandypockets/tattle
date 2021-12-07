@@ -31,7 +31,6 @@ async function createPaymentIntent(req, res) {
   });
 
   try {
-    console.log("PAYMENT INTENT: ", paymentIntent)
     const { data, error } = await supabase
       .from('stripe')
       .insert([{

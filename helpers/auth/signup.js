@@ -33,7 +33,6 @@ function recordStripeCustomerId(userResponse, stripeCustomerId) {
 }
 
 function createStripeCustomer(userEmail, userResponse){
-
   axios
     .post('/api/v1/create-customer', {
       "email": userEmail,
@@ -41,7 +40,6 @@ function createStripeCustomer(userEmail, userResponse){
     .then(function (response) {
       console.log(response);
       const stripeCustomerId = response.data.id
-      // const supabaseUserId = userResponse.id
       recordStripeCustomerId(userResponse, stripeCustomerId)
     })
     .catch(function (error) {
@@ -58,19 +56,14 @@ export default async function handleSignUp(userEmail, userPassword, router) {
         password: userPassword,
       })
     if (data) {
-      console.log("HANDLE SIGNUP DATA: ", data)
       userResponse = data.user
-      console.log("USER RESPONSE: ", userResponse)
-    }
-    if (error) {
-      throw error
     }
     const userSession = await supabase.auth.session()
     if (!userSession) {
       console.error(error)
     }
   } catch (error) {
-    console.error(error.error_description || error.message)
+    console.error(error['error_description'] || error.message)
   } finally {
     if (supabase.auth.session()) {
       createStripeCustomer(userEmail, userResponse)

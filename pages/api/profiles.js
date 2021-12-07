@@ -26,30 +26,27 @@ async function getProfile(req, res) {
 async function updateProfile(req, res) {
   console.log("Update profile fired")
   console.log("Req.body", req.body)
-  const { id, username, email, website, avatar_url, stripeCustomerId } = req.body
+  const { id, email, stripeCustomerId } = req.body
   try {
     const { data, error } = await supabase
       .from('profiles')
       .update({
-        // 'username': username,
         'email': email,
-        // 'website': website,
-        // 'avatar_url': avatar_url,
         'stripe_customer_id': stripeCustomerId
       })
       .match({ "id": id })
     if (data) {
       console.log("Update profile data", data)
       res.status(200).json(data)
-      res.end()
     }
     if (error) {
       console.log(error)
       res.status(500).json(error)
-      res.end()
     }
   } catch (error) {
     res.json(error.message)
+  } finally {
+    res.end()
   }
 }
 

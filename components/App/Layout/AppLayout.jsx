@@ -17,8 +17,6 @@ import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 import getUserPlan from "../../../helpers/getUserPlan";
-import PricingSection from "../../Web/PricingSection";
-import Subscribe from "../Subscribe";
 import Checkout from "../Checkout/Checkout";
 import LoadingWheelWrapper from "../../Global/LoadingWheelWrapper";
 import LoadingWheel from "../../Global/LoadingWheel";
@@ -77,14 +75,9 @@ export default function AppLayout({ children }) {
   }, [session])
 
   useEffect(() => {
-    console.log("UseEffect")
-
     if (user.id) {
-      console.log("UseEffect IN USER")
       return getUserPlan(user.id, setHasSubscription, setLoading)
     }
-
-
   }, [user])
 
   useEffect(() => {
@@ -96,7 +89,6 @@ export default function AppLayout({ children }) {
   useEffect(() => {
     console.log("HAS SUBSCRIPTION: ", hasSubscription)
   }, [hasSubscription])
-
 
   return (
     <>

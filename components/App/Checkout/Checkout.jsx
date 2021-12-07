@@ -11,7 +11,6 @@ const stripePublishableKey = process.env.NEXT_STRIPE_PUBLISHABLE_KEY
 // loadStripe is initialized with a fake API key.
 const stripePromise = loadStripe("pk_test_51IkyECLSQuRsBVHwF7qm2tCexmpVUdG2fMphLozNAwUelsH4aklQqXVOu8HjkJjq0dWcALrjPfnAQerGxlEpQI8000E8OwzIHi");
 
-
 export default function Checkout({ session }) {
   const [clientSecret, setClientSecret] = useState("");
   const [user, setUser] = useState()
@@ -23,7 +22,6 @@ export default function Checkout({ session }) {
   }, [])
 
   useEffect(() => {
-    // get user's stripe ID
     if (user) {
       const userId = user['id']
       getStripeCustomerId(userId, setStripeCustomerId)

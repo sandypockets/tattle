@@ -1,29 +1,5 @@
 import { supabase } from "../../../lib/supabaseClient";
 
-// async function createSubscription(argData, req, res) {
-//   try {
-//     const { data, error } = await supabase
-//       .from('subscriptions')
-//       .insert({
-//         owner_id: argData[0]['user_id'],
-//         plan_amount_cents: argData[0]['amount_cents'],
-//         stripe_id: argData[0]['stripe_id'],
-//         amount_cents_captured: argData[0]['amount_cents_captured'],
-//         balance_transaction: argData[0]['balance_transaction'],
-//         city: argData[0]['city'],
-//         country: argData[0]['country'],
-//       })
-//     if (data) {
-//       console.log("Create subscription successful.")
-//     }
-//     if (error) {
-//       console.log("Error creating subscription: ", error)
-//     }
-//   } catch (err) {
-//     console.log(err)
-//   }
-// }
-
 async function markAsSubscribed(payload) {
   try {
     const { data, error } = await supabase
@@ -45,7 +21,6 @@ async function markAsPaid(req, res) {
   const payload = req.body.data.object
   switch (payload.object) {
     case 'payment_intent':
-      console.log("PAYMENT INTENT: ", payload)
       try {
         const { data, error, status } = await supabase
           .from('stripe_subscriptions')
@@ -68,7 +43,6 @@ async function markAsPaid(req, res) {
             statement_descriptor: payload.statement_descriptor,
             status: payload.status
           })
-          // .match({ stripe_payment_intent_id: paymentId })
         if (data) {
           res.status(200).json(data)
         }
@@ -84,34 +58,8 @@ async function markAsPaid(req, res) {
       if (payload.status === 'succeeded') {
         return markAsSubscribed(payload)
       }
-      // if (payload.status === 'succeeded') {
-      //   const paymentId = payload.id
-      //   const amountCents = payload.amount
-      //   try {
-      //     const { data, error, status } = await supabase
-      //       .from('stripe')
-      //       .update({
-      //         payment_successful: true,
-      //         amount_cents: amountCents,
-      //         live_mode: payload.livemode,
-      //       })
-      //       .match({ stripe_payment_intent_id: paymentId })
-      //     if (data) {
-      //       res.status(200).json(data)
-      //     }
-      //     if (error || status !== 200) {
-      //       console.log("No records found.")
-      //       res.status(200).json(error)
-      //     }
-      //   } catch (err) {
-      //     console.error(err)
-      //   } finally {
-      //     res.end()
-      //   }
-      // }
       break;
     case 'charge':
-      console.log("CHARGE", payload)
       try {
         const { data, error, status } = await supabase
           .from('stripe_subscriptions')
@@ -152,12 +100,10 @@ async function markAsPaid(req, res) {
             statement_descriptor: payload.statement_descriptor
           })
         if (data) {
-          // await createSubscription(data, req, res)
           res.status(200).json(data)
         }
         if (error || status !== 200) {
           console.log("Error! ", error)
-          console.log("No records found.")
           res.status(200).json(error)
         }
       } catch (err) {
@@ -167,7 +113,6 @@ async function markAsPaid(req, res) {
       }
       break;
     case 'subscription':
-      console.log("SUBSCRIPTION: ", payload)
       try {
         const { data, error, status } = await supabase
           .from('stripe_subscriptions')
@@ -204,13 +149,13 @@ async function markAsPaid(req, res) {
           console.log(error)
           res.status(status).json(error)
         }
-
       } catch (err) {
         console.log("Webhook error: ", err)
+      } finally {
+        res.end()
       }
       break;
     case 'invoice':
-      console.log("INVOICE: ", payload)
       try {
         const { data, error, status } = await supabase
           .from('stripe_subscriptions')
@@ -252,8 +197,9 @@ async function markAsPaid(req, res) {
         }
       } catch (err) {
         console.log("Webhook error: ", err)
+      } finally {
+        res.end()
       }
-
       break;
     default:
       res.status(200).end()
@@ -262,7 +208,6 @@ async function markAsPaid(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    // console.log("WEBHOOK REQ.BODY: ", req.body)
     return markAsPaid(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()

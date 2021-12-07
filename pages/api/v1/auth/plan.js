@@ -11,14 +11,6 @@ async function checkUserPlan(req, res) {
     if (data) {
       console.log("PLAN DATA: ", data)
       res.status(200).json(data)
-      // let counter = 0;
-      // for (const item in data) {
-      //   if (data[item]['payment_successful'] === true && counter <= 1) {
-      //     counter++
-      //     res.status(status).json(data[item]['payment_successful'])
-      //     break;
-      //   }
-      // }
     }
     if (error) {
       res.status(status).json(error)
