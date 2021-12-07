@@ -26,12 +26,12 @@ export default function Checkout({ session }) {
     // get user's stripe ID
     if (user) {
       const userId = user['id']
-      getStripeCustomerId(user.id, setStripeCustomerId)
+      getStripeCustomerId(userId, setStripeCustomerId)
     }
   }, [user])
 
   useEffect(() => {
-    if (session || user) {
+    if (session && stripeCustomerId) {
       // Create PaymentIntent as soon as the page loads
       fetch("/api/v1/create-subscription", {
         method: "POST",

@@ -6,8 +6,9 @@ async function checkUserPlan(req, res) {
     const { data, error, status } = await supabase
       .from('stripe')
       .select('payment_successful')
-      .eq('user_id', ownerId)
+      .match({user_id: ownerId, payment_successful: true})
     if (data) {
+      console.log("PLAN DATA: ", data)
       let counter = 0;
       for (const item in data) {
         if (data[item]['payment_successful'] === true && counter <= 1) {

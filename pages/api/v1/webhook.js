@@ -100,14 +100,46 @@ async function markAsPaid(req, res) {
         res.end()
       }
       break;
+    case 'subscription':
+      console.log("SUBSCRIPTION: ", payload)
+      try {
+        // const { data, error, status } = await supabase
+        //   .from('')
+        //   .update({
+        //     subscription_id: req.body.data.id,
+        //     billing_cycle_anchor: payload['billing_cycle_anchor'],
+        //     cancel_at: payload['cancel_at'],
+        //     cancel_at_period_end: payload['cancel_at_period_end'],
+        //     canceled_at: payload['canceled_at'],
+        //     collection_method: 'charge_automatically',
+        //     stripe_created_at: payload['created_at'],
+        //     stripe_current_period_end: payload['current_period_end'],
+        //     stripe_current_period_start: payload['current_period_start'],
+        //     stripe_customer: payload['customer'],
+        //     latest_invoice_id: payload['latest_invoice'],
+        //     livemode: payload['livemode'],
+        //     start_date: payload['start_date'],
+        //     status: payload['status'],
+        //     trial_end: payload['trial_end'],
+        //     trial_start: payload['trial_start']
+        //   })
+        //   .match({ stripe_payment_intent_id: payload.payment_intent })
+
+      } catch (err) {
+        console.log("Webhook error: ", err)
+      }
+      break;
+    case 'invoice':
+      console.log("INVOICE: ", payload)
+      break;
     default:
-      res.status(400).end()
+      res.status(200).end()
   }
 }
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    console.log("WEBHOOK REQ.BODY: ", req.body)
+    // console.log("WEBHOOK REQ.BODY: ", req.body)
     return markAsPaid(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()
