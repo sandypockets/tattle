@@ -13,13 +13,8 @@ const stripePromise = loadStripe("pk_test_51IkyECLSQuRsBVHwF7qm2tCexmpVUdG2fMphL
 
 export default function Checkout({ session }) {
   const [clientSecret, setClientSecret] = useState("");
-  const [user, setUser] = useState()
   const [stripeCustomerId, setStripeCustomerId] = useState('')
-
-  useEffect(() => {
-    const user = supabase.auth.user()
-    setUser(user)
-  }, [])
+  const user = supabase.auth.user()
 
   useEffect(() => {
     if (user) {
