@@ -24,24 +24,28 @@ async function getProfile(req, res) {
 }
 
 async function updateProfile(req, res) {
-  const { id, username, email, website, avatar_url } = req.body
+  console.log("Update profile fired")
+  console.log("Req.body", req.body)
+  const { id, username, email, website, avatar_url, stripeCustomerId } = req.body
   try {
     const { data, error } = await supabase
       .from('profiles')
       .update({
-        'username': username,
+        // 'username': username,
         'email': email,
-        'website': website,
-        'avatar_url': avatar_url
+        // 'website': website,
+        // 'avatar_url': avatar_url,
+        'stripe_customer_id': stripeCustomerId
       })
       .match({ "id": id })
     if (data) {
-      res.json(data)
+      console.log("Update profile data", data)
+      res.status(200).json(data)
       res.end()
     }
     if (error) {
       console.log(error)
-      res.json(500)
+      res.status(500).json(error)
       res.end()
     }
   } catch (error) {
@@ -51,9 +55,9 @@ async function updateProfile(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    updateProfile(req, res)
+    return updateProfile(req, res)
   } else if (req.method === 'GET') {
-    getProfile(req, res)
+    return getProfile(req, res)
   } else {
     res.send("Something's not right. Check your query.")
   }
