@@ -3,7 +3,7 @@ import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js"
 
 const redirectUrl = process.env.NEXT_PUBLIC_REDIRECT_URL
 
-export default function CheckoutForm({ stripeCustomerId }) {
+export default function CheckoutForm({ stripeCustomerId, options }) {
   const stripe = useStripe();
   const elements = useElements();
   const [message, setMessage] = useState(null);
@@ -13,7 +13,7 @@ export default function CheckoutForm({ stripeCustomerId }) {
     if (!stripe) {
       console.log("!stripe")
       console.log(stripe)
-      return;
+      // return;
     }
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
@@ -75,6 +75,7 @@ export default function CheckoutForm({ stripeCustomerId }) {
     }
     setIsLoading(false);
   };
+
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>

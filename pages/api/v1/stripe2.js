@@ -9,6 +9,14 @@ const calculateOrderAmount = (items) => {
   return 300;
 };
 
+async function createSubscription(req, res) {
+  const { items, stripeCustomerId } = req.body;
+  const subscription = await stripe.subscriptions.create({
+    customer: stripeCustomerId,
+    items: items
+  });
+}
+
 // Create a PaymentIntent with the order amount and currency
 async function createPaymentIntent(req, res) {
   const { items, user, stripeCustomerId } = req.body;
@@ -37,6 +45,7 @@ async function createPaymentIntent(req, res) {
   } catch (err) {
     console.error(err)
   } finally {
+    createSubscription(req, res)
     res.send({
       clientSecret: paymentIntent.client_secret,
     });
