@@ -6,7 +6,7 @@ export default function getUserPlan(ownerId, setHasSubscription, setLoading){
   })
     .then(function (response) {
       console.log("GET USER PLAN: ", response.data)
-      setHasSubscription(response.data)
+      setHasSubscription(response.data[0]['is_subscribed'])
       setLoading(false)
     })
     .catch(function (error) {

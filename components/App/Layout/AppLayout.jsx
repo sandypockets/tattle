@@ -56,6 +56,8 @@ export default function AppLayout({ children }) {
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
+  const user = supabase.auth.user()
+
   useEffect(() => {
     setCurrentPage(router.pathname)
     console.log(router.pathname)
@@ -75,17 +77,25 @@ export default function AppLayout({ children }) {
   }, [session])
 
   useEffect(() => {
-    const user = supabase.auth.user()
-    if (user) {
-      getUserPlan(user.id, setHasSubscription, setLoading)
+    console.log("UseEffect")
+
+    if (user.id) {
+      console.log("UseEffect IN USER")
+      return getUserPlan(user.id, setHasSubscription, setLoading)
     }
-  }, [])
+
+
+  }, [user])
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
     }, 1000)
   }, [session])
+
+  useEffect(() => {
+    console.log("HAS SUBSCRIPTION: ", hasSubscription)
+  }, [hasSubscription])
 
 
   return (

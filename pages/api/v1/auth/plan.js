@@ -2,21 +2,23 @@ import {supabase} from "../../../../lib/supabaseClient";
 
 async function checkUserPlan(req, res) {
   const { ownerId } = req.query
+  console.log("PLAN REQ BODY: ", req.query)
   try {
     const { data, error, status } = await supabase
-      .from('stripe')
-      .select('payment_successful')
-      .match({user_id: ownerId, payment_successful: true})
+      .from('profiles')
+      .select('is_subscribed')
+      .match({ id: ownerId })
     if (data) {
       console.log("PLAN DATA: ", data)
-      let counter = 0;
-      for (const item in data) {
-        if (data[item]['payment_successful'] === true && counter <= 1) {
-          counter++
-          res.status(status).json(data[item]['payment_successful'])
-          break;
-        }
-      }
+      res.status(200).json(data)
+      // let counter = 0;
+      // for (const item in data) {
+      //   if (data[item]['payment_successful'] === true && counter <= 1) {
+      //     counter++
+      //     res.status(status).json(data[item]['payment_successful'])
+      //     break;
+      //   }
+      // }
     }
     if (error) {
       res.status(status).json(error)
