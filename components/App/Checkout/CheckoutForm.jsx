@@ -19,10 +19,10 @@ export default function CheckoutForm({ stripeCustomerId, options }) {
       "payment_intent_client_secret"
     );
     if (!clientSecret) {
-      return;
+      // return;
     }
 
-    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+    clientSecret && stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");

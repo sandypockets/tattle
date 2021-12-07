@@ -7,8 +7,8 @@ import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
 import YourBillingHistory from "../../../components/App/Settings/YourBillingHistory";
 
 import getSubscriptionData from "../../../helpers/getSubscriptionData";
-import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
-import LoadingWheel from "../../../components/Global/LoadingWheel";
+import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
+import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()

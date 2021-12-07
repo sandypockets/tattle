@@ -5,8 +5,8 @@ import Button from "../../../components/Global/Button";
 import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import getGoals from "../../../helpers/getGoals";
-import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
-import LoadingWheel from "../../../components/Global/LoadingWheel";
+import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
+import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
 
 export default function Completed() {
   const [goals, setGoals] = useState()
@@ -53,7 +53,7 @@ export default function Completed() {
       }
     }
   ).reverse()
-
+  
   return (
     <AppLayout>
       {loading && (

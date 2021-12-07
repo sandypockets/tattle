@@ -5,12 +5,10 @@ import Button from "../../../components/Global/Button";
 import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import getGoals from "../../../helpers/getGoals";
-import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
-import LoadingWheel from "../../../components/Global/LoadingWheel";
+import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 
 export default function Upcoming() {
   const [goals, setGoals] = useState()
-  const [user, setUser] = useState()
   const [loading, setLoading] = useState(true)
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
   const [upcomingGoals, setUpcomingGoals] = useState()
@@ -18,7 +16,6 @@ export default function Upcoming() {
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
-    setUser(user)
     const id = user['id']
     getGoals(id, setGoals)
   }
@@ -52,37 +49,32 @@ export default function Upcoming() {
     }
   }, [upcomingGoals])
 
-  return (
-    <AppLayout>
-      {loading && (
-        <LoadingWheelWrapper>
-          <LoadingWheel />
-        </LoadingWheelWrapper>
-      )}
-      {!loading && (
-        <>
-          <CardTitle>Goals due soon</CardTitle>
-          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-            {upcomingGoals && upcomingGoals.map((goal, index) => {
-              if (index < numberOfGoalsToShow) {
-                return (
-                  <article key={index}>
-                    <GoalCard goal={goal} />
-                  </article>
-                )
-              }
-            })}
-          </div>
-          <div className="w-36 mx-auto mt-10">
-            {
-              upcomingGoals && upcomingGoals.length > 3 &&
-              <Button disabled={numberOfGoalsToShow > upcomingGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
-                Show more
-              </Button>
+  if (loading) {
+    return ( <AppLoadingState /> )
+  } else {
+    return (
+      <AppLayout>
+        <CardTitle>Goals due soon</CardTitle>
+        <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
+          {upcomingGoals && upcomingGoals.map((goal, index) => {
+            if (index < numberOfGoalsToShow) {
+              return (
+                <article key={index}>
+                  <GoalCard goal={goal} />
+                </article>
+              )
             }
-          </div>
-        </>
-      )}
-    </AppLayout>
-  )
+          })}
+        </div>
+        <div className="w-36 mx-auto mt-10">
+          {
+            upcomingGoals && upcomingGoals.length > 4 && numberOfGoalsToShow <= upcomingGoals.length &&
+            <Button disabled={numberOfGoalsToShow > upcomingGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+              Show more
+            </Button>
+          }
+        </div>
+      </AppLayout>
+    )
+  }
 }

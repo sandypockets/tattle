@@ -18,8 +18,8 @@ import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 import getUserPlan from "../../../helpers/getUserPlan";
 import Checkout from "../Checkout/Checkout";
-import LoadingWheelWrapper from "../../Global/LoadingWheelWrapper";
-import LoadingWheel from "../../Global/LoadingWheel";
+import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
+import LoadingWheel from "../../Global/Loading/LoadingWheel";
 import CardTitle from "../../Global/CardTitle";
 
 const navigation = [

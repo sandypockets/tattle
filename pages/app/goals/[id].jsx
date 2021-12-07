@@ -2,12 +2,11 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
+import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import Button from "../../../components/Global/Button";
 import Card from "../../../components/Global/Card";
 import CardTitle from "../../../components/Global/CardTitle";
 import GridCard from "../../../components/Global/GridCard";
-import LoadingWheel from "../../../components/Global/LoadingWheel";
-import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
 import getGoal from "../../../helpers/getGoal";
 import getContact from "../../../helpers/getContact";
 import markAsDone from "../../../helpers/markAsDone";
@@ -57,68 +56,62 @@ export default function SingleGoal() {
     }
   }
 
-  return (
-    <AppLayout>
-      {loading && (
-        <LoadingWheelWrapper>
-          <LoadingWheel />
-        </LoadingWheelWrapper>
-      )}
-      {!loading && goal && (
-        <>
-          <section className="flex justify-between">
-            <CardTitle>{goal['title']}</CardTitle>
-            <div className="flex">
-              <div className="w-36 mx-4">
-                <Button>
-                  Update contact
-                </Button>
-              </div>
-              <div className="w-36">
-                <Button onClickHandler={() => {
-                  user && goal && markGoalAsDone(user.id, goal['id'], isCompletedOnTime)
-                  // user && goal && markAsDone(user.id, goal['id'], isCompletedOnTime)
-                }}>
-                  Mark as done
-                </Button>
-              </div>
+  if (loading) {
+    return (<AppLoadingState />)
+  } else if (goal) {
+    return (
+      <AppLayout>
+        <section className="flex justify-between">
+          <CardTitle>{goal['title']}</CardTitle>
+          <div className="flex">
+            <div className="w-36 mx-4">
+              <Button>
+                Update contact
+              </Button>
             </div>
-          </section>
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
-            <GridCard>
-              {goal['is_completed'] === true && (
-                <CardTitle>Complete</CardTitle>
-              )}
-              { goal['is_completed'] === false && (
-                <>
-                  <h2>{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h2>
-                  <CardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500" : "text-black"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></CardTitle>
-                </>
-              )}
-            </GridCard>
-            <GridCard>
-              <h2>Created on</h2>
-              <CardTitle>{new Date(goal['created_at']).toLocaleDateString("en-UK")}</CardTitle>
-            </GridCard>
-            <GridCard>
-              <h2>Due on</h2>
-              <CardTitle>{new Date(goal['due_date']).toLocaleDateString("en-UK")}</CardTitle>
-            </GridCard>
-            <GridCard>
-              <h2>Assigned to</h2>
-              <CardTitle>{contact && contact.name}</CardTitle>
-            </GridCard>
+            <div className="w-36">
+              <Button onClickHandler={() => {
+                user && goal && markGoalAsDone(user.id, goal['id'], isCompletedOnTime)
+              }}>
+                Mark as done
+              </Button>
+            </div>
           </div>
-          <Card>
-            <CardTitle>Description</CardTitle>
-            <p>{goal['description']}</p>
-          </Card>
-          <Card>
-            <CardTitle>Outcome</CardTitle>
-            <p>{goal['outcome']}</p>
-          </Card>
-        </>
-      )}
-    </AppLayout>
-  )
+        </section>
+        <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
+          <GridCard>
+            {goal['is_completed'] === true && (
+              <CardTitle>Complete</CardTitle>
+            )}
+            { goal['is_completed'] === false && (
+              <>
+                <h2>{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h2>
+                <CardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500" : "text-black"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></CardTitle>
+              </>
+            )}
+          </GridCard>
+          <GridCard>
+            <h2>Created on</h2>
+            <CardTitle>{new Date(goal['created_at']).toLocaleDateString("en-UK")}</CardTitle>
+          </GridCard>
+          <GridCard>
+            <h2>Due on</h2>
+            <CardTitle>{new Date(goal['due_date']).toLocaleDateString("en-UK")}</CardTitle>
+          </GridCard>
+          <GridCard>
+            <h2>Assigned to</h2>
+            <CardTitle>{contact && contact.name}</CardTitle>
+          </GridCard>
+        </div>
+        <Card>
+          <CardTitle>Description</CardTitle>
+          <p>{goal['description']}</p>
+        </Card>
+        <Card>
+          <CardTitle>Outcome</CardTitle>
+          <p>{goal['outcome']}</p>
+        </Card>
+      </AppLayout>
+    )
+  }
 }

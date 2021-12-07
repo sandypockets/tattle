@@ -7,8 +7,8 @@ import ContactsTable from "../../../components/App/Contacts/ContactsTable";
 import EditContactSlideover from "../../../components/App/Contacts/EditContactSlideover";
 import Heading from "../../../components/App/Contacts/Heading";
 import IntroCard from "../../../components/App/Contacts/IntroCard";
-import LoadingWheel from "../../../components/Global/LoadingWheel";
-import LoadingWheelWrapper from "../../../components/Global/LoadingWheelWrapper";
+import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
+import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
 import getContacts from "../../../helpers/getContacts";
 
 export default function Index() {

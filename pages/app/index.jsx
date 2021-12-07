@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabaseClient";
 import AppLayout from "../../components/App/Layout/AppLayout";
-import LoadingWheelWrapper from "../../components/Global/LoadingWheelWrapper";
-import LoadingWheel from "../../components/Global/LoadingWheel";
+import LoadingWheelWrapper from "../../components/Global/Loading/LoadingWheelWrapper";
+import LoadingWheel from "../../components/Global/Loading/LoadingWheel";
 import getGoals from "../../helpers/getGoals";
 import getTattleStats from "../../helpers/getTattleStats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
