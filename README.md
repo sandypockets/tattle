@@ -134,6 +134,100 @@ There are plenty more tables that need creating though. Create some new queries 
 -- tattles table
 ```
 
+```sql
+-- stripe_subscriptions table
+create table stripe_subscriptions
+(
+    id                   bigserial
+        constraint stripe_subscriptions_pk
+            primary key,
+    created_at           DATE default now(),
+    data_type            varchar,
+    account_country      varchar,
+    account_name         varchar,
+    amount_due           int8,
+    amount               int8,
+    amount_capturable    int8,
+    amount_received      int8,
+    amount_paid          int8,
+    amount_remaining     int8,
+    attempt_count        int8,
+    attempted            bool,
+    auto_advance         bool,
+    balance_transaction  varchar,
+    billing_reason       varchar,
+    billing_cycle_anchor int8,
+    collection_method    varchar,
+    created              int8,
+    currency             varchar,
+    customer_id          varchar,
+    customer_email       varchar,
+    charge               varchar,
+    captured             bool,
+    cancel_at            int8,
+    cancel_at_period_end bool,
+    canceled_at          int8,
+    capture_method       varchar,
+    card_brand           varchar,
+    card_country         varchar,
+    card_exp_month       varchar,
+    card_exp_year        varchar,
+    card_fingerprint      varchar,
+    card_funding         varchar,
+    card_last_four       varchar,
+    card_network         varchar,
+    card_three_d_secure  varchar,
+    card_wallete         varchar,
+    client_secret        varchar,
+    confirmation_method   varchar,
+    current_period_end   int8,
+    current_period_start int8,
+    description          varchar,
+    dispute              varchar,
+    disputed             bool,
+    ending_balance       int8,
+    hosted_invoice_url   varchar,
+    invoice_pdf          varchar,
+    invoice_id           varchar,
+    livemode             bool,
+    latest_invoice_id    varchar,
+    number               varchar,
+    network_status       varchar,
+    outcome_type         varchar,
+    payment_intent       varchar,
+    period_end           int8,
+    period_start         int8,
+    paid                 bool,
+    payment_intent_id    varchar,
+    payment_method_id    varchar,
+    plan_price_id        varchar,
+    plan_active          bool,
+    plan_amount          int8,
+    plan_created         int8,
+    plan_interval        varchar,
+    plan_interval_count  int8,
+    plan_product_id      varchar,
+    receipt_number       varchar,
+    receipt_url          varchar,
+    risk_level           varchar,
+    risk_score           int8,
+    seller_message       varchar,
+    setup_future_usage   varchar,
+    statement_descriptor varchar,
+    status               varchar,
+    start_date           int8,
+    subscription_id      varchar,
+    subtotal             int8,
+    trial_end            int8,
+    trial_start          int8,
+    tax                  varchar,
+    total                int8
+);
+
+create unique index stripe_subscriptions_id_uindex
+    on stripe_subscriptions (id);
+```
+
 Now with your database set up, and your environment variables configured in the `.env.local` file, you're ready to start the server.
 
 ## Set up Stripe
