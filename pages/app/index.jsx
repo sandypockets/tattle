@@ -7,6 +7,9 @@ import getGoals from "../../helpers/getGoals";
 import getTattleStats from "../../helpers/getTattleStats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
 import Stats from "../../components/App/Dashboard/Stats";
+import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
+import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
+import { useRouter } from "next/router";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -22,6 +25,7 @@ export default function Index() {
   })
   const [numOfCols, setNumOfCols] = useState(4)
   const [incompleteGoals, setIncompleteGoals] = useState()
+  const router = useRouter()
 
   useEffect(() => {
     async function getGoalsAndStats() {
@@ -80,7 +84,14 @@ export default function Index() {
     }
   }, [userStats, goals])
 
-  console.log("userStats: ", userStats)
+  function newGoalRedirect(arg) {
+    return router.push('/app/goals/new')
+  }
+
+  function newContactRedirect(arg) {
+    return router.push('/app/contacts/new')
+  }
+
 
   if (loading) {
     return (
@@ -95,8 +106,13 @@ export default function Index() {
       <AppLayout>
         {/*<StatsSection statProps={userStats} showHeadings={false} />*/}
         <Stats statProps={userStats} />
-        {goals.length > 0 && (
+        {goals.length > 0 ? (
           <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
+        ) : (
+          <>
+          <ContactsEmptyState setState={newContactRedirect} />
+          <GoalsEmptyState setState={newGoalRedirect} />
+          </>
         )}
       </AppLayout>
     )
