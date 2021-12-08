@@ -15,12 +15,15 @@ export default function ChooseContact({ selectedContactId, setSelectedContactId 
     getUserContacts()
   }, [])
 
-  // Create default select value
-  if (contacts) {
-    !selectedContactId && setSelectedContactId(contacts[0]['id'])
-  } else {
-    setSelectedContactId(null)
-  }
+  useEffect(() => {
+    // Create default select value
+    if (contacts) {
+      !selectedContactId && setSelectedContactId(contacts[0]['id'])
+    } else {
+      setSelectedContactId(null)
+    }
+  }, [contacts])
+
 
   return (
     <div className="flex mx-2 mt-6 justify-between flex-row-reverse">

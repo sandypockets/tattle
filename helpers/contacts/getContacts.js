@@ -8,7 +8,6 @@ export default function getContacts(id, setContacts){
     }
   })
     .then(function (response) {
-      console.log(response.data)
       setContacts(response.data)
     })
     .catch(function (error) {
