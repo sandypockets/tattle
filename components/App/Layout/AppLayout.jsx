@@ -49,6 +49,7 @@ export default function AppLayout({ children }) {
   const [currentPage, setCurrentPage] = useState('')
   const [session, setSession] = useState(null)
   const [hasSubscription, setHasSubscription] = useState(false)
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
 
   useEffect(() => {
@@ -65,30 +66,11 @@ export default function AppLayout({ children }) {
     }
   }, [])
 
-  // useEffect(() => {
-  //   setCurrentPage(router.pathname)
-  // }, [])
-
-  // useEffect(() => {
-  //   const user = supabase.auth.user()
-  //   if (!supabase.auth.session()) {
-  //     router.push('/app/signin')
-  //   } else if (user && user.id) {
-  //     return getUserPlan(user.id, setHasSubscription)
-  //   }
-  // }, [session])
-
-  // useEffect(() => {
-  //   if (user && user.id) {
-  //     return getUserPlan(user.id, setHasSubscription)
-  //   }
-  // }, [user, session])
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setLoading(false)
-  //   }, 1000)
-  // }, [session])
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000)
+  }, [hasSubscription])
 
   return (
     <>
@@ -265,7 +247,7 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {!hasSubscription && (
+                    {!hasSubscription && !loading && (
                       <>
                       <CardTitle>Checkout</CardTitle>
                         <div className="grid grid-cols-2">
@@ -282,7 +264,6 @@ export default function AppLayout({ children }) {
                         </div>
                       </>
                     )}
-                    {/*{!hasSubscription && <Subscribe />}*/}
                     {hasSubscription && children}
                   </main>
                 </div>
