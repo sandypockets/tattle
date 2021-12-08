@@ -19,7 +19,7 @@ export default function UpcomingGoals({ numOfCols, incompleteGoals, numberOfGoal
       </div>
       <div className="w-36 mx-auto mt-10">
         {
-          incompleteGoals && incompleteGoals.length > 3 &&
+          incompleteGoals && incompleteGoals.length > 3 && numberOfGoalsToShow < incompleteGoals.length &&
           <Button disabled={numberOfGoalsToShow > incompleteGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
             Show more
           </Button>

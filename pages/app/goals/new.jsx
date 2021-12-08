@@ -9,6 +9,7 @@ import CreateGoal from "../../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import getGoals from "../../../helpers/getGoals";
 import getContacts from "../../../helpers/getContacts";
+import CardTitle from "../../../components/Global/CardTitle";
 
 export default function New() {
   const [displayFormType, setDisplayFormType] = useState('empty')
@@ -49,6 +50,7 @@ export default function New() {
   } else {
     return (
       <AppLayout>
+        <CardTitle>Create a goal</CardTitle>
         {!contacts && !goals || contacts && contacts.length >= 1 && goals && goals.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
         {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} />}
         {!contacts || contacts && contacts.length === 0 && (

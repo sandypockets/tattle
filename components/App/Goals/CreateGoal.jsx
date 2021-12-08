@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
 import Card from "../../Global/Card";
-import CardTitle from "../../Global/CardTitle";
 import ChooseContact from "./ChooseContact";
 import SingleDatePicker from "../DatePicker";
 import TextInput from "../../Global/TextInput";
@@ -30,8 +29,6 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
 
   return (
     <Card>
-      <CardTitle>Create a goal</CardTitle>
-      <p>Create a new goal</p>
       <TextInput type="text" label="Goal title" value={goalTitle} onChangeHandler={(e) => setGoalTitle(e.target.value)} />
       <div className="my-6">
         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mx-2">

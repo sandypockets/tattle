@@ -13,16 +13,18 @@ import getTattleStats from "../../helpers/getTattleStats";
 export default function Index() {
   const [loading, setLoading] = useState(true)
   const [goals, setGoals] = useState()
-  const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
+  const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(3)
   const [userStats, setUserStats] = useState({
     'statOne': 0,
     'statOneText': 'Goals created',
     'statTwo': 0,
     'statTwoText': 'Completed on time',
     'statThree': 0,
-    'statThreeText': 'times Tattled on',
+    'statThreeText': 'Times Tattled on',
+    'statFour': 0,
+    'statFourText': 'Goals completed',
   })
-  const [numOfCols, setNumOfCols] = useState(4)
+  const [numOfCols, setNumOfCols] = useState(3)
   const [incompleteGoals, setIncompleteGoals] = useState()
   const router = useRouter()
 
@@ -51,8 +53,19 @@ export default function Index() {
 
   useEffect(() => {
     if (goals) {
+      setUserStats(prev => ({ ...prev, statOne: goals.length }))
+      let goalsCompleted = 0
+      for (const goal of goals) {
+        goal['is_completed'] === true && goalsCompleted++
+      }
+      setUserStats(prev => ({ ...prev, statFour: goalsCompleted }))
+    }
+  }, [goals])
+
+  useEffect(() => {
+    if (goals) {
       const outstandingGoals = goals.filter(item => item['is_completed'] === false)
-      setNumOfCols(outstandingGoals.length <= 3 ? outstandingGoals.length + 1 : 4)
+      setNumOfCols(outstandingGoals.length <= 2 ? outstandingGoals.length + 1 : 3)
       // Sort goals by due_date, then by id
       outstandingGoals.sort(
         function(a, b) {

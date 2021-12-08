@@ -51,6 +51,13 @@ export default function Upcoming() {
 
   if (loading) {
     return (<AppLoadingState />)
+  } else if (upcomingGoals.length < 1) {
+    return (
+      <AppLayout>
+        <CardTitle>Goals due soon</CardTitle>
+        <p>You don't have any outstanding goals.</p>
+      </AppLayout>
+    )
   } else {
     return (
       <AppLayout>

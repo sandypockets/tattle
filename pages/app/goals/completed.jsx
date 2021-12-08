@@ -55,6 +55,13 @@ export default function Completed() {
 
   if (loading) {
     return (<AppLoadingState />)
+  } else if (completedGoals.length < 1) {
+    return (
+      <AppLayout>
+        <CardTitle>Completed goals</CardTitle>
+        <p>You haven't completed any goals yet.</p>
+      </AppLayout>
+    )
   } else if (numOfCols) {
     return (
       <AppLayout>

@@ -58,7 +58,7 @@ export default function Index() {
       <AppLayout>
         <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
         {!contacts || contacts.length === 0 && <HasNoContactsBanner />}
-        <IntroCard />
+        {goals.length < 1 && <IntroCard/>}
         {displayFormType === 'empty' && goals.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
         {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
         {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
