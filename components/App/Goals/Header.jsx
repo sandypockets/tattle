@@ -1,12 +1,12 @@
 import CardTitle from "../../Global/CardTitle";
 import Button from "../../Global/Button";
 
-export default function Header({ goals, setDisplayFormType }) {
+export default function Header({ goals, setDisplayFormType, contacts }) {
   return (
     <div className="flex justify-between">
       <CardTitle>Goals</CardTitle>
       <div className="max-w-min">
-        <Button disabled={!goals || goals.length === 0} onClickHandler={() => setDisplayFormType('create')}>Create</Button>
+        <Button disabled={!contacts || contacts.length === 0} onClickHandler={() => setDisplayFormType('create')}>Create</Button>
       </div>
     </div>
   )

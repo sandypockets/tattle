@@ -10,6 +10,7 @@ import getGoals from "../../../helpers/getGoals";
 import HasNoGoalsBanner from "../../../components/App/Goals/HasNoGoalsBanner";
 import Header from "../../../components/App/Goals/Header";
 import IntroCard from "../../../components/App/Goals/IntroCard";
+import getContacts from "../../../helpers/getContacts";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -19,6 +20,7 @@ export default function Index() {
   const [user, setUser] = useState()
   const [selectedGoal, setSelectedGoal] = useState()
   const [numOfCols, setNumOfCols] = useState(4)
+  const [contacts, setContacts] = useState()
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
@@ -27,8 +29,18 @@ export default function Index() {
     getGoals(id, setGoals)
   }
 
+  async function getUserContacts() {
+    const user = await supabase.auth.user()
+    const id = user['id']
+    getContacts(id, setContacts)
+  }
+
   useEffect(() => {
     getUserGoals()
+  }, [])
+
+  useEffect(() => {
+    getUserContacts()
   }, [])
 
   useEffect(() => {
@@ -44,7 +56,7 @@ export default function Index() {
   } else {
     return (
       <AppLayout>
-        <Header setDisplayFormType={setDisplayFormType} goals={goals} />
+        <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
         {!goals || goals.length === 0 && <HasNoGoalsBanner />}
         <IntroCard />
         {displayFormType === 'empty' && !goals && <GoalsEmptyState setState={setDisplayFormType} />}
