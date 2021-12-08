@@ -46,42 +46,49 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState()
+  const [currentPage, setCurrentPage] = useState('')
   const [session, setSession] = useState(null)
   const [hasSubscription, setHasSubscription] = useState(false)
-  const [loading, setLoading] = useState(true)
   const router = useRouter()
-
-  const user = supabase.auth.user()
 
   useEffect(() => {
     setCurrentPage(router.pathname)
-  }, [])
-
-  useEffect(() => {
-    setSession(supabase.auth.session())
+    // setSession(supabase.auth.session())
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
     })
-  }, [])
-
-  useEffect(() => {
+    const user = supabase.auth.user()
     if (!supabase.auth.session()) {
       router.push('/app/signin')
-    }
-  }, [session])
-
-  useEffect(() => {
-    if (user && user.id) {
+    } else if (user && user.id) {
       return getUserPlan(user.id, setHasSubscription)
     }
-  }, [user, session])
+  }, [])
 
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [session])
+  // useEffect(() => {
+  //   setCurrentPage(router.pathname)
+  // }, [])
+
+  // useEffect(() => {
+  //   const user = supabase.auth.user()
+  //   if (!supabase.auth.session()) {
+  //     router.push('/app/signin')
+  //   } else if (user && user.id) {
+  //     return getUserPlan(user.id, setHasSubscription)
+  //   }
+  // }, [session])
+
+  // useEffect(() => {
+  //   if (user && user.id) {
+  //     return getUserPlan(user.id, setHasSubscription)
+  //   }
+  // }, [user, session])
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setLoading(false)
+  //   }, 1000)
+  // }, [session])
 
   return (
     <>
@@ -159,7 +166,9 @@ export default function AppLayout({ children }) {
                     {subNavigation.map((subItem, subItemIndex) => {
                       if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
                         return (
-                          <DesktopLinkNoIcon item={subItem} currentPage={currentPage} />
+                          <div key={subItemIndex}>
+                            <DesktopLinkNoIcon item={subItem} currentPage={currentPage} />
+                          </div>
                         )
                       }
                     })}
@@ -256,7 +265,7 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {!hasSubscription && !loading && (
+                    {!hasSubscription && (
                       <>
                       <CardTitle>Checkout</CardTitle>
                         <div className="grid grid-cols-2">
