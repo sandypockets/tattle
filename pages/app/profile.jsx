@@ -16,8 +16,10 @@ export default function Profile() {
         <CardTitle>Profile</CardTitle>
         {showMessage && <Message showMessage={showMessage} setShowMessage={setShowMessage} isSuccess={isSuccess} sectionName={sectionName} />}
       </div>
-      <Email setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
-      <Password setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
+      <form>
+        <Email setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
+        <Password setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
+      </form>
     </AppLayout>
   )
 }
