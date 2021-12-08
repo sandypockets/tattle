@@ -12,7 +12,7 @@ export default function Completed() {
   const [completedGoals, setCompletedGoals] = useState()
   const [loading, setLoading] = useState(true)
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
-  const [numOfCols, setNumOfCols] = useState(4)
+  const [numOfCols, setNumOfCols] = useState(2)
 
   async function getUserGoals() {
     const supabaseUser = await supabase.auth.user()
@@ -33,7 +33,7 @@ export default function Completed() {
   }, [goals])
 
   useEffect(() => {
-    completedGoals && setNumOfCols(completedGoals.length <= 3 ? completedGoals.length + 1 : 4)
+    completedGoals && setNumOfCols(completedGoals.length <= 1 ? completedGoals.length + 1 : 2)
   }, [completedGoals])
 
   useEffect(() => {

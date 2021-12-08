@@ -12,7 +12,7 @@ export default function Upcoming() {
   const [loading, setLoading] = useState(true)
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(4)
   const [upcomingGoals, setUpcomingGoals] = useState()
-  const [numOfCols, setNumOfCols] = useState(4)
+  const [numOfCols, setNumOfCols] = useState(2)
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
@@ -44,7 +44,7 @@ export default function Upcoming() {
 
   useEffect(() => {
     if (upcomingGoals) {
-      setNumOfCols(upcomingGoals.length <= 3 ? upcomingGoals + 1 : 4)
+      setNumOfCols(upcomingGoals.length <= 1 ? upcomingGoals + 1 : 2)
       setLoading(false)
     }
   }, [upcomingGoals])
