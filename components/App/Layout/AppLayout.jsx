@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { supabase } from "../../../lib/supabaseClient";
 import { useRouter } from "next/router";
 import Link from 'next/link'
@@ -16,9 +16,6 @@ import { SearchIcon } from '@heroicons/react/solid'
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
-import getUserPlan from "../../../helpers/subscription/getUserPlan";
-import Checkout from "../Checkout/Checkout";
-import CardTitle from "../../Global/CardTitle";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -46,31 +43,8 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [currentPage, setCurrentPage] = useState('')
-  const [session, setSession] = useState(null)
-  const [hasSubscription, setHasSubscription] = useState(false)
-  const [loading, setLoading] = useState(true)
   const router = useRouter()
-
-  useEffect(() => {
-    setCurrentPage(router.pathname)
-    // setSession(supabase.auth.session())
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-    const user = supabase.auth.user()
-    if (!supabase.auth.session()) {
-      router.push('/app/signin')
-    } else if (user && user.id) {
-      return getUserPlan(user.id, setHasSubscription)
-    }
-  }, [])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 1000)
-  }, [hasSubscription])
+  const currentPage = router.pathname
 
   return (
     <>
@@ -247,24 +221,7 @@ export default function AppLayout({ children }) {
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
                   <main className="py-4">
-                    {!hasSubscription && !loading && (
-                      <>
-                      <CardTitle>Checkout</CardTitle>
-                        <div className="grid grid-cols-2">
-                          <div>
-                            <h3>Some title</h3>
-                            <p>Some summary</p>
-                            <div>$3 USD / month</div>
-                            <div>Terms and conditions</div>
-                            <div>Powered by Stripe</div>
-                          </div>
-                          <div>
-                            <Checkout session={session} />
-                          </div>
-                        </div>
-                      </>
-                    )}
-                    {hasSubscription && children}
+                    {children}
                   </main>
                 </div>
               </div>

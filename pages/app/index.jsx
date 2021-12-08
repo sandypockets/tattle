@@ -9,6 +9,7 @@ import Stats from "../../components/App/Dashboard/Stats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
 import getGoals from "../../helpers/goals/getGoals";
 import getTattleStats from "../../helpers/subscription/getTattleStats";
+import StateWrapper from "../../components/App/Layout/StateWrapper";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -99,6 +100,7 @@ export default function Index() {
   } else {
     return (
       <AppLayout>
+        <StateWrapper>
         <Stats statProps={userStats} />
         {goals && goals.length > 0 ? (
           <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
@@ -108,6 +110,7 @@ export default function Index() {
           <GoalsEmptyState setState={newGoalRedirect} />
           </>
         )}
+        </StateWrapper>
       </AppLayout>
     )
   }
