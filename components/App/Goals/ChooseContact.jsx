@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import getContacts from "../../../helpers/getContacts";
+import getContacts from "../../../helpers/contacts/getContacts";
 
 export default function ChooseContact({ selectedContactId, setSelectedContactId }) {
   const [contacts, setContacts] = useState()

@@ -7,9 +7,9 @@ import Button from "../../../components/Global/Button";
 import Card from "../../../components/Global/Card";
 import CardTitle from "../../../components/Global/CardTitle";
 import GridCard from "../../../components/Global/GridCard";
-import getGoal from "../../../helpers/getGoal";
-import getContact from "../../../helpers/getContact";
-import markAsDone from "../../../helpers/markAsDone";
+import getGoal from "../../../helpers/goals/getGoal";
+import getContact from "../../../helpers/contacts/getContact";
+import markAsDone from "../../../helpers/goals/markAsDone";
 
 export default function SingleGoal() {
   const [contact, setContact] = useState()

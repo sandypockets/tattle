@@ -5,8 +5,8 @@ import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import CardTitle from "../../../components/Global/CardTitle";
 import YourSubscription from "../../../components/App/Settings/YourSubscription";
 import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
-import getIdAndSubscription from "../../../helpers/getSubscriptionByEmail";
-import getSubscriptionByEmail from "../../../helpers/getSubscriptionByEmail";
+import getIdAndSubscription from "../../../helpers/subscription/getSubscriptionByEmail";
+import getSubscriptionByEmail from "../../../helpers/subscription/getSubscriptionByEmail";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()

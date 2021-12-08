@@ -7,8 +7,8 @@ import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState
 import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import Stats from "../../components/App/Dashboard/Stats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
-import getGoals from "../../helpers/getGoals";
-import getTattleStats from "../../helpers/getTattleStats";
+import getGoals from "../../helpers/goals/getGoals";
+import getTattleStats from "../../helpers/subscription/getTattleStats";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)

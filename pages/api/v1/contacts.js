@@ -71,6 +71,26 @@ async function getContacts(req, res) {
   }
 }
 
+async function getSingleContact(req, res) {
+  const { ownerId, contactId } = req.query
+  try {
+    const { data, error, status } = await supabase
+      .from('contacts')
+      .select('name')
+      .match({ owner_id: ownerId, id: contactId })
+    if (data) {
+      res.status(status).json(data)
+    }
+    if (error) {
+      res.status(status).json(error)
+    }
+  } catch (err) {
+    res.json(err)
+  } finally {
+    res.end()
+  }
+}
+
 export default function handler(req, res) {
   if (req.method === 'POST') {
     if (req.body.type === 'create') {
@@ -79,7 +99,11 @@ export default function handler(req, res) {
       return updateContact(req, res)
     }
   } else if (req.method === 'GET') {
-    return getContacts(req, res)
+    if (req.query.type === 'all') {
+      return getContacts(req, res)
+    } else if (req.query.type === 'single') {
+      return getSingleContact(req, res)
+    }
   } else {
     res.send("Something's not right. Check your query.")
   }

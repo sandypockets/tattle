@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import Button from "../../Global/Button";
 import CardTitle from "../../Global/CardTitle";
 import ChooseContact from "./ChooseContact";
-import SingleDatePicker from "../DatePicker";
+import SingleDatePicker from "../Utils/DatePicker";
 import Slideover from "../Layout/Slideover";
 import TextInput from "../../Global/TextInput";
-import updateGoal from "../../../helpers/updateGoal";
+import updateGoal from "../../../helpers/goals/updateGoal";
 
 export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, user, getUserGoals }) {
   const [goalTitle, setGoalTitle] = useState('')

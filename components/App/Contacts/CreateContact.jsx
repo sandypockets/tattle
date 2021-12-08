@@ -3,7 +3,7 @@ import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
 import TextInput from "../../Global/TextInput";
-import createContact from "../../../helpers/createContact";
+import createContact from "../../../helpers/contacts/createContact";
 
 export default function CreateContact({ user, getUserContacts, setDisplayFormType }) {
   const [contactName, setContactName] = useState('')

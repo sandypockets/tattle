@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Banner from "../Banner";
+import Banner from "../Utils/Banner";
 
 export default function HasNoContactsBanner() {
   return (

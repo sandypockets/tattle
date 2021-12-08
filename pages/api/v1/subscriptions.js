@@ -37,7 +37,7 @@ async function getSubscription(req, res) {
     }
     if (error) {
       console.log(error)
-      res.status(status).json(error)
+      res.status(500).json(error)
     }
   } catch (err) {
     res.json(err)

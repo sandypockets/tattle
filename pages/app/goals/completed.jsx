@@ -5,7 +5,7 @@ import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import Button from "../../../components/Global/Button";
 import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
-import getGoals from "../../../helpers/getGoals";
+import getGoals from "../../../helpers/goals/getGoals";
 
 export default function Completed() {
   const [goals, setGoals] = useState()

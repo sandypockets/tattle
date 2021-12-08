@@ -2,7 +2,10 @@ import axios from 'axios'
 
 export default function getContacts(id, setContacts){
   axios.get('/api/v1/contacts', {
-    params: { "ownerId": id }
+    params: {
+      "type": 'all',
+      "ownerId": id,
+    }
   })
     .then(function (response) {
       console.log(response.data)

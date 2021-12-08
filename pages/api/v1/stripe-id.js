@@ -23,7 +23,6 @@ async function getStripeId(req, res) {
 }
 
 async function updateStripeId(req, res) {
-  console.log("req.query", req.body)
   const {id, stripeCustomerId} = req.body
   try {
     const { data, error, status } = await supabase

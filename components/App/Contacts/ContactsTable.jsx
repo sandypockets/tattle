@@ -1,10 +1,10 @@
 import Button from "../../Global/Button";
 import Slideover from "../Layout/Slideover";
 import {useEffect, useState} from "react";
-import getGoals from "../../../helpers/getGoals";
+import getGoals from "../../../helpers/goals/getGoals";
 import {supabase} from "../../../lib/supabaseClient";
-import updateGoal from "../../../helpers/updateGoal";
-import updateGoalContact from "../../../helpers/updateGoalContact";
+import updateGoal from "../../../helpers/goals/updateGoal";
+import updateGoalContact from "../../../helpers/goals/updateGoalContact";
 
 export default function ContactsTable({ contacts, setOpen, selectedContact, setSelectedContact }) {
   const [assignSlideoverOpen, setAssignSlideoverOpen] = useState(false)

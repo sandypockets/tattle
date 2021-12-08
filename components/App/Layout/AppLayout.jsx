@@ -16,7 +16,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
-import getUserPlan from "../../../helpers/getUserPlan";
+import getUserPlan from "../../../helpers/subscription/getUserPlan";
 import Checkout from "../Checkout/Checkout";
 import CardTitle from "../../Global/CardTitle";
 

@@ -3,12 +3,12 @@ import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
-import Banner from "../../../components/App/Banner";
+import Banner from "../../../components/App/Utils/Banner";
 import ContactsEmptyState from "../../../components/App/Contacts/ContactsEmptyState";
 import CreateGoal from "../../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
-import getGoals from "../../../helpers/getGoals";
-import getContacts from "../../../helpers/getContacts";
+import getGoals from "../../../helpers/goals/getGoals";
+import getContacts from "../../../helpers/contacts/getContacts";
 import CardTitle from "../../../components/Global/CardTitle";
 
 export default function New() {

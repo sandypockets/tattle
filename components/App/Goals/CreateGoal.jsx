@@ -4,9 +4,9 @@ import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import ChooseContact from "./ChooseContact";
-import SingleDatePicker from "../DatePicker";
+import SingleDatePicker from "../Utils/DatePicker";
 import TextInput from "../../Global/TextInput";
-import createGoal from "../../../helpers/createGoal";
+import createGoal from "../../../helpers/goals/createGoal";
 
 export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
   const [goalTitle, setGoalTitle] = useState('')

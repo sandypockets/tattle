@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { supabase } from "../../../lib/supabaseClient";
 import CheckoutForm from "./CheckoutForm";
-import getStripeCustomerId from "../../../helpers/getStripeCustomerId";
+import getStripeCustomerId from "../../../helpers/checkout/getStripeCustomerId";
 const stripePublishableKey = process.env.NEXT_STRIPE_PUBLISHABLE_KEY
 
 // Make sure to call loadStripe outside of a component’s render to avoid

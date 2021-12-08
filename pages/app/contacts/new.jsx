@@ -3,7 +3,7 @@ import CreateContact from "../../../components/App/Contacts/CreateContact";
 import {useEffect, useState} from "react";
 import {supabase} from "../../../lib/supabaseClient";
 import { useRouter } from "next/router";
-import getContacts from "../../../helpers/getContacts";
+import getContacts from "../../../helpers/contacts/getContacts";
 
 export default function NewContact() {
   const [contacts, setContacts] = useState()

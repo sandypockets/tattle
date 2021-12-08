@@ -6,11 +6,11 @@ import CreateGoal from "../../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../../components/App/Goals/GoalsTable";
 import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
-import getGoals from "../../../helpers/getGoals";
+import getGoals from "../../../helpers/goals/getGoals";
 import HasNoContactsBanner from "../../../components/App/Goals/HasNoContactsBanner";
 import Header from "../../../components/App/Goals/Header";
 import IntroCard from "../../../components/App/Goals/IntroCard";
-import getContacts from "../../../helpers/getContacts";
+import getContacts from "../../../helpers/contacts/getContacts";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)

@@ -23,7 +23,6 @@ async function updateProfileEmail(req, res) {
 }
 
 async function getCustomerId(req, res) {
-  console.log("Req.body CustomerId", req.query)
   const { id } = req.query
   try {
     const { data, error, status } = await supabase
