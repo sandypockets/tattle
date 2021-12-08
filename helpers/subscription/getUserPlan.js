@@ -5,7 +5,6 @@ export default function getUserPlan(ownerId, setHasSubscription){
     params: { ownerId: ownerId }
   })
     .then(function (response) {
-      console.log("GET PLAN DATA: ", response.data['is_subscribed'])
       setHasSubscription(response.data['is_subscribed'])
     })
     .catch(function (error) {

@@ -6,7 +6,6 @@ export default function getSubscriptionData(customerId, setSubscriptionData){
   })
     .then(function (response) {
       setSubscriptionData(response.data)
-      console.log("RESPONSE DATA: ", response.data)
     })
     .catch(function (error) {
       console.error("Error!", error)

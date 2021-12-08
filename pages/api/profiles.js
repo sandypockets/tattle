@@ -24,8 +24,6 @@ async function getProfile(req, res) {
 }
 
 async function updateProfile(req, res) {
-  console.log("Update profile fired")
-  console.log("Req.body", req.body)
   const { id, email, stripeCustomerId } = req.body
   try {
     const { data, error } = await supabase
@@ -36,7 +34,6 @@ async function updateProfile(req, res) {
       })
       .match({ "id": id })
     if (data) {
-      console.log("Update profile data", data)
       res.status(200).json(data)
     }
     if (error) {

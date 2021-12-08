@@ -8,7 +8,7 @@ function recordStripeIdStripeTable(userId, stripeCustomerId) {
       "stripeCustomerId": stripeCustomerId,
     })
     .then(function (response) {
-      console.log("recordStripeCustomerIdIN STRIPE TABLE: ", response);
+      console.log("Successfully recorded ID: ", response);
     })
     .catch(function (error) {
       console.log("Update error", error);
@@ -16,7 +16,6 @@ function recordStripeIdStripeTable(userId, stripeCustomerId) {
 }
 
 function recordStripeCustomerId(userResponse, stripeCustomerId) {
-  console.log("Record stripe customer ID fired!")
   axios
     .post('/api/profiles', {
       "id": userResponse.id,
@@ -24,7 +23,6 @@ function recordStripeCustomerId(userResponse, stripeCustomerId) {
       "email": userResponse.email
     })
     .then(function (response) {
-      console.log("recordStripeCustomerId", response);
       recordStripeIdStripeTable(userResponse.id, stripeCustomerId)
     })
     .catch(function (error) {

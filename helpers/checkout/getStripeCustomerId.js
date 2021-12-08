@@ -6,7 +6,6 @@ export default function getStripeCustomerId(userId, setStripeCustomerId) {
       params: { id: userId }
     })
     .then(function (response) {
-      console.log(response.data)
       setStripeCustomerId(response.data['stripe_customer_id'])
     })
     .catch(function (error) {

@@ -6,8 +6,6 @@ export default function StatsSection({ statProps, showHeadings=true }) {
     statTwo, statTwoText,
     statThree, statThreeText
   } = statProps
-
-  console.log("STAT THREE: ", statThree)
   return (
     <div>
       {showHeadings && (

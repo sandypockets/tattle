@@ -1,15 +1,13 @@
-import {supabase} from "../../../../lib/supabaseClient";
+import { supabase } from "../../../../lib/supabaseClient";
 
 async function checkUserPlan(req, res) {
   const { ownerId } = req.query
-  console.log("PLAN REQ BODY: ", req.query)
   try {
     const { data, error, status } = await supabase
       .from('profiles')
       .select('is_subscribed')
       .match({ id: ownerId })
     if (data) {
-      console.log("PLAN DATA: ", data)
       res.status(200).json(data[0])
     }
     if (error) {

@@ -5,8 +5,6 @@ export default function Stats({ statProps }) {
     statThree, statThreeText,
     statFour, statFourText
   } = statProps
-
-  console.log("STAT THREE: ", statThree)
   return (
     <div>
       <div className="mt-10 pb-12 sm:pb-16">

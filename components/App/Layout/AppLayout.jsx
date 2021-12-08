@@ -56,7 +56,6 @@ export default function AppLayout({ children }) {
 
   useEffect(() => {
     setCurrentPage(router.pathname)
-    console.log(router.pathname)
   }, [])
 
   useEffect(() => {
@@ -83,10 +82,6 @@ export default function AppLayout({ children }) {
       setLoading(false)
     }, 1000)
   }, [session])
-
-  useEffect(() => {
-    console.log("HAS SUBSCRIPTION: ", hasSubscription)
-  }, [hasSubscription])
 
   return (
     <>

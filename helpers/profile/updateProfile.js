@@ -11,7 +11,7 @@ export default function updateProfile({user, username, email, website, avatar_ur
       }
     )
     .then(function (response) {
-      console.log("!!!", response)
+      console.log("Update profile: ", response)
       return setLoading(false)
     })
     .catch(function (error) {

@@ -22,11 +22,11 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
       setSelectedContactId(selectedGoal['contact_id'])
       // Convert yyyy-mm-dd into unix
       const unixTime = new Date(selectedGoal['due_date']).getTime() + 86400000 - 14400000 //+ 100000000
-      console.log("DATE!", selectedGoal['due_date'])
-      console.log("UNIX TIME: ", unixTime)
-      console.log("DATE 2!", new Date(unixTime))
+      // console.log("DATE!", selectedGoal['due_date'])
+      // console.log("UNIX TIME: ", unixTime)
+      // console.log("DATE 2!", new Date(unixTime))
       setSelectedDate(new Date(unixTime))
-      console.log("selectedDate: ", selectedDate)
+      // console.log("selectedDate: ", selectedDate)
       // setSelectedDate(unixTime)
     }
   }, [selectedGoal])

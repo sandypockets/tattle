@@ -3,7 +3,6 @@ import { supabase } from "../../../lib/supabaseClient";
 async function getSubscription(req, res) {
   const { customerId } = req.query
   let dataObject = {}
-  console.log("Subscriptions - customerId: ", customerId)
   try {
     const { data, error } = await supabase
       .from('stripe_subscriptions')

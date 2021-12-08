@@ -5,7 +5,6 @@ export default function getTattleStats(ownerId, setUserStats){
     params: { ownerId: ownerId }
   })
     .then(function (response) {
-      console.log("FUNC STATS: ", response.data)
       setUserStats(prev => ({ ...prev, "statThree": response.data }))
     })
     .catch(function (error) {
