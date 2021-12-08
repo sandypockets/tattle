@@ -10,7 +10,7 @@ async function checkUserPlan(req, res) {
       .match({ id: ownerId })
     if (data) {
       console.log("PLAN DATA: ", data)
-      res.status(200).json(data)
+      res.status(200).json(data[0])
     }
     if (error) {
       res.status(status).json(error)

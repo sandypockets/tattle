@@ -5,31 +5,31 @@ import CardTitle from "../../Global/CardTitle";
 export default function YourBillingHistory({ billingHistory }) {
   console.log("billingHistory", billingHistory)
 
-  function sortByDateDescending() {
-    for (const item in billingHistory) {
-      const dateString = billingHistory[item]['created_at']
-      // billingHistory[item]['created_at'] = new Date(dateString).getTime()
-      console.log("lkj", billingHistory[item]['created_at'])
-    }
-    // return billingHistory.sort(
-    //   function(a, b) {
-    //     if (a['created_at'] > b['created_at']) {
-    //       return -1
-    //     } else if (a['created_at'] < b['created_at']) {
-    //       return 1
-    //     }
-    //     if (a['id'] > b['id']) {
-    //       return -1
-    //     } else if (a['id'] < b['id']) {
-    //       return 1
-    //     }
-    //   }
-    // ).reverse()
-  }
-
-  // if (billingHistory && Array.isArray(billingHistory)) {
-  //   return sortByDateDescending()
+  // function sortByDateDescending() {
+  //   for (const item in billingHistory['charge']) {
+  //     const dateString = billingHistory['charge'][item]['created_at']
+  //     // billingHistory[item]['created_at'] = new Date(dateString).getTime()
+  //     console.log("lkj", billingHistory['charge'][item]['created_at'])
+  //   }
+  //   // return billingHistory['charge'].sort(
+  //   //   function(a, b) {
+  //   //     if (a['created_at'] > b['created_at']) {
+  //   //       return -1
+  //   //     } else if (a['created_at'] < b['created_at']) {
+  //   //       return 1
+  //   //     }
+  //   //     if (a['id'] > b['id']) {
+  //   //       return -1
+  //   //     } else if (a['id'] < b['id']) {
+  //   //       return 1
+  //   //     }
+  //   //   }
+  //   // ).reverse()
   // }
+  //
+  // // if (billingHistory['charge'] && Array.isArray(billingHistory['charge'])) {
+  // //   return sortByDateDescending()
+  // // }
 
 
   return (
@@ -72,23 +72,26 @@ export default function YourBillingHistory({ billingHistory }) {
                 </tr>
                 </thead>
                 <tbody>
-                {billingHistory && billingHistory.map((bill, index) => (
-                  <tr key={bill.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill.id}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{bill['subscription_type'].charAt(0).toUpperCase() + bill['subscription_type'].slice(1).split('_').join(' ')}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill['created_at']).toLocaleDateString('en-CA')}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill['amount_cents'] / 100} USD</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                      <div className="max-w-min">
-                        <Button>
-                        <a target="_blank" href={bill['stripe_receipt_url']}>
-                          View details
-                        </a>
-                        </Button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
+                {billingHistory && billingHistory.map((bill, index) => {
+                  console.log("bill: ", bill)
+                  return (
+                    <tr key={bill.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill.id}</td>*/}
+                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tattle monthly</td>*/}
+                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill['created_at']).toLocaleDateString('en-CA')}</td>*/}
+                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill['total'] / 100} USD</td>*/}
+                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                        <div className="max-w-min">
+                          <Button>
+                            <a target="_blank" href={bill['stripe_receipt_url']}>
+                              View details
+                            </a>
+                          </Button>
+                        </div>
+                      </td>
+                    </tr>
+                  )
+                })}
                 </tbody>
               </table>
             </div>

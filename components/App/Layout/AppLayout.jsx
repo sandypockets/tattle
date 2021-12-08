@@ -74,9 +74,9 @@ export default function AppLayout({ children }) {
 
   useEffect(() => {
     if (user && user.id) {
-      return getUserPlan(user.id, setHasSubscription, setLoading)
+      return getUserPlan(user.id, setHasSubscription)
     }
-  }, [user])
+  }, [user, session])
 
   useEffect(() => {
     setTimeout(() => {

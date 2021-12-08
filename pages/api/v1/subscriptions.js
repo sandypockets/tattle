@@ -7,8 +7,8 @@ async function getSubscription(req, res) {
   try {
     const { data, error } = await supabase
       .from('stripe_subscriptions')
-      .select('id, total, customer_email, hosted_invoice_url, invoice_pdf, subscription_id')
-      .match({data_type: 'invoice', customer_id: customerId})
+      .select('id, created_at, total, customer_email, hosted_invoice_url, invoice_pdf, subscription_id')
+      .match({data_type: 'invoice', customer_id: customerId, status: 'paid'})
       .order('id', { ascending: false })
       .limit(1)
     if (data) {
@@ -18,7 +18,7 @@ async function getSubscription(req, res) {
       try {
         const { data, error } = await supabase
           .from('stripe_subscriptions')
-          .select('id, card_brand, card_exp_month, card_exp_year, card_last_four')
+          .select('id, created_at, card_brand, card_exp_month, card_exp_year, card_last_four')
           .match({data_type: 'charge', customer_id: customerId, paid: true})
           .order('id', { ascending: false })
           .limit(1)
@@ -48,7 +48,7 @@ async function getSubscription(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    // handle post
+
   } else if (req.method === 'GET') {
     return getSubscription(req, res)
   } else {
