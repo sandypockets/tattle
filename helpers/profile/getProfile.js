@@ -1,14 +1,12 @@
 import axios from "axios";
 
-export default function getProfile(user, setUsername, setWebsite, setAvatarUrl) {
+export default function getProfile(user, setCustomerId) {
   axios
-    .get('/api/profiles', {
+    .get('/api/v1/profiles', {
       params: { id: user.id }
     })
     .then(function (response) {
-      setUsername(response.data.username)
-      setWebsite(response.data.website)
-      setAvatarUrl(response.data.avatar_url)
+      setCustomerId(response.data[0]['stripe_customer_id'])
     })
     .catch(function (error) {
       console.log(error);

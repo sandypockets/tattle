@@ -9,15 +9,27 @@ import YourBillingHistory from "../../../components/App/Settings/YourBillingHist
 import getSubscriptionData from "../../../helpers/getSubscriptionData";
 import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
 import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
+import getProfile from "../../../helpers/profile/getProfile";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()
   const [loading, setLoading] = useState(true)
+  const [customerId, setCustomerId] = useState()
+
+  useEffect(() => {
+    const user = supabase.auth.user()
+    getProfile(user, setCustomerId)
+  }, [])
 
   useEffect(() => {
     const user = supabase.auth.user()
     getSubscriptionData(user.id, setSubscriptionData)
   }, [])
+
+  useEffect(() => {
+    console.log("CUSTOMER ID: ", customerId)
+  }, [customerId])
+
 
   useEffect(() => {
     if (subscriptionData) {
