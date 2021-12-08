@@ -22,20 +22,18 @@ export default function Index() {
   }, [])
 
   useEffect(() => {
-    const user = supabase.auth.user()
-    getSubscriptionData(user.id, setSubscriptionData)
-  }, [])
+    getSubscriptionData(customerId, setSubscriptionData)
+  }, [customerId])
 
   useEffect(() => {
     console.log("CUSTOMER ID: ", customerId)
   }, [customerId])
 
-
   useEffect(() => {
     if (subscriptionData) {
       setLoading(false)
     }
-  }, [subscriptionData])
+  }, [])
 
   if (loading) {
     return (
@@ -50,8 +48,8 @@ export default function Index() {
       <AppLayout>
         <CardTitle>Settings</CardTitle>
         <YourSubscription subscriptionData={subscriptionData} />
-        <YourPaymentInfo subscriptionData={subscriptionData} />
-        <YourBillingHistory billingHistory={subscriptionData} />
+        {/*<YourPaymentInfo subscriptionData={subscriptionData} />*/}
+        {/*<YourBillingHistory billingHistory={subscriptionData} />*/}
       </AppLayout>
     )
   }

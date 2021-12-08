@@ -1,20 +1,42 @@
 import { supabase } from "../../../lib/supabaseClient";
 
 async function getSubscription(req, res) {
-  const { ownerId } = req.query
+  const { customerId } = req.query
+  let dataObject = {}
+  console.log("Subscriptions - customerId: ", customerId)
   try {
-    const { data, error, status } = await supabase
-      .from('stripe')
-      .select('id, subscription_type, created_at, amount_cents, stripe_receipt_url, billing_frequency, card_last_four, card_type')
-      .match({user_id: ownerId, payment_successful: true})
+    const { data, error } = await supabase
+      .from('stripe_subscriptions')
+      .select('id, total, customer_email, hosted_invoice_url, invoice_pdf, subscription_id')
+      .match({data_type: 'invoice', customer_id: customerId})
+      .order('id', { ascending: false })
+      .limit(1)
     if (data) {
-      console.log("data", data)
-      let dataArr = []
-      // Should be sorted first
-      dataArr.push(data[0])
-      res.status(status).json(dataArr)
+      dataObject = {
+        "invoice": data[0]
+      }
+      try {
+        const { data, error } = await supabase
+          .from('stripe_subscriptions')
+          .select('id, card_brand, card_exp_month, card_exp_year, card_last_four')
+          .match({data_type: 'charge', customer_id: customerId, paid: true})
+          .order('id', { ascending: false })
+          .limit(1)
+        if (data) {
+          dataObject = {
+            ...dataObject,
+            "charge": data[0]
+          }
+          console.log("dataobj", dataObject)
+          error && console.log(error)
+          res.status(200).json(dataObject)
+        }
+      } catch (err) {
+        console.log(err)
+      }
     }
     if (error) {
+      console.log(error)
       res.status(status).json(error)
     }
   } catch (err) {

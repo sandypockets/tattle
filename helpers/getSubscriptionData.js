@@ -1,11 +1,12 @@
 import axios from 'axios'
 
-export default function getSubscriptionData(ownerId, setSubscriptionData){
+export default function getSubscriptionData(customerId, setSubscriptionData){
   axios.get('/api/v1/subscriptions', {
-    params: { ownerId: ownerId }
+    params: { customerId: customerId }
   })
     .then(function (response) {
       setSubscriptionData(response.data)
+      console.log("RESPONSE DATA: ", response.data)
     })
     .catch(function (error) {
       console.error("Error!", error)
