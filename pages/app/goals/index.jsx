@@ -7,7 +7,7 @@ import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../../components/App/Goals/GoalsTable";
 import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
 import getGoals from "../../../helpers/getGoals";
-import HasNoGoalsBanner from "../../../components/App/Goals/HasNoGoalsBanner";
+import HasNoContactsBanner from "../../../components/App/Goals/HasNoContactsBanner";
 import Header from "../../../components/App/Goals/Header";
 import IntroCard from "../../../components/App/Goals/IntroCard";
 import getContacts from "../../../helpers/getContacts";
@@ -57,9 +57,9 @@ export default function Index() {
     return (
       <AppLayout>
         <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
-        {!goals || goals.length === 0 && <HasNoGoalsBanner />}
+        {!contacts || contacts.length === 0 && <HasNoContactsBanner />}
         <IntroCard />
-        {displayFormType === 'empty' && !goals && <GoalsEmptyState setState={setDisplayFormType} />}
+        {displayFormType === 'empty' && goals.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
         {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
         {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
         <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
