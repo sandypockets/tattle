@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-export default function getSubscriptionByEmail(userId, setSubscriptionData){
-  console.log('id: ', userId)
+export default function getSubscriptionByEmail(email, setSubscriptionData){
+  console.log('customerEmail: ', email)
   axios
     .post('/api/v1/subscriptions', {
-      "id": userId,
+      "customerEmail": email,
     })
     .then(function (response) {
       console.log(response.data);

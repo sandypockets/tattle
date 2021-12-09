@@ -17,11 +17,8 @@ export default function Checkout({ session }) {
   const user = supabase.auth.user()
 
   useEffect(() => {
-    if (user) {
-      const userId = user['id']
-      getStripeCustomerId(userId, setStripeCustomerId)
-    }
-  }, [user])
+    user && getStripeCustomerId(user['id'], setStripeCustomerId)
+  }, [])
 
   useEffect(() => {
     if (session && stripeCustomerId) {

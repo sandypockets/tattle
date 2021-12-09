@@ -46,6 +46,7 @@ export default function AppLayout({ children }) {
   const router = useRouter()
   const currentPage = router.pathname
 
+
   return (
     <>
       <div>
