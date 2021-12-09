@@ -7,6 +7,7 @@ import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import getGoals from "../../../helpers/goals/getGoals";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
+import { sortTwice } from "../../../helpers/sort";
 
 export default function Completed() {
   const [goals, setGoals] = useState()
@@ -38,20 +39,21 @@ export default function Completed() {
   }, [completedGoals])
 
   useEffect(() => {
-    completedGoals && completedGoals.sort(
-      function(a, b) {
-        if (a['due_date'] > b['due_date']) {
-          return -1
-        } else if (a['due_date'] < b['due_date']) {
-          return 1
-        }
-        if (a['id'] > b['id']) {
-          return -1
-        } else if (a['id'] < b['id']) {
-          return 1
-        }
-      }
-    ).reverse()
+    completedGoals && sortTwice(completedGoals, 'due_date', 'id', true)
+    // completedGoals && completedGoals.sort(
+    //   function(a, b) {
+    //     if (a['due_date'] > b['due_date']) {
+    //       return -1
+    //     } else if (a['due_date'] < b['due_date']) {
+    //       return 1
+    //     }
+    //     if (a['id'] > b['id']) {
+    //       return -1
+    //     } else if (a['id'] < b['id']) {
+    //       return 1
+    //     }
+    //   }
+    // ).reverse()
   }, [completedGoals])
 
   if (loading) {

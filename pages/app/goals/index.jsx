@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
+import { sortOnce } from "../../../helpers/sort";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import CreateGoal from "../../../components/App/Goals/CreateGoal";
@@ -49,7 +50,8 @@ export default function Index() {
     if (goals) {
       setNumOfCols(goals.length <= 4 ? goals.length : 4)
       user && setLoading(false)
-      goals.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
+      goals && sortOnce(goals, 'id', false)
+      // goals.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
     }
   }, [goals])
 

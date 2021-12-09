@@ -54,7 +54,7 @@ export default function New() {
         <StateWrapper>
           <CardTitle>Create a goal</CardTitle>
           {!contacts && !goals || contacts && contacts.length >= 1 && goals && goals.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
-          {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} />}
+          {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
           {!contacts || contacts && contacts.length === 0 && (
             <>
               <Banner>

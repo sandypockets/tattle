@@ -44,7 +44,7 @@ export default function Index() {
       <AppLayout>
         <StateWrapper>
           <Heading setDisplayFormType={setDisplayFormType} />
-          <IntroCard />
+          {contacts.length < 1 && <IntroCard/>}
           {displayFormType === 'empty' && contacts.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
           {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
           {contacts.length > 0 && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }

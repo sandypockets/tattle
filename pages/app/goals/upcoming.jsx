@@ -7,6 +7,7 @@ import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import getGoals from "../../../helpers/goals/getGoals";
+import { sortTwice } from "../../../helpers/sort";
 
 export default function Upcoming() {
   const [goals, setGoals] = useState()
@@ -26,20 +27,7 @@ export default function Upcoming() {
   }, [])
 
   useEffect(() => {
-    goals && goals.sort(
-      function(a, b) {
-        if (a['due_date'] > b['due_date']) {
-          return -1
-        } else if (a['due_date'] < b['due_date']) {
-          return 1
-        }
-        if (a['id'] > b['id']) {
-          return -1
-        } else if (a['id'] < b['id']) {
-          return 1
-        }
-      }
-    ).reverse()
+    goals && sortTwice(goals, 'due_date', 'id', true)
     goals && setUpcomingGoals(goals.filter(item => item['is_completed'] === false))
   }, [goals])
 
