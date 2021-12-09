@@ -138,7 +138,7 @@ export default function AppLayout({ children }) {
 
         <div className="md:pl-64">
           <div className="max-w-4xl mx-auto flex flex-col md:px-8 xl:px-0">
-            <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-white border-b border-gray-200 flex">
+            <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-gray-50 border-b border-gray-200 flex">
               <button
                 type="button"
                 className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -159,7 +159,7 @@ export default function AppLayout({ children }) {
                       </div>
                       <input
                         id="search-field"
-                        className="block h-full w-full border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
+                        className="block h-full w-full bg-gray-50 border-transparent py-2 pl-8 pr-3 text-gray-900 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
                         placeholder="Search"
                         type="search"
                         name="search"
@@ -221,9 +221,9 @@ export default function AppLayout({ children }) {
             <main className="flex-1">
               <div className="py-6">
                 <div className="px-4 sm:px-6 md:px-0">
-                  <main className="py-4">
+                  <section className="p-4">
                     {children}
-                  </main>
+                  </section>
                 </div>
               </div>
             </main>

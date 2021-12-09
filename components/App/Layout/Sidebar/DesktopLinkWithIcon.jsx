@@ -16,7 +16,7 @@ export default function DesktopLinkWithIcon({ item, currentPage }) {
       >
         <item.icon
           className={classNames(
-            item.href === currentPage ? 'text-yellow-400' : 'text-gray-400 group-hover:text-gray-300',
+            item.href === currentPage ? 'text-gray-300' : 'text-gray-400 group-hover:text-gray-300',
             'mr-3 flex-shrink-0 h-6 w-6'
           )}
           aria-hidden="true"

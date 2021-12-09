@@ -5,7 +5,7 @@ export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
   const router = useRouter()
 
   return (
-    <div className="flex flex-col my-6 shadow-sm ring-1 ring-black rounded-md ring-opacity-5">
+    <div className="flex flex-col my-6 shadow-lg ring-1 ring-black rounded-md ring-opacity-5">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
