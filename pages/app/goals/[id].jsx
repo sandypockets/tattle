@@ -23,7 +23,6 @@ export default function SingleGoal() {
   const user = supabase.auth.user()
 
   useEffect(() => {
-    const user = supabase.auth.user()
     const { id } = router.query
     getGoal(user.id, id, setGoal)
   }, [])
@@ -45,7 +44,9 @@ export default function SingleGoal() {
   }, [goal])
 
   useEffect(() => {
-    goal && contact && setLoading(false)
+    goal && contact && setTimeout(() => {
+      setLoading(false)
+    }, 100)
   }, [goal, contact])
 
  function markGoalAsDone() {
