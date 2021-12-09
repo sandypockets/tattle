@@ -3,13 +3,14 @@ import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import CreateGoal from "../../../components/App/Goals/CreateGoal";
+import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import GoalsTable from "../../../components/App/Goals/GoalsTable";
-import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
-import getGoals from "../../../helpers/goals/getGoals";
 import HasNoContactsBanner from "../../../components/App/Goals/HasNoContactsBanner";
 import Header from "../../../components/App/Goals/Header";
 import IntroCard from "../../../components/App/Goals/IntroCard";
+import StateWrapper from "../../../components/App/Layout/StateWrapper";
+import getGoals from "../../../helpers/goals/getGoals";
 import getContacts from "../../../helpers/contacts/getContacts";
 
 export default function Index() {
@@ -17,22 +18,23 @@ export default function Index() {
   const [displayFormType, setDisplayFormType] = useState('empty')
   const [goals, setGoals] = useState()
   const [open, setOpen] = useState(false)
-  const [user, setUser] = useState()
   const [selectedGoal, setSelectedGoal] = useState()
   const [numOfCols, setNumOfCols] = useState(4)
   const [contacts, setContacts] = useState()
+  const user = supabase.auth.user()
 
   async function getUserGoals() {
-    const user = await supabase.auth.user()
-    setUser(user)
-    const id = user['id']
-    getGoals(id, setGoals)
+    if (user && user['id']) {
+      const id = user['id']
+      getGoals(id, setGoals)
+    }
   }
 
   async function getUserContacts() {
-    const user = await supabase.auth.user()
-    const id = user['id']
-    getContacts(id, setContacts)
+    if (user && user['id']) {
+      const id = user['id']
+      getContacts(id, setContacts)
+    }
   }
 
   useEffect(() => {
@@ -56,13 +58,15 @@ export default function Index() {
   } else {
     return (
       <AppLayout>
-        <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
-        {!contacts || contacts.length === 0 && <HasNoContactsBanner />}
-        {goals.length < 1 && <IntroCard/>}
-        {displayFormType === 'empty' && goals.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
-        {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
-        {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
-        <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
+        <StateWrapper>
+          <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
+          {!contacts || contacts.length === 0 && <HasNoContactsBanner />}
+          {goals.length < 1 && <IntroCard/>}
+          {displayFormType === 'empty' && goals.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
+          {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
+          {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
+          <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
+        </StateWrapper>
       </AppLayout>
     )
   }

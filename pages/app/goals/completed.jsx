@@ -6,6 +6,7 @@ import Button from "../../../components/Global/Button";
 import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import getGoals from "../../../helpers/goals/getGoals";
+import StateWrapper from "../../../components/App/Layout/StateWrapper";
 
 export default function Completed() {
   const [goals, setGoals] = useState()
@@ -58,33 +59,37 @@ export default function Completed() {
   } else if (completedGoals.length < 1) {
     return (
       <AppLayout>
-        <CardTitle>Completed goals</CardTitle>
-        <p>You haven't completed any goals yet.</p>
+        <StateWrapper>
+          <CardTitle>Completed goals</CardTitle>
+          <p>You haven't completed any goals yet.</p>
+        </StateWrapper>
       </AppLayout>
     )
   } else if (numOfCols) {
     return (
       <AppLayout>
-        <CardTitle>Completed goals</CardTitle>
-        <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-          {completedGoals && completedGoals.map((goal, index) => {
-            if (index < numberOfGoalsToShow) {
-              return (
-                <article key={index}>
-                  <GoalCard goal={goal} />
-                </article>
-              )
+        <StateWrapper>
+          <CardTitle>Completed goals</CardTitle>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
+            {completedGoals && completedGoals.map((goal, index) => {
+              if (index < numberOfGoalsToShow) {
+                return (
+                  <article key={index}>
+                    <GoalCard goal={goal} />
+                  </article>
+                )
+              }
+            })}
+          </div>
+          <div className="w-36 mx-auto mt-10">
+            {
+              completedGoals && completedGoals.length > 3 &&
+              <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                Show more
+              </Button>
             }
-          })}
-        </div>
-        <div className="w-36 mx-auto mt-10">
-          {
-            completedGoals && completedGoals.length > 3 &&
-            <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
-              Show more
-            </Button>
-          }
-        </div>
+          </div>
+        </StateWrapper>
       </AppLayout>
     )
   }

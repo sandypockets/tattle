@@ -5,6 +5,7 @@ export default function getGoals(id, setGoals){
     params: { ownerId: id }
   })
     .then(function (response) {
+      console.log("Get Goals: ", response.data)
       setGoals(response.data)
 
     })

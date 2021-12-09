@@ -4,12 +4,13 @@ import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import Banner from "../../../components/App/Utils/Banner";
+import CardTitle from "../../../components/Global/CardTitle";
 import ContactsEmptyState from "../../../components/App/Contacts/ContactsEmptyState";
 import CreateGoal from "../../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
+import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import getGoals from "../../../helpers/goals/getGoals";
 import getContacts from "../../../helpers/contacts/getContacts";
-import CardTitle from "../../../components/Global/CardTitle";
 
 export default function New() {
   const [displayFormType, setDisplayFormType] = useState('empty')
@@ -50,17 +51,19 @@ export default function New() {
   } else {
     return (
       <AppLayout>
-        <CardTitle>Create a goal</CardTitle>
-        {!contacts && !goals || contacts && contacts.length >= 1 && goals && goals.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
-        {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} />}
-        {!contacts || contacts && contacts.length === 0 && (
-          <>
-            <Banner>
-              <p className="mb-6">You need to add a contact before you can create a goal.</p>
-            </Banner>
-            <ContactsEmptyState setState={setContactFormState} />
-          </>
-        )}
+        <StateWrapper>
+          <CardTitle>Create a goal</CardTitle>
+          {!contacts && !goals || contacts && contacts.length >= 1 && goals && goals.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
+          {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} />}
+          {!contacts || contacts && contacts.length === 0 && (
+            <>
+              <Banner>
+                <p className="mb-6">You need to add a contact before you can create a goal.</p>
+              </Banner>
+              <ContactsEmptyState setState={setContactFormState} />
+            </>
+          )}
+        </StateWrapper>
       </AppLayout>
     )
   }

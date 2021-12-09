@@ -4,6 +4,7 @@ import {useEffect, useState} from "react";
 import {supabase} from "../../../lib/supabaseClient";
 import { useRouter } from "next/router";
 import getContacts from "../../../helpers/contacts/getContacts";
+import StateWrapper from "../../../components/App/Layout/StateWrapper";
 
 export default function NewContact() {
   const [contacts, setContacts] = useState()
@@ -20,7 +21,9 @@ export default function NewContact() {
 
   return (
     <AppLayout>
-      <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />
+      <StateWrapper>
+        <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />
+      </StateWrapper>
     </AppLayout>
   )
 }

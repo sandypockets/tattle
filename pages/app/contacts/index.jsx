@@ -9,6 +9,7 @@ import EditContactSlideover from "../../../components/App/Contacts/EditContactSl
 import Heading from "../../../components/App/Contacts/Heading";
 import IntroCard from "../../../components/App/Contacts/IntroCard";
 import getContacts from "../../../helpers/contacts/getContacts";
+import StateWrapper from "../../../components/App/Layout/StateWrapper";
 
 export default function Index() {
   const [contacts, setContacts] = useState()
@@ -41,12 +42,14 @@ export default function Index() {
   } else {
     return (
       <AppLayout>
-        <Heading setDisplayFormType={setDisplayFormType} />
-        <IntroCard />
-        {displayFormType === 'empty' && contacts.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
-        {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
-        {contacts.length > 0 && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }
-        <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
+        <StateWrapper>
+          <Heading setDisplayFormType={setDisplayFormType} />
+          <IntroCard />
+          {displayFormType === 'empty' && contacts.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
+          {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
+          {contacts.length > 0 && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }
+          <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
+        </StateWrapper>
       </AppLayout>
     )
   }

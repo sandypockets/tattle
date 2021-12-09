@@ -5,11 +5,11 @@ import AppLayout from "../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../components/App/Utils/AppLoadingState";
 import ContactsEmptyState from "../../components/App/Contacts/ContactsEmptyState";
 import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
+import StateWrapper from "../../components/App/Layout/StateWrapper";
 import Stats from "../../components/App/Dashboard/Stats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
 import getGoals from "../../helpers/goals/getGoals";
 import getTattleStats from "../../helpers/subscription/getTattleStats";
-import StateWrapper from "../../components/App/Layout/StateWrapper";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -101,15 +101,15 @@ export default function Index() {
     return (
       <AppLayout>
         <StateWrapper>
-        <Stats statProps={userStats} />
-        {goals && goals.length > 0 ? (
-          <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
-        ) : (
-          <>
-          <ContactsEmptyState setState={newContactRedirect} />
-          <GoalsEmptyState setState={newGoalRedirect} />
-          </>
-        )}
+          <Stats statProps={userStats} />
+          {goals && goals.length > 0 ? (
+            <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
+          ) : (
+            <>
+            <ContactsEmptyState setState={newContactRedirect} />
+            <GoalsEmptyState setState={newGoalRedirect} />
+            </>
+          )}
         </StateWrapper>
       </AppLayout>
     )

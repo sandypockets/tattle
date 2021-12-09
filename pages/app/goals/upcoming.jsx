@@ -5,6 +5,7 @@ import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import Button from "../../../components/Global/Button";
 import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
+import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import getGoals from "../../../helpers/goals/getGoals";
 
 export default function Upcoming() {
@@ -61,26 +62,28 @@ export default function Upcoming() {
   } else {
     return (
       <AppLayout>
-        <CardTitle>Goals due soon</CardTitle>
-        <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-          {upcomingGoals && upcomingGoals.map((goal, index) => {
-            if (index < numberOfGoalsToShow) {
-              return (
-                <article key={index}>
-                  <GoalCard goal={goal} />
-                </article>
-              )
+        <StateWrapper>
+          <CardTitle>Goals due soon</CardTitle>
+          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
+            {upcomingGoals && upcomingGoals.map((goal, index) => {
+              if (index < numberOfGoalsToShow) {
+                return (
+                  <article key={index}>
+                    <GoalCard goal={goal} />
+                  </article>
+                )
+              }
+            })}
+          </div>
+          <div className="w-36 mx-auto mt-10">
+            {
+              upcomingGoals && upcomingGoals.length > 4 && numberOfGoalsToShow <= upcomingGoals.length &&
+              <Button disabled={numberOfGoalsToShow > upcomingGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                Show more
+              </Button>
             }
-          })}
-        </div>
-        <div className="w-36 mx-auto mt-10">
-          {
-            upcomingGoals && upcomingGoals.length > 4 && numberOfGoalsToShow <= upcomingGoals.length &&
-            <Button disabled={numberOfGoalsToShow > upcomingGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
-              Show more
-            </Button>
-          }
-        </div>
+          </div>
+        </StateWrapper>
       </AppLayout>
     )
   }

@@ -1,23 +1,23 @@
-import {useEffect, useState} from "react";
-import {supabase} from "../../../lib/supabaseClient";
-import getUserPlan from "../../../helpers/subscription/getUserPlan";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
+import { supabase } from "../../../lib/supabaseClient";
 import CardTitle from "../../Global/CardTitle";
 import Checkout from "../Checkout/Checkout";
-// import { Transition } from '@headlessui/react'
+import getUserPlan from "../../../helpers/subscription/getUserPlan";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
   const [hasSubscription, setHasSubscription] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
-    // setSession(supabase.auth.session())
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
     })
     const user = supabase.auth.user()
-    if (!supabase.auth.session()) {
-      router.push('/app/signin')
+    if (!user) {
+      return router.push('/app/signin')
     } else if (user && user.id) {
       return getUserPlan(user.id, setHasSubscription)
     }
@@ -26,10 +26,16 @@ export default function StateWrapper({ children }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-    }, 1000)
+    }, 250)
   }, [hasSubscription])
 
-  if (!hasSubscription || loading) {
+  if (loading) {
+    return (
+      <div className="h-full w-full" />
+    )
+  }
+
+  if (!hasSubscription && !loading) {
     return (
       <>
         <CardTitle>Checkout</CardTitle>
@@ -49,8 +55,7 @@ export default function StateWrapper({ children }) {
     )
   } else {
     return (
-      <div className="opacity-0 transition delay-300 transition-opacity-1 duration-900 ease-in-out">
-
+      <div>
         {children}
       </div>
     )
