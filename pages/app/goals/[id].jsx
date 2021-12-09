@@ -14,10 +14,10 @@ import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import SmallCardTitle from "../../../components/Global/SmallCardTitle";
 
 export default function SingleGoal() {
-  const [contact, setContact] = useState()
-  const [goal, setGoal] = useState()
+  const [contact, setContact] = useState(Object)
+  const [goal, setGoal] = useState(Object)
   const [loading, setLoading] = useState(true)
-  const [timeLeft, setTimeLeft] = useState()
+  const [timeLeft, setTimeLeft] = useState(Number)
   const [isCompletedOnTime, setIsCompletedOnTime] = useState(false)
   const router = useRouter()
   const user = supabase.auth.user()
