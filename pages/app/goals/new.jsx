@@ -46,25 +46,23 @@ export default function New() {
     }
   }, [contactFormState])
 
-  if (loading) {
-    return (<AppLoadingState />)
-  } else {
     return (
       <AppLayout>
-        <StateWrapper>
-          <CardTitle>Create a goal</CardTitle>
-          {!contacts && !goals || contacts && contacts.length >= 1 && goals && goals.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
-          {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
-          {!contacts || contacts && contacts.length === 0 && (
-            <>
-              <Banner>
-                <p className="mb-6">You need to add a contact before you can create a goal.</p>
-              </Banner>
-              <ContactsEmptyState setState={setContactFormState} />
-            </>
-          )}
-        </StateWrapper>
+        {loading ? <div className="h-full w-full" /> : (
+          <StateWrapper>
+            <CardTitle>Create a goal</CardTitle>
+            {!contacts && !goals || contacts && contacts.length >= 1 && goals && goals.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
+            {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
+            {!contacts || contacts && contacts.length === 0 && (
+              <>
+                <Banner>
+                  <p className="mb-6">You need to add a contact before you can create a goal.</p>
+                </Banner>
+                <ContactsEmptyState setState={setContactFormState} />
+              </>
+            )}
+          </StateWrapper>
+        )}
       </AppLayout>
     )
-  }
 }

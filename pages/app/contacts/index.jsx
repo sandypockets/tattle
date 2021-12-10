@@ -37,20 +37,19 @@ export default function Index() {
     user && contacts && setLoading(false)
   }, [contacts])
 
-  if (loading) {
-    return (<AppLoadingState />)
-  } else {
     return (
       <AppLayout>
-        <StateWrapper>
-          <Heading setDisplayFormType={setDisplayFormType} />
-          {contacts.length < 1 && <IntroCard/>}
-          {displayFormType === 'empty' && contacts.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
-          {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
-          {contacts.length > 0 && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }
-          <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
-        </StateWrapper>
+        {loading ? <div className="h-full w-full" /> : (
+          <StateWrapper>
+            <Heading setDisplayFormType={setDisplayFormType} />
+            {contacts.length < 1 && <IntroCard/>}
+            {displayFormType === 'empty' && contacts.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
+            {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
+            {contacts.length > 0 && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }
+            <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
+          </StateWrapper>
+        )}
       </AppLayout>
     )
-  }
+
 }

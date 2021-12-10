@@ -46,7 +46,7 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const router = useRouter()
   const currentPage = router.pathname
   const user = supabase.auth.user()
@@ -59,13 +59,6 @@ export default function AppLayout({ children }) {
     }
   }, [user])
 
-  if (loading) {
-    return (
-      <LoadingWheelWrapper>
-      <LoadingWheel />
-    </LoadingWheelWrapper>
-    )
-  } else {
     return (
       <>
         <div>
@@ -241,7 +234,8 @@ export default function AppLayout({ children }) {
                 <div className="py-6">
                   <div className="px-4 sm:px-6 md:px-0">
                     <section className="p-4">
-                      {children}
+                      {loading && <div className="h-full w-full" />}
+                      {!loading && children}
                     </section>
                   </div>
                 </div>
@@ -251,5 +245,4 @@ export default function AppLayout({ children }) {
         </div>
       </>
     )
-  }
 }

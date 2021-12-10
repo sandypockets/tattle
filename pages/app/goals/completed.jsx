@@ -56,9 +56,7 @@ export default function Completed() {
     // ).reverse()
   }, [completedGoals])
 
-  if (loading) {
-    return (<AppLoadingState />)
-  } else if (completedGoals.length < 1) {
+if (completedGoals?.length < 1) {
     return (
       <AppLayout>
         <StateWrapper>
@@ -70,28 +68,30 @@ export default function Completed() {
   } else if (numOfCols) {
     return (
       <AppLayout>
-        <StateWrapper>
-          <CardTitle>Completed goals</CardTitle>
-          <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-            {completedGoals && completedGoals.map((goal, index) => {
-              if (index < numberOfGoalsToShow) {
-                return (
-                  <article key={index}>
-                    <GoalCard goal={goal} />
-                  </article>
-                )
+        {loading ? <div className="h-full w-full" /> : (
+          <StateWrapper>
+            <CardTitle>Completed goals</CardTitle>
+            <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
+              {completedGoals && completedGoals.map((goal, index) => {
+                if (index < numberOfGoalsToShow) {
+                  return (
+                    <article key={index}>
+                      <GoalCard goal={goal} />
+                    </article>
+                  )
+                }
+              })}
+            </div>
+            <div className="w-36 mx-auto mt-10">
+              {
+                completedGoals && completedGoals.length > 3 &&
+                <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                  Show more
+                </Button>
               }
-            })}
-          </div>
-          <div className="w-36 mx-auto mt-10">
-            {
-              completedGoals && completedGoals.length > 3 &&
-              <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
-                Show more
-              </Button>
-            }
-          </div>
-        </StateWrapper>
+            </div>
+          </StateWrapper>
+        )}
       </AppLayout>
     )
   }

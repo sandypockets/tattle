@@ -13,6 +13,8 @@ import IntroCard from "../../../components/App/Goals/IntroCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import getGoals from "../../../helpers/goals/getGoals";
 import getContacts from "../../../helpers/contacts/getContacts";
+import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
+import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -55,21 +57,24 @@ export default function Index() {
     }
   }, [goals])
 
-  if (loading) {
-    return (<AppLoadingState />)
-  } else {
     return (
       <AppLayout>
         <StateWrapper>
-          <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
-          {!contacts || contacts.length === 0 && <HasNoContactsBanner />}
-          {goals.length < 1 && <IntroCard/>}
-          {displayFormType === 'empty' && goals.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
-          {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
-          {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
-          <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
+          {loading ? (
+            <div className="h-full w-full" />
+          ) : (
+            <>
+              <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
+              {!contacts || contacts.length === 0 && <HasNoContactsBanner />}
+              {goals.length < 1 && <IntroCard/>}
+              {displayFormType === 'empty' && goals.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
+              {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
+              {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
+              <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
+            </>
+          )}
         </StateWrapper>
       </AppLayout>
     )
-  }
+  // }
 }

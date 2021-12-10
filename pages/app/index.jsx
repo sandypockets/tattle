@@ -95,23 +95,22 @@ export default function Index() {
     return router.push('/app/contacts/new')
   }
 
-  if (loading) {
-    return (<AppLoadingState /> )
-  } else {
     return (
       <AppLayout>
-        <StateWrapper>
-          <Stats statProps={userStats} />
-          {goals && goals.length > 0 ? (
-            <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
-          ) : (
-            <>
-            <ContactsEmptyState setState={newContactRedirect} />
-            <GoalsEmptyState setState={newGoalRedirect} />
-            </>
-          )}
-        </StateWrapper>
+        {loading ? <div className="h-full w-full" /> : (
+          <StateWrapper>
+            <Stats statProps={userStats} />
+            {goals && goals.length > 0 ? (
+              <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
+            ) : (
+              <>
+              <ContactsEmptyState setState={newContactRedirect} />
+              <GoalsEmptyState setState={newGoalRedirect} />
+              </>
+            )}
+          </StateWrapper>
+        )}
       </AppLayout>
     )
-  }
+
 }

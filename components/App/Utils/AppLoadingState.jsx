@@ -4,10 +4,6 @@ import AppLayout from "../Layout/AppLayout";
 
 export default function AppLoadingState() {
   return (
-    <AppLayout>
-      {/*<LoadingWheelWrapper>*/}
-      {/*  <LoadingWheel />*/}
-      {/*</LoadingWheelWrapper>*/}
-    </AppLayout>
+    <div className="h-full w-full" />
   )
 }

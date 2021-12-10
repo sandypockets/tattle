@@ -6,7 +6,7 @@ import getUserPlan from "../../../helpers/subscription/getUserPlan";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
-  const [hasSubscription, setHasSubscription] = useState()
+  const [hasSubscription, setHasSubscription] = useState(null)
   const [loading, setLoading] = useState(true)
   const user = supabase.auth.user()
 
@@ -20,9 +20,9 @@ export default function StateWrapper({ children }) {
   }, [])
 
   useEffect(() => {
-    // setTimeout(() => {
+    if (hasSubscription !== null) {
       setLoading(false)
-    // }, 50)
+    }
   }, [hasSubscription])
 
   if (loading) {
@@ -49,7 +49,8 @@ export default function StateWrapper({ children }) {
         </div>
       </>
     )
-  } else {
+  }
+  else {
     return (
       <div>
         {children}
