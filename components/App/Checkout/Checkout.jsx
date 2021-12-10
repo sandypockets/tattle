@@ -7,6 +7,7 @@ import getStripeCustomerId from "../../../helpers/checkout/getStripeCustomerId";
 import AppLoadingState from "../Utils/AppLoadingState";
 import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
 import LoadingWheel from "../../Global/Loading/LoadingWheel";
+import CheckoutLoadingState from "./CheckoutLoadingState";
 const stripePublishableKey = process.env.NEXT_STRIPE_PUBLISHABLE_KEY
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -47,7 +48,7 @@ export default function Checkout({ session }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-    }, 3000)
+    }, 3500)
   }, [clientSecret])
 
   const appearance = {
@@ -61,7 +62,8 @@ export default function Checkout({ session }) {
     <div className="App">
       {loading && (
         <div className="flex justify-center">
-          <LoadingWheel />
+          {/*<LoadingWheel />*/}
+          <CheckoutLoadingState />
         </div>
       )}
       <div className={loading && "hidden"}>

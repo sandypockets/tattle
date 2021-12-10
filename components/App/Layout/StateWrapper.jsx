@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import Checkout from "../Checkout/Checkout";
 import getUserPlan from "../../../helpers/subscription/getUserPlan";
+import CheckoutLoadingState from "../Checkout/CheckoutLoadingState";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
@@ -24,13 +25,7 @@ export default function StateWrapper({ children }) {
     }
   }, [hasSubscription])
 
-  if (loading) {
-    return (
-      <div className="h-full w-full" />
-    )
-  }
-
-  if (hasSubscription === false && !loading) {
+  if (hasSubscription === false) {
     return (
       <>
         <div className="grid grid-cols-2 mt-16">
@@ -64,7 +59,7 @@ export default function StateWrapper({ children }) {
   else {
     return (
       <div>
-        {children}
+        {!loading && children}
       </div>
     )
   }
