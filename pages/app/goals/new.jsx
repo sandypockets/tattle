@@ -50,7 +50,7 @@ export default function New() {
 
     return (
       <AppLayout>
-        {loading ? <div className="h-full w-full" /> : (
+        {loading ? <AppLoadingState /> : (
           <StateWrapper>
             <CardTitle>Create a goal</CardTitle>
             {!contacts && !goals || contacts?.length >= 1 && goals?.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}

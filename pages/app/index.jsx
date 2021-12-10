@@ -68,22 +68,6 @@ export default function Index() {
     if (goals) {
       const outstandingGoals = goals?.filter(item => item['is_completed'] === false)
       setNumOfCols(outstandingGoals.length <= 2 ? outstandingGoals.length + 1 : 3)
-      // Sort goals by due_date, then by id
-      // outstandingGoals.sort(
-      //   function(a, b) {
-      //     if (a['due_date'] > b['due_date']) {
-      //       return -1
-      //     } else if (a['due_date'] < b['due_date']) {
-      //       return 1
-      //     }
-      //     if (a['id'] > b['id']) {
-      //       return -1
-      //     } else if (a['id'] < b['id']) {
-      //       return 1
-      //     }
-      //   }
-      // ).reverse()
-      // setIncompleteGoals(outstandingGoals)
       setIncompleteGoals(sortTwice(outstandingGoals, 'due_date', 'id', true))
       userStats && setLoading(false)
     }
@@ -99,7 +83,7 @@ export default function Index() {
 
     return (
       <AppLayout>
-        {loading ? <div className="h-full w-full" /> : (
+        {loading ? <AppLoadingState /> : (
           <StateWrapper>
             <Stats statProps={userStats} />
             {goals?.length > 0 ? (

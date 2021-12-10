@@ -60,9 +60,7 @@ export default function Index() {
     return (
       <AppLayout>
         <StateWrapper>
-          {loading ? (
-            <div className="h-full w-full" />
-          ) : (
+          {loading ? (<AppLoadingState />) : (
             <>
               <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
               {!contacts || contacts?.length === 0 && <HasNoContactsBanner />}

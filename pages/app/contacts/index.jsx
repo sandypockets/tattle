@@ -39,7 +39,7 @@ export default function Index() {
 
     return (
       <AppLayout>
-        {loading ? <div className="h-full w-full" /> : (
+        {loading ? <AppLoadingState /> : (
           <StateWrapper>
             <Heading setDisplayFormType={setDisplayFormType} />
             {contacts?.length < 1 && <IntroCard/>}
