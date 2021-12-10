@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import Checkout from "../Checkout/Checkout";
 import getUserPlan from "../../../helpers/subscription/getUserPlan";
-import CheckoutLoadingState from "../Checkout/CheckoutLoadingState";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)

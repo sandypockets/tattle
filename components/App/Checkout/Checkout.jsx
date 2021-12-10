@@ -4,15 +4,11 @@ import { Elements } from "@stripe/react-stripe-js";
 import { supabase } from "../../../lib/supabaseClient";
 import CheckoutForm from "./CheckoutForm";
 import getStripeCustomerId from "../../../helpers/checkout/getStripeCustomerId";
-import AppLoadingState from "../Utils/AppLoadingState";
-import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
-import LoadingWheel from "../../Global/Loading/LoadingWheel";
 import CheckoutLoadingState from "./CheckoutLoadingState";
 const stripePublishableKey = process.env.NEXT_STRIPE_PUBLISHABLE_KEY
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
-// loadStripe is initialized with a fake API key.
 const stripePromise = loadStripe("pk_test_51IkyECLSQuRsBVHwF7qm2tCexmpVUdG2fMphLozNAwUelsH4aklQqXVOu8HjkJjq0dWcALrjPfnAQerGxlEpQI8000E8OwzIHi");
 
 export default function Checkout({ session }) {
@@ -62,7 +58,6 @@ export default function Checkout({ session }) {
     <div className="App">
       {loading && (
         <div className="flex justify-center">
-          {/*<LoadingWheel />*/}
           <CheckoutLoadingState />
         </div>
       )}
