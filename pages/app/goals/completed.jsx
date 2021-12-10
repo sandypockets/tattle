@@ -31,11 +31,11 @@ export default function Completed() {
   }, [goals])
 
   useEffect(() => {
-    goals && setCompletedGoals(goals.filter(item => item['is_completed'] === true))
+    goals && setCompletedGoals(goals?.filter(item => item['is_completed'] === true))
   }, [goals])
 
   useEffect(() => {
-    completedGoals && setNumOfCols(completedGoals.length <= 1 ? completedGoals.length + 1 : 2)
+    completedGoals && setNumOfCols(completedGoals?.length <= 1 ? completedGoals?.length + 1 : 3)
   }, [completedGoals])
 
   useEffect(() => {
@@ -43,23 +43,22 @@ export default function Completed() {
   }, [completedGoals])
 
 if (completedGoals?.length < 1) {
-    return (
-      <AppLayout>
-        <StateWrapper>
-          <CardTitle>Completed goals</CardTitle>
-          <p>You haven't completed any goals yet.</p>
-        </StateWrapper>
-      </AppLayout>
-    )
-  } else if (numOfCols) {
+  return (
+    <AppLayout>
+      <StateWrapper>
+        <CardTitle>Completed goals</CardTitle>
+        <p>You haven't completed any goals yet.</p>
+      </StateWrapper>
+    </AppLayout>
+  )} else if (numOfCols) {
     return (
       <AppLayout>
         {loading ? <AppLoadingState /> : (
           <StateWrapper>
             <CardTitle>Completed goals</CardTitle>
             <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-              {completedGoals && completedGoals.map((goal, index) => {
-                if (index < numberOfGoalsToShow) {
+              {completedGoals?.map((goal, index) => {
+                if (index <= numberOfGoalsToShow) {
                   return (
                     <article key={index}>
                       <GoalCard goal={goal} />
@@ -70,8 +69,8 @@ if (completedGoals?.length < 1) {
             </div>
             <div className="w-36 mx-auto mt-10">
               {
-                completedGoals && completedGoals.length > 3 &&
-                <Button disabled={numberOfGoalsToShow > goals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                completedGoals?.length <= numOfCols &&
+                <Button disabled={numberOfGoalsToShow > goals?.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
                   Show more
                 </Button>
               }

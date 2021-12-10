@@ -52,7 +52,7 @@ export default function Upcoming() {
           <StateWrapper>
             <CardTitle>Goals due soon</CardTitle>
             <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-              {upcomingGoals && upcomingGoals.map((goal, index) => {
+              {upcomingGoals?.map((goal, index) => {
                 if (index < numberOfGoalsToShow) {
                   return (
                     <article key={index}>
@@ -64,8 +64,8 @@ export default function Upcoming() {
             </div>
             <div className="w-36 mx-auto mt-10">
               {
-                upcomingGoals && upcomingGoals.length > 4 && numberOfGoalsToShow <= upcomingGoals.length &&
-                <Button disabled={numberOfGoalsToShow > upcomingGoals.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                upcomingGoals?.length > 4 && numberOfGoalsToShow <= upcomingGoals?.length &&
+                <Button disabled={numberOfGoalsToShow > upcomingGoals?.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
                   Show more
                 </Button>
               }
