@@ -72,11 +72,14 @@ export default function CheckoutForm({ stripeCustomerId, options }) {
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
       <PaymentElement id="payment-element" />
-      <button disabled={isLoading || !stripe || !elements} id="submit" className="mt-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-yellow-400 hover:bg-yellow-500 transition duration-150 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
+      <button disabled={isLoading || !stripe || !elements} id="submit" className="mt-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition duration-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
         <span id="button-text">
           {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
         </span>
       </button>
+      <div className="flex justify-between pt-1">
+        <small className="text-gray-700">Powered by Stripe</small>
+      </div>
       {/* Show any error or success messages */}
       {message && <div id="payment-message">{message}</div>}
     </form>
