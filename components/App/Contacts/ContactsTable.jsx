@@ -1,37 +1,27 @@
+import { useEffect, useState } from "react";
+import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
 import Slideover from "../Layout/Slideover";
-import {useEffect, useState} from "react";
+import { sortTwice } from "../../../helpers/sort";
 import getGoals from "../../../helpers/goals/getGoals";
-import {supabase} from "../../../lib/supabaseClient";
 import updateGoal from "../../../helpers/goals/updateGoal";
 import updateGoalContact from "../../../helpers/goals/updateGoalContact";
 
 export default function ContactsTable({ contacts, setOpen, selectedContact, setSelectedContact }) {
   const [assignSlideoverOpen, setAssignSlideoverOpen] = useState(false)
-  const [goals, setGoals] = useState()
+  const [goals, setGoals] = useState({})
   const [selectedGoalId, setSelectedGoalId] = useState()
-  const [user, setUser] = useState()
+  const [user, setUser] = useState({})
 
   useEffect(() => {
-    const user = supabase.auth.user()
-    setUser(user)
+    const authUser = supabase.auth.user()
+    setUser(authUser)
     getGoals(user.id, setGoals)
   }, [])
 
-  goals && goals.sort(
-    function(a, b) {
-      if (a['due_date'] > b['due_date']) {
-        return -1
-      } else if (a['due_date'] < b['due_date']) {
-        return 1
-      }
-      if (a['id'] > b['id']) {
-        return -1
-      } else if (a['id'] < b['id']) {
-        return 1
-      }
-    }
-  ).reverse()
+  useEffect(() => {
+    goals && sortTwice(goals, 'due_date', 'id', true)
+  }, [goals])
 
   return (
     <div className="flex flex-col my-6">
@@ -104,7 +94,7 @@ export default function ContactsTable({ contacts, setOpen, selectedContact, setS
         <section className="mx-auto">
           <p className="my-2">Assign {selectedContact && selectedContact.name} to one of your goals.</p>
           <select onChange={(e) => setSelectedGoalId(e.target.value)}>
-            {goals && goals.map((goal, index) => (
+            {goals?.length > 0 && goals.map((goal, index) => (
               <option
                 key={index}
                 value={goal.id}

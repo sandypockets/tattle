@@ -1,5 +1,5 @@
 export function sortOnce(items, sortFirst, reverse=true) {
-  const sortedItems = items.sort(
+  const sortedItems = items?.length > 0 && items.sort(
     function(a, b) {
       if (a[sortFirst] > b[sortFirst]) {
         return -1
@@ -9,14 +9,14 @@ export function sortOnce(items, sortFirst, reverse=true) {
     }
   )
   if (reverse) {
-    return sortedItems.reverse()
+    return sortedItems?.reverse()
   } else {
     return sortedItems
   }
 }
 
 export function sortTwice(items, sortFirst, sortSecond, reverse=true) {
-  const sortedItems = items.sort(
+  const sortedItems = items?.length > 0 && items.sort(
     function(a, b) {
       if (a[sortFirst] > b[sortFirst]) {
         return -1
@@ -30,7 +30,7 @@ export function sortTwice(items, sortFirst, sortSecond, reverse=true) {
       }
     }
   )
-  if (reverse) {
+  if (sortedItems?.length > 0 && reverse) {
     return sortedItems.reverse()
   } else {
     return sortedItems
