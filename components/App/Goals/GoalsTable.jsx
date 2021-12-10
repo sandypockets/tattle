@@ -18,8 +18,8 @@ function XMark() {
   )
 }
 
-function getContactName(contacts, goalId) {
-  return contacts.filter(contact => contact.id === goalId)[0].name
+function getContactName(contactsArray, goalId) {
+  return contactsArray?.length > 0 && contactsArray.filter(contact => contact.id === goalId)[0].name
 }
 
 export default function GoalsTable({ goals, setSelectedGoal, contacts, setOpen }) {
