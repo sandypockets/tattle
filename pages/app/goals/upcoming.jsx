@@ -18,8 +18,9 @@ export default function Upcoming() {
 
   async function getUserGoals() {
     const user = await supabase.auth.user()
-    const id = user['id']
-    getGoals(id, setGoals)
+    if (user?.id) {
+      getGoals(user.id, setGoals)
+    }
   }
 
   useEffect(() => {
@@ -28,12 +29,12 @@ export default function Upcoming() {
 
   useEffect(() => {
     goals && sortTwice(goals, 'due_date', 'id', true)
-    goals && setUpcomingGoals(goals.filter(item => item['is_completed'] === false))
+    goals && setUpcomingGoals(goals?.filter(item => item['is_completed'] === false))
   }, [goals])
 
   useEffect(() => {
     if (upcomingGoals) {
-      setNumOfCols(upcomingGoals.length <= 1 ? upcomingGoals + 1 : 2)
+      setNumOfCols(upcomingGoals?.length <= 1 ? upcomingGoals + 1 : 2)
       setLoading(false)
     }
   }, [upcomingGoals])

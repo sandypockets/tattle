@@ -19,22 +19,22 @@ import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
 export default function Index() {
   const [loading, setLoading] = useState(true)
   const [displayFormType, setDisplayFormType] = useState('empty')
-  const [goals, setGoals] = useState()
+  const [goals, setGoals] = useState([])
   const [open, setOpen] = useState(false)
-  const [selectedGoal, setSelectedGoal] = useState()
+  const [selectedGoal, setSelectedGoal] = useState({})
   const [numOfCols, setNumOfCols] = useState(4)
-  const [contacts, setContacts] = useState()
+  const [contacts, setContacts] = useState({})
   const user = supabase.auth.user()
 
   async function getUserGoals() {
-    if (user && user['id']) {
+    if (user?.id) {
       const id = user['id']
       getGoals(id, setGoals)
     }
   }
 
   async function getUserContacts() {
-    if (user && user['id']) {
+    if (user?.id) {
       const id = user['id']
       getContacts(id, setContacts)
     }
@@ -50,7 +50,7 @@ export default function Index() {
 
   useEffect(() => {
     if (goals) {
-      setNumOfCols(goals.length <= 4 ? goals.length : 4)
+      setNumOfCols(goals?.length <= 4 ? goals?.length : 4)
       user && setLoading(false)
       goals && sortOnce(goals, 'id', false)
       // goals.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
@@ -65,11 +65,11 @@ export default function Index() {
           ) : (
             <>
               <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
-              {!contacts || contacts.length === 0 && <HasNoContactsBanner />}
-              {goals.length < 1 && <IntroCard/>}
-              {displayFormType === 'empty' && goals.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
+              {!contacts || contacts?.length === 0 && <HasNoContactsBanner />}
+              {goals?.length < 1 && <IntroCard/>}
+              {displayFormType === 'empty' && goals?.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
               {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
-              {goals && goals.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
+              {goals && goals?.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
               <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
             </>
           )}

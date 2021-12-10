@@ -10,10 +10,11 @@ import Stats from "../../components/App/Dashboard/Stats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
 import getGoals from "../../helpers/goals/getGoals";
 import getTattleStats from "../../helpers/subscription/getTattleStats";
+import {sortTwice} from "../../helpers/sort";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
-  const [goals, setGoals] = useState()
+  const [goals, setGoals] = useState([])
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(3)
   const [userStats, setUserStats] = useState({
     'statOne': 0,
@@ -26,13 +27,13 @@ export default function Index() {
     'statFourText': 'Goals completed',
   })
   const [numOfCols, setNumOfCols] = useState(3)
-  const [incompleteGoals, setIncompleteGoals] = useState()
+  const [incompleteGoals, setIncompleteGoals] = useState([])
   const router = useRouter()
 
   useEffect(() => {
     async function getGoalsAndStats() {
       const user = await supabase.auth.user()
-      if (user) {
+      if (user?.id) {
         const id = user['id']
         getGoals(id, setGoals)
         getTattleStats(id, setUserStats)
@@ -43,7 +44,7 @@ export default function Index() {
 
   useEffect(() => {
     if (goals) {
-      setUserStats(prev => ({ ...prev, statOne: goals.length }))
+      setUserStats(prev => ({ ...prev, statOne: goals?.length }))
       let goalsCompletedOnTime = 0
       for (const goal of goals) {
         goal['is_completed_on_time'] === true && goalsCompletedOnTime++
@@ -54,7 +55,7 @@ export default function Index() {
 
   useEffect(() => {
     if (goals) {
-      setUserStats(prev => ({ ...prev, statOne: goals.length }))
+      setUserStats(prev => ({ ...prev, statOne: goals?.length }))
       let goalsCompleted = 0
       for (const goal of goals) {
         goal['is_completed'] === true && goalsCompleted++
@@ -65,24 +66,25 @@ export default function Index() {
 
   useEffect(() => {
     if (goals) {
-      const outstandingGoals = goals.filter(item => item['is_completed'] === false)
+      const outstandingGoals = goals?.filter(item => item['is_completed'] === false)
       setNumOfCols(outstandingGoals.length <= 2 ? outstandingGoals.length + 1 : 3)
       // Sort goals by due_date, then by id
-      outstandingGoals.sort(
-        function(a, b) {
-          if (a['due_date'] > b['due_date']) {
-            return -1
-          } else if (a['due_date'] < b['due_date']) {
-            return 1
-          }
-          if (a['id'] > b['id']) {
-            return -1
-          } else if (a['id'] < b['id']) {
-            return 1
-          }
-        }
-      ).reverse()
-      setIncompleteGoals(outstandingGoals)
+      // outstandingGoals.sort(
+      //   function(a, b) {
+      //     if (a['due_date'] > b['due_date']) {
+      //       return -1
+      //     } else if (a['due_date'] < b['due_date']) {
+      //       return 1
+      //     }
+      //     if (a['id'] > b['id']) {
+      //       return -1
+      //     } else if (a['id'] < b['id']) {
+      //       return 1
+      //     }
+      //   }
+      // ).reverse()
+      // setIncompleteGoals(outstandingGoals)
+      setIncompleteGoals(sortTwice(outstandingGoals, 'due_date', 'id', true))
       userStats && setLoading(false)
     }
   }, [userStats, goals])
@@ -100,7 +102,7 @@ export default function Index() {
         {loading ? <div className="h-full w-full" /> : (
           <StateWrapper>
             <Stats statProps={userStats} />
-            {goals && goals.length > 0 ? (
+            {goals?.length > 0 ? (
               <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
             ) : (
               <>

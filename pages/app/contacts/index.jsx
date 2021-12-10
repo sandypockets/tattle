@@ -12,12 +12,12 @@ import getContacts from "../../../helpers/contacts/getContacts";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 
 export default function Index() {
-  const [contacts, setContacts] = useState()
+  const [contacts, setContacts] = useState([])
   const [displayFormType, setDisplayFormType] = useState('empty')
   const [loading, setLoading] = useState(true)
   const [open, setOpen] = useState(false)
-  const [selectedContact, setSelectedContact] = useState()
-  const [user, setUser] = useState()
+  const [selectedContact, setSelectedContact] = useState({})
+  const [user, setUser] = useState({})
 
   async function getUserContacts() {
     const user = await supabase.auth.user()
@@ -42,10 +42,10 @@ export default function Index() {
         {loading ? <div className="h-full w-full" /> : (
           <StateWrapper>
             <Heading setDisplayFormType={setDisplayFormType} />
-            {contacts.length < 1 && <IntroCard/>}
-            {displayFormType === 'empty' && contacts.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
+            {contacts?.length < 1 && <IntroCard/>}
+            {displayFormType === 'empty' && contacts?.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
             {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
-            {contacts.length > 0 && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }
+            {contacts?.length > 0 && <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} /> }
             <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
           </StateWrapper>
         )}

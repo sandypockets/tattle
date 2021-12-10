@@ -11,7 +11,7 @@ export default function StateWrapper({ children }) {
   const user = supabase.auth.user()
 
   useEffect(() => {
-    if (user && user.id) {
+    if (user?.id) {
       return getUserPlan(user.id, setHasSubscription)
     }
     supabase.auth.onAuthStateChange((_event, session) => {

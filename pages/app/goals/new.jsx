@@ -14,18 +14,20 @@ import getContacts from "../../../helpers/contacts/getContacts";
 
 export default function New() {
   const [displayFormType, setDisplayFormType] = useState('empty')
-  const [goals, setGoals] = useState()
-  const [user, setUser] = useState()
+  const [goals, setGoals] = useState([])
+  const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
-  const [contacts, setContacts] = useState()
-  const [contactFormState, setContactFormState] = useState()
+  const [contacts, setContacts] = useState([])
+  const [contactFormState, setContactFormState] = useState('')
   const router = useRouter()
 
   async function getUserGoals() {
-    const user = await supabase.auth.user()
-    setUser(user)
-    const id = user['id']
-    getGoals(id, setGoals)
+    const authUser = await supabase.auth.user()
+    if (authUser?.id) {
+      const id = authUser['id']
+      getGoals(id, setGoals)
+      setUser(authUser)
+    }
   }
 
   useEffect(() => {
@@ -51,9 +53,9 @@ export default function New() {
         {loading ? <div className="h-full w-full" /> : (
           <StateWrapper>
             <CardTitle>Create a goal</CardTitle>
-            {!contacts && !goals || contacts && contacts.length >= 1 && goals && goals.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
-            {!goals || goals && goals.length > 0 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
-            {!contacts || contacts && contacts.length === 0 && (
+            {!contacts && !goals || contacts?.length >= 1 && goals?.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
+            {!goals || goals?.length > 0 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
+            {!contacts || contacts?.length === 0 && (
               <>
                 <Banner>
                   <p className="mb-6">You need to add a contact before you can create a goal.</p>
