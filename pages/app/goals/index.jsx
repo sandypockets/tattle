@@ -67,7 +67,7 @@ export default function Index() {
               {goals?.length < 1 && <IntroCard/>}
               {displayFormType === 'empty' && goals?.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
               {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
-              {goals && goals?.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />}
+              {goals && goals?.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}
               <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
             </>
           )}
