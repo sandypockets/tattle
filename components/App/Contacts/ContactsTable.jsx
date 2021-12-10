@@ -34,7 +34,7 @@ export default function ContactsTable({ contacts, setOpen, selectedContact, setS
   ).reverse()
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col my-6">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
           <div className="shadow-md overflow-hidden ring-1 ring-black ring-opacity-5 sm:rounded-lg">
@@ -68,13 +68,13 @@ export default function ContactsTable({ contacts, setOpen, selectedContact, setS
               </tr>
               </thead>
               <tbody>
-              {contacts && contacts.map((contact) => (
-                <tr key={contact.id} className='bg-white'>
+              {contacts && contacts.map((contact, index) => (
+                <tr key={contact.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{contact.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{contact.phone}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(contact['created_at']).toLocaleDateString('en-CA')}</td>
-                  <td className="pl-2 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <div className="max-w-min mx-4">
+                  <td className="py-4 whitespace-nowrap text-right text-sm font-medium max-w-6xs">
+                    <div className="max-w-min">
                       <Button onClickHandler={() => {
                         setSelectedContact(contact)
                         setAssignSlideoverOpen(true)
@@ -83,7 +83,7 @@ export default function ContactsTable({ contacts, setOpen, selectedContact, setS
                       </Button>
                     </div>
                   </td>
-                  <td className="pr-2 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <td className="py-4 whitespace-nowrap text-right text-sm font-medium">
                     <div className="max-w-min">
                       <Button onClickHandler={() => {
                         setSelectedContact(contact)
