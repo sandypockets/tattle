@@ -40,20 +40,6 @@ export default function Completed() {
 
   useEffect(() => {
     completedGoals && sortTwice(completedGoals, 'due_date', 'id', true)
-    // completedGoals && completedGoals.sort(
-    //   function(a, b) {
-    //     if (a['due_date'] > b['due_date']) {
-    //       return -1
-    //     } else if (a['due_date'] < b['due_date']) {
-    //       return 1
-    //     }
-    //     if (a['id'] > b['id']) {
-    //       return -1
-    //     } else if (a['id'] < b['id']) {
-    //       return 1
-    //     }
-    //   }
-    // ).reverse()
   }, [completedGoals])
 
 if (completedGoals?.length < 1) {
@@ -68,7 +54,7 @@ if (completedGoals?.length < 1) {
   } else if (numOfCols) {
     return (
       <AppLayout>
-        {loading ? <div className="h-full w-full" /> : (
+        {loading ? <AppLoadingState /> : (
           <StateWrapper>
             <CardTitle>Completed goals</CardTitle>
             <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
