@@ -31,6 +31,7 @@ function recordStripeCustomerId(userResponse, stripeCustomerId) {
 }
 
 function createStripeCustomer(userEmail, userResponse){
+  console.log("Signup.js!")
   axios
     .post('/api/v1/create-customer', {
       "email": userEmail,
@@ -63,7 +64,7 @@ export default async function handleSignUp(userEmail, userPassword, router) {
   } catch (error) {
     console.error(error['error_description'] || error.message)
   } finally {
-    if (supabase.auth.session()) {
+    if (userResponse) {
       createStripeCustomer(userEmail, userResponse)
       router.push('/app')
     }

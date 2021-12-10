@@ -4,6 +4,9 @@ import { Elements } from "@stripe/react-stripe-js";
 import { supabase } from "../../../lib/supabaseClient";
 import CheckoutForm from "./CheckoutForm";
 import getStripeCustomerId from "../../../helpers/checkout/getStripeCustomerId";
+import AppLoadingState from "../Utils/AppLoadingState";
+import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
+import LoadingWheel from "../../Global/Loading/LoadingWheel";
 const stripePublishableKey = process.env.NEXT_STRIPE_PUBLISHABLE_KEY
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -14,6 +17,7 @@ const stripePromise = loadStripe("pk_test_51IkyECLSQuRsBVHwF7qm2tCexmpVUdG2fMphL
 export default function Checkout({ session }) {
   const [clientSecret, setClientSecret] = useState("");
   const [stripeCustomerId, setStripeCustomerId] = useState('')
+  const [loading, setLoading] = useState(true)
   const user = supabase.auth.user()
 
   useEffect(() => {
@@ -21,13 +25,13 @@ export default function Checkout({ session }) {
   }, [])
 
   useEffect(() => {
-    if (session && stripeCustomerId) {
+    if (user && stripeCustomerId) {
       // Create PaymentIntent as soon as the page loads
       fetch("/api/v1/create-subscription", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-          user: session.user,
+          user: user.id,
           stripeCustomerId: stripeCustomerId,
           items: [{price: 'price_1K252ULSQuRsBVHwBmVYETzD'}]
         }),
@@ -40,6 +44,12 @@ export default function Checkout({ session }) {
     }
   }, [stripeCustomerId]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 3000)
+  }, [clientSecret])
+
   const appearance = {
     theme: 'stripe',
   };
@@ -47,14 +57,20 @@ export default function Checkout({ session }) {
     clientSecret,
     appearance,
   };
-
   return (
     <div className="App">
-      {clientSecret && (
-        <Elements options={options} stripe={stripePromise}>
-          <CheckoutForm options={options} stripeCustomerId={stripeCustomerId} />
-        </Elements>
+      {loading && (
+        <div className="flex justify-center">
+          <LoadingWheel />
+        </div>
       )}
+      <div className={loading && "hidden"}>
+        {clientSecret && (
+          <Elements options={options} stripe={stripePromise}>
+            <CheckoutForm options={options} stripeCustomerId={stripeCustomerId}/>
+          </Elements>
+        )}
+      </div>
     </div>
   );
 }
