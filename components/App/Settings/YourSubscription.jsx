@@ -40,7 +40,7 @@ export default function YourSubscription({ subscriptionData }) {
         </div>
         <div className="py-8 px-6 text-center bg-gray-50 lg:flex-shrink-0 lg:flex lg:flex-col lg:justify-center lg:p-12">
           <div className="mt-4 flex items-center justify-center text-5xl font-extrabold text-gray-900">
-            <span>${subscriptionData.invoice?.total / 100} USD</span>
+            <span>${subscriptionData?.invoice?.total / 100} USD</span>
             <span className="ml-3 text-xl font-medium text-gray-500"> / month</span>
           </div>
         </div>
