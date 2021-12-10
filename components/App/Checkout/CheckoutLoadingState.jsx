@@ -20,11 +20,14 @@ export default function CheckoutLoadingState() {
               <div className="h-8 bg-gray-200 rounded col-span-2"/>
               <div className="h-8 bg-gray-200 rounded col-span-2"/>
             </div>
-            <div className="pt-2 grid grid-cols-2 gap-3">
+            <div className="pt-2 grid grid-cols-4 gap-3">
+              <div className="h-2 bg-gray-200 rounded col-span-4"/>
               <div className="h-2 bg-gray-200 rounded col-span-2"/>
-              <div className="h-2 bg-gray-200 rounded col-span-1"/>
+              <div className="h-2 bg-gray-200 rounded col-span-1" />
+              <div className="h-2 bg-gray-200 rounded col-span-1" />
+              <div className="h-2 bg-gray-200 rounded col-span-1" />
               <div className="col-span-1" />
-              <div className="h-8 bg-gray-200 rounded col-span-1"/>
+              <div className="h-8 bg-gray-200 rounded col-span-4"/>
             </div>
           </div>
         </div>
