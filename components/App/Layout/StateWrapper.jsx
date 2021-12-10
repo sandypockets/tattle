@@ -1,22 +1,17 @@
 import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabaseClient";
 import CardTitle from "../../Global/CardTitle";
 import Checkout from "../Checkout/Checkout";
 import getUserPlan from "../../../helpers/subscription/getUserPlan";
-import SignInPage from "../../../pages/app/signin";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
-  const [hasSubscription, setHasSubscription] = useState(false)
+  const [hasSubscription, setHasSubscription] = useState()
   const [loading, setLoading] = useState(true)
-  const router = useRouter()
   const user = supabase.auth.user()
 
   useEffect(() => {
-    if (!supabase.auth.session()) {
-      return router.push('/app/signin')
-    } else if (user && user.id) {
+    if (user && user.id) {
       return getUserPlan(user.id, setHasSubscription)
     }
     supabase.auth.onAuthStateChange((_event, session) => {
@@ -25,9 +20,9 @@ export default function StateWrapper({ children }) {
   }, [])
 
   useEffect(() => {
-    setTimeout(() => {
+    // setTimeout(() => {
       setLoading(false)
-    }, 300)
+    // }, 50)
   }, [hasSubscription])
 
   if (loading) {
@@ -36,7 +31,7 @@ export default function StateWrapper({ children }) {
     )
   }
 
-  if (!hasSubscription && !loading) {
+  if (hasSubscription === false && !loading) {
     return (
       <>
         <CardTitle>Checkout</CardTitle>

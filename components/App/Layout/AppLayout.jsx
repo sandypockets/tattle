@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import {Fragment, useEffect, useState} from 'react'
 import { supabase } from "../../../lib/supabaseClient";
 import { useRouter } from "next/router";
 import Link from 'next/link'
@@ -16,6 +16,9 @@ import { SearchIcon } from '@heroicons/react/solid'
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
+import AppLoadingState from "../Utils/AppLoadingState";
+import LoadingWheel from "../../Global/Loading/LoadingWheel";
+import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -43,13 +46,25 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [loading, setLoading] = useState(true)
   const router = useRouter()
   const currentPage = router.pathname
-  
   const user = supabase.auth.user()
-  if (!user) {
-    router.push('/signin')
-    return (<div></div>)
+
+  useEffect(() => {
+    if (!user) {
+      router.push('/signin')
+    } else {
+      setLoading(false)
+    }
+  }, [user])
+
+  if (loading) {
+    return (
+      <LoadingWheelWrapper>
+      <LoadingWheel />
+    </LoadingWheelWrapper>
+    )
   } else {
     return (
       <>
