@@ -1,7 +1,28 @@
 import { useRouter } from "next/router";
+import { CheckIcon, XIcon } from "@heroicons/react/solid";
 import Button from '../../Global/Button'
 
-export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
+function Checkmark() {
+  return (
+    <div className="h-6 w-6 text-yellow-400">
+      <CheckIcon />
+    </div>
+  )
+}
+
+function XMark() {
+  return (
+    <div className="h-6 w-6 text-red-400">
+      <XIcon />
+    </div>
+  )
+}
+
+function getContactName(contacts, goalId) {
+  return contacts.filter(contact => contact.id === goalId)[0].name
+}
+
+export default function GoalsTable({ goals, setSelectedGoal, contacts, setOpen }) {
   const router = useRouter()
 
   return (
@@ -16,13 +37,13 @@ export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Title
+                  Status
                 </th>
                 <th
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Is complete when
+                  Title
                 </th>
                 <th
                   scope="col"
@@ -40,7 +61,7 @@ export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
                   scope="col"
                   className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
-                  Tattle contact
+                  Contact
                 </th>
                 <th scope="col" className="relative px-6 py-3">
                   <span className="sr-only">View</span>
@@ -53,11 +74,11 @@ export default function GoalsTable({ goals, setSelectedGoal, setOpen }) {
               <tbody>
               {goals.map((goal, index) => (
                 <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
-                  <td className="w-36 px-4 py-4 whitespace-pre-line text-sm font-medium text-gray-900">{goal.title}</td>
-                  <td className="w-48 px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal.outcome}</td>
-                  <td className="w-24 max-w-xs px-4 py-4 whitespace-nowrap	truncate text-sm text-gray-500">{goal.description}</td>
-                  <td className="px-4 py-4 whitespace-pre-line text-sm text-gray-500">{goal['due_date']}</td>
-                  <td className="w-24 px-8 py-4 whitespace-pre-line text-sm text-gray-500">Tattle contact Id: {goal['contact_id']}</td>
+                  <td className="w-48 max-w-5xs pl-8 py-4 whitespace-pre-line text-sm text-gray-500">{goal['is_completed'] ? <Checkmark /> : <XMark />}</td>
+                  <td className="w-72 max-w-4xs py-4 whitespace-nowrap text-sm font-medium text-gray-900">{goal.title}</td>
+                  <td className="w-24 max-w-2xs px-4 py-4 whitespace-nowrap truncate text-sm text-gray-500">{goal.description}</td>
+                  <td className="pl-5 max-w-6xs py-4 whitespace-nowrap text-sm text-gray-500">{goal['due_date']}</td>
+                  <td className="w-24 max-w-4xs px-6 py-4 whitespace-nowrap text-sm text-gray-500">{getContactName(contacts, goal['contact_id'])}</td>
                   <td className="px-2 py-4 whitespace-pre-line text-right text-sm font-medium">
                     <Button onClickHandler={() => {
                       setSelectedGoal(goal)
