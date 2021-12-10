@@ -22,7 +22,7 @@ export default function Index() {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
-    }, 150)
+    }, 350)
   }, [subscriptionData])
 
   if (loading) {
@@ -35,7 +35,7 @@ export default function Index() {
           <CardTitle>Settings</CardTitle>
           <YourSubscription subscriptionData={subscriptionData} />
           <YourPaymentInfo subscriptionData={subscriptionData} />
-          {/*<YourBillingHistory billingHistory={subscriptionData} />*/}
+          <YourBillingHistory billingHistory={subscriptionData} />
         </StateWrapper>
       </AppLayout>
     )

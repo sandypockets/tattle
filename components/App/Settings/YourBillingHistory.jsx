@@ -3,7 +3,9 @@ import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
 
 export default function YourBillingHistory({ billingHistory }) {
-  console.log("billingHistory", billingHistory)
+  const billingHistoryArr = [billingHistory]
+  console.log("billingHistory", [billingHistory])
+  console.log("billingHistoryArr", billingHistoryArr)
 
   // function sortByDateDescending() {
   //   for (const item in billingHistory['charge']) {
@@ -72,18 +74,18 @@ export default function YourBillingHistory({ billingHistory }) {
                 </tr>
                 </thead>
                 <tbody>
-                {billingHistory && billingHistory.map((bill, index) => {
+                {billingHistoryArr?.length > 0 && billingHistoryArr.map((bill, index) => {
                   console.log("bill: ", bill)
                   return (
-                    <tr key={bill.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
-                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill.id}</td>*/}
-                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tattle monthly</td>*/}
-                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill['created_at']).toLocaleDateString('en-CA')}</td>*/}
-                      {/*<td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill['total'] / 100} USD</td>*/}
+                    <tr key={bill.invoice.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill.invoice.id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tattle monthly</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill.invoice['created_at']).toLocaleDateString('en-CA')}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill.invoice['total'] / 100} USD</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="max-w-min">
                           <Button>
-                            <a target="_blank" href={bill['stripe_receipt_url']}>
+                            <a target="_blank" href={bill.invoice.hosted_invoice_url}>
                               View details
                             </a>
                           </Button>
