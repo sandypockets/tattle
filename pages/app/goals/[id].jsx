@@ -59,64 +59,64 @@ export default function SingleGoal() {
     }
   }
 
-  if (loading) {
-    return (<AppLoadingState />)
-  } else if (goal) {
+  if (goal) {
     return (
       <AppLayout>
-        <StateWrapper>
-          <section className="flex justify-between">
-            <CardTitle>{goal['title']}</CardTitle>
-            <div className="flex">
-              <div className="w-36 mx-4">
-                <Button>
-                  Update contact
-                </Button>
+        {loading ? <AppLoadingState /> : (
+          <StateWrapper>
+            <section className="flex justify-between">
+              <CardTitle>{goal['title']}</CardTitle>
+              <div className="flex">
+                <div className="w-36 mx-4">
+                  <Button>
+                    Update contact
+                  </Button>
+                </div>
+                <div className="w-36">
+                  <Button onClickHandler={() => {
+                    user && goal && markGoalAsDone(user.id, goal['id'], isCompletedOnTime)
+                  }}>
+                    Mark as done
+                  </Button>
+                </div>
               </div>
-              <div className="w-36">
-                <Button onClickHandler={() => {
-                  user && goal && markGoalAsDone(user.id, goal['id'], isCompletedOnTime)
-                }}>
-                  Mark as done
-                </Button>
-              </div>
+            </section>
+            <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
+              <GridCard>
+                {/*<h3 className="text-sm text-gray-500">Status</h3>*/}
+                {goal['is_completed'] === true && (
+                  <SmallCardTitle>Complete</SmallCardTitle>
+                )}
+                {goal['is_completed'] === false && (
+                  <>
+                    <h3 className="text-sm text-gray-500">{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h3>
+                    <SmallCardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500" : "text-black"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></SmallCardTitle>
+                  </>
+                )}
+              </GridCard>
+              <GridCard>
+                <h3 className="text-sm text-gray-500">Created on</h3>
+                <SmallCardTitle>{new Date(goal['created_at']).toLocaleDateString("en-UK")}</SmallCardTitle>
+              </GridCard>
+              <GridCard>
+                <h3 className="text-sm text-gray-500">Due on</h3>
+                <SmallCardTitle>{new Date(goal['due_date']).toLocaleDateString("en-UK")}</SmallCardTitle>
+              </GridCard>
+              <GridCard>
+                <h3 className="text-sm text-gray-500">Assigned to</h3>
+                <SmallCardTitle>{contact && contact.name}</SmallCardTitle>
+              </GridCard>
             </div>
-          </section>
-          <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
-            <GridCard>
-              {/*<h3 className="text-sm text-gray-500">Status</h3>*/}
-              {goal['is_completed'] === true && (
-                <SmallCardTitle>Complete</SmallCardTitle>
-              )}
-              {goal['is_completed'] === false && (
-                <>
-                  <h3 className="text-sm text-gray-500">{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h3>
-                  <SmallCardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500" : "text-black"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></SmallCardTitle>
-                </>
-              )}
-            </GridCard>
-            <GridCard>
-              <h3 className="text-sm text-gray-500">Created on</h3>
-              <SmallCardTitle>{new Date(goal['created_at']).toLocaleDateString("en-UK")}</SmallCardTitle>
-            </GridCard>
-            <GridCard>
-              <h3 className="text-sm text-gray-500">Due on</h3>
-              <SmallCardTitle>{new Date(goal['due_date']).toLocaleDateString("en-UK")}</SmallCardTitle>
-            </GridCard>
-            <GridCard>
-              <h3 className="text-sm text-gray-500">Assigned to</h3>
-              <SmallCardTitle>{contact && contact.name}</SmallCardTitle>
-            </GridCard>
-          </div>
-          <Card>
-            <SmallCardTitle>Description</SmallCardTitle>
-            <p>{goal['description']}</p>
-          </Card>
-          <Card>
-            <SmallCardTitle>Outcome</SmallCardTitle>
-            <p>{goal['outcome']}</p>
-          </Card>
-        </StateWrapper>
+            <Card>
+              <SmallCardTitle>Description</SmallCardTitle>
+              <p>{goal['description']}</p>
+            </Card>
+            <Card>
+              <SmallCardTitle>Outcome</SmallCardTitle>
+              <p>{goal['outcome']}</p>
+            </Card>
+          </StateWrapper>
+        )}
       </AppLayout>
     )
   }
