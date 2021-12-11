@@ -24,4 +24,4 @@ jobs:
       # Runs a single command using the runners shell
       # run: command will need updated URL once live
       - name: Run a one-line script
-        run: curl --location --request POST 'https://89c3-24-235-207-14.ngrok.io/api/v1/cron'
+        run: curl --location --request POST 'https://kobe.ngrok.io/api/v1/cron'
