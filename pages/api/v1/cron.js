@@ -6,6 +6,19 @@ const toPhoneNumber = process.env.NEXT_TEST_TO_PHONE_NUMBER;
 const fromPhoneNumber = process.env.NEXT_TEST_FROM_PHONE_NUMBER;
 const client = require('twilio')(accountSid, authToken);
 
+async function getCustomMessages(ownerId) {
+  try {
+    const { data, error } = await supabase
+      .from('custom_messages')
+      .select('custom_sms_message, custom_voice_message')
+      .match({ owner_id: ownerId })
+    data && console.log("Custom Messages Data: ", data)
+    return data
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 async function saveTattle(ownerId, goalId, contactId, messageBody) {
   try {
     const { data, error } = await supabase
@@ -22,11 +35,31 @@ async function saveTattle(ownerId, goalId, contactId, messageBody) {
   }
 }
 
-function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId, contactId) {
-  const smsBody = `Hey ${contactName}! ${ownerName} didn't achieve their goal: ${goalTitle}`;
+function parseVariables(customMessageText, contactName, userName, goalTitle) {
+  const varContactName = "{{ contact_name }}"
+  const varUserName = "{{ user_name }}"
+  const varGoalTitle = "{{ goal_title }}"
+  return customMessageText.replace(varContactName, contactName).replace(varUserName, userName).replace(varGoalTitle, goalTitle)
+}
+
+async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId, contactId) {
+  const customMessages = await getCustomMessages(ownerId)
+  let parsedSms;
+  let parsedVoice;
+  if (customMessages?.length > 0) {
+    const customSms = customMessages[0].custom_sms_message
+    const customVoice = customMessages[0].custom_voice_message
+    parsedSms = parseVariables(customSms, contactName, ownerName, goalTitle)
+    parsedVoice = parseVariables(customVoice, contactName, ownerName, goalTitle)
+    console.log("customSms", parsedSms)
+    console.log("customVoice", parsedVoice)
+  } else {
+    parsedSms = `Hey ${contactName}! ${ownerName} didn't achieve their goal: ${goalTitle}`;
+    parsedVoice = `Hey ${contactName}! ${ownerName} didn't achieve their goal: ${goalTitle}`;
+  }
   client.messages
     .create({
-      body: smsBody,
+      body: parsedSms,
       from: fromPhoneNumber,
       to: toPhoneNumber
     })

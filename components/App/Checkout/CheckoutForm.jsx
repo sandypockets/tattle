@@ -74,7 +74,7 @@ export default function CheckoutForm({ stripeCustomerId, options }) {
       <PaymentElement id="payment-element" />
       <button disabled={isLoading || !stripe || !elements} id="submit" className="mt-2 w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 transition duration-600 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
+          {isLoading ? <div className="spinner" id="spinner">Processing...</div> : "Pay now"}
         </span>
       </button>
       <div className="flex justify-between pt-1">

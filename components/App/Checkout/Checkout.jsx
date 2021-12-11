@@ -68,7 +68,7 @@ export default function Checkout({ session }) {
           <CheckoutLoadingState />
         </div>
       )}
-      <div className={loading && "hidden"}>
+      <div className={loading ? "hidden" : ""}>
         {clientSecret && (
           <Elements options={options} stripe={stripePromise}>
             <CheckoutForm options={options} stripeCustomerId={stripeCustomerId}/>

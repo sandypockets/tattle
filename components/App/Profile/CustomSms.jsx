@@ -1,7 +1,7 @@
 import CardTitle from "../../Global/CardTitle";
 import Card from "../../Global/Card";
 
-export default function CustomSms() {
+export default function CustomSms({ smsMessageText, setSmsMessageText }) {
   return (
     <Card>
       <CardTitle>Custom SMS message</CardTitle>
@@ -15,11 +15,12 @@ export default function CustomSms() {
           rows={4}
           name="custom-sms"
           id="custom-sms"
-          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-          defaultValue={''}
+          className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md"
+          value={smsMessageText}
+          onChange={(e) => setSmsMessageText(e.target.value)}
         />
-          <p className="flex justify-end">
-          12 / 140 characters remaining
+          <p className={`${smsMessageText?.length > 140 && "text-red-400"} flex justify-end font-light text-gray-400 mt-1`}>
+            {140 - smsMessageText?.length}/140 characters remaining
           </p>
         </div>
       </div>

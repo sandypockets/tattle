@@ -1,6 +1,22 @@
 import { supabase } from "../../lib/supabaseClient";
 import axios from "axios";
 
+function createCustomMessages(userId) {
+  axios
+    .post('/api/v1/custom-messages', {
+      "type": "create",
+      "id": userId,
+      "customSmsMessage": "Hey {{ contact_name }}! {{ user_name }} didn't achieve their goal: {{ goal_title }}",
+      "customVoiceMessage": "Hey {{ contact_name }}! {{ user_name }} didn't achieve their goal: {{ goal_title }}"
+    })
+    .then(function (response) {
+      console.log("Successfully created custom messages: ", response);
+    })
+    .catch(function (error) {
+      console.log("Create error", error);
+    });
+}
+
 function recordStripeIdStripeTable(userId, stripeCustomerId) {
   axios
     .post('/api/v1/stripe-id', {
@@ -58,7 +74,9 @@ export default async function handleSignUp(userEmail, userPassword, router) {
       userResponse = data.user
     }
     const userSession = await supabase.auth.session()
-    if (!userSession) {
+    if (userSession) {
+      createCustomMessages(userSession?.user.id)
+    } else {
       console.error(error)
     }
   } catch (error) {
