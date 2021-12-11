@@ -1,4 +1,4 @@
-import {Fragment, useEffect, useState} from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { supabase } from "../../../lib/supabaseClient";
 import { useRouter } from "next/router";
 import Link from 'next/link'
@@ -234,7 +234,7 @@ export default function AppLayout({ children }) {
                 <div className="py-6">
                   <div className="px-4 sm:px-6 md:px-0">
                     <section className="p-4">
-                      {loading && <div className="h-full w-full" />}
+                      {loading && <AppLoadingState />}
                       {!loading && children}
                     </section>
                   </div>
