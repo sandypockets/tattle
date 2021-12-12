@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-export function getCustomMessages(id, setSmsMessageText, setVoiceMessageText){
+export function getCustomMessages(id, setSmsMessageText, setVoiceMessageText, setCustomId){
   axios.get('/api/v1/custom-messages', {
     params: { id: id }
   })
@@ -8,22 +8,24 @@ export function getCustomMessages(id, setSmsMessageText, setVoiceMessageText){
       console.log("Get custom messages: ", response.data)
       setSmsMessageText(response.data[0].custom_sms_message)
       setVoiceMessageText(response.data[0].custom_voice_message)
+      setCustomId(response.data[0].id)
     })
     .catch(function (error) {
       console.error("Error!", error)
     })
 }
 
-export function updateCustomMessages(id, smsMessageText, voiceMessageText){
+export function updateCustomMessages(id, userId, smsMessageText, voiceMessageText){
   axios
     .post('/api/v1/custom-messages', {
       "type": "update",
       id,
+      userId,
       smsMessageText,
       voiceMessageText
     })
     .then(function (response) {
-      console.log("Create custom messages", response);
+      console.log("update custom messages", response);
     })
     .catch(function (error) {
       console.log(error);
