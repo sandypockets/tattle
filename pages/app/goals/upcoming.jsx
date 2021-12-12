@@ -49,7 +49,7 @@ export default function Upcoming() {
   } else {
     return (
       <AppLayout>
-        {loading ? <div className="h-full w-full" /> : (
+        {loading ? <AppLoadingState /> : (
           <StateWrapper>
             <CardTitle>Goals due soon</CardTitle>
             <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>

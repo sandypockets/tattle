@@ -13,8 +13,6 @@ import IntroCard from "../../../components/App/Goals/IntroCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import getGoals from "../../../helpers/goals/getGoals";
 import getContacts from "../../../helpers/contacts/getContacts";
-import LoadingWheelWrapper from "../../../components/Global/Loading/LoadingWheelWrapper";
-import LoadingWheel from "../../../components/Global/Loading/LoadingWheel";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -53,7 +51,6 @@ export default function Index() {
       setNumOfCols(goals?.length <= 4 ? goals?.length : 4)
       user && setLoading(false)
       goals && sortOnce(goals, 'id', false)
-      // goals.sort((a,b) => (a.id > b.id) ? 1 : ((b.id > a.id) ? -1 : 0))
     }
   }, [goals])
 

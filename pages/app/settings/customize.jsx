@@ -1,4 +1,7 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../lib/supabaseClient";
+import { DuplicateIcon } from "@heroicons/react/outline";
+import { getCustomMessages, updateCustomMessages } from "../../api/v1/customMessages";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import Card from "../../../components/Global/Card";
 import CardTitle from "../../../components/Global/CardTitle";
@@ -6,9 +9,6 @@ import CustomSms from "../../../components/App/Profile/CustomSms";
 import CustomVoice from "../../../components/App/Profile/CustomVoice";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import Button from "../../../components/Global/Button";
-import {getCustomMessages, updateCustomMessages} from "../../api/v1/customMessages";
-import {supabase} from "../../../lib/supabaseClient";
-import {DuplicateIcon} from "@heroicons/react/outline";
 
 export default function Customize() {
   const [smsMessageText, setSmsMessageText] = useState('')

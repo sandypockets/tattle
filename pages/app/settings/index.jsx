@@ -7,7 +7,6 @@ import YourSubscription from "../../../components/App/Settings/YourSubscription"
 import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import YourBillingHistory from "../../../components/App/Settings/YourBillingHistory";
-import getIdAndSubscription from "../../../helpers/subscription/getSubscriptionByEmail";
 import getSubscriptionByEmail from "../../../helpers/subscription/getSubscriptionByEmail";
 
 export default function Index() {
