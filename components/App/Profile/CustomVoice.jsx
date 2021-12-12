@@ -19,7 +19,7 @@ export default function CustomVoice({ voiceMessageText, setVoiceMessageText }) {
           value={voiceMessageText}
           onChange={(e) => setVoiceMessageText(e.target.value)}
         />
-          <p className={`${voiceMessageText?.length > 300 && 'text-red-400'} flex justify-end`}>
+          <p className={`${voiceMessageText?.length > 140 && "text-red-400"} flex justify-end font-light text-gray-400 mt-1`}>
             {300 - voiceMessageText?.length} / 300 characters remaining
           </p>
         </div>
