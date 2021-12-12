@@ -25,19 +25,19 @@ export default function Index() {
     }, 350)
   }, [subscriptionData])
 
-  if (loading) {
-    return (<AppLoadingState />)
-  } else {
-    console.log("Subscription Data!: ", subscriptionData)
-    return (
-      <AppLayout>
-        <StateWrapper>
-          <CardTitle>Settings</CardTitle>
-          <YourSubscription subscriptionData={subscriptionData} />
-          <YourPaymentInfo subscriptionData={subscriptionData} />
-          <YourBillingHistory billingHistory={subscriptionData} />
-        </StateWrapper>
-      </AppLayout>
-    )
-  }
+  console.log("Subscription Data!: ", subscriptionData)
+  return (
+    <AppLayout>
+      <StateWrapper>
+        {loading ? <AppLoadingState /> : (
+          <>
+            <CardTitle>Settings</CardTitle>
+            <YourSubscription subscriptionData={subscriptionData} />
+            <YourPaymentInfo subscriptionData={subscriptionData} />
+            <YourBillingHistory billingHistory={subscriptionData} />
+          </>
+        )}
+      </StateWrapper>
+    </AppLayout>
+  )
 }
