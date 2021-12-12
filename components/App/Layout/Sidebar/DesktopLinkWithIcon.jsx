@@ -10,7 +10,8 @@ export default function DesktopLinkWithIcon({ item, currentPage }) {
       <a
         key={item.href}
         className={classNames(
-          item.href === currentPage ? 'bg-gray-900 text-yellow-400' : 'text-gray-400 hover:bg-gray-900 hover:text-yellow-400',
+          item.href === currentPage
+            ? 'bg-gray-900 text-yellow-400' : 'text-gray-400 hover:bg-gray-900 hover:text-yellow-400',
           'group rounded-md py-2 px-2 flex items-center text-sm font-medium'
         )}
       >

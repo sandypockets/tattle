@@ -16,6 +16,7 @@ import { SearchIcon } from '@heroicons/react/solid'
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
+import MobileLinkNoIcon from "./Sidebar/MobileLinkNoIcon";
 import AppLoadingState from "../Utils/AppLoadingState";
 import LoadingWheel from "../../Global/Loading/LoadingWheel";
 import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
@@ -86,7 +87,7 @@ export default function AppLayout({ children }) {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <div className="relative max-w-xs w-full bg-white pt-5 pb-4 flex-1 flex flex-col">
+                <div className="relative max-w-xs w-full bg-black pt-5 pb-4 flex-1 flex flex-col">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -107,13 +108,24 @@ export default function AppLayout({ children }) {
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-gray-900 sm:text-3xl">
+                  <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-yellow-400 sm:text-3xl">
                     Tattle
                   </div>
                   <div className="mt-5 flex-1 h-0 overflow-y-auto">
                     <nav className="px-2 space-y-1">
                       {navigation.map((item) => (
+                        <div>
                         <MobileLinkWithIcon key={item.href} item={item} currentPage={currentPage} />
+                          {subNavigation.map((subItem, subItemIndex) => {
+                            if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
+                              return (
+                                <div key={subItemIndex}>
+                                  <MobileLinkNoIcon item={subItem} currentPage={currentPage} />
+                                </div>
+                              )
+                            }
+                          })}
+                        </div>
                       ))}
                     </nav>
                   </div>
