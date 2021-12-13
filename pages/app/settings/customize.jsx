@@ -54,7 +54,8 @@ export default function Customize() {
         <Card>
           <h3 className="text-xl font-extrabold">Variables</h3>
           <p className="mt-3 mb-6">Use these variables to output data dynamically in your SMS or voice messages.</p>
-          <table className="min-w-full divide-y divide-gray-200">
+          <div className="overflow-scroll">
+          <table className="min-w-full divide-y divide-gray-200 overflow-scroll">
             <thead className="bg-gray-50">
               <tr>
                 <th
@@ -72,56 +73,56 @@ export default function Customize() {
 
                 <th
                   scope="col"
-                  className="pl-8 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="pl-8 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider overflow-scroll"
                 >
                   Output
                 </th>
               </tr>
             </thead>
-            <tr>
-              <td className="max-w-7xs pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+            <tr className="overflow-scroll">
+              <td className="max-w-7xs pl-2 sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
                 <div onClick={() => handleCopy("{{ contact_name }}")} className="w-6 h-6 cursor-pointer">
                   {copyText !== "{{ contact_name }}" && <DuplicateIcon/>}
                   {isCopied && copyText === "{{ contact_name }}" && <span>Copied!</span>}
                 </div>
               </td>
-              <td className="max-w-5xs pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
                 <code>{"{{ contact_name }}"}</code>
               </td>
-              <td className="max-w-5xs pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
                 Outputs the name of your contact.
               </td>
             </tr>
             <tr>
-              <td className="max-w-5xs pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-2 sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
                 <div  onClick={() => handleCopy("{{ user_name }}")} className="w-6 h-6 cursor-pointer">
                   {copyText !== "{{ user_name }}" && <DuplicateIcon/>}
                   {isCopied && copyText === "{{ user_name }}" && <span>Copied!</span>}
                 </div>
               </td>
-              <td className="max-w-5xs pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
                 <code>{"{{ user_name }}"}</code>
               </td>
-              <td className="max-w-5xs pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
                 Outputs your name.
               </td>
             </tr>
             <tr>
-              <td className="max-w-5xs pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-2 sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
                 <div onClick={() => handleCopy("{{ goal_title }}")} className="w-6 h-6 cursor-pointer">
                   {copyText !== "{{ goal_title }}" && <DuplicateIcon/>}
                   {isCopied && copyText === "{{ goal_title }}" && <span>Copied!</span>}
                 </div>
               </td>
-              <td className="max-w-5xs pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
                 <code>{"{{ goal_title }}"}</code>
               </td>
-              <td className="max-w-5xs pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
                 Outputs the title of your goal.
               </td>
             </tr>
           </table>
-
+          </div>
         </Card>
         <CustomSms smsMessageText={smsMessageText} setSmsMessageText={setSmsMessageText} />
         <CustomVoice voiceMessageText={voiceMessageText} setVoiceMessageText={setVoiceMessageText} />
