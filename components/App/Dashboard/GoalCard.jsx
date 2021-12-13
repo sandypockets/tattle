@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import GridCard from "../../Global/GridCard";
+import { CheckCircleIcon } from "@heroicons/react/solid";
 
 export default function GoalCard({ goal }) {
   const [isUrgent, setIsUrgent] = useState()
@@ -15,7 +16,6 @@ export default function GoalCard({ goal }) {
     timeLeft <= dateNow && setIsUrgent(true)
   }, [goal])
 
-
   return (
     <div
       className="cursor-pointer"
@@ -26,11 +26,12 @@ export default function GoalCard({ goal }) {
       })
     }}>
     <GridCard>
-      <h2 className="font-extrabold text-gray-900 bg-white text-lg mb-2 truncate">{goal.title}</h2>
+      <h2 className="font-extrabold text-gray-900 text-lg truncate">{goal.title}</h2>
+      <div className="border-b-2 border-gray-150 w-full my-2 mr-2" />
       <p className="text-sm h-10 overflow-hidden truncate mb-2 sm:mb-4">
         {goal.description}
       </p>
-      <p>
+      <small>
         {goal['is_completed'] === false &&
           <>
             <span className="text-gray-400">Due by: </span>
@@ -38,12 +39,15 @@ export default function GoalCard({ goal }) {
           </>
         }
         {goal['is_completed'] === true &&
-          <>
-            <span className="text-gray-400">Completed</span>
-            {goal['is_completed_on_time'] === false && <span className="text-red-400"> late</span>}
-          </>
+          <div className="flex">
+            <div className="text-gray-400 w-4 h-4 mr-1"><CheckCircleIcon /></div>
+            <span className="text-gray-400 pr-1">
+              Completed
+            </span>
+            {goal['is_completed_on_time'] === false ? <span className="text-red-400">late</span> : <span className="text-green-500">on time</span>}
+          </div>
         }
-      </p>
+      </small>
     </GridCard>
     </div>
   )
