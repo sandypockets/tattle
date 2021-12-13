@@ -30,7 +30,7 @@ export default function SearchResults({ searchResults }) {
                     <a>{result.name}</a>
                   </h3>
                 </div>
-                <p className="w-96 truncate px-8">{result.phone}</p>
+                <p className="hidden xs:block md:w-56 lg:w-64 xl:w-96 truncate px-8">{result.phone}</p>
                 <p className="px-12 hidden lg:block">{new Date(result.created_at).toLocaleDateString('en-UK')}</p>
               </div>
             </li>
