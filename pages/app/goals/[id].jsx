@@ -67,11 +67,11 @@ export default function SingleGoal() {
           <StateWrapper>
             <section className="flex flex-col-reverse sm:flex-row justify-between">
               <CardTitle>{goal['title']}</CardTitle>
-              <div className="pb-6 sm:pb-0 flex justify-end">
+              <div className="pb-6 sm:pb-0 flex justify-center sm:justify-end">
                 <GoalHeaderButtons goal={goal} user={user} isCompletedOnTime={isCompletedOnTime} markGoalAsDone={markGoalAsDone} />
               </div>
             </section>
-            <div className="grid grid-cols-2 xl:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 2xs:grid-cols-2 xl:grid-cols-4 gap-1 2xs:gap-3 sm:gap-4 md:gap-6 mb-8 2xs:mb-0">
               <GridCard>
                 {goal['is_completed'] === true && (
                   <SmallCardTitle>Complete</SmallCardTitle>
@@ -96,14 +96,16 @@ export default function SingleGoal() {
                 <SmallCardTitle>{contact && contact.name}</SmallCardTitle>
               </GridCard>
             </div>
-            <Card>
-              <SmallCardTitle>Description</SmallCardTitle>
-              <p>{goal['description']}</p>
-            </Card>
-            <Card>
-              <SmallCardTitle>Outcome</SmallCardTitle>
-              <p>{goal['outcome']}</p>
-            </Card>
+            <div className="mt-8 sm:mt-12 md:mt-14">
+              <Card>
+                <SmallCardTitle>Description</SmallCardTitle>
+                <p>{goal['description']}</p>
+              </Card>
+              <Card>
+                <SmallCardTitle>Outcome</SmallCardTitle>
+                <p>{goal['outcome']}</p>
+              </Card>
+            </div>
           </StateWrapper>
         )}
       </AppLayout>

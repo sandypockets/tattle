@@ -64,11 +64,11 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
       </div>
       <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} />
 
-      <div className="flex justify-between sm:justify-center flex-row-reverse my-6 mx-2">
-        <div className="flex flex-col flex-col-reverse sm:flex-row-reverse">
+      <div className="flex justify-between sm:justify-center flex-row-reverse my-6 mx-4">
+        <div className="flex flex-col flex-col-reverse lg:flex-row-reverse lg:justify-center">
           <div className="flex flex-row">
-            <div className="mx-2">
-              <label className="mt-5 sm:mt-0 mb-1">
+            <div className="mx-2 sm:mx-0 lg:mx-4">
+              <label className="mt-6 sm:mt-4 mb-1">
                 <small>
                   Due date
                 </small>
@@ -76,7 +76,7 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
               <SingleDatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
             </div>
           </div>
-          <p className="self-center w-full sm:max-w-md mb-2 sm:mb-0 mt-2">If you do not mark your goal as complete by this date, we'll tattle on you.</p>
+          <p className="self-center w-full sm:max-w-lg ml-4 xs:ml-2 sm:ml-0 mb-2 sm:mb-0 lg:mx-4 my-2">If you do not mark your goal as complete by this date, we'll tattle on you.</p>
         </div>
       </div>
 
