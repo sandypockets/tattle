@@ -60,7 +60,7 @@ export default function Customize() {
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="max-w-6xs sm:max-w-4xl px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                 >
                   Copy
                 </th>
@@ -80,44 +80,44 @@ export default function Customize() {
               </tr>
             </thead>
             <tr className="overflow-scroll">
-              <td className="max-w-7xs pl-2 sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
-                <div onClick={() => handleCopy("{{ contact_name }}")} className="w-6 h-6 cursor-pointer">
+              <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+                <div onClick={() => handleCopy("{{ contact_name }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
                   {copyText !== "{{ contact_name }}" && <DuplicateIcon/>}
                   {isCopied && copyText === "{{ contact_name }}" && <span>Copied!</span>}
                 </div>
               </td>
               <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
-                <code>{"{{ contact_name }}"}</code>
+                <code className="text-2xs xs:text-xs sm:text-sm">{"{{ contact_name }}"}</code>
               </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
                 Outputs the name of your contact.
               </td>
             </tr>
             <tr>
-              <td className="max-w-5xs pl-2 sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
-                <div  onClick={() => handleCopy("{{ user_name }}")} className="w-6 h-6 cursor-pointer">
+              <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+                <div onClick={() => handleCopy("{{ user_name }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
                   {copyText !== "{{ user_name }}" && <DuplicateIcon/>}
                   {isCopied && copyText === "{{ user_name }}" && <span>Copied!</span>}
                 </div>
               </td>
               <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
-                <code>{"{{ user_name }}"}</code>
+                <code className="text-2xs xs:text-xs sm:text-sm">{"{{ user_name }}"}</code>
               </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
                 Outputs your name.
               </td>
             </tr>
             <tr>
-              <td className="max-w-5xs pl-2 sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
-                <div onClick={() => handleCopy("{{ goal_title }}")} className="w-6 h-6 cursor-pointer">
+              <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+                <div onClick={() => handleCopy("{{ goal_title }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
                   {copyText !== "{{ goal_title }}" && <DuplicateIcon/>}
                   {isCopied && copyText === "{{ goal_title }}" && <span>Copied!</span>}
                 </div>
               </td>
               <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
-                <code>{"{{ goal_title }}"}</code>
+                <code className="text-2xs xs:text-xs sm:text-sm">{"{{ goal_title }}"}</code>
               </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-sm text-gray-500">
+              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
                 Outputs the title of your goal.
               </td>
             </tr>

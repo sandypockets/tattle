@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   purge: {
     enabled: true,
@@ -11,6 +13,10 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    screens: {
+      'xs': '475px',
+      ...defaultTheme.screens,
+    },
     maxWidth: {
       '7xs': '3rem',
       '6xs': '4rem',
@@ -34,6 +40,23 @@ module.exports = {
       'fit': 'fit-content',
       'full': '100%',
       '1/2': '50%'
+    },
+    fontSize: {
+      '4xs': '.50rem',
+      '3xs': '.55rem',
+      '2xs': '.65rem',
+      'xs': '.75rem',
+      'sm': '.875rem',
+      'tiny': '.875rem',
+      'base': '1rem',
+      'lg': '1.125rem',
+      'xl': '1.25rem',
+      '2xl': '1.5rem',
+      '3xl': '1.875rem',
+      '4xl': '2.25rem',
+      '5xl': '3rem',
+      '6xl': '4rem',
+      '7xl': '5rem',
     },
     extend: {
       animation: {

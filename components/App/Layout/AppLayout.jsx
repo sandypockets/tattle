@@ -232,12 +232,10 @@ export default function AppLayout({ children }) {
 
               <main className="flex-1">
                 <div className="py-6">
-                  <div className="px-4 sm:px-6 md:px-0">
-                    <section className="p-4">
-                      {loading && <AppLoadingState />}
-                      {!loading && children}
-                    </section>
-                  </div>
+                  <section className="p-3 xs:p-4 sm:py-2 sm:px-6 md:px-0">
+                    {loading && <AppLoadingState />}
+                    {!loading && children}
+                  </section>
                 </div>
               </main>
             </div>
