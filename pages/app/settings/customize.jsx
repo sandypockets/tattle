@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import { DuplicateIcon } from "@heroicons/react/outline";
-import { getCustomMessages, updateCustomMessages } from "../../api/v1/customMessages";
+import { getCustomMessages, updateCustomMessages } from "../../../helpers/customMessages";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import Card from "../../../components/Global/Card";
 import CardTitle from "../../../components/Global/CardTitle";
@@ -79,48 +79,50 @@ export default function Customize() {
                 </th>
               </tr>
             </thead>
-            <tr className="overflow-scroll">
-              <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
-                <div onClick={() => handleCopy("{{ contact_name }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
-                  {copyText !== "{{ contact_name }}" && <DuplicateIcon/>}
-                  {isCopied && copyText === "{{ contact_name }}" && <span>Copied!</span>}
-                </div>
-              </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
-                <code className="text-2xs xs:text-xs sm:text-sm">{"{{ contact_name }}"}</code>
-              </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
-                Outputs the name of your contact.
-              </td>
-            </tr>
-            <tr>
-              <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
-                <div onClick={() => handleCopy("{{ user_name }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
-                  {copyText !== "{{ user_name }}" && <DuplicateIcon/>}
-                  {isCopied && copyText === "{{ user_name }}" && <span>Copied!</span>}
-                </div>
-              </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
-                <code className="text-2xs xs:text-xs sm:text-sm">{"{{ user_name }}"}</code>
-              </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
-                Outputs your name.
-              </td>
-            </tr>
-            <tr>
-              <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
-                <div onClick={() => handleCopy("{{ goal_title }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
-                  {copyText !== "{{ goal_title }}" && <DuplicateIcon/>}
-                  {isCopied && copyText === "{{ goal_title }}" && <span>Copied!</span>}
-                </div>
-              </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
-                <code className="text-2xs xs:text-xs sm:text-sm">{"{{ goal_title }}"}</code>
-              </td>
-              <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
-                Outputs the title of your goal.
-              </td>
-            </tr>
+            <tbody>
+              <tr className="overflow-scroll">
+                <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+                  <div onClick={() => handleCopy("{{ contact_name }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
+                    {copyText !== "{{ contact_name }}" && <DuplicateIcon/>}
+                    {isCopied && copyText === "{{ contact_name }}" && <span>Copied!</span>}
+                  </div>
+                </td>
+                <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
+                  <code className="text-2xs xs:text-xs sm:text-sm">{"{{ contact_name }}"}</code>
+                </td>
+                <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
+                  Outputs the name of your contact.
+                </td>
+              </tr>
+              <tr>
+                <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+                  <div onClick={() => handleCopy("{{ user_name }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
+                    {copyText !== "{{ user_name }}" && <DuplicateIcon/>}
+                    {isCopied && copyText === "{{ user_name }}" && <span>Copied!</span>}
+                  </div>
+                </td>
+                <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
+                  <code className="text-2xs xs:text-xs sm:text-sm">{"{{ user_name }}"}</code>
+                </td>
+                <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
+                  Outputs your name.
+                </td>
+              </tr>
+              <tr>
+                <td className="max-w-5xs flex justify-center sm:pl-7 py-4 whitespace-pre-line text-sm text-gray-500">
+                  <div onClick={() => handleCopy("{{ goal_title }}")} className="w-4 h-4 xs:w-6 xs:h-6 pt-2 xs:pt-0 cursor-pointer text-sm xs:text-md">
+                    {copyText !== "{{ goal_title }}" && <DuplicateIcon/>}
+                    {isCopied && copyText === "{{ goal_title }}" && <span>Copied!</span>}
+                  </div>
+                </td>
+                <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line font-mono text-sm text-gray-600">
+                  <code className="text-2xs xs:text-xs sm:text-sm">{"{{ goal_title }}"}</code>
+                </td>
+                <td className="max-w-5xs pl-0 sm:pl-8 py-4 whitespace-pre-line text-2xs sm:text-sm text-gray-500">
+                  Outputs the title of your goal.
+                </td>
+              </tr>
+            </tbody>
           </table>
           </div>
         </Card>

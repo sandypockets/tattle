@@ -5,13 +5,12 @@ export function getCustomMessages(id, setSmsMessageText, setVoiceMessageText, se
     params: { id: id }
   })
     .then(function (response) {
-      console.log("Get custom messages: ", response.data)
       setSmsMessageText(response.data[0].custom_sms_message)
       setVoiceMessageText(response.data[0].custom_voice_message)
       setCustomId(response.data[0].id)
     })
     .catch(function (error) {
-      console.error("Error!", error)
+      console.error(error)
     })
 }
 
@@ -23,9 +22,6 @@ export function updateCustomMessages(id, userId, smsMessageText, voiceMessageTex
       userId,
       smsMessageText,
       voiceMessageText
-    })
-    .then(function (response) {
-      console.log("update custom messages", response);
     })
     .catch(function (error) {
       console.log(error);
