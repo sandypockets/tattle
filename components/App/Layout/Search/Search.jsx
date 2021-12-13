@@ -24,7 +24,7 @@ export default function Search() {
     <>
       <SearchInput searchText={searchText} setSearchText={setSearchText} />
       {searchText?.length > 0 && (
-        <div className="fixed top-16 w-full">
+        <div className="fixed mx-auto left-14 sm:left-auto top-16 max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-4xl xl:w-full">
           <SearchResults searchResults={searchResults} />
         </div>
       )}
