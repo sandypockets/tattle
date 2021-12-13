@@ -40,26 +40,28 @@ export default function Email({ setIsSuccess, setSectionName, setShowMessage }) 
 
   return (
     <Card>
-      <div className="flex justify-between">
-        <div>
+      <div className="flex justify-between flex-col sm:flex-row">
+        <div className="mb-2 sm:mb-0">
           <CardTitle>Email</CardTitle>
-          <p>Update your email address.</p>
+          <p className="ml-2">Update your email address.</p>
         </div>
-        <div className="flex mr-16">
-          <div className="w-72">
+        <div className="flex lg:mr-12 flex-col sm:flex-row">
+          <div className="sm:w-48 lg:w-72">
             <TextInput value={email} type={email} label="Email" onChangeHandler={(e) => setEmail(e.target.value)} />
           </div>
-          <div className="max-w-min mt-8">
-            <Button
-              onClickHandler={() => {
-                email && updateEmail(user['id'], email)
-                user && updateAuthEmail(email)
-              }}
-              disabled={loading}
-              type="submit"
-            >
-              Save
-            </Button>
+          <div className="flex justify-end sm:flex-col sm:justify-center md:flex-row md:justify-end mr-2 sm:mr-0">
+            <div className="max-w-min mt-2 md:mt-8">
+              <Button
+                onClickHandler={() => {
+                  email && updateEmail(user['id'], email)
+                  user && updateAuthEmail(email)
+                }}
+                disabled={loading}
+                type="submit"
+              >
+                Save
+              </Button>
+            </div>
           </div>
         </div>
       </div>

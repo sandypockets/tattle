@@ -20,6 +20,7 @@ export default function Profile() {
         </div>
         <form>
           <Email setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
+          <div className="py-2 sm:py-0" />
           <Password setShowMessage={setShowMessage} setIsSuccess={setIsSuccess} setSectionName={setSectionName} />
         </form>
       </StateWrapper>

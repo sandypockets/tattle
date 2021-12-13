@@ -39,21 +39,23 @@ export default function Password({ setShowMessage, setIsSuccess, setSectionName 
 
   return (
     <Card>
-      <div className="flex justify-between">
+      <div className="flex justify-between flex-col xs:flex-row">
         <div>
-          <CardTitle>Password</CardTitle>
-          <p>Update your password. Minimum 8 characters.</p>
+          <CardTitle className="mb-2 sm:mb-0">Password</CardTitle>
+          <p className="ml-2">Update your password. Minimum 8 characters.</p>
         </div>
-        <div className="flex mr-16">
-          <div className="flex">
-            <div className="w-52">
+        <div className="flex justify-end lg:mr-10">
+          <div className="flex flex-col xl:flex-row">
+            <div className="w-full xs:w-64 sm:w-56">
               <TextInput value={password} type={"password"} label="New password" onChangeHandler={(e) => setPassword(e.target.value)} />
             </div>
-            <div className="w-52">
+            <div className="w-full xs:w-64 sm:w-56">
               <TextInput value={confirmPassword} type={"password"} label="Confirm new password" onChangeHandler={(e) => setConfirmPassword(e.target.value)} />
             </div>
-            <div className="max-w-min mt-8">
-              <Button type="submit" disabled={loading} onClickHandler={() => updateAuthPassword(password, confirmPassword)}>{loading ? 'Saving...' : 'Update'}</Button>
+            <div className="flex justify-end mr-2 lg:mr-0">
+              <div className="max-w-min mt-2 xl:mt-8">
+                <Button type="submit" disabled={loading} onClickHandler={() => updateAuthPassword(password, confirmPassword)}>{loading ? 'Saving...' : 'Update'}</Button>
+              </div>
             </div>
           </div>
         </div>
