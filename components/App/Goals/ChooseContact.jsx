@@ -26,7 +26,7 @@ export default function ChooseContact({ selectedContactId, setSelectedContactId 
 
 
   return (
-    <div className="flex mx-2 mt-6 justify-between sm:justify-center flex-row-reverse">
+    <div className="flex mx-4 mt-6 justify-between sm:justify-center flex-row-reverse">
       <div className="flex flex-col flex-col-reverse sm:flex-row-reverse">
         <div className="flex flex-col mx-2 sm:mx-0">
           <label className="mt-3 sm:mt-0"><small>Choose a contact</small></label>
@@ -36,7 +36,7 @@ export default function ChooseContact({ selectedContactId, setSelectedContactId 
             ) )}
           </select>
         </div>
-        <p className="self-center mt-4 w-full sm:max-w-md">Select the person you'd like us to contact if you don't achieve your goal.</p>
+        <p className="self-center mt-4 w-full sm:max-w-lg">Select the person you'd like us to contact if you don't achieve your goal.</p>
       </div>
     </div>
   )
