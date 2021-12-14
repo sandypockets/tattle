@@ -15,14 +15,14 @@ async function getCustomMessages(req, res) {
 }
 
 async function createCustomMessages(req, res) {
-  const { id, smsMessageText, voiceMessageText } = req.body
+  const { id, customSmsMessage, customVoiceMessage } = req.body
   try {
     const { data, error } = await supabase
       .from('custom_messages')
       .insert([{
         owner_id: id,
-        custom_sms_message: smsMessageText,
-        custom_voice_message: voiceMessageText
+        custom_sms_message: customSmsMessage,
+        custom_voice_message: customVoiceMessage
       }])
     data && res.status(200).json(data)
     error && res.status(500).json(error)
