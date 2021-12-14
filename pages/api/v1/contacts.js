@@ -1,7 +1,7 @@
 import { supabase } from "../../../lib/supabaseClient";
 
 async function createContact(req, res) {
-  const { ownerId, name, phone } = req.body
+  const { ownerId, name, phone, countryCode } = req.body
   if (name && phone) {
     try {
       const { data, error } = await supabase
@@ -10,6 +10,7 @@ async function createContact(req, res) {
           "owner_id": ownerId,
           "name": name,
           "phone": phone,
+          "country_code": countryCode
         }])
       if (data) {
         console.log("Create Contact Data: ", data)
