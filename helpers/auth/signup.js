@@ -35,8 +35,8 @@ function recordStripeCustomerId(userResponse, stripeCustomerId) {
   axios
     .post('/api/profiles', {
       "id": userResponse.id,
-      "stripeCustomerId": stripeCustomerId,
-      "email": userResponse.email
+      "stripeCustomerId": stripeCustomerId
+      // "email": userResponse.email
     })
     .then(function (response) {
       recordStripeIdStripeTable(userResponse.id, stripeCustomerId)
@@ -83,7 +83,9 @@ export default async function handleSignUp(userEmail, userPassword, router) {
   } finally {
     if (userResponse) {
       createStripeCustomer(userEmail, userResponse)
-      router.push('/app')
+      setTimeout(() => {
+        router.push('/app')
+      }, 1000)
     }
   }
 }

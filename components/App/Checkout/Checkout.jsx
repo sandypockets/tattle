@@ -21,10 +21,8 @@ export default function Checkout({ session }) {
     user && getStripeCustomerId(user['id'], setStripeCustomerId)
   }, [])
 
-
-
   useEffect(() => {
-    if (user && stripeCustomerId) {
+    if (user && stripeCustomerId?.length > 0) {
       // Create PaymentIntent as soon as the page loads
       fetch("/api/v1/create-subscription", {
         method: "POST",
@@ -44,10 +42,12 @@ export default function Checkout({ session }) {
   }, [stripeCustomerId]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setLoading(false)
-    }, 3500)
-  }, [clientSecret])
+    if (clientSecret) {
+      setTimeout(() => {
+        setLoading(false)
+      }, 2000)
+    }
+  }, [clientSecret, stripeCustomerId])
 
   const appearance = {
     theme: 'stripe',
@@ -74,7 +74,7 @@ export default function Checkout({ session }) {
         </div>
       )}
       <div className={loading ? "hidden" : ""}>
-        {clientSecret && (
+        {clientSecret && stripeCustomerId && (
           <Elements options={options} stripe={stripePromise}>
             <CheckoutForm options={options} stripeCustomerId={stripeCustomerId}/>
           </Elements>
