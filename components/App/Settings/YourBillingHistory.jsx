@@ -4,35 +4,6 @@ import CardTitle from "../../Global/CardTitle";
 
 export default function YourBillingHistory({ billingHistory }) {
   const billingHistoryArr = [billingHistory]
-  console.log("billingHistory", [billingHistory])
-  console.log("billingHistoryArr", billingHistoryArr)
-
-  // function sortByDateDescending() {
-  //   for (const item in billingHistory['charge']) {
-  //     const dateString = billingHistory['charge'][item]['created_at']
-  //     // billingHistory[item]['created_at'] = new Date(dateString).getTime()
-  //     console.log("lkj", billingHistory['charge'][item]['created_at'])
-  //   }
-  //   // return billingHistory['charge'].sort(
-  //   //   function(a, b) {
-  //   //     if (a['created_at'] > b['created_at']) {
-  //   //       return -1
-  //   //     } else if (a['created_at'] < b['created_at']) {
-  //   //       return 1
-  //   //     }
-  //   //     if (a['id'] > b['id']) {
-  //   //       return -1
-  //   //     } else if (a['id'] < b['id']) {
-  //   //       return 1
-  //   //     }
-  //   //   }
-  //   // ).reverse()
-  // }
-  //
-  // // if (billingHistory['charge'] && Array.isArray(billingHistory['charge'])) {
-  // //   return sortByDateDescending()
-  // // }
-
 
   return (
     <Card>
@@ -85,7 +56,7 @@ export default function YourBillingHistory({ billingHistory }) {
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="max-w-min">
                           <Button>
-                            <a target="_blank" href={bill?.invoice.hosted_invoice_url}>
+                            <a target="_blank" href={bill?.invoice?.hosted_invoice_url}>
                               View details
                             </a>
                           </Button>

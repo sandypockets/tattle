@@ -113,6 +113,22 @@ async function markAsPaid(req, res) {
       }
       break;
     case 'subscription':
+      console.log("DEBUG 2!: ", payload)
+      if (payload.canceled_at !== null) {
+        try {
+          const { data, error } = await supabase
+            .from('profiles')
+            .update({ is_subscribed: false })
+            .match({ stripe_customer_id: payload.customer })
+          if (data) {
+            console.log("Update profile successful.", data)
+          }
+          error && console.error(error)
+        } catch (err) {
+          console.error(err)
+        }
+      }
+
       try {
         const { data, error, status } = await supabase
           .from('stripe_subscriptions')
@@ -143,6 +159,7 @@ async function markAsPaid(req, res) {
             trial_start: payload.trial_start
           })
         if (data) {
+          console.log("DEBUG 3!: ", data)
           res.status(200).json(data)
         }
         if (error) {
@@ -208,6 +225,7 @@ async function markAsPaid(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
+    console.log("WEBHOOKS!:  ", req.body)
     return markAsPaid(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()

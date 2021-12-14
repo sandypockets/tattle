@@ -53,7 +53,6 @@ function createStripeCustomer(userEmail, userResponse){
       "email": userEmail,
     })
     .then(function (response) {
-      console.log(response);
       const stripeCustomerId = response.data.id
       recordStripeCustomerId(userResponse, stripeCustomerId)
     })

@@ -1,9 +1,17 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
+import cancelSubscription from "../../../helpers/subscription/cancelSubscription";
+import { supabase } from "../../../lib/supabaseClient";
 
-export default function ModalCancel({ cancelModalOpen, setCancelModalOpen }) {
+export default function ModalCancel({ subscriptionId, cancelModalOpen, setCancelModalOpen }) {
   const cancelButtonRef = useRef(null)
+
+  function handleCancel() {
+    const user = supabase.auth.user()
+    setCancelModalOpen(false)
+    return cancelSubscription(subscriptionId, user?.id)
+  }
 
   return (
     <Transition.Root show={cancelModalOpen} as={Fragment}>
@@ -54,7 +62,7 @@ export default function ModalCancel({ cancelModalOpen, setCancelModalOpen }) {
                 <button
                   type="button"
                   className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-                  onClick={() => setCancelModalOpen(false)}
+                  onClick={() => handleCancel()}
                 >
                   Cancel subscription
                 </button>

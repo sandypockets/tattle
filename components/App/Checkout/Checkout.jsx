@@ -21,6 +21,8 @@ export default function Checkout({ session }) {
     user && getStripeCustomerId(user['id'], setStripeCustomerId)
   }, [])
 
+
+
   useEffect(() => {
     if (user && stripeCustomerId) {
       // Create PaymentIntent as soon as the page loads
@@ -61,6 +63,9 @@ export default function Checkout({ session }) {
     clientSecret,
     appearance,
   };
+
+  console.log("DEBUG 3: ", user, stripeCustomerId, loading)
+
   return (
     <div className="App">
       {loading && (

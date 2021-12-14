@@ -25,6 +25,7 @@ async function getProfile(req, res) {
 
 async function updateProfile(req, res) {
   const { id, email, stripeCustomerId } = req.body
+  console.log("DEBUG 10: ", req.body)
   try {
     const { data, error } = await supabase
       .from('profiles')
@@ -34,6 +35,7 @@ async function updateProfile(req, res) {
       })
       .match({ "id": id })
     if (data) {
+      console.log("DEBUG 11: ", data)
       res.status(200).json(data)
     }
     if (error) {
@@ -49,6 +51,7 @@ async function updateProfile(req, res) {
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
+    console.log("DEBUG 12: ", req.body)
     return updateProfile(req, res)
   } else if (req.method === 'GET') {
     return getProfile(req, res)

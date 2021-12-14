@@ -1,4 +1,6 @@
 import { supabase } from "../../../lib/supabaseClient";
+const stripeSecretKey = process.env.NEXT_STRIPE_SECRET_KEY
+const stripe = require('stripe')(`${stripeSecretKey}`);
 
 async function getSubscription(req, res) {
   const { customerId } = req.query
@@ -55,7 +57,6 @@ async function getSubscriptionByEmail(req, res) {
       .order('id', { ascending: false })
       .limit(1)
     if (data) {
-      console.log("DATA! ", data)
       dataObject = {
         "invoice": data[0]
       }
@@ -89,9 +90,84 @@ async function getSubscriptionByEmail(req, res) {
   }
 }
 
+async function cancelStripeSubscription(req, res) {
+  const { subscriptionId, userId } = req.body
+  const deleted = await stripe.subscriptions.del(
+    `${subscriptionId}`
+  );
+  if (deleted) {
+    res.status(200).json(deleted)
+  }
+}
+
+// async function cancelStripeSubscription(req, res) {
+//   const { subscriptionId, userId } = req.body
+//   let responseData = {
+//     "profilesResponse": [],
+//     "subscriptionsResponse": []
+//   }
+//   const deleted = await stripe.subscriptions.del(
+//     `${subscriptionId}`
+//   );
+//   if (deleted) {
+//     try {
+//       const { data, error } = await supabase
+//         .from('profiles')
+//         .update({ is_subscribed: false })
+//         .match({ id: userId })
+//       if (data) {
+//         responseData = {
+//           "profilesResponse": data,
+//           ...responseData
+//         }
+//       }
+//       error && res.status(500).json(error)
+//     } catch (err) {
+//       console.error(err)
+//     } finally {
+//       try {
+//         const { data, error } = await supabase
+//           .from('stripe_subscriptions')
+//           .insert({
+//             data_type: 'subscription',
+//             billing_cycle_anchor: deleted.billing_cycle_anchor,
+//             cancel_at_period_end: deleted.cancel_at_period_end,
+//             canceled_at: deleted.canceled_at,
+//             collection_method: deleted.collection_method,
+//             current_period_end: deleted.current_period_end,
+//             current_period_start: deleted.current_period_start,
+//             customer_id: deleted.customer,
+//             latest_invoice_id: deleted.latest_invoice,
+//             livemode: deleted.livemode,
+//             plan_price_id: deleted?.plan.id,
+//             status: deleted.status
+//           })
+//         data &&
+//       } catch (err) {
+//
+//       } finally {
+//         res.status(200).json(responseData)
+//       }
+//     }
+//   } else {
+//     console.error("Deleted: false")
+//   }
+// }
+
+
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    return getSubscriptionByEmail(req, res)
+    if (req.body.type === 'getByEmail') {
+      return getSubscriptionByEmail(req, res)
+    }
+    if (req.body.type === 'cancelStripe') {
+      console.log("CancelStripe")
+      return cancelStripeSubscription(req, res)
+    }
+    if (req.body.type === 'cancelTattle') {
+      console.log("CancelTattle")
+      // return cancelStripeSubscription(req, res)
+    }
   } else if (req.method === 'GET') {
     return getSubscription(req, res)
   } else {

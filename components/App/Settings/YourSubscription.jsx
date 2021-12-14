@@ -10,8 +10,6 @@ const includedFeatures = [
 
 export default function YourSubscription({ subscriptionData }) {
   subscriptionData && console.log("subscriptionData: ", subscriptionData)
-  // console.log(subscriptionData.length)
-  // console.log(new Date("2021-12-06T01:17:00.833+00:00").getTime())
     return (
       <div className="my-6 max-w-4xl mx-auto rounded-2xl shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden lg:flex">
         <div className="flex-1 bg-white px-6 py-8 lg:p-12">

@@ -4,10 +4,11 @@ export default function getSubscriptionByEmail(email, setSubscriptionData){
   console.log('customerEmail: ', email)
   axios
     .post('/api/v1/subscriptions', {
+      "type": "getByEmail",
       "customerEmail": email,
     })
     .then(function (response) {
-      console.log(response.data);
+      console.log("getSubscriptionByEmail: ", response.data);
       setSubscriptionData(response.data)
     })
     .catch(function (error) {

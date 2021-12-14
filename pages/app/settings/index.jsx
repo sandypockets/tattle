@@ -27,6 +27,10 @@ export default function Index() {
   }, [subscriptionData])
 
   console.log("Subscription Data!: ", subscriptionData)
+
+  useEffect(() => {
+    console.log("Subscription Data useEffect!: ", subscriptionData)
+  }, [subscriptionData])
   return (
     <AppLayout>
       <StateWrapper>
@@ -36,7 +40,7 @@ export default function Index() {
             <YourSubscription subscriptionData={subscriptionData} />
             <YourPaymentInfo setCancelModalOpen={setCancelModalOpen} subscriptionData={subscriptionData} />
             <YourBillingHistory billingHistory={subscriptionData} />
-            <ModalCancel cancelModalOpen={cancelModalOpen} setCancelModalOpen={setCancelModalOpen} />
+            <ModalCancel subscriptionId={subscriptionData?.invoice?.subscription_id} cancelModalOpen={cancelModalOpen} setCancelModalOpen={setCancelModalOpen} />
           </>
         )}
       </StateWrapper>
