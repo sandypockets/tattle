@@ -64,7 +64,7 @@ export default function Index() {
               <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
               {!contacts || contacts?.length === 0 && <HasNoContactsBanner />}
               {goals?.length < 1 && <IntroCard/>}
-              {displayFormType === 'empty' && goals?.length < 1 && <GoalsEmptyState setState={setDisplayFormType} />}
+              {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 && <GoalsEmptyState setState={setDisplayFormType} />}
               {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
               <div className="hidden lg:block">
                 {goals?.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}

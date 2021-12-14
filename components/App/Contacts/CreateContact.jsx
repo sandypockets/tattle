@@ -5,11 +5,12 @@ import CardTitle from "../../Global/CardTitle";
 import TextInput from "../../Global/TextInput";
 import createContact from "../../../helpers/contacts/createContact";
 
-export default function CreateContact({ user, getUserContacts, setDisplayFormType }) {
+export default function CreateContact({ user, getUserContacts, setDisplayFormType, setLoading }) {
   const [contactName, setContactName] = useState('')
   const [contactPhone, setContactPhone] = useState('')
 
   async function submitAndRefreshData() {
+    setLoading(true)
     await createContact(user.id, contactName, contactPhone)
     setTimeout(() => {
       return getUserContacts()

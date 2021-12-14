@@ -23,7 +23,10 @@ export default function Index() {
   async function getUserContacts() {
     const user = await supabase.auth.user()
     const id = user['id']
-    getContacts(id, setContacts)
+    await getContacts(id, setContacts)
+    setTimeout(() => {
+      setLoading(false)
+    }, 500)
   }
 
   useEffect(() => {
@@ -45,7 +48,7 @@ export default function Index() {
             <Heading setDisplayFormType={setDisplayFormType} />
             {contacts?.length < 1 && <IntroCard/>}
             {displayFormType === 'empty' && contacts?.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
-            {displayFormType === 'create' && <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
+            {displayFormType === 'create' && <CreateContact setLoading={setLoading} user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
             {contacts?.length > 0 && (
               <section className="hidden sm:block">
                 <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
