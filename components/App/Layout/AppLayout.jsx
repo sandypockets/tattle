@@ -114,16 +114,16 @@ export default function AppLayout({ children }) {
                   <div className="mt-5 flex-1 h-0 overflow-y-auto">
                     <nav className="px-2 space-y-1">
                       {navigation.map((item) => (
-                        <div>
-                        <MobileLinkWithIcon key={item.href} item={item} currentPage={currentPage} />
-                          {subNavigation.map((subItem, subItemIndex) => {
-                            if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
-                              return (
-                                <div key={subItemIndex}>
-                                  <MobileLinkNoIcon item={subItem} currentPage={currentPage} />
-                                </div>
-                              )
-                            }
+                        <div key={item.href}>
+                          <MobileLinkWithIcon item={item} currentPage={currentPage} />
+                            {subNavigation.map((subItem, subItemIndex) => {
+                              if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
+                                return (
+                                  <div key={subItemIndex}>
+                                    <MobileLinkNoIcon item={subItem} currentPage={currentPage} />
+                                  </div>
+                                )
+                              }
                           })}
                         </div>
                       ))}
