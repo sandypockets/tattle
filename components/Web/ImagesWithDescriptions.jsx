@@ -34,7 +34,7 @@ export default function ImagesWithDescriptions() {
           <div className="mt-12 w-full lg:w-320">
             <div className="static flex justify-center lg:px-0 lg:m-0 lg:relative">
               <img
-                className="static w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl rounded-xl lg:absolute lg:left-0"
+                className="static w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl rounded-xl lg:absolute lg:left-0 transition ease-in-out delay-150 duration-700 lg:hover:-translate-x-32"
                 src="/goals-screenshot.png"
                 alt="Index page interface"
               />
@@ -44,7 +44,7 @@ export default function ImagesWithDescriptions() {
       </div>
       <div className="mt-24 lg:mt-48">
         <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
-          <div className="px-4 max-w-xl mx-auto lg:py-32 lg:max-w-none lg:mx-0 lg:px-0 lg:mt-12 lg:col-start-2">
+          <div className="z-10 px-4 max-w-xl mx-auto lg:py-32 lg:max-w-none lg:mx-0 lg:px-0 lg:mt-12 lg:col-start-2">
             <div>
               <div>
                 <span className="h-12 w-12 rounded-md flex items-center justify-center bg-yellow-400">
@@ -75,7 +75,7 @@ export default function ImagesWithDescriptions() {
           <div className="lg:block mt-12 sm:mt-16 w-full lg:w-320">
             <div className="lg:px-0 lg:m-0 static flex justify-center lg:block">
               <img
-                className="static w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl rounded-xl lg:absolute md:right-72 lg:right-150 xl:right-200"
+                className="static w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl rounded-xl lg:absolute md:right-72 lg:right-150 xl:right-200 transition ease-in-out delay-150 duration-700 lg:hover:translate-x-10 xl:hover:translate-x-32"
                 src="/goals-screenshot.png"
                 alt="Index page interface"
               />
