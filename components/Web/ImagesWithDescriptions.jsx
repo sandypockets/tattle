@@ -3,9 +3,9 @@ import { InboxIcon, SparklesIcon } from '@heroicons/react/outline'
 export default function ImagesWithDescriptions() {
   return (
     <div className="bg-white pt-16 pb-32 overflow-hidden">
-      <div className="pl-16">
+      <div className="lg:pl-16">
         <div className="lg:mx-auto lg:max-w-none lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
-          <div className="px-4 max-w-xl mx-auto lg:py-16 lg:max-w-4xl lg:mx-0 lg:px-0 lg:pl-10">
+          <div className="px-4 max-w-xl mx-auto lg:py-16 lg:max-w-4xl lg:mx-0 lg:mt-16 lg:px-0 lg:pl-10">
             <div>
               <div>
                 <span className="h-12 w-12 rounded-md flex items-center justify-center bg-yellow-400">
@@ -14,7 +14,8 @@ export default function ImagesWithDescriptions() {
               </div>
               <div className="mt-6">
                 <h2 className="text-3xl font-extrabold tracking-tight text-gray-900">
-                  Low effort. High accountability.
+                  <span>Low effort.{' '}</span>
+                  <span className="block">High accountability.</span>
                 </h2>
                 <p className="mt-4 text-lg text-gray-500">
                   Add a contact, set a goal. If you don't mark the goal as completed before the due date, we'll send a voice or SMS message to your specified contact, and tattle on you.
@@ -30,10 +31,10 @@ export default function ImagesWithDescriptions() {
               </div>
             </div>
           </div>
-          <div className="mt-12 sm:mt-16 lg:mt-0 lg:w-320">
-            <div className="pl-4 lg:px-0 lg:m-0 lg:relative">
+          <div className="mt-12 w-full lg:w-320">
+            <div className="static flex justify-center lg:px-0 lg:m-0 lg:relative">
               <img
-                className="max-w-3xl rounded-xl lg:absolute lg:left-0"
+                className="static w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl rounded-xl lg:absolute lg:left-0"
                 src="/goals-screenshot.png"
                 alt="Index page interface"
               />
@@ -41,16 +42,16 @@ export default function ImagesWithDescriptions() {
           </div>
         </div>
       </div>
-      <div className="mt-56">
+      <div className="mt-24 lg:mt-48">
         <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
-          <div className="px-4 max-w-xl mx-auto lg:py-32 lg:max-w-none lg:mx-0 lg:px-0 lg:col-start-2">
+          <div className="px-4 max-w-xl mx-auto lg:py-32 lg:max-w-none lg:mx-0 lg:px-0 lg:mt-12 lg:col-start-2">
             <div>
               <div>
                 <span className="h-12 w-12 rounded-md flex items-center justify-center bg-yellow-400">
                   <SparklesIcon className="h-6 w-6 text-white" aria-hidden="true" />
                 </span>
               </div>
-              <div className="mt-6">
+              <div className="mt-6 md:mr-12">
                 <h2 className="text-3xl font-extrabold tracking-tight text-gray-900">
                   Eat your own dog food, they say.
                 </h2>
@@ -71,10 +72,10 @@ export default function ImagesWithDescriptions() {
               </div>
             </div>
           </div>
-          <div className="lg:block mt-12 sm:mt-16 lg:mt-12 w-full lg:w-320">
-            <div className="lg:px-0 lg:m-0 static md:flex md:justify-center lg:block">
+          <div className="lg:block mt-12 sm:mt-16 w-full lg:w-320">
+            <div className="lg:px-0 lg:m-0 static flex justify-center lg:block">
               <img
-                className="static max-w-xl md:max-w-2xl lg:max-w-3xl rounded-xl lg:absolute lg:right-200"
+                className="static w-full sm:max-w-2xl md:max-w-3xl lg:max-w-4xl rounded-xl lg:absolute md:right-72 lg:right-150 xl:right-200"
                 src="/goals-screenshot.png"
                 alt="Index page interface"
               />
