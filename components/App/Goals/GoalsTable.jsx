@@ -75,7 +75,7 @@ export default function GoalsTable({ goals, setSelectedGoal, contacts, setOpen }
               {goals.map((goal, index) => (
                 <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
                   <td className="w-48 max-w-5xs pl-8 py-4 whitespace-pre-line text-sm text-gray-500">{goal['is_completed'] ? <Checkmark /> : <XMark />}</td>
-                  <td className="w-72 max-w-4xs py-4 whitespace-nowrap text-sm font-medium text-gray-900">{goal.title}</td>
+                  <td className="w-72 max-w-4xs py-4 whitespace-nowrap truncate text-sm font-medium text-gray-900">{goal.title}</td>
                   <td className="w-24 max-w-2xs px-4 py-4 whitespace-nowrap truncate text-sm text-gray-500">{goal.description}</td>
                   <td className="pl-5 max-w-6xs py-4 whitespace-nowrap text-sm text-gray-500">{goal['due_date']}</td>
                   <td className="w-24 max-w-4xs px-6 py-4 whitespace-nowrap text-sm text-gray-500">{getContactName(contacts, goal['contact_id'])}</td>
