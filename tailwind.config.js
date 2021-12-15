@@ -1,16 +1,15 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
+const colors = require('tailwindcss/colors')
+
 
 module.exports = {
-  purge: {
-    enabled: true,
-    content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
-    safelist: [
-      'grid-cols-1',
-      'grid-cols-2',
-      'grid-cols-3',
-      'grid-cols-4',
-    ]
-  },
+  content: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    'grid-cols-1',
+    'grid-cols-2',
+    'grid-cols-3',
+    'grid-cols-4',
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
@@ -19,6 +18,11 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
+      colors: {
+        green: colors.emerald,
+        yellow: colors.amber,
+        gray: colors.gray,
+      },
       maxWidth: {
         '7xs': '3rem',
         '6xs': '4rem',
@@ -83,9 +87,6 @@ module.exports = {
         }
       }
     },
-  },
-  variants: {
-    extend: {},
   },
   plugins: [
     require('@tailwindcss/forms'),
