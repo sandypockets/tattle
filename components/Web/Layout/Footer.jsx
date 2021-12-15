@@ -11,7 +11,7 @@ const navigation = [
 
 export default function Footer() {
   return (
-    <footer className="bg-white mt-12">
+    <footer className="bg-white pt-12">
       <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
         <nav className="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
           {navigation.map((item) => (
@@ -24,7 +24,7 @@ export default function Footer() {
             </div>
           ))}
         </nav>
-        <p className="mt-8 text-center text-base text-gray-400">&copy; {new Date().getFullYear()} Some Company, Inc. All rights reserved.</p>
+        <p className="mt-8 text-center text-base text-gray-400">&copy; {new Date().getFullYear()} Tattle, All rights reserved.</p>
       </div>
     </footer>
   )

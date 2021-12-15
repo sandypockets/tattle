@@ -40,7 +40,8 @@ module.exports = {
       'min': 'min-content',
       'fit': 'fit-content',
       'full': '100%',
-      '1/2': '50%'
+      '1/2': '50%',
+      ...defaultTheme.maxWidth
     },
     fontSize: {
       '4xs': '.50rem',
@@ -58,6 +59,7 @@ module.exports = {
       '5xl': '3rem',
       '6xl': '4rem',
       '7xl': '5rem',
+      ...defaultTheme.fontSize
     },
     extend: {
       animation: {

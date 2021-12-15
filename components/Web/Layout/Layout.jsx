@@ -13,7 +13,7 @@ export default function Layout({ children }) {
       <header>
         <Navigation currentUrl={currentUrl} />
       </header>
-      <main className="mt-10">
+      <main className="pt-10 bg-white">
         {children}
       </main>
       <Footer />

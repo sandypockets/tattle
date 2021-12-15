@@ -7,7 +7,7 @@ export default function StatsSection({ statProps, showHeadings=true }) {
     statThree, statThreeText
   } = statProps
   return (
-    <div>
+    <div className="bg-white">
       {showHeadings && (
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">

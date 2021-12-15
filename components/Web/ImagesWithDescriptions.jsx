@@ -3,7 +3,7 @@ import { InboxIcon, SparklesIcon } from '@heroicons/react/outline'
 export default function ImagesWithDescriptions() {
   return (
     <div className="relative bg-white pt-16 pb-32 overflow-hidden">
-      <div className="relative">
+      <div>
         <div className="lg:mx-auto lg:max-w-7xl lg:px-8 lg:grid lg:grid-cols-2 lg:grid-flow-col-dense lg:gap-24">
           <div className="px-4 max-w-xl mx-auto sm:px-6 lg:py-16 lg:max-w-none lg:mx-0 lg:px-0">
             <div>
@@ -31,9 +31,9 @@ export default function ImagesWithDescriptions() {
             </div>
           </div>
           <div className="mt-12 sm:mt-16 lg:mt-0">
-            <div className="pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
+            <div className="pl-4 -mr-48 sm:pl-6 md:-mr-16 lg:px-0 lg:m-0 lg:relative">
               <img
-                className="w-full rounded-xl lg:absolute lg:left-0 lg:h-full lg:w-auto lg:max-w-none"
+                className="w-full rounded-xl lg:absolute lg:left-0 lg:max-w-none"
                 src="/goals-screenshot.png"
                 alt="Index page interface"
               />
@@ -72,9 +72,9 @@ export default function ImagesWithDescriptions() {
             </div>
           </div>
           <div className="mt-12 sm:mt-16 lg:mt-0 lg:col-start-1">
-            <div className="pr-4 -ml-48 sm:pr-6 md:-ml-16 lg:px-0 lg:m-0 lg:relative lg:h-full">
+            <div className="pr-4 -ml-48 sm:pr-6 md:-ml-16 lg:px-0 lg:m-0 lg:relative">
               <img
-                className="w-full rounded-xl lg:absolute lg:right-0 lg:h-full lg:w-auto lg:max-w-none"
+                className="w-full rounded-xl lg:absolute lg:left-0 lg:max-w-none"
                 src="/goals-screenshot.png"
                 alt="Index page interface"
               />
