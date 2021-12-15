@@ -13,12 +13,12 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    screens: {
+      '2xs': '330px',
+      'xs': '475px',
+      ...defaultTheme.screens,
+    },
     extend: {
-      screens: {
-        '2xs': '330px',
-        'xs': '475px',
-        ...defaultTheme.screens,
-      },
       maxWidth: {
         '7xs': '3rem',
         '6xs': '4rem',
