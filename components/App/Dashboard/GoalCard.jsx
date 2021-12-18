@@ -15,7 +15,7 @@ export default function GoalCard({ goal }) {
     const unixDueDate = new Date(goal['due_date']).getTime() / 1000
     const timeLeft = unixDueDate - dayInUnixTime
     const dateNowGmt = Number(Date.now().toString().slice(0, -3))
-    const dateNowEst = Number(Date.now().toString().slice(0, -3) - 144000)
+    const dateNowEst = dateNowGmt - 144000
     timeLeft <= dateNowGmt && setIsUrgent(true)
     unixDueDate <= dateNowEst && setIsPastDue(true)
   }, [goal])
