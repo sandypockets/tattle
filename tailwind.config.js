@@ -66,6 +66,12 @@ module.exports = {
         '7xl': '5rem',
         ...defaultTheme.fontSize
       },
+      scale: {
+        '101': '1.01',
+        '102': '1.01',
+        '103': '1.01',
+        '104': '1.01',
+      },
       spacing: {
         '128': '32rem',
         '150': '37.5rem',
