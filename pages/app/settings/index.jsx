@@ -26,15 +26,10 @@ export default function Index() {
     }, 350)
   }, [subscriptionData])
 
-  console.log("Subscription Data!: ", subscriptionData)
-
-  useEffect(() => {
-    console.log("Subscription Data useEffect!: ", subscriptionData)
-  }, [subscriptionData])
   return (
     <AppLayout>
       <StateWrapper>
-        {loading ? <AppLoadingState /> : (
+        {loading || !subscriptionData ? <AppLoadingState /> : (
           <>
             <CardTitle>Settings</CardTitle>
             <YourSubscription subscriptionData={subscriptionData} />
