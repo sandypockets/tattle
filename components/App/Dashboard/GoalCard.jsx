@@ -4,26 +4,30 @@ import GridCard from "../../Global/GridCard";
 import { CheckCircleIcon } from "@heroicons/react/solid";
 
 export default function GoalCard({ goal }) {
-  const [isUrgent, setIsUrgent] = useState()
+  const [isUrgent, setIsUrgent] = useState(Boolean)
+  const [isPastDue, setIsPastDue] = useState(false)
   const router = useRouter()
 
   // set goal as urgent if due in the next 24 hours
+  // set goal as pastDue if date is in past
   useEffect(() => {
     const dayInUnixTime = 86400
     const unixDueDate = new Date(goal['due_date']).getTime() / 1000
     const timeLeft = unixDueDate - dayInUnixTime
-    const dateNow = Date.now().toString().slice(0, -3)
-    timeLeft <= dateNow && setIsUrgent(true)
+    const dateNowGmt = Number(Date.now().toString().slice(0, -3))
+    const dateNowEst = Number(Date.now().toString().slice(0, -3) - 144000)
+    timeLeft <= dateNowGmt && setIsUrgent(true)
+    unixDueDate <= dateNowEst && setIsPastDue(true)
   }, [goal])
 
   return (
     <div
       className="cursor-pointer"
       onClick={() => {
-      router.push({
-        pathname: '/app/goals/[id]',
-        query: { id: goal.id },
-      })
+        router.push({
+          pathname: '/app/goals/[id]',
+          query: { id: goal.id },
+        })
     }}>
     <GridCard>
       <h2 className="font-extrabold text-gray-900 text-lg truncate">{goal.title}</h2>
@@ -49,7 +53,7 @@ export default function GoalCard({ goal }) {
             </div>
           }
         </small>
-        {!goal['is_completed_on_time'] && (
+        {!goal['is_completed'] && isPastDue && (
           <small>
             <span className="text-red-400">Past due</span>
           </small>
