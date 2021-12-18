@@ -8,7 +8,7 @@ export default function UpcomingGoals({ numOfCols, incompleteGoals, numberOfGoal
       <CardTitle>Goals due soon</CardTitle>
       <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
         {incompleteGoals && incompleteGoals.map((goal, index) => {
-          if (index < numberOfGoalsToShow) {
+          if (index <= numberOfGoalsToShow) {
             return (
               <article key={index}>
                 <GoalCard goal={goal} />
