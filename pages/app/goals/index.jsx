@@ -13,7 +13,6 @@ import IntroCard from "../../../components/App/Goals/IntroCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import getGoals from "../../../helpers/goals/getGoals";
 import getContacts from "../../../helpers/contacts/getContacts";
-import GridCard from "../../../components/Global/GridCard";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
 
 export default function Index() {
@@ -69,7 +68,6 @@ export default function Index() {
               <div className="hidden lg:block">
                 {goals?.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}
               </div>
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 lg:hidden">
                 {goals?.map((goal, index) => (
                   <div key={index}>
@@ -77,7 +75,6 @@ export default function Index() {
                   </div>
                 ))}
               </div>
-
               <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
             </>
           )}
