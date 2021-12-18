@@ -22,7 +22,7 @@ export default function GoalCard({ goal }) {
 
   return (
     <div
-      className="cursor-pointer"
+      className="cursor-pointer transition ease-in-out duration-300 delay-75 hover:scale-101"
       onClick={() => {
         router.push({
           pathname: '/app/goals/[id]',
