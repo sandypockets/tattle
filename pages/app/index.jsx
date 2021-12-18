@@ -87,7 +87,10 @@ export default function Index() {
           <StateWrapper>
             <Stats statProps={userStats} />
             {goals?.length > 0 ? (
-              <UpcomingGoals incompleteGoals={incompleteGoals} numOfCols={numOfCols} numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow} />
+              <UpcomingGoals
+                incompleteGoals={incompleteGoals} numOfCols={numOfCols}
+                numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow}
+              />
             ) : (
               <>
               <ContactsEmptyState setState={newContactRedirect} />
