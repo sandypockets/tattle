@@ -5,15 +5,15 @@ import AppLayout from "../../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import Card from "../../../components/Global/Card";
 import CardTitle from "../../../components/Global/CardTitle";
+import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
+import GoalHeaderButtons from "../../../components/App/Goals/GoalHeaderButtons";
 import GridCard from "../../../components/Global/GridCard";
-import getGoal from "../../../helpers/goals/getGoal";
-import getContact from "../../../helpers/contacts/getContact";
-import markAsDone from "../../../helpers/goals/markAsDone";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import SmallCardTitle from "../../../components/Global/SmallCardTitle";
-import GoalHeaderButtons from "../../../components/App/Goals/GoalHeaderButtons";
-import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
-import getGoals from "../../../helpers/goals/getGoals";
+import { getContact } from "../../../helpers/contacts";
+import { getGoal } from "../../../helpers/goals";
+import { getGoals } from "../../../helpers/goals";
+import { markAsDone } from "../../../helpers/goals";
 
 export default function SingleGoal() {
   const [contact, setContact] = useState(Object)

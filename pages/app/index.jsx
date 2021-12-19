@@ -8,9 +8,9 @@ import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import StateWrapper from "../../components/App/Layout/StateWrapper";
 import Stats from "../../components/App/Dashboard/Stats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
-import getGoals from "../../helpers/goals/getGoals";
 import getTattleStats from "../../helpers/subscription/getTattleStats";
-import {sortTwice} from "../../helpers/sort";
+import { getGoals } from "../../helpers/goals";
+import { sortTwice } from "../../helpers/sort";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)

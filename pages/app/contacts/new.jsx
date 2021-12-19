@@ -4,7 +4,7 @@ import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import CreateContact from "../../../components/App/Contacts/CreateContact";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
-import getContacts from "../../../helpers/contacts/getContacts";
+import { getContacts } from "../../../helpers/contacts";
 
 export default function NewContact() {
   const [contacts, setContacts] = useState()

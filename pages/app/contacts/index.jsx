@@ -10,7 +10,7 @@ import EditContactSlideover from "../../../components/App/Contacts/EditContactSl
 import Heading from "../../../components/App/Contacts/Heading";
 import IntroCard from "../../../components/App/Contacts/IntroCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
-import getContacts from "../../../helpers/contacts/getContacts";
+import { getContacts } from "../../../helpers/contacts";
 
 export default function Index() {
   const [contacts, setContacts] = useState([])

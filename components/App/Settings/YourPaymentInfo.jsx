@@ -3,8 +3,6 @@ import Card from "../../Global/Card";
 import Button from "../../Global/Button";
 
 export default function YourPaymentInfo({ subscriptionData, setCancelModalOpen }) {
-  console.log("YourPaymentInfo: ", subscriptionData)
-  console.log("YourPaymentInfo: ", subscriptionData?.invoice?.subscription_id)
   return (
     <Card>
       <div className="flex flex-col">

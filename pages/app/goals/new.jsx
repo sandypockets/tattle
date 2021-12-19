@@ -9,8 +9,8 @@ import ContactsEmptyState from "../../../components/App/Contacts/ContactsEmptySt
 import CreateGoal from "../../../components/App/Goals/CreateGoal";
 import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
-import getGoals from "../../../helpers/goals/getGoals";
-import getContacts from "../../../helpers/contacts/getContacts";
+import { getGoals } from "../../../helpers/goals";
+import { getContacts } from "../../../helpers/contacts";
 
 export default function New() {
   const [displayFormType, setDisplayFormType] = useState('empty')

@@ -6,9 +6,9 @@ import Card from "../../Global/Card";
 import ChooseContact from "./ChooseContact";
 import SingleDatePicker from "../Utils/DatePicker";
 import TextInput from "../../Global/TextInput";
-import createGoal from "../../../helpers/goals/createGoal";
 import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
 import LoadingWheel from "../../Global/Loading/LoadingWheel";
+import { createGoal } from "../../../helpers/goals";
 
 export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
   const [goalTitle, setGoalTitle] = useState('')

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Button from "../../Global/Button";
 import Slideover from "../Layout/Slideover";
 import TextInput from "../../Global/TextInput";
-import updateContact from "../../../helpers/contacts/updateContact";
+import { updateContact } from "../../../helpers/contacts";
 
 export default function EditContactSlideover({ open, setOpen, selectedContact, user }) {
   const [name, setName] = useState()

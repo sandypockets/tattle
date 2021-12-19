@@ -1,8 +1,8 @@
 import { Fragment, useRef } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
+import { supabase } from "../../../lib/supabaseClient";
 import { ExclamationIcon } from '@heroicons/react/outline'
 import cancelSubscription from "../../../helpers/subscription/cancelSubscription";
-import { supabase } from "../../../lib/supabaseClient";
 
 export default function ModalCancel({ subscriptionId, cancelModalOpen, setCancelModalOpen }) {
   const cancelButtonRef = useRef(null)

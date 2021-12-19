@@ -5,8 +5,8 @@ import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import Button from "../../../components/Global/Button";
 import CardTitle from "../../../components/Global/CardTitle";
 import GoalCard from "../../../components/App/Dashboard/GoalCard";
-import getGoals from "../../../helpers/goals/getGoals";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
+import { getGoals } from "../../../helpers/goals";
 import { sortTwice } from "../../../helpers/sort";
 
 export default function Completed() {

@@ -12,15 +12,11 @@ import {
   XIcon,
   AdjustmentsIcon
 } from '@heroicons/react/outline'
-import { SearchIcon } from '@heroicons/react/solid'
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
 import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 import MobileLinkNoIcon from "./Sidebar/MobileLinkNoIcon";
 import AppLoadingState from "../Utils/AppLoadingState";
-import LoadingWheel from "../../Global/Loading/LoadingWheel";
-import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
-import SearchResults from "./Search/SearchResults";
 import Search from "./Search/Search";
 
 const navigation = [

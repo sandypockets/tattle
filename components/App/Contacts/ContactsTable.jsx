@@ -3,20 +3,19 @@ import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
 import Slideover from "../Layout/Slideover";
 import { sortTwice } from "../../../helpers/sort";
-import getGoals from "../../../helpers/goals/getGoals";
-import updateGoal from "../../../helpers/goals/updateGoal";
-import updateGoalContact from "../../../helpers/goals/updateGoalContact";
+import { getGoals } from "../../../helpers/goals";
+import { updateGoalContact } from "../../../helpers/goals";
 
 export default function ContactsTable({ contacts, setOpen, selectedContact, setSelectedContact }) {
   const [assignSlideoverOpen, setAssignSlideoverOpen] = useState(false)
   const [goals, setGoals] = useState({})
-  const [selectedGoalId, setSelectedGoalId] = useState()
+  const [selectedGoalId, setSelectedGoalId] = useState(Number)
   const [user, setUser] = useState({})
 
   useEffect(() => {
     const authUser = supabase.auth.user()
     setUser(authUser)
-    getGoals(user.id, setGoals)
+    getGoals(authUser.id, setGoals)
   }, [])
 
   useEffect(() => {
@@ -92,16 +91,20 @@ export default function ContactsTable({ contacts, setOpen, selectedContact, setS
       </div>
       <Slideover setOpen={setAssignSlideoverOpen} open={assignSlideoverOpen} title="Assign contact">
         <section className="mx-auto">
-          <p className="my-2">Assign {selectedContact && selectedContact.name} to one of your goals.</p>
-          <select onChange={(e) => setSelectedGoalId(e.target.value)}>
-            {goals?.length > 0 && goals.map((goal, index) => (
-              <option
-                key={index}
-                value={goal.id}
-              >
-                {goal.title} - {new Date(goal['created_at']).toLocaleDateString('en-CA')}
-              </option>
-            ))}
+          <p className="my-2">Assign {selectedContact && selectedContact.name} to one of your outstanding goals.</p>
+          <select onChange={(e) => setSelectedGoalId(Number(e.target.value))}>
+            {goals?.length > 0 && goals.map((goal, index) => {
+              if (!goal["is_completed"]) {
+                return (
+                  <option
+                    key={index}
+                    value={goal.id}
+                  >
+                    {goal.title} - {new Date(goal['created_at']).toLocaleDateString('en-CA')}
+                  </option>
+                )
+              }
+            })}
           </select>
           <div className="max-w-min mt-4">
             <Button onClickHandler={() => {

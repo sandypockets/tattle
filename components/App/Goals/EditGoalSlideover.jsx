@@ -5,7 +5,7 @@ import ChooseContact from "./ChooseContact";
 import SingleDatePicker from "../Utils/DatePicker";
 import Slideover from "../Layout/Slideover";
 import TextInput from "../../Global/TextInput";
-import updateGoal from "../../../helpers/goals/updateGoal";
+import { updateGoal } from "../../../helpers/goals";
 
 export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, user, getUserGoals }) {
   const [goalTitle, setGoalTitle] = useState('')

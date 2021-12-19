@@ -4,7 +4,7 @@ import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
 import PhoneInput from "./PhoneInput";
 import TextInput from "../../Global/TextInput";
-import createContact from "../../../helpers/contacts/createContact";
+import { createContact } from "../../../helpers/contacts";
 
 export default function CreateContact({ user, getUserContacts, setDisplayFormType, setLoading }) {
   const [contactName, setContactName] = useState('')
