@@ -39,7 +39,9 @@ export default function New() {
   }, [user])
 
   useEffect(() => {
-    goals && setLoading(false)
+    goals && setTimeout(() => {
+      setLoading(false)
+    }, 100)
   }, [goals])
 
   useEffect(() => {
