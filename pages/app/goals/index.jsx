@@ -50,8 +50,10 @@ export default function Index() {
   useEffect(() => {
     if (goals) {
       setNumOfCols(goals?.length <= 4 ? goals?.length : 4)
-      user && setLoading(false)
-      goals && sortOnce(goals, 'id', false)
+      sortOnce(goals, 'id', false)
+      user && setTimeout(() => {
+        setLoading(false)
+      }, 100)
     }
   }, [goals])
 
@@ -61,9 +63,9 @@ export default function Index() {
           {loading ? (<AppLoadingState />) : (
             <>
               <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
-              {!contacts || contacts?.length === 0 && <HasNoContactsBanner />}
-              {goals?.length < 1 && <IntroCard/>}
-              {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 && <GoalsEmptyState setState={setDisplayFormType} />}
+              {/*{!contacts || contacts?.length === 0 && <HasNoContactsBanner />}*/}
+              {/*{goals?.length < 1 && <IntroCard/>}*/}
+              {/*{displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 && <GoalsEmptyState setState={setDisplayFormType} />}*/}
               {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
               <div className="hidden lg:block">
                 {goals?.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}
@@ -75,6 +77,10 @@ export default function Index() {
                   </div>
                 ))}
               </div>
+              {!contacts || contacts?.length === 0 && <HasNoContactsBanner />}
+              {goals?.length < 1 && <IntroCard/>}
+              {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 && <GoalsEmptyState setState={setDisplayFormType} />}
+              {/*{displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}*/}
               <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
             </>
           )}
