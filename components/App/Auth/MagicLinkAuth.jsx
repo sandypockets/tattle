@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Link from 'next/link'
-import handleLogin from "../../../helpers/auth/magicLink";
+import { handleLogin } from "../../../helpers/auth";
 
 export default function MagicLinkAuth({ registrationType }) {
   const [loading, setLoading] = useState(false)

@@ -8,13 +8,15 @@ import GoalsEmptyState from "../../components/App/Goals/GoalsEmptyState";
 import StateWrapper from "../../components/App/Layout/StateWrapper";
 import Stats from "../../components/App/Dashboard/Stats";
 import UpcomingGoals from "../../components/App/Dashboard/UpcomingGoals";
-import getTattleStats from "../../helpers/subscription/getTattleStats";
+import { getContacts } from "../../helpers/contacts";
 import { getGoals } from "../../helpers/goals";
+import { getTattleStats } from "../../helpers/subscriptions";
 import { sortTwice } from "../../helpers/sort";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
   const [goals, setGoals] = useState([])
+  const [contacts, setContacts] = useState([])
   const [numberOfGoalsToShow, setNumberOfGoalsToShow] = useState(3)
   const [userStats, setUserStats] = useState({
     'statOne': 0,
@@ -31,15 +33,16 @@ export default function Index() {
   const router = useRouter()
 
   useEffect(() => {
-    async function getGoalsAndStats() {
+    async function getUserData() {
       const user = await supabase.auth.user()
       if (user?.id) {
         const id = user['id']
         getGoals(id, setGoals)
         getTattleStats(id, setUserStats)
+        getContacts(id, setContacts)
       }
     }
-    getGoalsAndStats()
+    getUserData()
   }, [])
 
   useEffect(() => {
@@ -74,7 +77,7 @@ export default function Index() {
   }, [userStats, goals])
 
   function newGoalRedirect(arg) {
-    return router.push('/app/goals/new')
+    return router.push('/app/goals/new#first')
   }
 
   function newContactRedirect(arg) {
@@ -93,8 +96,8 @@ export default function Index() {
               />
             ) : (
               <>
-              <ContactsEmptyState setState={newContactRedirect} />
-              <GoalsEmptyState setState={newGoalRedirect} />
+                {contacts.length < 1 && <ContactsEmptyState setState={newContactRedirect} />}
+                <GoalsEmptyState setState={newGoalRedirect} />
               </>
             )}
           </StateWrapper>

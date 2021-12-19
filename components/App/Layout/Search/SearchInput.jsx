@@ -1,4 +1,4 @@
-import {SearchIcon} from "@heroicons/react/solid";
+import { SearchIcon } from "@heroicons/react/solid";
 
 export default function SearchInput({ searchText, setSearchText }) {
   return (

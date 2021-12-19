@@ -8,7 +8,7 @@ import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import YourBillingHistory from "../../../components/App/Settings/YourBillingHistory";
 import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
 import YourSubscription from "../../../components/App/Settings/YourSubscription";
-import getSubscriptionByEmail from "../../../helpers/subscription/getSubscriptionByEmail";
+import { getSubscriptionByEmail } from "../../../helpers/subscriptions";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()

@@ -218,6 +218,27 @@ async function markAsPaid(req, res) {
         res.end()
       }
       break;
+    case 'customer':
+      if (req.body.type === 'customer.created') {
+        try {
+          const { data, error, status } = await supabase
+            .from('profiles')
+            .update({ stripe_customer_id: payload.id })
+            .match({ email: payload.email })
+          if (data) {
+            res.status(200).json(data)
+          }
+          if (error) {
+            console.log(error)
+            res.status(status).json(error)
+          }
+        } catch (err) {
+          console.log("Webhook error: ", err)
+        } finally {
+          res.end()
+        }
+      }
+      break;
     default:
       res.status(200).end()
   }

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import Checkout from "../Checkout/Checkout";
-import getUserPlan from "../../../helpers/subscription/getUserPlan";
+import { getUserPlan } from "../../../helpers/subscriptions";
 
 const months = ['January','February','March','April','May','Jun','July','August','September','October','November','December']
 const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']

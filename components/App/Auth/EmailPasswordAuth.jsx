@@ -4,8 +4,8 @@ import { supabase } from "../../../lib/supabaseClient";
 import Link from 'next/link'
 import Button from '../../Global/Button'
 import TextInput from "../../Global/TextInput";
-import handleSignIn from "../../../helpers/auth/signin";
-import handleSignUp from "../../../helpers/auth/signup";
+import { handleSignIn } from "../../../helpers/auth";
+import { handleSignUp } from "../../../helpers/auth";
 
 export default function Auth({ registrationType }) {
   const [email, setEmail] = useState('')

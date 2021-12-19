@@ -1,8 +1,8 @@
 import SearchInput from "./SearchInput";
 import SearchResults from "./SearchResults";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
+import { supabase } from "../../../../lib/supabaseClient";
 import getSearch from "../../../../helpers/getSearch";
-import {supabase} from "../../../../lib/supabaseClient";
 
 export default function Search() {
   const [searchText, setSearchText] = useState('')
@@ -15,10 +15,6 @@ export default function Search() {
       getSearch(searchText, user?.id, setSearchResults)
     }
   }, [searchText])
-
-  useEffect(() => {
-    console.log("FrontEndSearchResults: ", searchResults)
-  }, [searchResults])
 
   return (
     <>

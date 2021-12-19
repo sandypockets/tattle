@@ -1,6 +1,40 @@
-import { supabase } from "../../lib/supabaseClient";
+import { supabase } from "../lib/supabaseClient";
 import axios from "axios";
 
+// Magic link
+export async function handleLogin(email) {
+  try {
+    const { error } = await supabase.auth.signIn({ email })
+    if (error) throw error
+    console.error(error)
+  } catch (error) {
+    console.error(error['error_description'] || error.message)
+  }
+}
+
+// Email sign in
+export async function handleSignIn(userEmail, userPassword, router) {
+  try {
+    const { email, password, error } = await supabase.auth.signIn(
+      {
+        email: userEmail,
+        password: userPassword,
+      })
+    if (error) throw error
+    const userSession = await supabase.auth.session()
+    if (!userSession) {
+      console.error(error)
+    }
+  } catch (error) {
+    console.error(error['error_description'] || error.message)
+  } finally {
+    if (await supabase.auth.session()) {
+      router.push('/app')
+    }
+  }
+}
+
+// Email sign up
 function createCustomMessages(userId) {
   axios
     .post('/api/v1/custom-messages', {
@@ -16,7 +50,6 @@ function createCustomMessages(userId) {
       console.log("Create error", error);
     });
 }
-
 function recordStripeIdStripeTable(userId, stripeCustomerId) {
   axios
     .post('/api/v1/stripe-id', {
@@ -30,7 +63,6 @@ function recordStripeIdStripeTable(userId, stripeCustomerId) {
       console.log("Update error", error);
     });
 }
-
 function recordStripeCustomerId(userResponse, stripeCustomerId) {
   axios
     .post('/api/profiles', {
@@ -45,9 +77,7 @@ function recordStripeCustomerId(userResponse, stripeCustomerId) {
       console.log("Update error", error);
     });
 }
-
 function createStripeCustomer(userEmail, userResponse){
-  console.log("Signup.js!")
   axios
     .post('/api/v1/create-customer', {
       "email": userEmail,
@@ -60,8 +90,7 @@ function createStripeCustomer(userEmail, userResponse){
       console.log("Update error", error);
     });
 }
-
-export default async function handleSignUp(userEmail, userPassword, router) {
+export async function handleSignUp(userEmail, userPassword, router) {
   let userResponse;
   try {
     const {email, password, error, data} = await supabase.auth.signUp(
@@ -87,5 +116,23 @@ export default async function handleSignUp(userEmail, userPassword, router) {
         router.push('/app')
       }, 1000)
     }
+  }
+}
+
+// Update auth table profile
+export async function updateAuthProfile(email, password) {
+  try {
+    const { user, error } = await supabase.auth.update({
+      'email': email,
+      'password': password
+    })
+    if (user) {
+      console.log(user)
+    }
+    if (error) {
+      console.log(error)
+    }
+  } catch (error) {
+    console.error(error.message)
   }
 }

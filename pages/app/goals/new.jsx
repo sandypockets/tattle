@@ -45,6 +45,14 @@ export default function New() {
   }, [goals])
 
   useEffect(() => {
+    let path = router.asPath
+    path = path.split('#')
+    if (path[1] === 'first') {
+      setDisplayFormType('create')
+    }
+  }, [])
+
+  useEffect(() => {
     if (contactFormState === 'create') {
       router.push('/app/contacts/new')
     }
@@ -55,8 +63,11 @@ export default function New() {
         {loading ? <AppLoadingState /> : (
           <StateWrapper>
             <CardTitle>Create a goal</CardTitle>
-            {!contacts && !goals || contacts?.length >= 1 && goals?.length === 0 && <GoalsEmptyState setState={setDisplayFormType} />}
-            {!goals || goals?.length > 0 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
+            {!contacts && !goals || contacts?.length >= 1 && goals?.length === 0 && displayFormType === 'empty' &&
+              <GoalsEmptyState setState={setDisplayFormType} />
+            }
+            {/*{!goals || goals?.length < 1 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}*/}
+            {displayFormType === 'create' && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
             {!contacts || contacts?.length === 0 && (
               <>
                 <Banner>
