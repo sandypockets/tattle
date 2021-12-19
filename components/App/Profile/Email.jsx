@@ -4,7 +4,7 @@ import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
 import TextInput from "../../Global/TextInput";
-import updateEmail from "../../../helpers/profile/updateEmail";
+import { updateEmail } from "../../../helpers/profile";
 
 export default function Email({ setIsSuccess, setSectionName, setShowMessage }) {
   const [email, setEmail] = useState()
