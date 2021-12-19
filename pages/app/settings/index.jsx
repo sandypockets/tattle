@@ -3,12 +3,12 @@ import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import CardTitle from "../../../components/Global/CardTitle";
-import YourSubscription from "../../../components/App/Settings/YourSubscription";
-import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
+import ModalCancel from "../../../components/App/Settings/ModalCancel";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import YourBillingHistory from "../../../components/App/Settings/YourBillingHistory";
+import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
+import YourSubscription from "../../../components/App/Settings/YourSubscription";
 import getSubscriptionByEmail from "../../../helpers/subscription/getSubscriptionByEmail";
-import ModalCancel from "../../../components/App/Settings/ModalCancel";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()

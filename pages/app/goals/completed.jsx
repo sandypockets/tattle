@@ -69,8 +69,8 @@ if (completedGoals?.length < 1) {
             </div>
             <div className="w-36 mx-auto mt-10">
               {
-                completedGoals?.length <= numOfCols &&
-                <Button disabled={numberOfGoalsToShow > goals?.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                completedGoals?.length > numOfCols &&
+                <Button disabled={numberOfGoalsToShow > completedGoals?.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
                   Show more
                 </Button>
               }

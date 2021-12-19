@@ -1,10 +1,10 @@
-import {useEffect, useState} from "react";
+import { useState } from "react";
 import Button from "../../Global/Button";
 import Card from "../../Global/Card";
 import CardTitle from "../../Global/CardTitle";
+import PhoneInput from "./PhoneInput";
 import TextInput from "../../Global/TextInput";
 import createContact from "../../../helpers/contacts/createContact";
-import PhoneInput from "./PhoneInput";
 
 export default function CreateContact({ user, getUserContacts, setDisplayFormType, setLoading }) {
   const [contactName, setContactName] = useState('')
@@ -30,14 +30,13 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
         </div>
         <div className="w-72">
           <TextInput type="text" label="Name" value={contactName} onChangeHandler={(e) => setContactName(e.target.value)} />
-          {/*<TextInput type="phone" label="Phone number" value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} />*/}
           <PhoneInput value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} setContactCountryCode={setContactCountryCode} />
           <div className="flex justify-end mt-4 mr-2">
             <div className="max-w-min">
               <Button type="button" onClickHandler={() => {
                 return submitAndRefreshData()
               }}>
-                Save!
+                Save
               </Button>
             </div>
           </div>

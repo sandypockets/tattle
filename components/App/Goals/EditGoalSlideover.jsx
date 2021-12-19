@@ -12,7 +12,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
   const [goalDesc, setGoalDesc] = useState('')
   const [goalOutcome, setGoalOutcome] = useState('')
   const [selectedDate, setSelectedDate] = useState();
-  const [selectedContactId, setSelectedContactId] = useState()
+  const [selectedContactId, setSelectedContactId] = useState(Number)
 
   useEffect(() => {
     if (selectedGoal) {
@@ -22,12 +22,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
       setSelectedContactId(selectedGoal['contact_id'])
       // Convert yyyy-mm-dd into unix
       const unixTime = new Date(selectedGoal['due_date']).getTime() + 86400000 - 14400000 //+ 100000000
-      // console.log("DATE!", selectedGoal['due_date'])
-      // console.log("UNIX TIME: ", unixTime)
-      // console.log("DATE 2!", new Date(unixTime))
       setSelectedDate(new Date(unixTime))
-      // console.log("selectedDate: ", selectedDate)
-      // setSelectedDate(unixTime)
     }
   }, [selectedGoal])
 
@@ -41,8 +36,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
   return (
     <Slideover open={open} setOpen={setOpen}>
       <div className="overflow-scroll">
-        <CardTitle>Create a goal</CardTitle>
-        <p>Create a new goal</p>
+        <CardTitle>{title}</CardTitle>
         <TextInput type="text" label="Goal title" value={goalTitle} onChangeHandler={(e) => setGoalTitle(e.target.value)} />
         <div className="my-6">
           <label htmlFor="description" className="block text-sm font-medium text-gray-700 mx-2">

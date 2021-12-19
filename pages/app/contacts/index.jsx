@@ -3,14 +3,14 @@ import { supabase } from "../../../lib/supabaseClient";
 import AppLayout from "../../../components/App/Layout/AppLayout";
 import AppLoadingState from "../../../components/App/Utils/AppLoadingState";
 import ContactsEmptyState from "../../../components/App/Contacts/ContactsEmptyState";
-import CreateContact from "../../../components/App/Contacts/CreateContact";
+import ContactCard from "../../../components/App/Contacts/ContactCard";
 import ContactsTable from "../../../components/App/Contacts/ContactsTable";
+import CreateContact from "../../../components/App/Contacts/CreateContact";
 import EditContactSlideover from "../../../components/App/Contacts/EditContactSlideover";
 import Heading from "../../../components/App/Contacts/Heading";
 import IntroCard from "../../../components/App/Contacts/IntroCard";
-import getContacts from "../../../helpers/contacts/getContacts";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
-import ContactCard from "../../../components/App/Contacts/ContactCard";
+import getContacts from "../../../helpers/contacts/getContacts";
 
 export default function Index() {
   const [contacts, setContacts] = useState([])
@@ -38,7 +38,9 @@ export default function Index() {
   }, [user])
 
   useEffect(() => {
-    user && contacts && setLoading(false)
+    user && contacts && setTimeout(() => {
+      setLoading(false)
+    }, 100)
   }, [contacts])
 
     return (

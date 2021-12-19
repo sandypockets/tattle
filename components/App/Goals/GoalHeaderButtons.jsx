@@ -1,11 +1,14 @@
 import Button from "../../Global/Button";
 
-export default function GoalHeaderButtons({ markGoalAsDone, isCompletedOnTime, user, goal}) {
+export default function GoalHeaderButtons({ markGoalAsDone, isCompletedOnTime, user, goal, setSelectedGoal, setOpen}) {
   return (
     <div className="flex flex-col 2xs:flex-row">
       <div className="w-36 ml-4 mr-4 2xs:mr-2 mb-2 2xs:mb-0">
-        <Button>
-          Update contact
+        <Button onClickHandler={() => {
+          setSelectedGoal(goal)
+          setOpen(true)
+        }}>
+          Edit Goal
         </Button>
       </div>
       <div className="w-36 mr-4 ml-4 2xs:ml-2">

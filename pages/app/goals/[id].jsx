@@ -12,6 +12,8 @@ import markAsDone from "../../../helpers/goals/markAsDone";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import SmallCardTitle from "../../../components/Global/SmallCardTitle";
 import GoalHeaderButtons from "../../../components/App/Goals/GoalHeaderButtons";
+import EditGoalSlideover from "../../../components/App/Goals/EditGoalSlideover";
+import getGoals from "../../../helpers/goals/getGoals";
 
 export default function SingleGoal() {
   const [contact, setContact] = useState(Object)
@@ -19,6 +21,15 @@ export default function SingleGoal() {
   const [loading, setLoading] = useState(true)
   const [timeLeft, setTimeLeft] = useState(Number)
   const [isCompletedOnTime, setIsCompletedOnTime] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [selectedGoal, setSelectedGoal] = useState({})
+
+  async function getUserGoals() {
+    const supabaseUser = await supabase.auth.user()
+    const id = supabaseUser['id']
+    getGoals(id, setGoal)
+  }
+
   const router = useRouter()
   const user = supabase.auth.user()
 
@@ -66,13 +77,16 @@ export default function SingleGoal() {
           <section className="flex flex-col-reverse sm:flex-row justify-between">
             <CardTitle>{goal['title']}</CardTitle>
             <div className="pb-6 sm:pb-0 flex justify-center sm:justify-end">
-              <GoalHeaderButtons goal={goal} user={user} isCompletedOnTime={isCompletedOnTime} markGoalAsDone={markGoalAsDone} />
+              <GoalHeaderButtons goal={goal} user={user} isCompletedOnTime={isCompletedOnTime} markGoalAsDone={markGoalAsDone} setSelectedGoal={setSelectedGoal} setOpen={setOpen} />
             </div>
           </section>
           <div className="grid grid-cols-1 2xs:grid-cols-2 xl:grid-cols-4 gap-1 2xs:gap-3 sm:gap-4 md:gap-6 mb-8 2xs:mb-0">
             <GridCard>
               {goal['is_completed'] === true && (
-                <SmallCardTitle>Complete</SmallCardTitle>
+                <>
+                  <h3 className="text-xs sm:text-sm text-gray-500">Status</h3>
+                  <SmallCardTitle>Complete</SmallCardTitle>
+                </>
               )}
               {goal['is_completed'] === false && (
                 <>
@@ -104,6 +118,7 @@ export default function SingleGoal() {
               <p>{goal['outcome']}</p>
             </Card>
           </div>
+          <EditGoalSlideover title="Edit your goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
         </StateWrapper>
       )}
     </AppLayout>
