@@ -62,8 +62,6 @@ export default function Checkout({ session }) {
     appearance,
   };
 
-  console.log("DEBUG 3: ", user, stripeCustomerId, loading)
-
   return (
     <div className="App">
       {loading && (
