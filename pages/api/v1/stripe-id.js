@@ -1,4 +1,4 @@
-import {supabase} from "../../../lib/supabaseClient";
+import { supabase } from "../../../lib/supabaseClient";
 
 async function getStripeId(req, res) {
   const userId = req.query.id
