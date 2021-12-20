@@ -10,7 +10,7 @@ module.exports = {
     'grid-cols-3',
     'grid-cols-4',
   ],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'class',
   theme: {
     screens: {
       '2xs': '330px',
