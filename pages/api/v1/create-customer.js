@@ -5,7 +5,6 @@ async function createStripeCustomer(req, res) {
   const customer = await stripe.customers.create({
     email: req.body.email,
   });
-  console.log("DEBUG 8: ", customer)
   res.status(200).json(customer)
 }
 
