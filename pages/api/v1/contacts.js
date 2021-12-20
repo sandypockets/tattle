@@ -73,12 +73,12 @@ async function getContacts(req, res) {
 }
 
 async function getSingleContact(req, res) {
-  const { ownerId, contactId } = req.query
+  const { ownerId } = req.query
   try {
     const { data, error, status } = await supabase
       .from('contacts')
       .select('name')
-      .match({ owner_id: ownerId, id: contactId })
+      .match({ owner_id: ownerId })
     if (data) {
       res.status(status).json(data)
     }
