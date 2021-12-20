@@ -18,6 +18,7 @@ import MobileLinkWithIcon from "./Sidebar/MobileLinkWithIcon";
 import MobileLinkNoIcon from "./Sidebar/MobileLinkNoIcon";
 import AppLoadingState from "../Utils/AppLoadingState";
 import Search from "./Search/Search";
+import Toggle from "./Toggle";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -46,6 +47,18 @@ function classNames(...classes) {
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const [darkMode, setDarkMode] = useState(false)
+  useEffect(() => {
+    if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark')
+      setDarkMode(true)
+    } else {
+      document.documentElement.classList.remove('dark')
+      setDarkMode(false)
+    }
+  }, [darkMode])
+
   const router = useRouter()
   const currentPage = router.pathname
   const user = supabase.auth.user()
@@ -83,7 +96,7 @@ export default function AppLayout({ children }) {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <div className="relative max-w-xs w-full bg-black pt-5 pb-4 flex-1 flex flex-col">
+                <div className="relative max-w-xs w-full bg-black dark:bg-white pt-5 pb-4 flex-1 flex flex-col">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -155,12 +168,13 @@ export default function AppLayout({ children }) {
                   ))}
                 </nav>
               </div>
+              <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
             </div>
           </div>
 
-          <div className="md:pl-64">
+          <div className="md:pl-64 bg-gray-50 dark:bg-gray-900">
             <div className="max-w-4xl mx-auto flex flex-col md:px-8 xl:px-0">
-              <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-gray-50 border-b border-gray-200 flex">
+              <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 flex">
                 <button
                   type="button"
                   className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
@@ -228,7 +242,7 @@ export default function AppLayout({ children }) {
 
               <main className="flex-1">
                 <div className="py-6">
-                  <section className="p-3 xs:p-4 sm:py-2 sm:px-6 md:px-0">
+                  <section className="p-3 xs:p-4 sm:py-2 sm:px-6 md:px-0 dark:text-gray-200 min-h-screen">
                     {loading && <AppLoadingState />}
                     {!loading && children}
                   </section>

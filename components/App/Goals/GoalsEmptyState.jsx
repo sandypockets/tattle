@@ -12,7 +12,7 @@ export default function GoalsEmptyState({ setState }) {
         <div className="mx-auto h-12 w-12 text-gray-400">
           <CheckIcon />
         </div>
-        <span className="mt-2 block text-sm font-medium text-gray-900">Add your first goal</span>
+        <span className="mt-2 block text-sm font-medium text-gray-900 dark:text-gray-200">Add your first goal</span>
       </button>
     </Card>
   )
