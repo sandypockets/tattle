@@ -47,8 +47,8 @@ export default function StateWrapper({ children }) {
   if (hasSubscription === false) {
     return (
       <>
-        <div className="grid grid-cols-2 mt-16">
-          <div className="mt-8 max-w-sm">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 mt-16">
+          <div className="mt-8 mb-12 lg:mb-0 mx-auto max-w-sm">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-6 px-1">Tattle monthly</h1>
             <h4 className="-mt-6 text-md px-2">$3 USD / month. Cancel anytime.</h4>
             <div className="my-6 grid grid-cols-2 max-w-1xs bg-gray-100 p-4">
