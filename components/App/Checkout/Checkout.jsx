@@ -5,11 +5,8 @@ import { supabase } from "../../../lib/supabaseClient";
 import CheckoutForm from "./CheckoutForm";
 import CheckoutLoadingState from "./CheckoutLoadingState";
 import { getStripeCustomerId } from "../../../helpers/subscriptions";
+// Call loadStripe outside of a component’s render to avoid recreating the Stripe object on every render.
 const stripePublishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-
-// Make sure to call loadStripe outside of a component’s render to avoid
-// recreating the Stripe object on every render.
-// const stripePromise = loadStripe("pk_test_51IkyECLSQuRsBVHwF7qm2tCexmpVUdG2fMphLozNAwUelsH4aklQqXVOu8HjkJjq0dWcALrjPfnAQerGxlEpQI8000E8OwzIHi");
 const stripePromise = loadStripe(stripePublishableKey);
 
 export default function Checkout({ session }) {

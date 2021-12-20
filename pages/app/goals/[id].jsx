@@ -11,8 +11,7 @@ import GridCard from "../../../components/Global/GridCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import SmallCardTitle from "../../../components/Global/SmallCardTitle";
 import { getContact } from "../../../helpers/contacts";
-import { getGoal } from "../../../helpers/goals";
-import { markAsDone } from "../../../helpers/goals";
+import { getGoal, markAsDone } from "../../../helpers/goals";
 
 export default function SingleGoal() {
   const [contact, setContact] = useState(Object)
@@ -28,7 +27,6 @@ export default function SingleGoal() {
 
   async function getUserGoal() {
     getGoal(user.id, goal.id, setGoal)
-    console.log("GOAL!!! : ", goal)
   }
 
   useEffect(() => {
@@ -38,7 +36,6 @@ export default function SingleGoal() {
 
   useEffect(() => {
     if (goal) {
-      console.log("GOAL: ", goal)
       getContact(user.id, goal['contact_id'], setContact)
       const unixDueDate = new Date(goal['due_date']).getTime()
       const unixDateNow = Date.now()
