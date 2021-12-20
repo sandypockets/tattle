@@ -29,25 +29,25 @@ export default function GoalsTable({ goals, setSelectedGoal, contacts, setOpen }
     <div className="flex flex-col my-6 shadow-lg ring-1 ring-black rounded-md ring-opacity-5">
       <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+          <div className="shadow overflow-hidden border-b border-gray-200 dark:border-b-0 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
+              <thead className="bg-gray-50 dark:bg-gray-700">
               <tr>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                 >
                   Status
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                 >
                   Title
                 </th>
                 <th
                   scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                 >
                   Description
                 </th>
@@ -73,12 +73,12 @@ export default function GoalsTable({ goals, setSelectedGoal, contacts, setOpen }
               </thead>
               <tbody>
               {goals.map((goal, index) => (
-                <tr key={index} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}>
-                  <td className="w-48 max-w-5xs pl-8 py-4 whitespace-pre-line text-sm text-gray-500">{goal['is_completed'] ? <Checkmark /> : <XMark />}</td>
-                  <td className="w-72 max-w-4xs py-4 whitespace-nowrap truncate text-sm font-medium text-gray-900">{goal.title}</td>
-                  <td className="w-24 max-w-2xs px-4 py-4 whitespace-nowrap truncate text-sm text-gray-500">{goal.description}</td>
-                  <td className="pl-5 max-w-6xs py-4 whitespace-nowrap text-sm text-gray-500">{goal['due_date']}</td>
-                  <td className="w-24 max-w-4xs px-6 py-4 whitespace-nowrap text-sm text-gray-500">{getContactName(contacts, goal['contact_id'])}</td>
+                <tr key={index} className={index % 2 === 0 ? 'bg-white dark:bg-gray-600' : 'bg-gray-100 dark:bg-gray-700'}>
+                  <td className="w-48 max-w-5xs pl-8 py-4 whitespace-pre-line text-sm text-gray-500 dark:text-gray-300">{goal['is_completed'] ? <Checkmark /> : <XMark />}</td>
+                  <td className="w-72 max-w-4xs py-4 whitespace-nowrap truncate text-sm font-medium text-gray-900 dark:text-gray-300">{goal.title}</td>
+                  <td className="w-24 max-w-2xs px-4 py-4 whitespace-nowrap truncate text-sm text-gray-500 dark:text-gray-300">{goal.description}</td>
+                  <td className="pl-5 max-w-6xs py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{goal['due_date']}</td>
+                  <td className="w-24 max-w-4xs px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{getContactName(contacts, goal['contact_id'])}</td>
                   <td className="px-2 py-4 whitespace-pre-line text-right text-sm font-medium">
                     <Button onClickHandler={() => {
                       setSelectedGoal(goal)

@@ -168,7 +168,10 @@ export default function AppLayout({ children }) {
                   ))}
                 </nav>
               </div>
-              <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
+              <nav className="flex justify-between mx-6 mb-6">
+                <p className="text-gray-300 dark:text-white align-middle">Light / Dark theme</p>
+                <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
+              </nav>
             </div>
           </div>
 

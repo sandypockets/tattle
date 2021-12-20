@@ -30,7 +30,7 @@ export default function GoalCard({ goal }) {
         })
     }}>
     <GridCard>
-      <h2 className="font-extrabold text-gray-900 text-lg truncate">{goal.title}</h2>
+      <h2 className="font-extrabold text-gray-900 dark:text-gray-100 text-lg truncate">{goal.title}</h2>
       <div className="border-b-2 border-gray-150 w-full mt-2 mb-3 mr-2" />
       <p className="text-sm h-10 overflow-hidden truncate mb-2 sm:mb-4">
         {goal.description}
@@ -39,8 +39,8 @@ export default function GoalCard({ goal }) {
         <small>
           {goal['is_completed'] === false &&
             <>
-              <span className="text-gray-400">Due by: </span>
-              <span className={isUrgent ? 'text-red-500' : 'text-gray-500'}>{goal['due_date']}</span>
+              <span className="text-gray-400 dark:text-gray-300">Due by: </span>
+              <span className={isUrgent ? 'text-red-500 dark:text-red-300' : 'text-gray-500 dark:text-gray-300'}>{goal['due_date']}</span>
             </>
           }
           {goal['is_completed'] === true &&

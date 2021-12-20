@@ -80,27 +80,27 @@ export default function SingleGoal() {
             <GridCard>
               {goal['is_completed'] === true && (
                 <>
-                  <h3 className="text-xs sm:text-sm text-gray-500">Status</h3>
+                  <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">Status</h3>
                   <SmallCardTitle>Complete</SmallCardTitle>
                 </>
               )}
               {goal['is_completed'] === false && (
                 <>
-                  <h3 className="text-xs sm:text-sm text-gray-500">{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h3>
-                  <SmallCardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500 text-md" : "text-black text-md"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></SmallCardTitle>
+                  <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h3>
+                  <SmallCardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500 dark:text-red-300 text-md" : "text-black text-md"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></SmallCardTitle>
                 </>
               )}
             </GridCard>
             <GridCard>
-              <h3 className="text-xs sm:text-sm text-gray-500">Created on</h3>
+              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">Created on</h3>
               <SmallCardTitle>{new Date(goal['created_at']).toLocaleDateString("en-UK")}</SmallCardTitle>
             </GridCard>
             <GridCard>
-              <h3 className="text-xs sm:text-sm text-gray-500">Due on</h3>
+              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">Due on</h3>
               <SmallCardTitle>{new Date(goal['due_date']).toLocaleDateString("en-UK")}</SmallCardTitle>
             </GridCard>
             <GridCard>
-              <h3 className="text-xs sm:text-sm text-gray-500">Assigned to</h3>
+              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">Assigned to</h3>
               <SmallCardTitle>{contact && contact.name}</SmallCardTitle>
             </GridCard>
           </div>
