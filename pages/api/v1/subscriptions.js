@@ -90,6 +90,48 @@ async function getSubscriptionByEmail(req, res) {
   }
 }
 
+async function cancelLocalStripe(deleted) {
+  try {
+    const { data, error } = await supabase
+      .from('stripe_subscriptions')
+      .insert({
+        data_type: 'subscription_cancel',
+        billing_cycle_anchor: deleted.billing_cycle_anchor,
+        cancel_at_period_end: deleted.cancel_at_period_end,
+        canceled_at: deleted.canceled_at,
+        collection_method: deleted.collection_method,
+        current_period_end: deleted.current_period_end,
+        current_period_start: deleted.current_period_start,
+        customer_id: deleted.customer,
+        latest_invoice_id: deleted.latest_invoice,
+        livemode: deleted.livemode,
+        plan_price_id: deleted?.plan.id,
+        status: deleted.status
+      })
+    data && console.log(data)
+    error && console.log(error)
+  } catch (err) {
+    console.error(err)
+  }
+}
+async function cancelLocalProfileSub(userId){
+  try {
+    const { data, error } = await supabase
+      .from('profiles')
+      .update({ is_subscribed: false })
+      .match({ id: userId })
+    data && console.log(data)
+    error && console.error(error)
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+function cancelLocalSubscription(userId, deleted) {
+  cancelLocalProfileSub(userId)
+    .then(() => cancelLocalStripe(deleted))
+}
+
 async function cancelStripeSubscription(req, res) {
   const { subscriptionId, userId } = req.body
   const deleted = await stripe.subscriptions.del(
@@ -97,63 +139,9 @@ async function cancelStripeSubscription(req, res) {
   );
   if (deleted) {
     res.status(200).json(deleted)
+    return cancelLocalSubscription(userId, deleted)
   }
 }
-
-// async function cancelStripeSubscription(req, res) {
-//   const { subscriptionId, userId } = req.body
-//   let responseData = {
-//     "profilesResponse": [],
-//     "subscriptionsResponse": []
-//   }
-//   const deleted = await stripe.subscriptions.del(
-//     `${subscriptionId}`
-//   );
-//   if (deleted) {
-//     try {
-//       const { data, error } = await supabase
-//         .from('profiles')
-//         .update({ is_subscribed: false })
-//         .match({ id: userId })
-//       if (data) {
-//         responseData = {
-//           "profilesResponse": data,
-//           ...responseData
-//         }
-//       }
-//       error && res.status(500).json(error)
-//     } catch (err) {
-//       console.error(err)
-//     } finally {
-//       try {
-//         const { data, error } = await supabase
-//           .from('stripe_subscriptions')
-//           .insert({
-//             data_type: 'subscription',
-//             billing_cycle_anchor: deleted.billing_cycle_anchor,
-//             cancel_at_period_end: deleted.cancel_at_period_end,
-//             canceled_at: deleted.canceled_at,
-//             collection_method: deleted.collection_method,
-//             current_period_end: deleted.current_period_end,
-//             current_period_start: deleted.current_period_start,
-//             customer_id: deleted.customer,
-//             latest_invoice_id: deleted.latest_invoice,
-//             livemode: deleted.livemode,
-//             plan_price_id: deleted?.plan.id,
-//             status: deleted.status
-//           })
-//         data &&
-//       } catch (err) {
-//
-//       } finally {
-//         res.status(200).json(responseData)
-//       }
-//     }
-//   } else {
-//     console.error("Deleted: false")
-//   }
-// }
-
 
 export default function handler(req, res) {
   if (req.method === 'POST') {
