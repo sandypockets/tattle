@@ -12,7 +12,6 @@ import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import SmallCardTitle from "../../../components/Global/SmallCardTitle";
 import { getContact } from "../../../helpers/contacts";
 import { getGoal } from "../../../helpers/goals";
-import { getGoals } from "../../../helpers/goals";
 import { markAsDone } from "../../../helpers/goals";
 
 export default function SingleGoal() {
@@ -24,14 +23,13 @@ export default function SingleGoal() {
   const [open, setOpen] = useState(false)
   const [selectedGoal, setSelectedGoal] = useState({})
 
-  async function getUserGoals() {
-    const supabaseUser = await supabase.auth.user()
-    const id = supabaseUser['id']
-    getGoals(id, setGoal)
-  }
-
   const router = useRouter()
   const user = supabase.auth.user()
+
+  async function getUserGoal() {
+    getGoal(user.id, goal.id, setGoal)
+    console.log("GOAL!!! : ", goal)
+  }
 
   useEffect(() => {
     const { id } = router.query
@@ -40,6 +38,7 @@ export default function SingleGoal() {
 
   useEffect(() => {
     if (goal) {
+      console.log("GOAL: ", goal)
       getContact(user.id, goal['contact_id'], setContact)
       const unixDueDate = new Date(goal['due_date']).getTime()
       const unixDateNow = Date.now()
@@ -118,7 +117,7 @@ export default function SingleGoal() {
               <p>{goal['outcome']}</p>
             </Card>
           </div>
-          <EditGoalSlideover title="Edit your goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
+          <EditGoalSlideover title="Edit your goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoal} />
         </StateWrapper>
       )}
     </AppLayout>
