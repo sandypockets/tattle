@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../../lib/supabaseClient";
 import getSearch from "../../../../helpers/getSearch";
 
-export default function Search() {
+export default function Search({ setSearchIsOpen }) {
   const [searchText, setSearchText] = useState('')
   const [searchResults, setSearchResults] = useState()
 
@@ -15,6 +15,12 @@ export default function Search() {
       getSearch(searchText, user?.id, setSearchResults)
     }
   }, [searchText])
+
+  useEffect(() => {
+    if (searchResults?.length > 0) {
+      setSearchIsOpen(true)
+    }
+  }, [searchResults])
 
   return (
     <>

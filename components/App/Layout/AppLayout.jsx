@@ -47,6 +47,8 @@ function classNames(...classes) {
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [loading, setLoading] = useState(false)
+  // State used to manage 'main' behaviour while search results are open. Not currently in use
+  const [searchIsOpen, setSearchIsOpen] = useState(false)
 
   const [darkMode, setDarkMode] = useState(false)
   useEffect(() => {
@@ -189,7 +191,7 @@ export default function AppLayout({ children }) {
                 <div className="flex-1 flex justify-between px-4 md:px-0">
                   <div className="flex-1 flex w-full">
 
-                    <Search />
+                    <Search setSearchIsOpen={setSearchIsOpen} />
 
                   </div>
                   <div className="ml-4 flex items-center md:ml-6">

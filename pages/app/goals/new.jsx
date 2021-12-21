@@ -39,6 +39,7 @@ export default function New() {
   }, [user])
 
   useEffect(() => {
+    goals?.length > 0 && setDisplayFormType('create')
     goals && setTimeout(() => {
       setLoading(false)
     }, 100)
