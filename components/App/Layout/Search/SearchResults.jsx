@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function SearchResults({ searchResults }) {
   return (
-    <div className="max-w-4xl xl:max-w-4xl border-1 border-black bg-gray-50 dark:bg-gray-600 shadow-lg rounded-b-lg">
+    <div className="max-w-4xl xl:max-w-4xl border-1 border-black bg-gray-50 dark:bg-gray-600 shadow-lg rounded-b-lg max-h-96 overflow-scroll">
       <ul>
         {searchResults?.goalData?.length > 0 && <h2 className="px-6 pt-3 pb-2 text-xl font-bold text-gray-400 dark:text-gray-200">Goals</h2>}
         {searchResults?.goalData?.map((result, index) => (
