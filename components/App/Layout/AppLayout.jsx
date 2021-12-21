@@ -10,7 +10,9 @@ import {
   MenuAlt2Icon,
   UsersIcon,
   XIcon,
-  AdjustmentsIcon
+  AdjustmentsIcon,
+  SunIcon,
+  MoonIcon
 } from '@heroicons/react/outline'
 import DesktopLinkNoIcon from "./Sidebar/DesktopLinkNoIcon";
 import DesktopLinkWithIcon from "./Sidebar/DesktopLinkWithIcon";
@@ -34,11 +36,7 @@ const subNavigation = [
   {name: 'New', category: 'contacts', href: '/app/contacts/new', parentHref: '/app/contacts', icon: AdjustmentsIcon},
   {name: 'Customize', category: 'settings', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon}
 ]
-const userNavigation = [
-  { name: 'Your Profile', href: '/app/profile' },
-  { name: 'Settings', href: '/app/settings' },
-  { name: 'Sign out', href: '/' },
-]
+
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -49,8 +47,33 @@ export default function AppLayout({ children }) {
   const [loading, setLoading] = useState(false)
   // State used to manage 'main' behaviour while search results are open. Not currently in use
   const [searchIsOpen, setSearchIsOpen] = useState(false)
-
   const [darkMode, setDarkMode] = useState(false)
+
+  const userNavigation = [
+    { name: 'Dashboard', href: '/app/' },
+    { name: 'Profile', href: '/app/profile' },
+    { name: 'Settings', href: '/app/settings' },
+    { name: 'Sign out', href: '/' },
+    { name:
+        <div className="flex mx-auto">
+          {!darkMode &&
+            <>
+              <div className="h-6 w-6">
+                <MoonIcon/>
+              </div>
+              <a className="pl-1">Dark theme</a>
+            </>}
+          {darkMode &&
+            <>
+              <div className="h-6 w-6">
+                <SunIcon/>
+              </div>
+              <a className="pl-1">Light theme</a>
+            </>}
+        </div>,
+      href: '#theme' },
+  ]
+
   useEffect(() => {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
@@ -72,6 +95,17 @@ export default function AppLayout({ children }) {
       setLoading(false)
     }
   }, [user])
+
+  const toggleTheme = () => {
+    setDarkMode(!darkMode)
+    if (!darkMode) {
+      localStorage.theme = 'dark'
+      setDarkMode(true)
+    } else {
+      localStorage.theme = 'light'
+      setDarkMode(false)
+    }
+  }
 
     return (
       <>
@@ -182,7 +216,7 @@ export default function AppLayout({ children }) {
               <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-gray-50 dark:bg-black border-b border-gray-200 flex">
                 <button
                   type="button"
-                  className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
+                  className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-yellow-400 md:hidden"
                   onClick={() => setSidebarOpen(true)}
                 >
                   <span className="sr-only">Open sidebar</span>
@@ -198,7 +232,7 @@ export default function AppLayout({ children }) {
                     {/* Profile dropdown */}
                     <Menu as="div" className="ml-3 relative">
                       <div>
-                        <Menu.Button className="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        <Menu.Button className="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-400">
                           <span className="sr-only">Open user menu</span>
                           <img
                             className="h-8 w-8 rounded-full"
@@ -216,7 +250,7 @@ export default function AppLayout({ children }) {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 py-1 focus:outline-none">
+                        <Menu.Items className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white dark:bg-gray-600 ring-1 ring-black ring-opacity-5 focus:outline-none">
                           {userNavigation.map((item) => (
                             <Menu.Item key={item.name}>
                               {({ active }) => (
@@ -226,10 +260,13 @@ export default function AppLayout({ children }) {
                                       if (item.name === 'Sign out') {
                                         return supabase.auth.signOut()
                                       }
+                                      if (item.href === '#theme') {
+                                        return toggleTheme()
+                                      }
                                     }}
                                     className={classNames(
                                       active ? 'bg-gray-100' : '',
-                                      'block py-2 px-4 text-sm text-gray-700'
+                                      'block py-2 px-4 text-sm text-gray-700 tracking-wide font-semibold dark:text-gray-200 dark:hover:text-black dark:hover:bg-yellow-500 dark:hover:rounded-md'
                                     )}
                                   >
                                     {item.name}

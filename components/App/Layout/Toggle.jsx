@@ -22,7 +22,7 @@ export default function Toggle({ darkMode, setDarkMode }) {
   })
 
   const toggleTheme = () => {
-    enabled ? setEnabled(false) : setEnabled(true)
+    setEnabled(!enabled)
     if (!enabled) {
       localStorage.theme = 'dark'
       setDarkMode(true)
