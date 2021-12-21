@@ -107,11 +107,11 @@ export default function SingleGoal() {
           <div className="mt-8 sm:mt-12 md:mt-14">
             <Card>
               <SmallCardTitle>Description</SmallCardTitle>
-              <p>{goal['description']}</p>
+              <p className="dark:text-gray-400">{goal['description']}</p>
             </Card>
             <Card>
               <SmallCardTitle>Outcome</SmallCardTitle>
-              <p>{goal['outcome']}</p>
+              <p className="dark:text-gray-400">{goal['outcome']}</p>
             </Card>
           </div>
           <EditGoalSlideover title="Edit your goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoal} />

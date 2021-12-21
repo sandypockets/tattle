@@ -11,7 +11,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
   const [goalTitle, setGoalTitle] = useState('')
   const [goalDesc, setGoalDesc] = useState('')
   const [goalOutcome, setGoalOutcome] = useState('')
-  const [selectedDate, setSelectedDate] = useState();
+  const [selectedDate, setSelectedDate] = useState(new Date);
   const [selectedContactId, setSelectedContactId] = useState(Number)
 
   useEffect(() => {
@@ -39,7 +39,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
         <CardTitle>{title}</CardTitle>
         <TextInput type="text" label="Goal title" value={goalTitle} onChangeHandler={(e) => setGoalTitle(e.target.value)} />
         <div className="my-6">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mx-2">
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mx-2 dark:text-gray-300">
             Goal description
           </label>
           <div className="mt-1 mx-2">
@@ -47,14 +47,14 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
           rows={4}
           name="description"
           id="description"
-          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
           value={goalDesc}
           onChange={(e) => setGoalDesc(e.target.value)}
         />
           </div>
         </div>
         <div>
-          <label htmlFor="outcomes" className="block text-sm font-medium text-gray-700 mx-2">
+          <label htmlFor="outcomes" className="block text-sm font-medium text-gray-700 mx-2 dark:text-gray-300">
             How will you know that this goal is achieved?
           </label>
           <div className="mt-1 mx-2">
@@ -62,7 +62,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
           rows={4}
           name="outcomes"
           id="outcomes"
-          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+          className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
           value={goalOutcome}
           onChange={(e) => setGoalOutcome(e.target.value)}
         />
@@ -71,12 +71,12 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
         <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} />
         <div className="flex justify-between flex-row-reverse my-6 mx-2">
           <div>
-            <p className="mb-1">
+            <p className="mb-1 dark:text-gray-300">
               Due date
             </p>
             <SingleDatePicker selected={selectedDate} selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
           </div>
-          <p className="self-center max-w-md mt-2">Must be completed by</p>
+          <p className="self-center max-w-md mt-2 dark:text-gray-300">Must be completed by</p>
         </div>
         <div className="mx-2 mb-12">
           <Button

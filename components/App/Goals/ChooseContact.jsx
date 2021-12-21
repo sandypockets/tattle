@@ -30,13 +30,13 @@ export default function ChooseContact({ selectedContactId, setSelectedContactId 
       <div className="flex flex-col flex-col-reverse lg:flex-row-reverse">
         <div className="flex flex-col mx-2 sm:mx-0 ">
           <label className="mt-3 sm:mt-0"><small>Choose a contact</small></label>
-          <select defaultValue={selectedContactId} className="w-full lg:w-56 focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none border-gray-300 rounded-md" onChange={(e) => setSelectedContactId(event.target.value)}>
+          <select defaultValue={selectedContactId} className="w-full lg:w-56 focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300" onChange={(e) => setSelectedContactId(event.target.value)}>
             {contacts?.map((option) => (
               <option value={option.id} key={option.id}>{option.name} - {option.phone}</option>
             ) )}
           </select>
         </div>
-        <p className="self-center mt-4 w-full sm:max-w-lg">Select the person you'd like us to contact if you don't achieve your goal.</p>
+        <p className="self-center mt-4 w-full sm:max-w-lg dark:text-gray-300">Select the person you'd like us to contact if you don't achieve your goal.</p>
       </div>
     </div>
   )

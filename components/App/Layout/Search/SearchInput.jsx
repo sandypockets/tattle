@@ -12,7 +12,7 @@ export default function SearchInput({ searchText, setSearchText }) {
         </div>
         <input
           id="search-field"
-          className="block h-full w-full bg-gray-50 dark:bg-gray-900 border-transparent py-2 pl-8 pr-3 text-gray-900 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
+          className="block h-full w-full bg-gray-50 dark:bg-black border-transparent py-2 pl-8 pr-3 text-gray-900 dark:text-gray-200 placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-0 focus:border-transparent sm:text-sm"
           placeholder="Search for a goal"
           type="search"
           name="search"

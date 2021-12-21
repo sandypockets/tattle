@@ -13,29 +13,29 @@ export default function YourBillingHistory({ billingHistory }) {
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
             <div className="overflow-hidden sm:rounded-lg">
               <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
+                <thead className="bg-gray-50 dark:bg-gray-900">
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     ID
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Bill type
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Bill date
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider"
                   >
                     Amount
                   </th>
@@ -48,7 +48,7 @@ export default function YourBillingHistory({ billingHistory }) {
                 {billingHistoryArr?.length > 0 && billingHistoryArr.map((bill, index) => {
                   console.log("bill: ", bill)
                   return (
-                    <tr key={bill?.invoice?.id} className={index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                    <tr key={bill?.invoice?.id} className={index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-700'}>
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill?.invoice?.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tattle monthly</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill?.invoice?.created_at).toLocaleDateString('en-CA')}</td>

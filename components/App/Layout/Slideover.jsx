@@ -21,7 +21,7 @@ export default function Slideover({ title, children, open, setOpen }) {
               leaveTo="translate-x-full"
             >
               <div className="w-screen max-w-md">
-                <div className="h-full flex flex-col py-6 bg-white shadow-xl overflow-y-scroll">
+                <div className="h-full flex flex-col py-6 bg-white dark:bg-gray-900 dark:border-l dark:border-gray-600 shadow-xl overflow-y-scroll">
                   <div className="px-4 sm:px-6">
                     <div className="flex items-start justify-between">
                       <Dialog.Title className="text-lg font-medium text-gray-900">{title}</Dialog.Title>

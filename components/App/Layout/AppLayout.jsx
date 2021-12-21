@@ -146,7 +146,7 @@ export default function AppLayout({ children }) {
           {/* Static sidebar for desktop */}
           <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
             {/* Sidebar component */}
-            <div className="border-r border-gray-200 pt-5 flex flex-col flex-grow bg-black overflow-y-auto">
+            <div className="border-r border-gray-200 dark:border-r-0 pt-5 flex flex-col flex-grow bg-black overflow-y-auto">
               <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-yellow-400 sm:text-3xl">
                 Tattle
               </div>
@@ -175,9 +175,9 @@ export default function AppLayout({ children }) {
             </div>
           </div>
 
-          <div className="md:pl-64 bg-gray-50 dark:bg-gray-900">
+          <div className="md:pl-64 bg-gray-50 dark:bg-black">
             <div className="max-w-4xl mx-auto flex flex-col md:px-8 xl:px-0">
-              <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-gray-50 dark:bg-gray-900 border-b border-gray-200 flex">
+              <div className="sticky top-0 z-10 flex-shrink-0 h-16 bg-gray-50 dark:bg-black border-b border-gray-200 flex">
                 <button
                   type="button"
                   className="border-r border-gray-200 px-4 text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 md:hidden"
