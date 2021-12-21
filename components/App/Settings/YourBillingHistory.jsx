@@ -49,10 +49,10 @@ export default function YourBillingHistory({ billingHistory }) {
                   console.log("bill: ", bill)
                   return (
                     <tr key={bill?.invoice?.id} className={index % 2 === 0 ? 'bg-white dark:bg-gray-900' : 'bg-gray-50 dark:bg-gray-700'}>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{bill?.invoice?.id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Tattle monthly</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{new Date(bill?.invoice?.created_at).toLocaleDateString('en-CA')}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${bill?.invoice?.total / 100} USD</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-400">{bill?.invoice?.id}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">Tattle monthly</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">{new Date(bill?.invoice?.created_at).toLocaleDateString('en-CA')}</td>
+                      <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-400">${bill?.invoice?.total / 100} USD</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                         <div className="max-w-min">
                           <Button>
