@@ -132,7 +132,7 @@ export default function AppLayout({ children }) {
                 leaveFrom="translate-x-0"
                 leaveTo="-translate-x-full"
               >
-                <div className="relative max-w-xs w-full bg-black dark:bg-white pt-5 pb-4 flex-1 flex flex-col">
+                <div className="relative max-w-xs w-full bg-black pt-5 pb-4 flex-1 flex flex-col">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-300"
@@ -172,6 +172,26 @@ export default function AppLayout({ children }) {
                           })}
                         </div>
                       ))}
+                      <div className="flex mx-auto">
+                        {!darkMode &&
+                          <button
+                            className="flex"
+                            onClick={() => toggleTheme()}>
+                            <div className="h-6 w-6 text-gray-400">
+                              <MoonIcon/>
+                            </div>
+                            <a className="pl-1 text-gray-400">Dark theme</a>
+                          </button>}
+                        {darkMode &&
+                          <button
+                            className="flex"
+                            onClick={() => toggleTheme()}>
+                            <div className="h-6 w-6 text-gray-400">
+                              <SunIcon/>
+                            </div>
+                            <a className="pl-1 text-gray-400">Light theme</a>
+                          </button>}
+                      </div>
                     </nav>
                   </div>
                 </div>
