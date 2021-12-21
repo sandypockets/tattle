@@ -1,4 +1,5 @@
 import { Fragment, useRef } from 'react'
+import { useRouter } from 'next/router'
 import { Dialog, Transition } from '@headlessui/react'
 import { supabase } from "../../../lib/supabaseClient";
 import { ExclamationIcon } from '@heroicons/react/outline'
@@ -6,11 +7,13 @@ import { cancelSubscription } from "../../../helpers/subscriptions";
 
 export default function ModalCancel({ subscriptionId, cancelModalOpen, setCancelModalOpen }) {
   const cancelButtonRef = useRef(null)
+  const router = useRouter()
 
   function handleCancel() {
     const user = supabase.auth.user()
     setCancelModalOpen(false)
-    return cancelSubscription(subscriptionId, user?.id)
+    cancelSubscription(subscriptionId, user?.id)
+    return router.push('/bye-for-now')
   }
 
   return (
