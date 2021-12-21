@@ -7,7 +7,7 @@ export default function CustomSms({ smsMessageText, setSmsMessageText }) {
       <CardTitle>Custom SMS message</CardTitle>
       <p>If Tattle sends an SMS to one of your contacts, it cycles through a few predefined responses. Some of which you can see here. The field below allows you to use your own custom Tattle SMS message.</p>
       <div className="mt-6">
-        <label htmlFor="custom-sms" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="custom-sms" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Add your custom message
         </label>
         <div className="mt-1">
@@ -15,7 +15,7 @@ export default function CustomSms({ smsMessageText, setSmsMessageText }) {
           rows={4}
           name="custom-sms"
           id="custom-sms"
-          className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md"
+          className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700"
           value={smsMessageText}
           onChange={(e) => setSmsMessageText(e.target.value)}
         />

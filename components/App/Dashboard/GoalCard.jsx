@@ -40,7 +40,7 @@ export default function GoalCard({ goal }) {
           {goal['is_completed'] === false &&
             <>
               <span className="text-gray-400 dark:text-gray-300">Due by: </span>
-              <span className={isUrgent ? 'text-red-500 dark:text-red-300' : 'text-gray-500 dark:text-gray-300'}>{goal['due_date']}</span>
+              <span className={isUrgent ? 'text-red-500 dark:text-red-400' : 'text-gray-500 dark:text-gray-400'}>{goal['due_date']}</span>
             </>
           }
           {goal['is_completed'] === true &&

@@ -4,7 +4,7 @@ import Button from '../../Global/Button'
 
 function Checkmark() {
   return (
-    <div className="h-6 w-6 text-yellow-400">
+    <div className="h-6 w-6 text-yellow-400 dark:text-yellow-500">
       <CheckIcon />
     </div>
   )
@@ -12,7 +12,7 @@ function Checkmark() {
 
 function XMark() {
   return (
-    <div className="h-6 w-6 text-red-400">
+    <div className="h-6 w-6 text-red-400 dark:text-red-500">
       <XIcon />
     </div>
   )

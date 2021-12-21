@@ -91,8 +91,10 @@ export default function ContactsTable({ contacts, setOpen, selectedContact, setS
       </div>
       <Slideover setOpen={setAssignSlideoverOpen} open={assignSlideoverOpen} title="Assign contact">
         <section className="mx-auto">
-          <p className="my-2">Assign {selectedContact && selectedContact.name} to one of your outstanding goals.</p>
-          <select onChange={(e) => setSelectedGoalId(Number(e.target.value))}>
+          <p className="my-2 dark:text-gray-300">Assign {selectedContact && selectedContact.name} to one of your outstanding goals.</p>
+          <select
+            className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
+            onChange={(e) => setSelectedGoalId(Number(e.target.value))}>
             {goals?.length > 0 && goals.map((goal, index) => {
               if (!goal["is_completed"]) {
                 return (

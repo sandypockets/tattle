@@ -20,7 +20,7 @@ export default function EditContactSlideover({ open, setOpen, selectedContact, u
       {user && selectedContact && (
         <div>
           <div>
-            <h3 className="font-bold mb-2">Editing {selectedContact.name} - {selectedContact.phone}</h3>
+            <h3 className="font-bold mb-2 dark:text-gray-300">Editing {selectedContact.name} - {selectedContact.phone}</h3>
             <TextInput value={name} type="text" label="Name" onChangeHandler={(e) => setName(e.target.value)} />
             <TextInput value={phone} type="phone" label="Phone" onChangeHandler={(e) => setPhone(e.target.value)} />
             <div className="max-w-min mx-2 mt-4">
@@ -34,8 +34,8 @@ export default function EditContactSlideover({ open, setOpen, selectedContact, u
         </div>
       )}
       <div className="mx-4 mt-8">
-        <p className="mb-4">Editing a contact's phone number changes the phone number for all goals the contact is assigned to.</p>
-        <p>Once the old phone number is overwritten, it cannot be recovered.</p>
+        <p className="mb-4 dark:text-gray-400">Editing a contact's phone number changes the phone number for all goals the contact is assigned to.</p>
+        <p className="dark:text-gray-400">Once the old phone number is overwritten, it cannot be recovered.</p>
       </div>
     </Slideover>
   )

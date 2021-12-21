@@ -7,7 +7,7 @@ export default function CustomVoice({ voiceMessageText, setVoiceMessageText }) {
       <CardTitle>Custom voice script</CardTitle>
       <p>If Tattle calls one of your contacts, it cycles through a few predefined responses. Some of which you can hear here. The field below allows you to use your own custom Tattle voice message.</p>
       <div className="mt-6">
-        <label htmlFor="custom-voice" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="custom-voice" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
           Add your custom message
         </label>
         <div className="mt-1">
@@ -15,7 +15,7 @@ export default function CustomVoice({ voiceMessageText, setVoiceMessageText }) {
           rows={4}
           name="custom-voice"
           id="custom-voice"
-          className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md"
+          className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700"
           value={voiceMessageText}
           onChange={(e) => setVoiceMessageText(e.target.value)}
         />
