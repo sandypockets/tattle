@@ -86,21 +86,21 @@ export default function SingleGoal() {
               )}
               {goal['is_completed'] === false && (
                 <>
-                  <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h3>
-                  <SmallCardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500 dark:text-red-600 text-md" : "text-black text-md"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft === 1 ? " day" : " days"}</span></SmallCardTitle>
+                  <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">{timeLeft.toString()[0] === '-' ? "Days late" : "Time remaining"}</h3>
+                  <SmallCardTitle><span className={timeLeft.toString()[0] === '-' ? "text-red-500 dark:text-red-600 text-md" : "text-black text-md"}>{timeLeft.toString()[0] === '-' ? timeLeft.toString().slice(1) : timeLeft}{timeLeft.toString().slice(1) === '1' || timeLeft.toString() === '1' ? " day" : " days"}</span></SmallCardTitle>
                 </>
               )}
             </GridCard>
             <GridCard>
-              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">Created on</h3>
+              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Created on</h3>
               <SmallCardTitle>{new Date(goal['created_at']).toLocaleDateString("en-UK")}</SmallCardTitle>
             </GridCard>
             <GridCard>
-              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">Due on</h3>
+              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Due on</h3>
               <SmallCardTitle>{new Date(goal['due_date']).toLocaleDateString("en-UK")}</SmallCardTitle>
             </GridCard>
             <GridCard>
-              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-300">Assigned to</h3>
+              <h3 className="text-xs sm:text-sm text-gray-500 dark:text-gray-400">Assigned to</h3>
               <SmallCardTitle>{contact && contact.name}</SmallCardTitle>
             </GridCard>
           </div>
