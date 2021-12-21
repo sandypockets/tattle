@@ -32,7 +32,7 @@ export default function YourPaymentInfo({ subscriptionData, setCancelModalOpen }
             <div className="w-48">
               <Button>
                 <div className="py-0.5">
-                  Add payment method
+                  Payment method
                 </div>
               </Button>
             </div>
