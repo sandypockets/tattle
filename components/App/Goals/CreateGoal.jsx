@@ -46,7 +46,7 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
           <TextInput type="text" label="Goal title" value={goalTitle} onChangeHandler={(e) => setGoalTitle(e.target.value)} />
         </div>
         <div className="my-6 mx-2">
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700 mx-2">
+          <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mx-2">
             Goal description
           </label>
           <div className="mt-1 mx-2">
@@ -54,25 +54,25 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
       rows={4}
       name="description"
       id="description"
-      className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md"
+      className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
       value={goalDesc}
       onChange={(e) => setGoalDesc(e.target.value)}
     />
           </div>
         </div>
         <div className="mx-2">
-          <label htmlFor="outcomes" className="block text-sm font-medium text-gray-700 mx-2">
+          <label htmlFor="outcomes" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mx-2">
             How will you know that this goal is achieved?
           </label>
           <div className="mt-1 mx-2">
-    <textarea
-      rows={4}
-      name="outcomes"
-      id="outcomes"
-      className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md"
-      value={goalOutcome}
-      onChange={(e) => setGoalOutcome(e.target.value)}
-    />
+            <textarea
+              rows={4}
+              name="outcomes"
+              id="outcomes"
+              className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
+              value={goalOutcome}
+              onChange={(e) => setGoalOutcome(e.target.value)}
+            />
           </div>
         </div>
         <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} />
@@ -89,11 +89,11 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
                 <SingleDatePicker selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
               </div>
             </div>
-            <p className="self-center w-full sm:max-w-lg ml-4 xs:ml-2 sm:ml-0 mb-2 sm:mb-0 lg:mx-4 my-2">If you do not mark your goal as complete by this date, we'll tattle on you.</p>
+            <p className="self-center pr-6 w-full sm:max-w-lg ml-4 xs:ml-2 sm:ml-0 mb-2 sm:mb-0 lg:mx-4 my-2">If you do not mark your goal as complete by this date, we'll tattle on you.</p>
           </div>
         </div>
 
-        <div className="mx-4 pt-6 pb-8 sm:pb-6">
+        <div className="mx-4 px-2 pt-6 pb-8 sm:pb-6">
           <Button
             onClickHandler={() => {
               handleCreateGoal()
