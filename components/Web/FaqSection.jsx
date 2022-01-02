@@ -36,6 +36,7 @@ export default function FaqSection() {
     <div className="bg-white">
       <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-gray-900 text-center">Frequently asked questions</h2>
+        <p className="mt-4 text-base text-gray-500 max-w-2xl mx-auto">Tattle isn't an ordinary service, and we expect that you might have a few questions. Not to worry, we've got answers.</p>
         <div className="mt-12">
           <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-12 lg:grid-cols-3">
             {faqs.map((faq) => (

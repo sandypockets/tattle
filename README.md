@@ -25,18 +25,19 @@ Don't want to rope dear old mom into this? Use any phone number you want, just p
 # Getting started
 This guide will walk you through setting up Tattle locally. Tattle was developed and tested with `Node 14`, and `Node 16`, and `yarn`.
 
+To complete the setup, you will need API keys for the following accounts:
+- Supabase
+- Twilio
+- Stripe
+
 1. Fork and clone this repository.
 2. From the project's root directory, install dependencies:
 ```shell
 yarn
 ```
-3. Copy the contents of the `.env.example` file into a new file called `.env.local` using the following command:
-```shell
-cp .env.example .env.local
-```
-4. Replace the default values with your own Supabase, Twilio, Stripe, email, and phone values.
+
 <details>
-<summary>5. Set up Supabase ( <strong>Click for instructions </strong>)</summary>
+<summary>3. Set up Supabase ( <strong>Click for instructions </strong>)</summary>
 
 ## Set up Supabase
 First, login or sign up to [Supabase](https://supabase.io/), and start a new project. Then, in your Supabase project's dashboard, navigate to the SQL editor. In the following steps, you'll create several queries to run in the editor and create the tables necessary for the project. 
@@ -53,7 +54,7 @@ Now with your database set up, and your environment variables configured in the 
 </details>
 
 <details>
-<summary>6. Set up Stripe ( <strong>Click for instructions</strong> )</summary>
+<summary>4. Set up Stripe ( <strong>Click for instructions</strong> )</summary>
 
 ## Set up Stripe
 The Stripe integration uses a signed webhook to check if the payment was successful. To test those webhooks, you'll need to either use the [Stripe CLI](https://stripe.com/docs/stripe-cli/webhooks), or expose your development environment to the internet with something like [Ngrok](https://ngrok.com/). 
@@ -68,6 +69,13 @@ stripe listen --forward-to localhost:3000/api/v1/webhook
 ```
 
 </details>
+
+5. Copy the contents of the `.env.example` file into a new file called `.env.local` using the following command:
+```shell
+cp .env.example .env.local
+```
+6. Replace the default values with your own Supabase, Twilio, Stripe, email, and phone values.
+
 
 ## Server commands
 Once the server is started, visit [`http://localhost:3000/`](http://localhost:3000/) in your browser to view the app.
@@ -88,7 +96,11 @@ yarn start
 ## Testing
 Components can be developed in isolation using Storybook. This template comes with Storybook 6.3.0
 
-### Using Storybook
+<details>
+<summary>
+    <h3 style="display: inline">Using Storybook</h3>
+</summary>
+
 To start the Storybook development server, run:
 ```bash
 yarn storybook
@@ -103,6 +115,7 @@ If you want to deploy a static version of Storybook, you first need to build it.
 yarn build-storybook
 ```
 If you're deploying to Vercel, specify `storybook-static` as the output directory.
+</details>
 
 ## Dependencies
 - @headlessui/react `^1.4.0`
@@ -128,15 +141,3 @@ If you're deploying to Vercel, specify `storybook-static` as the output director
 - postcss `^7.0.36`
 - serve `11.3.2`
 - tailwindcss `npm:@tailwindcss/postcss7-compat@^2.2.`
-
-## Additional Docs
-- [React.js](https://reactjs.org/docs/getting-started.html)
-- [Next.js](https://nextjs.org/docs/getting-started)
-- [PostCSS](https://github.com/postcss/postcss/tree/main/docs)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [HeroIcons - TailwindLabs](https://github.com/tailwindlabs/heroicons)
-- [HeadlessUI - TailwindLabs](https://github.com/tailwindlabs/headlessui/tree/main/packages/%40headlessui-react)
-- [Supabase](https://supabase.io/)
-- [Storybook](https://storybook.js.org/docs/react/get-started/introduction)
-- [Vercel](https://vercel.com/)
-

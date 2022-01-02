@@ -16,12 +16,12 @@ export default function HeroSection() {
               </p>
             </h1>
             <p className="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
-              When you don't achieve your goal, we'll send an SMS message to your mom to let her know.
+              If you don't achieve your goal, we'll send an SMS message to your mom to let her know.
             </p>
             <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
               <div className="rounded-md shadow">
                 <a
-                  href="#"
+                  href="/signup"
                   className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500 md:py-4 md:text-lg md:px-10"
                 >
                   Sign up

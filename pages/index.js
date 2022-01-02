@@ -1,11 +1,11 @@
 import HeroSection from "../components/Web/HeroSection";
-import ImagesWithDescriptions from "../components/Web/ImagesWithDescriptions";
+import ImagesWithDescriptionsContainer from "../components/Web/ImagesWithDescriptions/ImagesWithDescriptionsContainer";
 import Layout from '../components/Web/Layout/Layout'
 import StatsSection from "../components/Web/StatsSection";
 
 const statProps = {
   'heading': 'Pressuring people to keep their goals since 2021.',
-  'subHeading': 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.',
+  'subHeading': 'A fun and friendly way to stay accountable. What will you achieve next?',
   'statOne': '90%',
   'statOneText': 'goal success rate',
   'statTwo': '180',
@@ -22,7 +22,7 @@ export default function Index() {
         <div className="pt-24">
           <StatsSection statProps={statProps} />
         </div>
-        <ImagesWithDescriptions />
+        <ImagesWithDescriptionsContainer />
       </Layout>
     </>
   )
