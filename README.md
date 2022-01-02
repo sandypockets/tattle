@@ -3,6 +3,9 @@ Tattle is a full stack goal tracking and accountability platform, with a bit of 
 
 Don't want to rope dear old mom into this? Use any phone number you want, just pick someone that will help keep you accountable.
 
+### Using this repository
+This repo contains the code for the Tattle marketing website, as well as web app, which can be logged into via the marketing site. Tattle also offers a native iOS and Android app, though the codebase is stored separately, in the [`tattle-native`](https://github.com/sandypockets/tattle-native) repo.
+
 ## Features
 - Create, edit, delete goals
 - Create edit, delete contacts
@@ -26,9 +29,9 @@ Don't want to rope dear old mom into this? Use any phone number you want, just p
 This guide will walk you through setting up Tattle locally. Tattle was developed and tested with `Node 14`, and `Node 16`, and `yarn`.
 
 To complete the setup, you will need API keys for the following accounts:
-- Supabase
-- Twilio
-- Stripe
+- [Supabase](https://supabase.com/)
+- [Twilio](https://www.twilio.com/)
+- [Stripe](https://stripe.com/)
 
 1. Fork and clone this repository.
 2. From the project's root directory, install dependencies:
@@ -50,7 +53,6 @@ In the root directory of Tattle (not Supabase) navigate to the `/db/schema/` dir
 > It is important to create the schemas in the specified order for relational purposes. 
 
 Now with your database set up, and your environment variables configured in the `.env.local` file, you're ready to start the server.
-
 </details>
 
 <details>
