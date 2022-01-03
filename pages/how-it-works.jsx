@@ -4,6 +4,8 @@ import AddContactSvg from "../components/Web/Graphics/AddContactSvg";
 import AddGoalSvg from "../components/Web/Graphics/AddGoalSvg";
 import DatePickerSvg from "../components/Web/Graphics/DatePickerSvg";
 import TattledSvg from "../components/Web/Graphics/TattledSvg";
+import SignUpNow from "../components/Web/SignUpNow";
+import Link from 'next/link'
 
 const infoItems = [
   {
@@ -41,7 +43,7 @@ const infoItems = [
 export default function HowItWorks() {
   return (
     <Layout>
-      <div className="mt-12 mx-36">
+      <div className="mt-12 mx-28">
         <div className="mb-20 pt-12 ml-6">
           <h1 className="text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">How it works</h1>
           <h2 className="text-3xl">Achieve your biggest goals yet.</h2>
@@ -56,6 +58,19 @@ export default function HowItWorks() {
               {item.svg}
             </article>
           ))}
+        </section>
+        <section className="flex justify-around bg-gray-100 pb-16 rounded-md">
+          <div className="flex flex-col justify-center">
+            <h3 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl lg:text-4xl">Get started today.</h3>
+            <p className="mt-6 max-w-xl text-lg font-light">
+              Still have questions? Check out our{' '}
+              <Link href="faq">
+                <a className="text-blue-600">Frequently Asked Questions page</a>
+              </Link>
+              .
+            </p>
+          </div>
+          <SignUpNow />
         </section>
       </div>
     </Layout>

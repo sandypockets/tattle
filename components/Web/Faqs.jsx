@@ -1,3 +1,5 @@
+import QuestionSvg from "./Graphics/QuestionSvg";
+
 const faqs = [
   {
     id: 1,
@@ -47,23 +49,58 @@ const faqs = [
     answer:
       "Yes. One contact can be assigned to as many goals as you'd like.",
   },
+  {
+    id: 9,
+    question: "Lorem ipsum?",
+    answer:
+      "Lorem ipsum. Dolor.",
+  },
+  {
+    id: 10,
+    question: "Lorem ipsum?",
+    answer:
+      "Lorem ipsum. Dolor.",
+  },
+  {
+    id: 11,
+    question: "Lorem ipsum?",
+    answer:
+      "Lorem ipsum. Dolor.",
+  },
+  {
+    id: 12,
+    question: "Lorem ipsum?",
+    answer:
+      "Lorem ipsum. Dolor.",
+  },
 ]
 
-export default function FaqSection() {
+export default function Faqs() {
   return (
-    <div className="bg-white">
-      <div className="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
-        <h2 className="text-3xl font-extrabold text-gray-900 text-center">Frequently asked questions</h2>
-        <p className="mt-4 text-base text-gray-500 max-w-3xl mx-auto">Tattle isn't an ordinary service, and we expect that you might have a few questions. Not to worry, we've got a few answers too.</p>
-        <div className="mt-12">
-          <dl className="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-12 lg:grid-cols-3">
-            {faqs.map((faq) => (
-              <div key={faq.id}>
-                <dt className="text-lg leading-6 font-medium text-gray-900">{faq.question}</dt>
-                <dd className="mt-2 text-base text-gray-500">{faq.answer}</dd>
-              </div>
-            ))}
-          </dl>
+    <div className="bg-white mx-24 mt-6">
+      <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
+        <div className="lg:grid lg:grid-cols-3 lg:gap-24 lg:relative">
+          <div className="hidden lg:block" />
+          <div className="lg:fixed lg:max-w-md">
+            <h2 className="text-4xl font-extrabold text-gray-900">Frequently asked questions</h2>
+            <p className="mt-4 text-lg text-gray-500">
+              Tattle isn't an ordinary service, and we expect that you might have a few questions.{' '}
+              <p className="pt-1">
+                Not to worry, we've got a few answers too.
+              </p>
+            </p>
+            <QuestionSvg />
+          </div>
+          <div className="mt-12 lg:mt-0 lg:col-span-2 lg:pl-20 bg-scroll">
+            <dl className="space-y-12">
+              {faqs.map((faq) => (
+                <div key={faq.id}>
+                  <dt className="text-lg leading-6 font-medium text-gray-900">{faq.question}</dt>
+                  <dd className="mt-2 text-base text-gray-500">{faq.answer}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </div>
       </div>
     </div>
