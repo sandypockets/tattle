@@ -90,14 +90,20 @@ function createStripeCustomer(userEmail, userResponse){
       console.log("Update error", error);
     });
 }
-export async function handleSignUp(userEmail, userPassword, router) {
+export async function handleSignUp(userEmail, userPassword, userName, router) {
   let userResponse;
   try {
     const {email, password, error, data} = await supabase.auth.signUp(
       {
         email: userEmail,
         password: userPassword,
-      })
+      },
+      {
+        data: {
+          name: userName
+        }
+      }
+      )
     if (data) {
       userResponse = data.user
     }

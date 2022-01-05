@@ -11,6 +11,7 @@ export default function Auth({ registrationType }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [content, setContent] = useState('signup')
+  const [name, setName] = useState()
 
   const router = useRouter()
 
@@ -63,7 +64,17 @@ export default function Auth({ registrationType }) {
           </div>
           <div className="mt-8">
             <div className="mt-6">
-              <form action="#" method="POST" className="space-y-6">
+              <form action="#" method="POST" className="space-y-1">
+                {content === 'signup' && (
+                  <TextInput
+                    label="First name"
+                    type="name"
+                    onChangeHandler={(e) => setName(e.target.value)}
+                    required={true}
+                    value={name}
+                    useDark={false}
+                  />
+                )}
                 <TextInput
                   label="Email address"
                   type="email"
@@ -80,7 +91,7 @@ export default function Auth({ registrationType }) {
                   value={password}
                   useDark={false}
                 />
-                <div className="mx-2">
+                <div className="mx-2 pt-2">
                   <Button type="submit" onClickHandler={(e) => {
                     e.preventDefault()
                     content === 'signup' ? handleSignUp(email, password, router) : handleSignIn(email, password, router)
