@@ -50,28 +50,31 @@ function createCustomMessages(userId) {
       console.log("Create error", error);
     });
 }
-function recordStripeIdStripeTable(userId, stripeCustomerId) {
-  axios
-    .post('/api/v1/stripe-id', {
-      "id": userId,
-      "stripeCustomerId": stripeCustomerId,
-    })
-    .then(function (response) {
-      console.log("Successfully recorded ID: ", response);
-    })
-    .catch(function (error) {
-      console.log("Update error", error);
-    });
-}
+// function recordStripeIdStripeTable(userId, stripeCustomerId) {
+//   axios
+//     .post('/api/v1/stripe-id', {
+//       "id": userId,
+//       "stripeCustomerId": stripeCustomerId,
+//     })
+//     .then(function (response) {
+//       console.log("Successfully recorded ID: ", response);
+//     })
+//     .catch(function (error) {
+//       console.log("Update error", error);
+//     });
+// }
 function recordStripeCustomerId(userResponse, stripeCustomerId) {
+  console.log("USER RESPONSE: !:  ", userResponse)
   axios
-    .post('/api/profiles', {
+    .post('/api/v1/profiles', {
+      "type": "update",
+      "content": "stripeId",
       "id": userResponse.id,
       "stripeCustomerId": stripeCustomerId
       // "email": userResponse.email
     })
     .then(function (response) {
-      recordStripeIdStripeTable(userResponse.id, stripeCustomerId)
+      // recordStripeIdStripeTable(userResponse.id, stripeCustomerId)
     })
     .catch(function (error) {
       console.log("Update error", error);
@@ -93,7 +96,7 @@ function createStripeCustomer(userEmail, userResponse){
 export async function handleSignUp(userEmail, userPassword, userName, router) {
   let userResponse;
   try {
-    const {email, password, error, data} = await supabase.auth.signUp(
+    const {email, password, error, data: result} = await supabase.auth.signUp(
       {
         email: userEmail,
         password: userPassword,
@@ -104,8 +107,8 @@ export async function handleSignUp(userEmail, userPassword, userName, router) {
         }
       }
       )
-    if (data) {
-      userResponse = data.user
+    if (result) {
+      userResponse = result.user
     }
     const userSession = await supabase.auth.session()
     if (userSession) {
@@ -118,9 +121,9 @@ export async function handleSignUp(userEmail, userPassword, userName, router) {
   } finally {
     if (userResponse) {
       createStripeCustomer(userEmail, userResponse)
-      setTimeout(() => {
-        router.push('/app')
-      }, 1000)
+      // setTimeout(() => {
+      //   router.push('/app')
+      // }, 1000)
     }
   }
 }
