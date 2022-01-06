@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useRouter } from "next/router";
+
 const redirectUrl = process.env.NEXT_PUBLIC_REDIRECT_URL
 
 export default function CheckoutForm({ stripeCustomerId, options }) {
@@ -12,10 +14,11 @@ export default function CheckoutForm({ stripeCustomerId, options }) {
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
-    clientSecret && stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+    clientSecret && stripe?.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
       switch (paymentIntent.status) {
         case "succeeded":
           setMessage("Payment succeeded!");
+
           break;
         case "processing":
           setMessage("Your payment is processing.");
