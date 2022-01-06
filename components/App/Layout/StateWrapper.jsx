@@ -47,11 +47,11 @@ export default function StateWrapper({ children }) {
   if (hasSubscription === false) {
     return (
       <>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 mt-16">
-          <div className="mt-8 mb-12 lg:mb-0 mx-auto max-w-sm">
+        <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 mt-16 sm:px-0 md:px-10">
+          <div className="mt-8 mb-12 lg:mb-0 mx-auto w-full lg:max-w-sm sm:px-6 md:px-0">
             <h1 className="text-4xl font-extrabold text-gray-900 mb-6 px-1">Tattle monthly</h1>
             <h4 className="-mt-6 text-md px-2">$3 USD / month. Cancel anytime.</h4>
-            <div className="my-6 grid grid-cols-2 max-w-1xs bg-gray-100 p-4">
+            <div className="my-6 grid grid-cols-2 w-full lg:max-w-1xs bg-gray-100 p-4">
               <div>
                 <p className="font-thin">Subtotal:</p>
                 <p className="font-thin">Taxes:</p>
