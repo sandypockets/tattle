@@ -59,7 +59,7 @@ Now with your database set up, and your environment variables configured in the 
 <summary>4. Set up Stripe ( <strong>Click for instructions</strong> )</summary>
 
 ## Set up Stripe
-The Stripe integration uses a signed webhook to check if the payment was successful. To test those webhooks, you'll need to either use the [Stripe CLI](https://stripe.com/docs/stripe-cli/webhooks), or expose your development environment to the internet with something like [Ngrok](https://ngrok.com/). 
+The Stripe integration uses a signed webhook to check if the payment was successful. To test those webhooks, you'll need to either use the [Stripe CLI](https://stripe.com/docs/stripe-cli/webhooks), or expose your development environment to the internet over `https` with something like [Ngrok](https://ngrok.com/). 
 
 > If you're not using the Stripe CLI, your webhook endpoint must be `https`
 
@@ -69,6 +69,17 @@ If you are using the Stripe CLI, the app listens for Stripe webhooks at the `/ap
 ```shell
 stripe listen --forward-to localhost:3000/api/v1/webhook
 ```
+
+### Webhooks
+The app uses webhooks from Stripe to help keep track of events. Webhooks are required whether using the Stripe CLI or not. 
+
+At the time of this writing, to set up webhooks in Stripe:
+
+1. Login to your Stripe dashboard
+2. Click on **Developers** (near the "Test mode" toggle)
+3. Click **Webhooks** from the nav on the left
+4. Click **Add endpoint**
+5. Your endpoint should point to something like `your-ngrok-domain.io/api/v1/webhook`
 
 </details>
 
