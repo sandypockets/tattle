@@ -19,7 +19,7 @@ export default function YourSubscription({ subscriptionData }) {
             </p>
           <div className="mt-8">
             <div className="flex items-center">
-              <h4 className="flex-shrink-0 pr-4 bg-white dark:bg-gray-800 text-sm tracking-wider font-bold uppercase text-yellow-400">
+              <h4 className="flex-shrink-0 pr-4 bg-white dark:bg-gray-800 text-sm tracking-wider font-bold uppercase text-yellow-400 dark:text-yellow-300">
                 What's included
               </h4>
               <div className="flex-1 border-t-2 border-gray-700" />
@@ -28,7 +28,7 @@ export default function YourSubscription({ subscriptionData }) {
               {includedFeatures.map((feature) => (
                 <li key={feature} className="flex items-start lg:col-span-1">
                   <div className="flex-shrink-0">
-                    <CheckCircleIcon className="h-5 w-5 text-yellow-400" aria-hidden="true" />
+                    <CheckCircleIcon className="h-5 w-5 text-yellow-400 dark:text-yellow-300" aria-hidden="true" />
                   </div>
                   <p className="ml-3 text-sm text-gray-700 dark:text-gray-300">{feature}</p>
                 </li>

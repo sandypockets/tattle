@@ -68,11 +68,12 @@ export default function New() {
               <GoalsEmptyState setState={setDisplayFormType} />
             }
             {/*{!goals || goals?.length < 1 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}*/}
-            {displayFormType === 'create' && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
+            {displayFormType === 'create' &&
+              <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
             {!contacts || contacts?.length === 0 && (
               <>
                 <Banner>
-                  <p className="mb-6">You need to add a contact before you can create a goal.</p>
+                  <p className="mt-1">You need to add a contact before you can create a goal.</p>
                 </Banner>
                 <ContactsEmptyState setState={setContactFormState} />
               </>

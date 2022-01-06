@@ -60,23 +60,28 @@ export default function Index() {
     return (
       <AppLayout>
         <StateWrapper>
-          {loading ? (<AppLoadingState />) : (
+          {loading ? <AppLoadingState /> : (
             <>
               <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
-              {displayFormType === 'create' && <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
+              {displayFormType === 'create' &&
+                <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
               <div className="hidden lg:block">
-                {goals?.length > 0 && <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}
+                {goals?.length > 0 &&
+                  <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 lg:hidden">
-                {goals?.map((goal, index) => (
-                  <div key={index}>
+                {goals?.map((goal) => (
+                  <div key={goal.id}>
                     <GoalCard goal={goal} />
                   </div>
                 ))}
               </div>
-              {!contacts || contacts?.length === 0 && <HasNoContactsBanner />}
-              {goals?.length < 1 && <IntroCard/>}
-              {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 && <GoalsEmptyState setState={setDisplayFormType} />}
+              {!contacts || contacts?.length === 0 &&
+                <HasNoContactsBanner />}
+              {goals?.length < 1 &&
+                <IntroCard/>}
+              {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 &&
+                <GoalsEmptyState setState={setDisplayFormType} />}
               <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
             </>
           )}

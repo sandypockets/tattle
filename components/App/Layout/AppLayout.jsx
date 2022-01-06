@@ -153,7 +153,7 @@ export default function AppLayout({ children }) {
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-yellow-400 sm:text-3xl">
+                  <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-yellow-300 sm:text-3xl">
                     Tattle
                   </div>
                   <div className="mt-5 flex-1 h-0 overflow-y-auto">
@@ -203,18 +203,18 @@ export default function AppLayout({ children }) {
           <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
             {/* Sidebar component */}
             <div className="border-r border-gray-200 dark:border-r-0 pt-5 flex flex-col flex-grow bg-black overflow-y-auto">
-              <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-yellow-400 sm:text-3xl">
+              <div className="flex-shrink-0 px-4 flex items-center text-2xl font-extrabold text-yellow-300 sm:text-3xl">
                 Tattle
               </div>
               <div className="flex-grow mt-5 flex flex-col">
                 <nav className="flex-1 px-2 pb-4 space-y-1">
-                  {navigation.map((item, index) => (
-                    <div key={index}>
+                  {navigation.map((item) => (
+                    <div key={item.href}>
                       <DesktopLinkWithIcon item={item} currentPage={currentPage} />
-                      {subNavigation.map((subItem, subItemIndex) => {
+                      {subNavigation.map((subItem) => {
                         if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
                           return (
-                            <div key={subItemIndex}>
+                            <div key={subItem.href}>
                               <DesktopLinkNoIcon item={subItem} currentPage={currentPage} />
                             </div>
                           )

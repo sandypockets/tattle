@@ -50,14 +50,14 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
             Goal description
           </label>
           <div className="mt-1 mx-2">
-    <textarea
-      rows={4}
-      name="description"
-      id="description"
-      className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
-      value={goalDesc}
-      onChange={(e) => setGoalDesc(e.target.value)}
-    />
+            <textarea
+              rows={4}
+              name="description"
+              id="description"
+              className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
+              value={goalDesc}
+              onChange={(e) => setGoalDesc(e.target.value)}
+            />
           </div>
         </div>
         <div className="mx-2">

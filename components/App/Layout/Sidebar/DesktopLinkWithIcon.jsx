@@ -11,7 +11,7 @@ export default function DesktopLinkWithIcon({ item, currentPage }) {
         key={item.href}
         className={classNames(
           item.href === currentPage
-            ? 'bg-gray-900 text-yellow-400' : 'text-gray-400 hover:bg-gray-900 hover:text-yellow-400',
+            ? 'bg-gray-900 text-yellow-300' : 'text-gray-400 hover:bg-gray-900 hover:text-yellow-300',
           'group rounded-md py-2 px-2 flex items-center text-sm font-medium'
         )}
       >
