@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 export default function HeroSection() {
   return (
     <div>
@@ -5,35 +7,37 @@ export default function HeroSection() {
         <div className="mx-auto w-full max-w-7xl pt-16 pb-20 text-center lg:py-48 lg:text-left">
           <div className="px-4 lg:w-1/2 sm:px-8 xl:pr-16">
             <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-5xl">
-              <p>
+              <div>
                 <span className="block inline">Achieve your</span>{' '}
-                <span className="block text-yellow-400 inline">goals.</span>
-              </p>
-              <p>
+                <span className="block underline decoration-yellow-300 inline">goals</span><span>.</span>
+              </div>
+              <div>
                 <span className="block inline">Or we'll</span>{' '}
-                <span className="block text-yellow-400 inline">tattle</span>{' '}
+                <span className="block underline decoration-yellow-300 inline">tattle</span>{' '}
                 <span className="block inline">on you.</span>
-              </p>
+              </div>
             </h1>
             <p className="mt-3 max-w-md mx-auto text-lg text-gray-500 sm:text-xl md:mt-5 md:max-w-3xl">
               If you don't achieve your goal, we'll send an SMS message to your mom to let her know.
             </p>
             <div className="mt-10 sm:flex sm:justify-center lg:justify-start">
               <div className="rounded-md shadow">
-                <a
-                  href="/signup"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-yellow-400 hover:bg-yellow-500 md:py-4 md:text-lg md:px-10"
-                >
-                  Sign up
-                </a>
+                <Link href="/signup">
+                  <a
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black bg-yellow-300 hover:bg-yellow-400 md:py-4 md:text-lg md:px-10"
+                  >
+                    Sign up
+                  </a>
+                </Link>
               </div>
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
-                <a
-                  href="/how-it-works"
-                  className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-yellow-400 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
-                >
-                  Learn more
-                </a>
+                <Link href="/#how-it-works">
+                  <a
+                    className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black bg-yellow-300 hover:bg-yellow-400 md:py-4 md:text-lg md:px-10"
+                  >
+                    Learn more
+                  </a>
+                </Link>
               </div>
             </div>
           </div>

@@ -6,6 +6,7 @@ export default function StatsSection({ statProps, showHeadings=true }) {
     statTwo, statTwoText,
     statThree, statThreeText
   } = statProps
+
   return (
     <div className="bg-white">
       {showHeadings && (

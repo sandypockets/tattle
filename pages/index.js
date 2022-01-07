@@ -1,7 +1,7 @@
 import HeroSection from "../components/Web/HeroSection";
-import ImagesWithDescriptionsContainer from "../components/Web/ImagesWithDescriptions/ImagesWithDescriptionsContainer";
 import Layout from '../components/Web/Layout/Layout'
 import StatsSection from "../components/Web/StatsSection";
+import HowItWorks from "./how-it-works";
 
 const statProps = {
   'heading': 'Pressuring people to keep their goals since 2021.',
@@ -22,7 +22,7 @@ export default function Index() {
         <div className="pt-24">
           <StatsSection statProps={statProps} />
         </div>
-        <ImagesWithDescriptionsContainer />
+        <HowItWorks />
       </Layout>
     </>
   )
