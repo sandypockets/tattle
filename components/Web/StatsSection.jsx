@@ -29,15 +29,15 @@ export default function StatsSection({ statProps, showHeadings=true }) {
               <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
                 <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">{statOneText}</dt>
-                  <dd className="order-1 text-5xl font-extrabold text-yellow-400">{statOne}</dd>
+                  <dd className="order-1 text-5xl font-extrabold text-yellow-300">{statOne}</dd>
                 </div>
                 <div className="flex flex-col border-t border-b border-gray-100 p-6 text-center sm:border-0 sm:border-l sm:border-r">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">{statTwoText}</dt>
-                  <dd className="order-1 text-5xl font-extrabold text-yellow-400">{statTwo}</dd>
+                  <dd className="order-1 text-5xl font-extrabold text-yellow-300">{statTwo}</dd>
                 </div>
                 <div className="flex flex-col border-t border-gray-100 p-6 text-center sm:border-0 sm:border-l">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500">{statThreeText}</dt>
-                  <dd className="order-1 text-5xl font-extrabold text-yellow-400">{statThree}</dd>
+                  <dd className="order-1 text-5xl font-extrabold text-yellow-300">{statThree}</dd>
                 </div>
               </dl>
             </div>
