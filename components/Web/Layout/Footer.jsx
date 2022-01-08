@@ -1,7 +1,8 @@
 import Link from 'next/link'
 
 const navigation = [
-  { name: 'Terms of Service', href: '/terms' },
+  { name: 'Terms', href: '/terms' },
+  { name: 'Privacy', href: '/privacy' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Login', href: '/signin' },

@@ -45,7 +45,7 @@ export default function TermsPage() {
         </p>
         <h2 className="font-extrabold text-3xl mt-12">Privacy</h2>
         <p className="my-4">
-          Tattle takes your privacy very seriously. We share your personal information only in a few rare occasions explained in our Privacy Policy. For example, we might need to share your data with law enforcement authorities. By using the Service, you agree to the collection and use of information about you and your use of the Service in accordance with our Privacy Policy
+          Tattle takes your privacy very seriously. We share your personal information only in a few rare occasions explained in our Privacy Policy. For example, we might need to share your data with law enforcement authorities. By using the Service, you agree to the collection and use of information about you and your use of the Service in accordance with our Privacy Policy.
         </p>
         <h2 className="font-extrabold text-3xl mt-12">Software in the Service</h2>
         <p className="my-4">
