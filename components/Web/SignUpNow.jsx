@@ -14,7 +14,7 @@ export default function SignUpNow() {
     <div className="mt-8">
       <div className="mt-6 w-96">
         <form action="#" method="POST" className="space-y-1">
-          <TextInput label="FirstName" type="first-name" onChangeHandler={(e) => setName(e.target.value)} required={true} value={name} />
+          <TextInput label="First name" type="first-name" onChangeHandler={(e) => setName(e.target.value)} required={true} value={name} />
           <TextInput label="Email address" type="email" onChangeHandler={(e) => setEmail(e.target.value)} required={true} value={email} />
           <TextInput label="Password" type="password" onChangeHandler={(e) => setPassword(e.target.value)} required={true} value={password} />
           <div className="mx-2 pt-4">

@@ -25,7 +25,7 @@ export default function PricingSection() {
                 </p>
                 <div className="mt-8">
                   <div className="flex items-center">
-                    <h4 className="flex-shrink-0 pr-4 bg-white text-sm tracking-wider font-bold uppercase text-yellow-300">
+                    <h4 className="flex-shrink-0 pr-4 bg-white text-sm tracking-wider font-bold uppercase text-black">
                       What's included
                     </h4>
                     <div className="flex-1 border-t-2 border-gray-200" />
