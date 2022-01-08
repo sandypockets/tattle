@@ -48,22 +48,24 @@ export default function PricingSection() {
                   <span>$3 USD</span>
                   <span className="ml-3 text-xl font-medium text-gray-500"> / month</span>
                 </div>
-                <p className="mt-4 text-sm">
-                  <a href="#" className="font-medium text-gray-500 underline">
-                    Learn more about Tattle
-                  </a>
-                </p>
                 <div className="mt-6">
                   <div className="rounded-md shadow">
                     <Link href="/signup">
                       <a
                         className="flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-black bg-yellow-300 hover:bg-yellow-400"
                       >
-                        Subscribe
+                        Start 14 day trial
                       </a>
                     </Link>
                   </div>
                 </div>
+
+                <div className="mt-4 text-sm">
+                  <span className="font-medium text-gray-900">
+                    Payments powered by Stripe
+                  </span>
+                </div>
+
               </div>
             </div>
           </div>

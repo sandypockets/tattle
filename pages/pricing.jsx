@@ -7,14 +7,11 @@ import PersonWithReceiptSvg from "../components/Web/Graphics/PersonWithReceiptSv
 export default function Pricing() {
   return (
     <Layout>
-      <div className="bg-white mt-12">
+      <div className="bg-white mt-16 mx-4">
         <div className="mx-28 mt-24 pb-6">
-          <h2 className="text-4xl font-extrabold text-gray-900">Pricing</h2>
-          <p className="mt-4 text-lg text-gray-500">
-            Tattle isn't an ordinary service, and we expect that you might have a few questions.{' '}
-            <p className="pt-1">
-              Not to worry, we've got a few answers too.
-            </p>
+          <h2 className="text-5xl font-extrabold text-gray-900">Pricing</h2>
+          <p className="mt-4 text-2xl text-gray-500">
+            We're big fans of nonsense, but never when it comes to pricing.
           </p>
         </div>
         <PricingSection />
@@ -23,9 +20,9 @@ export default function Pricing() {
           <div className="flex flex-col justify-center max-w-2xl">
             <h2 className="text-4xl font-extrabold text-gray-900">One plan to rule them all</h2>
             <p className="mt-4 text-lg text-gray-500">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              We don't believe in tiered pricing, or gating features to certain users.
               <p className="pt-1">
-                Ut enim ad minim veniam
+                We offer a single plan, with full access to the platform, and any new features we release.
               </p>
             </p>
           </div>

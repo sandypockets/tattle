@@ -82,7 +82,7 @@ export default function Faqs() {
         <div className="lg:grid lg:grid-cols-3 lg:gap-24 lg:relative">
           <div className="hidden lg:block" />
           <div className="lg:fixed lg:max-w-md">
-            <h2 className="text-4xl font-extrabold text-gray-900">Frequently asked questions</h2>
+            <h2 className="text-5xl font-extrabold text-gray-900">Frequently asked questions</h2>
             <p className="mt-4 text-lg text-gray-500">
               Tattle isn't an ordinary service, and we expect that you might have a few questions.{' '}
               <p className="pt-1">

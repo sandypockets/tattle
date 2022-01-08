@@ -1,7 +1,7 @@
 import HeroSection from "../components/Web/HeroSection";
 import Layout from '../components/Web/Layout/Layout'
 import StatsSection from "../components/Web/StatsSection";
-import HowItWorks from "./how-it-works";
+import HowItWorks from "../components/Web/HowItWorks";
 
 const statProps = {
   'heading': 'Pressuring people to keep their goals since 2021.',
