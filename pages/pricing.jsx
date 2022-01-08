@@ -33,7 +33,7 @@ export default function Pricing() {
 
         <section className="flex justify-around bg-gray-100 pb-16 rounded-lg mx-28 shadow-md">
           <div className="flex flex-col justify-center">
-            <h3 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl lg:text-4xl">Get started today.</h3>
+            <h3 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl lg:text-4xl">Start your 14 day free trial today</h3>
             <p className="mt-6 max-w-xl text-lg font-light">
               Still have questions? Check out our{' '}
               <Link href="faq">
