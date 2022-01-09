@@ -8,7 +8,7 @@ export default function Pricing() {
     <Layout>
       <div className="bg-white mt-16 mx-4">
         <div className="mx-28 mt-24 pb-6">
-          <h2 className="text-5xl font-extrabold text-gray-900">Pricing</h2>
+          <h2 id="pricing" className="text-5xl font-extrabold text-gray-900">Pricing</h2>
           <p className="mt-4 text-2xl text-gray-500">
             We're big fans of nonsense, but never when it comes to pricing.
           </p>

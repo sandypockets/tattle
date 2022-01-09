@@ -116,16 +116,19 @@ export default function Faqs() {
           </div>
           <div className="lg:mt-0 lg:col-span-2 lg:pl-20 bg-scroll">
             {faqs.map((faq, index) => (
-              <div key={faq[0].faqTitle} className="mb-12">
-                <h2 className="text-xl font-extrabold mb-6 underline decoration-yellow-300 decoration-8 mt-12 lg:mt-0">{faq[0].faqTitle}</h2>
-                <dl className="space-y-12">
-                  {faq[1].map((subFaq) => (
-                    <div key={subFaq.id}>
-                      <dt className="text-lg leading-6 font-medium text-gray-900">{subFaq.question}</dt>
-                      <dd className="mt-2 text-base text-gray-500">{subFaq.answer}</dd>
-                    </div>
-                  ))}
-                </dl>
+              <div key={faq[0].faqTitle}>
+                <div id={faq[0].faqTitle.toLowerCase()} className="pb-16"/>
+                <article>
+                  <h2 className="text-xl font-extrabold mb-6 underline decoration-yellow-300 decoration-8 mt-12 lg:mt-0">{faq[0].faqTitle}</h2>
+                  <dl className="space-y-12">
+                    {faq[1].map((subFaq) => (
+                      <div key={subFaq.id}>
+                        <dt className="text-lg leading-6 font-medium text-gray-900">{subFaq.question}</dt>
+                        <dd className="mt-2 text-base text-gray-500">{subFaq.answer}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                </article>
               </div>
             ))}
           </div>

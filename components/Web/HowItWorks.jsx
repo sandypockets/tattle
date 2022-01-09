@@ -49,15 +49,18 @@ export default function HowItWorks() {
         </div>
         <section>
           {infoItems.map((item, index) => (
-            <article key={item.id} className={index % 2 !== 0 ? "flex justify-around py-4 flex-col-reverse lg:flex-row" : "flex justify-around lg:flex-row-reverse py-4 flex-col-reverse"}>
-              <div className="max-w-2xl flex flex-col justify-center">
-                <h3 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl lg:text-4xl">{item.header}</h3>
-                <p className="mt-6 max-w-xl text-xl font-light">{item.body}</p>
-              </div>
-              <div className="mx-auto">
-                {item.svg}
-              </div>
-            </article>
+            <div key={item.id}>
+              <div className="pt-6" id={item.header.toLowerCase().split(' ').join('-').slice(0, -1)} />
+              <article className={index % 2 !== 0 ? "flex justify-around py-4 flex-col-reverse lg:flex-row" : "flex justify-around lg:flex-row-reverse py-4 flex-col-reverse"}>
+                <div className="max-w-2xl flex flex-col justify-center">
+                  <h3 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl md:text-5xl lg:text-4xl">{item.header}</h3>
+                  <p className="mt-6 max-w-xl text-xl font-light">{item.body}</p>
+                </div>
+                <div className="mx-auto">
+                  {item.svg}
+                </div>
+              </article>
+            </div>
           ))}
         </section>
         <SignUpFooter />
