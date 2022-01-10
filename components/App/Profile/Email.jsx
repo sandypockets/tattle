@@ -7,8 +7,8 @@ import TextInput from "../../Global/TextInput";
 import { updateEmail } from "../../../helpers/profile";
 
 export default function Email({ setIsSuccess, setSectionName, setShowMessage }) {
-  const [email, setEmail] = useState()
-  const [user, setUser] = useState()
+  const [email, setEmail] = useState('')
+  const [user, setUser] = useState({})
   const [loading, setLoading] = useState(false)
 
   async function updateAuthEmail(email) {
@@ -40,29 +40,31 @@ export default function Email({ setIsSuccess, setSectionName, setShowMessage }) 
 
   return (
     <Card>
-      <div className="flex justify-between flex-col sm:flex-row">
-        <div className="mb-2 sm:mb-0">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
+        <div>
           <CardTitle>Email</CardTitle>
-          <p className="ml-2">Update your email address.</p>
+          <p>Update your email address.</p>
         </div>
-        <div className="flex lg:mr-12 flex-col sm:flex-row">
-          <div className="sm:w-48 lg:w-72">
-            <TextInput value={email} type={email} label="Email" onChangeHandler={(e) => setEmail(e.target.value)} />
-          </div>
-          <div className="flex justify-end sm:flex-col sm:justify-center md:flex-row md:justify-end mr-2 sm:mr-0">
-            <div className="max-w-min mt-2 md:mt-8">
-              <Button
-                onClickHandler={() => {
-                  email && updateEmail(user['id'], email)
-                  user && updateAuthEmail(email)
-                }}
-                disabled={loading}
-                type="submit"
-              >
-                Save
-              </Button>
+        <div className="flex sm:w-full mt-4 lg:justify-end">
+          <form className="flex flex-col w-full">
+            <div className="w-full">
+              <TextInput value={email} type={email} label="Email" onChangeHandler={(e) => setEmail(e.target.value)} />
             </div>
-          </div>
+            <div className="flex justify-end">
+              <div className="w-full mx-2 mt-2">
+                <Button
+                  onClickHandler={() => {
+                    email && updateEmail(user['id'], email)
+                    user && updateAuthEmail(email)
+                  }}
+                  disabled={loading}
+                  type="submit"
+                >
+                  Update
+                </Button>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </Card>

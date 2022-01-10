@@ -6,8 +6,8 @@ import CardTitle from "../../Global/CardTitle";
 import TextInput from "../../Global/TextInput";
 
 export default function Password({ setShowMessage, setIsSuccess, setSectionName }) {
-  const [password, setPassword] = useState()
-  const [confirmPassword, setConfirmPassword] = useState()
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
 
   async function updateAuthPassword(password, confirmPassword) {
@@ -39,25 +39,25 @@ export default function Password({ setShowMessage, setIsSuccess, setSectionName 
 
   return (
     <Card>
-      <div className="flex justify-between flex-col xs:flex-row">
+      <div className="grid grid-cols-1 lg:grid-cols-2">
         <div>
-          <CardTitle className="mb-2 sm:mb-0">Password</CardTitle>
-          <p className="ml-2">Update your password. Minimum 8 characters.</p>
+          <CardTitle>Password</CardTitle>
+          <p>Update your password. Minimum 8 characters.</p>
         </div>
-        <div className="flex justify-end lg:mr-10">
-          <div className="flex flex-col xl:flex-row">
-            <div className="w-full xs:w-64 sm:w-56">
+        <div className="flex w-full mt-4 lg:justify-end">
+          <form className="flex flex-col w-full">
+            <div className="w-full">
               <TextInput value={password} type={"password"} label="New password" onChangeHandler={(e) => setPassword(e.target.value)} />
             </div>
-            <div className="w-full xs:w-64 sm:w-56">
+            <div className="w-full">
               <TextInput value={confirmPassword} type={"password"} label="Confirm new password" onChangeHandler={(e) => setConfirmPassword(e.target.value)} />
             </div>
-            <div className="flex justify-end mr-2 lg:mr-0">
-              <div className="max-w-min mt-2 xl:mt-8">
+            <div className="flex justify-end">
+              <div className="w-full mx-2 mt-2">
                 <Button type="submit" disabled={loading} onClickHandler={() => updateAuthPassword(password, confirmPassword)}>{loading ? 'Saving...' : 'Update'}</Button>
               </div>
             </div>
-          </div>
+          </form>
         </div>
       </div>
     </Card>
