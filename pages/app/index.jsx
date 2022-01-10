@@ -97,7 +97,7 @@ export default function Index() {
             ) : (
               <>
                 {contacts.length < 1 && <ContactsEmptyState setState={newContactRedirect} />}
-                <GoalsEmptyState setState={newGoalRedirect} />
+                {contacts.length > 0 && <GoalsEmptyState setState={newGoalRedirect}/>}
               </>
             )}
           </StateWrapper>

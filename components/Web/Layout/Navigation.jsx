@@ -1,6 +1,7 @@
 import { Disclosure } from '@headlessui/react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
+import {supabase} from "../../../lib/supabaseClient";
 
 const navItems = [
     {
@@ -16,6 +17,8 @@ const navItems = [
     href: '/pricing',
   },
 ]
+
+const user = supabase.auth.user()
 
 export default function Navigation({ currentUrl }) {
   return (
@@ -64,7 +67,7 @@ export default function Navigation({ currentUrl }) {
                     </button>
 
                     <button className="bg-yellow-300 hover:bg-yellow-400 rounded-lg h-min py-1 px-2">
-                      <Link href="/signin">
+                      <Link href={user?.id ? "/app" : "/signin"}>
                         <a
                           className="inline-flex items-center text-sm font-medium pb-1"
                         >

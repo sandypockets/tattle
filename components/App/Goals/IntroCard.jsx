@@ -1,12 +1,15 @@
 import CardTitle from "../../Global/CardTitle";
 import Card from "../../Global/Card";
 
-export default function IntroCard() {
+export default function IntroCard({ contacts }) {
   return (
     <Card>
       <CardTitle>Manage your goals</CardTitle>
-      <p className="my-4">Add your mom, your best friend, or anyone else that will help keep you accountable.</p>
-      <p>After saving a contact, you can assign the contact to any goals you create.</p>
+      {
+        !contacts || contacts?.length ?
+          <p className="my-4">Create a new goal, or modify an existing one.</p> :
+          <p>After you have at least 1 contact, then you can create or manage your existing goals here.</p>
+      }
     </Card>
   )
 }

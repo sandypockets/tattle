@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
 import { getUserPlan } from "../../../helpers/subscriptions";
 import CheckoutPage from "../Checkout/CheckoutPage";
+import AppLoadingState from "../Utils/AppLoadingState";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
@@ -14,8 +15,6 @@ export default function StateWrapper({ children }) {
   const currentTImeUnix = new Date().getTime()
   const trialPeriod = 1219000000
   const daysLeftInTrial = Math.round(((createdAtUnix + trialPeriod) - currentTImeUnix) / 86400000)
-
-
 
   useEffect(() => {
     if (user?.id) {
@@ -34,18 +33,20 @@ export default function StateWrapper({ children }) {
 
   useEffect(() => {
     if (hasSubscription !== null && sessionIstrial !== null) {
-      setLoading(false)
+      setTimeout(() => {
+        setLoading(false)
+      }, 300)
     }
   }, [hasSubscription, sessionIstrial])
 
-  if (!sessionIstrial && !hasSubscription) {
+  if (!loading && !sessionIstrial && !hasSubscription) {
     return (
       <CheckoutPage session={session} />
     )
-  }
-  else {
+  } else {
     return (
       <div>
+        {loading && <AppLoadingState />}
         {!loading && children}
         <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
           <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">

@@ -40,22 +40,20 @@ export default function Index() {
   }
 
   useEffect(() => {
-    getUserGoals()
+    getUserGoals().then(() => getUserContacts())
   }, [])
 
   useEffect(() => {
-    getUserContacts()
-  }, [])
-
-  useEffect(() => {
-    if (goals) {
+    if (goals && contacts) {
       setNumOfCols(goals?.length <= 4 ? goals?.length : 4)
       sortOnce(goals, 'id', false)
-      user && setTimeout(() => {
+    }
+    if (user && goals && contacts) {
+      setTimeout(() => {
         setLoading(false)
       }, 300)
     }
-  }, [goals])
+  }, [goals, contacts])
 
     return (
       <AppLayout>
@@ -79,7 +77,7 @@ export default function Index() {
               {!contacts || contacts?.length === 0 &&
                 <HasNoContactsBanner />}
               {goals?.length < 1 &&
-                <IntroCard/>}
+                <IntroCard contacts={contacts} />}
               {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 &&
                 <GoalsEmptyState setState={setDisplayFormType} />}
               <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
