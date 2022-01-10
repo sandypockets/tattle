@@ -87,13 +87,14 @@ async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId
 }
 
 export async function getContactData(contactId, goalId, goalTitle, ownerName, ownerId){
+  let outputData = {}
   try {
     const { data, error, status } = await supabase
       .from('contacts')
       .select('name, phone, id')
       .eq('id', contactId)
     if (data) {
-      return {
+      outputData = {
         "phone": data[0].phone,
         "contact_id": data[0]['id'],
         "contact_name": data[0]['name'],
@@ -102,12 +103,33 @@ export async function getContactData(contactId, goalId, goalTitle, ownerName, ow
         "owner_name": ownerName,
         "owner_id": ownerId
       }
+
+      try {
+        const { data, error, status } = await supabase
+          .from('profiles')
+          .select('username')
+          .eq('id', ownerId)
+        if (data) {
+          console.log("Data! ", data[0])
+          outputData = {
+            ...outputData,
+            "owner_name": data[0]['username']
+          }
+          console.log("outputData! ", outputData)
+          return outputData;
+        }
+        if (error) console.error(error)
+      } catch (err) {
+        console.error(err)
+      }
     }
     if (error) {
       console.error("contact Error: ", error)
     }
   } catch (err) {
     console.error(err)
+  } finally {
+
   }
 }
 

@@ -94,7 +94,7 @@ export default function Auth({ registrationType }) {
                 <div className="mx-2 pt-2">
                   <Button type="submit" onClickHandler={(e) => {
                     e.preventDefault()
-                    content === 'signup' ? handleSignUp(email, password, router).then(() => setTimeout(() => { return router.push('/app') }, 1000)) : handleSignIn(email, password, router)
+                    content === 'signup' ? handleSignUp(email, password, name).then(() => setTimeout(() => { return router.push('/app') }, 1000)) : handleSignIn(email, password, router)
                   }}>
                     {content === 'signin' ? "Sign in" : "Sign up"}
                   </Button>

@@ -93,7 +93,7 @@ function createStripeCustomer(userEmail, userResponse){
       console.log("Update error", error);
     });
 }
-export async function handleSignUp(userEmail, userPassword, userName, router) {
+export async function handleSignUp(userEmail, userPassword, userName) {
   let userResponse;
   try {
     const {email, password, error, data: result} = await supabase.auth.signUp(
@@ -121,9 +121,14 @@ export async function handleSignUp(userEmail, userPassword, userName, router) {
   } finally {
     if (userResponse) {
       createStripeCustomer(userEmail, userResponse)
-      // setTimeout(() => {
-      //   router.push('/app')
-      // }, 1000)
+      try {
+        const { data, error } = await supabase
+          .from('profiles')
+          .update({ username: userName })
+          .match({ email: userEmail })
+      } catch (err) {
+        console.error(err)
+      }
     }
   }
 }
