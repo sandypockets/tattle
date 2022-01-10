@@ -7,7 +7,8 @@ async function createGoal(req, res) {
     goalDesc,
     goalOutcome,
     dueDate,
-    selectedContactId
+    selectedContactId,
+    notificationMethod
   } = req.body
 
   if (goalTitle && dueDate && selectedContactId) {
@@ -21,7 +22,8 @@ async function createGoal(req, res) {
           "owner_id": userId,
           "contact_id": selectedContactId,
           "is_completed": false,
-          "description": goalDesc
+          "description": goalDesc,
+          "notification_type": notificationMethod
         }])
       if (data) {
         console.log("Create new goal data: ", data)

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import { useRouter } from "next/router";
 import { supabase } from "../../../lib/supabaseClient";
 import Button from "../../Global/Button";
@@ -9,6 +9,7 @@ import TextInput from "../../Global/TextInput";
 import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
 import LoadingWheel from "../../Global/Loading/LoadingWheel";
 import { createGoal } from "../../../helpers/goals";
+import RadioGroup from "../Layout/RadioGroup";
 
 export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
   const [goalTitle, setGoalTitle] = useState('')
@@ -16,14 +17,20 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
   const [goalOutcome, setGoalOutcome] = useState('')
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedContactId, setSelectedContactId] = useState()
+  const [notificationMethod, setNotificationMethod] = useState('sms')
   const [loading, setLoading] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    console.log(notificationMethod)
+  }, [notificationMethod])
+
 
   async function handleCreateGoal() {
     setLoading(true)
     const user = await supabase.auth.user()
     const userId = user.id
-    await createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId)
+    await createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId, notificationMethod)
     setDisplayFormType('empty')
     setTimeout(() => {
       getUserGoals().then(function() {
@@ -43,7 +50,13 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
     return (
       <Card>
         <div className="mx-2">
-          <TextInput type="text" label="Goal title" value={goalTitle} onChangeHandler={(e) => setGoalTitle(e.target.value)} />
+          <TextInput
+            type="text"
+            label="Goal title"
+            placeholder=""
+            value={goalTitle}
+            onChangeHandler={(e) => setGoalTitle(e.target.value)}
+          />
         </div>
         <div className="my-6 mx-2">
           <label htmlFor="description" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mx-2">
@@ -57,6 +70,7 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
               className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
               value={goalDesc}
               onChange={(e) => setGoalDesc(e.target.value)}
+              placeholder=""
             />
           </div>
         </div>
@@ -72,11 +86,12 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
               className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 focus:outline-none block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700 dark:text-gray-300"
               value={goalOutcome}
               onChange={(e) => setGoalOutcome(e.target.value)}
+              placeholder={""}
             />
           </div>
         </div>
         <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} />
-
+        <RadioGroup state={notificationMethod} setState={setNotificationMethod} />
         <div className="flex justify-between sm:justify-center flex-row-reverse my-6 mx-4">
           <div className="flex flex-col flex-col-reverse lg:flex-row-reverse lg:justify-center">
             <div className="flex flex-row">
@@ -92,7 +107,6 @@ export default function CreateGoal({ getUserGoals, setDisplayFormType }) {
             <p className="self-center pr-6 w-full sm:max-w-lg ml-4 xs:ml-2 sm:ml-0 mb-2 sm:mb-0 lg:mx-4 my-2">If you do not mark your goal as complete by this date, we'll tattle on you.</p>
           </div>
         </div>
-
         <div className="mx-4 px-2 pt-6 pb-8 sm:pb-6">
           <Button
             onClickHandler={() => {

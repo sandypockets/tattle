@@ -27,7 +27,7 @@ export function getGoal(ownerId, id, setGoal){
     })
 }
 
-export function createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId){
+export function createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDate, selectedContactId, notificationMethod){
   axios
     .post('/api/v1/goals', {
       'type': 'create',
@@ -36,7 +36,8 @@ export function createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDat
       goalDesc,
       goalOutcome,
       'dueDate': selectedDate,
-      selectedContactId
+      selectedContactId,
+      notificationMethod
     })
     .then(function (response) {
       console.log(response);

@@ -6,6 +6,7 @@ import SingleDatePicker from "../Utils/DatePicker";
 import Slideover from "../Layout/Slideover";
 import TextInput from "../../Global/TextInput";
 import { updateGoal } from "../../../helpers/goals";
+import RadioGroup from "../Layout/RadioGroup";
 
 export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, user, getUserGoals }) {
   const [goalTitle, setGoalTitle] = useState('')
@@ -69,6 +70,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
           </div>
         </div>
         <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} useCase="narrow" />
+        <RadioGroup usage="col" />
         <div className="flex justify-between flex-row-reverse my-6 mx-2">
           <div>
             <p className="mb-1 dark:text-gray-300">
