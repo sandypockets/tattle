@@ -49,6 +49,19 @@ export default function AppLayout({ children }) {
   const [searchIsOpen, setSearchIsOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
 
+  const router = useRouter()
+  const currentPage = router.pathname
+  const user = supabase.auth.user()
+
+  const createdAtUnix = new Date(user?.created_at).getTime()
+  const currentTImeUnix = new Date().getTime()
+  const trialPeriod = 1219000000
+  console.log(createdAtUnix)
+  console.log("NOW", currentTImeUnix)
+  console.log("NOW", currentTImeUnix)
+  console.log("Expires", trialPeriod + currentTImeUnix)
+  console.log(trialPeriod + currentTImeUnix)
+
   const userNavigation = [
     { name: 'Dashboard', href: '/app/' },
     { name: 'Profile', href: '/app/profile' },
@@ -84,9 +97,6 @@ export default function AppLayout({ children }) {
     }
   }, [darkMode])
 
-  const router = useRouter()
-  const currentPage = router.pathname
-  const user = supabase.auth.user()
 
   useEffect(() => {
     if (!user) {
@@ -224,7 +234,7 @@ export default function AppLayout({ children }) {
                   ))}
                 </nav>
               </div>
-              <nav className="flex justify-between mx-6 mb-6">
+              <nav className={createdAtUnix + trialPeriod > currentTImeUnix ? "flex justify-between mx-6 mb-14" : "flex justify-between mx-6 mb-6"}>
                 <p className="text-gray-300 dark:text-white align-middle">Light / Dark theme</p>
                 <Toggle darkMode={darkMode} setDarkMode={setDarkMode} />
               </nav>
@@ -304,7 +314,8 @@ export default function AppLayout({ children }) {
 
               <main className="flex-1">
                 <div className="py-6">
-                  <section className="p-3 xs:p-4 sm:py-2 sm:px-6 md:px-0 dark:text-gray-200 min-h-screen">
+                  <section
+                    className={createdAtUnix + trialPeriod > currentTImeUnix ? "p-3 xs:p-4 sm:py-2 sm:px-6 md:px-0 dark:text-gray-200 min-h-screen mb-14" : "p-3 xs:p-4 sm:py-2 sm:px-6 md:px-0 dark:text-gray-200 min-h-screen"}>
                     {loading && <AppLoadingState />}
                     {!loading && children}
                   </section>

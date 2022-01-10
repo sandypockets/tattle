@@ -10,7 +10,12 @@ export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
   const [hasSubscription, setHasSubscription] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [sessionIstrial, setSessionIsTrial] = useState(null)
   const user = supabase.auth.user()
+
+  const createdAtUnix = new Date(user?.created_at).getTime()
+  const currentTImeUnix = new Date().getTime()
+  const trialPeriod = 1219000000
 
   const currentMonth = new Date(Date.now()).getMonth()
   const currentDate = new Date(Date.now()).getDate()
@@ -31,7 +36,12 @@ export default function StateWrapper({ children }) {
 
   useEffect(() => {
     if (user?.id) {
-      return getUserPlan(user.id, setHasSubscription)
+      if (createdAtUnix + trialPeriod < currentTImeUnix) {
+        setSessionIsTrial(false)
+        return getUserPlan(user.id, setHasSubscription)
+      } else {
+        setSessionIsTrial(true)
+      }
     }
     supabase.auth.onAuthStateChange((_event, session) => {
       setSession(session)
@@ -39,12 +49,13 @@ export default function StateWrapper({ children }) {
   }, [])
 
   useEffect(() => {
-    if (hasSubscription !== null) {
+    if (hasSubscription !== null || sessionIstrial !== null) {
       setLoading(false)
     }
-  }, [hasSubscription])
+  }, [hasSubscription, sessionIstrial])
 
-  if (hasSubscription === false) {
+  // if (hasSubscription === false) {
+  if (sessionIstrial === false) {
     return (
       <>
         <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 mt-16 sm:px-0 md:px-10">
@@ -78,6 +89,11 @@ export default function StateWrapper({ children }) {
     return (
       <div>
         {!loading && children}
+        <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
+          <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">
+            Your free trial of Tattle ends on {new Date(createdAtUnix + trialPeriod).toLocaleDateString()}
+          </h4>
+        </div>
       </div>
     )
   }
