@@ -42,7 +42,7 @@ function parseVariables(customMessageText, contactName, userName, goalTitle) {
   return customMessageText.replace(varContactName, contactName).replace(varUserName, userName).replace(varGoalTitle, goalTitle)
 }
 
-async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId, contactId, contactPhone) {
+async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId, contactId, contactPhone, notificationType) {
   function convertToUsableNumber(phoneNumber) {
     let hasHyphens = true
     while (hasHyphens) {
@@ -72,21 +72,26 @@ async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId
     parsedSms = `Hey ${contactName}! ${ownerName} didn't achieve their goal: ${goalTitle}`;
     parsedVoice = `Hey ${contactName}! ${ownerName} didn't achieve their goal: ${goalTitle}`;
   }
-  client.messages
-    .create({
-      body: parsedSms,
-      from: fromPhoneNumber,
-      to: formattedPhoneNumber
-    })
-    .then(message => {
-      console.log(message.sid)
-      console.log(ownerId)
-      return saveTattle(ownerId, goalId, contactId, parsedSms)
-    })
-    .catch((err) => console.error(err));
+
+  if (notificationType === 'sms') {
+    client.messages
+      .create({
+        body: parsedSms,
+        from: fromPhoneNumber,
+        to: formattedPhoneNumber
+      })
+      .then(message => {
+        console.log(message.sid)
+        console.log(ownerId)
+        return saveTattle(ownerId, goalId, contactId, parsedSms)
+      })
+      .catch((err) => console.error(err));
+  } else {
+    // use parsedVoice
+  }
 }
 
-export async function getContactData(contactId, goalId, goalTitle, ownerName, ownerId){
+export async function getContactData(contactId, goalId, goalTitle, ownerName, ownerId, notificationType){
   let outputData = {}
   try {
     const { data, error, status } = await supabase
@@ -101,7 +106,8 @@ export async function getContactData(contactId, goalId, goalTitle, ownerName, ow
         "goal_id": goalId,
         "goal_title": goalTitle,
         "owner_name": ownerName,
-        "owner_id": ownerId
+        "owner_id": ownerId,
+        "notification_type": notificationType
       }
 
       try {
@@ -138,7 +144,7 @@ async function cronCheck(req, res) {
   try {
     const { data, error, status } = await supabase
       .from('goals')
-      .select('due_date, id, contact_id, title, owner_name, owner_id')
+      .select('due_date, id, contact_id, title, owner_name, owner_id, notification_type')
       .eq('due_date', todayDate)
     if (data) {
       let dataArr = []
@@ -148,7 +154,8 @@ async function cronCheck(req, res) {
           data[item]['id'],
           data[item]['title'],
           data[item]['owner_name'],
-          data[item]['owner_id'])
+          data[item]['owner_id'],
+          data[item]['notification_type'])
         dataArr.push(contactData)
       }
       console.log("dataArr: ", dataArr)
@@ -160,7 +167,8 @@ async function cronCheck(req, res) {
           dataArr[item]['owner_id'],
           dataArr[item]['goal_id'],
           dataArr[item]['contact_id'],
-          dataArr[item]['phone'])
+          dataArr[item]['phone'],
+          dataArr[item]['notification_type'])
       }
     }
     if (error) {
