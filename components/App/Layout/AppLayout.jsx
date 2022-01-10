@@ -56,11 +56,6 @@ export default function AppLayout({ children }) {
   const createdAtUnix = new Date(user?.created_at).getTime()
   const currentTImeUnix = new Date().getTime()
   const trialPeriod = 1219000000
-  console.log(createdAtUnix)
-  console.log("NOW", currentTImeUnix)
-  console.log("NOW", currentTImeUnix)
-  console.log("Expires", trialPeriod + currentTImeUnix)
-  console.log(trialPeriod + currentTImeUnix)
 
   const userNavigation = [
     { name: 'Dashboard', href: '/app/' },

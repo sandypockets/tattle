@@ -5,19 +5,35 @@ import CardTitle from "../../Global/CardTitle";
 import PhoneInput from "./PhoneInput";
 import TextInput from "../../Global/TextInput";
 import { createContact } from "../../../helpers/contacts";
+import { validPhone } from "../../../helpers/regex";
 
 export default function CreateContact({ user, getUserContacts, setDisplayFormType, setLoading }) {
   const [contactName, setContactName] = useState('')
   const [contactPhone, setContactPhone] = useState('')
   const [contactCountryCode, setContactCountryCode] = useState('')
+  const [phoneError, setPhoneError] = useState(false)
 
-  async function submitAndRefreshData() {
+  async function submitAndRefreshData(validatedPhone) {
     setLoading(true)
-    await createContact(user.id, contactName, contactPhone, contactCountryCode)
+    await createContact(user.id, contactName, validatedPhone, contactCountryCode)
     setTimeout(() => {
       return getUserContacts()
     }, 1000)
     setDisplayFormType('empty')
+  }
+
+  function validatePhone(phoneNumber) {
+    setPhoneError(false)
+    let preFilteredPhone = phoneNumber.split(' ').join('-')
+    preFilteredPhone = preFilteredPhone.split('.').join('-')
+    // const hasNoSpaces = preFilteredPhone.search('-')
+    // console.log(hasNoSpaces)
+    if (validPhone.test(preFilteredPhone)) {
+      return submitAndRefreshData(preFilteredPhone)
+    } else {
+      console.error("Phone number format is not valid")
+      setPhoneError(true)
+    }
   }
 
   return (
@@ -30,11 +46,11 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
         </div>
         <div className="w-72">
           <TextInput type="text" label="Name" value={contactName} onChangeHandler={(e) => setContactName(e.target.value)} />
-          <PhoneInput value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} setContactCountryCode={setContactCountryCode} />
+          <PhoneInput value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} setContactCountryCode={setContactCountryCode} error={phoneError} />
           <div className="flex justify-end mt-4 mr-2">
             <div className="max-w-min">
               <Button type="button" onClickHandler={() => {
-                return submitAndRefreshData()
+                return validatePhone(contactPhone)
               }}>
                 Save
               </Button>
