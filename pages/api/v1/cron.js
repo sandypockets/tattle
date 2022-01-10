@@ -42,8 +42,7 @@ function parseVariables(customMessageText, contactName, userName, goalTitle) {
   return customMessageText.replace(varContactName, contactName).replace(varUserName, userName).replace(varGoalTitle, goalTitle)
 }
 
-async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId, contactId) {
-
+async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId, contactId, contactPhone) {
   function convertToUsableNumber(phoneNumber) {
     let hasHyphens = true
     while (hasHyphens) {
@@ -59,6 +58,7 @@ async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId
   }
 
   const customMessages = await getCustomMessages(ownerId)
+  const formattedPhoneNumber = convertToUsableNumber(contactPhone)
   let parsedSms;
   let parsedVoice;
   if (customMessages?.length > 0) {
@@ -76,7 +76,7 @@ async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId
     .create({
       body: parsedSms,
       from: fromPhoneNumber,
-      to: toPhoneNumber
+      to: formattedPhoneNumber
     })
     .then(message => {
       console.log(message.sid)
@@ -121,12 +121,24 @@ async function cronCheck(req, res) {
     if (data) {
       let dataArr = []
       for (const item in data) {
-        const contactData = await getContactData(data[item]['contact_id'], data[item]['id'], data[item]['title'], data[item]['owner_name'], data[item]['owner_id'])
+        const contactData = await getContactData(
+          data[item]['contact_id'],
+          data[item]['id'],
+          data[item]['title'],
+          data[item]['owner_name'],
+          data[item]['owner_id'])
         dataArr.push(contactData)
       }
       console.log("dataArr: ", dataArr)
       for (const item in dataArr) {
-        sendSmsMessage(dataArr[item]['contact_name'], dataArr[item]['goal_title'], dataArr[item]['owner_name'], dataArr[item]['owner_id'], dataArr[item]['goal_id'], dataArr[item]['contact_id'])
+        sendSmsMessage(
+          dataArr[item]['contact_name'],
+          dataArr[item]['goal_title'],
+          dataArr[item]['owner_name'],
+          dataArr[item]['owner_id'],
+          dataArr[item]['goal_id'],
+          dataArr[item]['contact_id'],
+          dataArr[item]['phone'])
       }
     }
     if (error) {
