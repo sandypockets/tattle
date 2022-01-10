@@ -26,13 +26,24 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
     setPhoneError(false)
     let preFilteredPhone = phoneNumber.split(' ').join('-')
     preFilteredPhone = preFilteredPhone.split('.').join('-')
-    // const hasNoSpaces = preFilteredPhone.search('-')
-    // console.log(hasNoSpaces)
+    preFilteredPhone = preFilteredPhone.split('_').join('-')
+    preFilteredPhone = preFilteredPhone.split(',').join('-')
+    preFilteredPhone = preFilteredPhone.split('(').join('-')
+    preFilteredPhone = preFilteredPhone.split(')').join('-')
+    preFilteredPhone = preFilteredPhone.split('+').join('-')
+    preFilteredPhone = preFilteredPhone.trim()
+    if (preFilteredPhone[0] === '-') {
+      preFilteredPhone = preFilteredPhone.slice(1, preFilteredPhone.length) //?
+    }
+    if (preFilteredPhone[preFilteredPhone.length - 1] === '-') {
+      preFilteredPhone = preFilteredPhone.slice(0, preFilteredPhone.length - 1) //?
+    }
+    console.log(preFilteredPhone)
     if (validPhone.test(preFilteredPhone)) {
+      console.log("Phone number is valid")
       return submitAndRefreshData(preFilteredPhone)
     } else {
       console.error("Phone number format is not valid")
-      setPhoneError(true)
     }
   }
 

@@ -43,6 +43,21 @@ function parseVariables(customMessageText, contactName, userName, goalTitle) {
 }
 
 async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId, contactId) {
+
+  function convertToUsableNumber(phoneNumber) {
+    let hasHyphens = true
+    while (hasHyphens) {
+      if (phoneNumber.search('-') === -1) {
+        console.log("Phone number is ready")
+        hasHyphens = false
+        return `+1${phoneNumber}`
+      } else {
+        console.log('Removing characters...')
+        phoneNumber = phoneNumber.replace('-', '')
+      }
+    }
+  }
+
   const customMessages = await getCustomMessages(ownerId)
   let parsedSms;
   let parsedVoice;
