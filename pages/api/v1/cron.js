@@ -81,7 +81,7 @@ async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId
     .then(message => {
       console.log(message.sid)
       console.log(ownerId)
-      return saveTattle(ownerId, goalId, contactId, smsBody)
+      return saveTattle(ownerId, goalId, contactId, parsedSms)
     })
     .catch((err) => console.error(err));
 }
