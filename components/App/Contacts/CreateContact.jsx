@@ -14,7 +14,6 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
   const [phoneError, setPhoneError] = useState(false)
 
   async function submitAndRefreshData(validatedPhone) {
-    setLoading(true)
     await createContact(user.id, contactName, validatedPhone, contactCountryCode)
     setTimeout(() => {
       return getUserContacts()
