@@ -50,7 +50,8 @@ async function updateUserGoal(req, res) {
     goalDesc,
     goalOutcome,
     dueDate,
-    selectedContactId
+    selectedContactId,
+    notificationMethod
   } = req.body
 
   try {
@@ -61,7 +62,8 @@ async function updateUserGoal(req, res) {
         "description": goalDesc,
         "outcome": goalOutcome,
         "due_date": dueDate,
-        "contact_id": selectedContactId
+        "contact_id": selectedContactId,
+        "notification_type": notificationMethod
       })
       .match({ "id": goalId, "owner_id": userId })
     if (data) {

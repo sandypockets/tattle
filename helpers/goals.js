@@ -47,7 +47,7 @@ export function createGoal(userId, goalTitle, goalDesc, goalOutcome, selectedDat
     });
 }
 
-export function updateGoal( userId, selectedContactId, selectedGoalId, goalTitle, goalDesc, goalOutcome, selectedDate ){
+export function updateGoal( userId, selectedContactId, selectedGoalId, goalTitle, goalDesc, goalOutcome, selectedDate, notificationMethod ){
   axios
     .post('/api/v1/goals', {
       'type': 'update',
@@ -58,6 +58,7 @@ export function updateGoal( userId, selectedContactId, selectedGoalId, goalTitle
       goalOutcome,
       'dueDate': selectedDate,
       selectedContactId,
+      notificationMethod
     })
     .then(function (response) {
       console.log(response);

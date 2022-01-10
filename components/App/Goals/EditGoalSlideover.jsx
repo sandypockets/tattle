@@ -14,6 +14,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
   const [goalOutcome, setGoalOutcome] = useState('')
   const [selectedDate, setSelectedDate] = useState(new Date);
   const [selectedContactId, setSelectedContactId] = useState(Number)
+  const [notificationMethod, setNotificationMethod] = useState('')
 
   useEffect(() => {
     if (selectedGoal) {
@@ -28,7 +29,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
   }, [selectedGoal])
 
   async function updateGoalWrapper() {
-    await updateGoal( user.id, selectedContactId, selectedGoal.id, goalTitle, goalDesc, goalOutcome, selectedDate )
+    await updateGoal( user.id, selectedContactId, selectedGoal.id, goalTitle, goalDesc, goalOutcome, selectedDate, notificationMethod )
     await getUserGoals()
     setOpen(false)
   }
@@ -70,7 +71,7 @@ export default function EditGoalSlideover({ title, open, setOpen, selectedGoal, 
           </div>
         </div>
         <ChooseContact selectedContactId={selectedContactId} setSelectedContactId={setSelectedContactId} useCase="narrow" />
-        <RadioGroup usage="col" />
+        <RadioGroup usage="col" state={notificationMethod} setState={setNotificationMethod} />
         <div className="flex justify-between flex-row-reverse my-6 mx-2">
           <div>
             <p className="mb-1 dark:text-gray-300">
