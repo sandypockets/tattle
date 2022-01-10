@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import Checkout from "../Checkout/Checkout";
 import { getUserPlan } from "../../../helpers/subscriptions";
-
-const months = ['January','February','March','April','May','Jun','July','August','September','October','November','December']
-const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+import CheckoutPage from "../Checkout/CheckoutPage";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
@@ -16,23 +13,9 @@ export default function StateWrapper({ children }) {
   const createdAtUnix = new Date(user?.created_at).getTime()
   const currentTImeUnix = new Date().getTime()
   const trialPeriod = 1219000000
+  const daysLeftInTrial = Math.round(((createdAtUnix + trialPeriod) - currentTImeUnix) / 86400000)
 
-  const currentMonth = new Date(Date.now()).getMonth()
-  const currentDate = new Date(Date.now()).getDate()
-  const nextMonthIndex = currentMonth + 1 > 11 ? 0 : currentMonth + 1
-  const currentDay = new Date(Date.now()).getDay()
-  let suffix = ''
-  switch (currentDate[-1]) {
-    case 1:
-      suffix = 'st'
-      break
-    case 2:
-      suffix = 'nd'
-      break
-    default:
-      suffix = 'th'
-  }
-  const nextBillingDate = `${days[currentDay]}, ${months[nextMonthIndex]} ${currentDate}${suffix}`
+
 
   useEffect(() => {
     if (user?.id) {
@@ -41,6 +24,7 @@ export default function StateWrapper({ children }) {
         return getUserPlan(user.id, setHasSubscription)
       } else {
         setSessionIsTrial(true)
+        setHasSubscription(false)
       }
     }
     supabase.auth.onAuthStateChange((_event, session) => {
@@ -49,40 +33,14 @@ export default function StateWrapper({ children }) {
   }, [])
 
   useEffect(() => {
-    if (hasSubscription !== null || sessionIstrial !== null) {
+    if (hasSubscription !== null && sessionIstrial !== null) {
       setLoading(false)
     }
   }, [hasSubscription, sessionIstrial])
 
-  // if (hasSubscription === false) {
-  if (sessionIstrial === false) {
+  if (!sessionIstrial && !hasSubscription) {
     return (
-      <>
-        <div className="grid grid-cols-1 gap-x-6 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 mt-16 sm:px-0 md:px-10">
-          <div className="mt-8 mb-12 lg:mb-0 mx-auto w-full lg:max-w-sm sm:px-6 md:px-0">
-            <h1 className="text-4xl font-extrabold text-gray-900 mb-6 px-1">Tattle monthly</h1>
-            <h4 className="-mt-6 text-md px-2">$3 USD / month. Cancel anytime.</h4>
-            <div className="my-6 grid grid-cols-2 w-full lg:max-w-1xs bg-gray-100 p-4">
-              <div>
-                <p className="font-thin">Subtotal:</p>
-                <p className="font-thin">Taxes:</p>
-                <p className="font-medium text-xl mt-2">Due today:</p>
-              </div>
-              <div className="font-thin">
-                <p className="font-thin text-right">$3.00</p>
-                <p className="text-right">$0.00</p>
-                <p className="text-xl font-medium text-right mt-2">$3.00 <small className="text-sm">USD</small></p>
-              </div>
-            </div>
-            <div className="flex flex-col">
-              <small className="px-1"><span className="font-semibold pr-3">Next billing date:</span> {nextBillingDate}</small>
-            </div>
-          </div>
-          <div>
-            <Checkout session={session} />
-          </div>
-        </div>
-      </>
+      <CheckoutPage session={session} />
     )
   }
   else {
@@ -91,7 +49,7 @@ export default function StateWrapper({ children }) {
         {!loading && children}
         <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
           <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">
-            Your free trial of Tattle ends on {new Date(createdAtUnix + trialPeriod).toLocaleDateString()}
+            Your free trial of Tattle ends in {daysLeftInTrial} {daysLeftInTrial === 1 ? "day" : "days"}
           </h4>
         </div>
       </div>
