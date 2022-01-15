@@ -19,12 +19,12 @@ async function getCustomMessages(ownerId) {
   }
 }
 
-async function saveTattle(ownerId, goalId, contactId, messageBody) {
+async function saveTattle(ownerId, goalId, contactId, messageBody, messageType) {
   try {
     const { data, error } = await supabase
       .from('tattles')
       .insert([
-        { owner_id: ownerId, goal_id: goalId, contact_id: contactId, message_body: messageBody }
+        { owner_id: ownerId, goal_id: goalId, contact_id: contactId, message_body: messageBody, message_type: messageType }
       ])
     if (data) {
       console.log("SaveTattle: ", data)
@@ -73,7 +73,22 @@ async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId
     parsedVoice = `Hey ${contactName}! ${ownerName} didn't achieve their goal: ${goalTitle}`;
   }
 
-  if (notificationType === 'sms') {
+  if (notificationType === 'voice') {
+    // Send voice message
+    client.calls
+      .create({
+        twiml: `<Response><Say>${parsedVoice}</Say></Response>`,
+        to: formattedPhoneNumber,
+        from: fromPhoneNumber
+      })
+      .then(call => {
+        console.log(call.sid)
+        console.log(ownerId)
+        return saveTattle(ownerId, goalId, contactId, parsedVoice, 'voice')
+      })
+      .catch((err) => console.error(err));
+  } else {
+    // Send sms
     client.messages
       .create({
         body: parsedSms,
@@ -83,18 +98,16 @@ async function sendSmsMessage(contactName, goalTitle, ownerName, ownerId, goalId
       .then(message => {
         console.log(message.sid)
         console.log(ownerId)
-        return saveTattle(ownerId, goalId, contactId, parsedSms)
+        return saveTattle(ownerId, goalId, contactId, parsedSms, 'sms')
       })
       .catch((err) => console.error(err));
-  } else {
-    // use parsedVoice
   }
 }
 
 export async function getContactData(contactId, goalId, goalTitle, ownerName, ownerId, notificationType){
   let outputData = {}
   try {
-    const { data, error, status } = await supabase
+    const { data, error } = await supabase
       .from('contacts')
       .select('name, phone, id')
       .eq('id', contactId)
@@ -111,7 +124,7 @@ export async function getContactData(contactId, goalId, goalTitle, ownerName, ow
       }
 
       try {
-        const { data, error, status } = await supabase
+        const { data, error } = await supabase
           .from('profiles')
           .select('username')
           .eq('id', ownerId)
