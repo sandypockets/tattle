@@ -16,8 +16,8 @@ export default function Index() {
   const [loading, setLoading] = useState(true)
   const [cancelModalOpen, setCancelModalOpen] = useState(false)
   const [session, setSession] = useState({})
-  const user = supabase.auth.user()
 
+  const user = supabase.auth.user()
   const createdAtUnix = new Date(user?.created_at).getTime()
   const currentTImeUnix = new Date().getTime()
   const trialPeriod = 1219000000
@@ -38,7 +38,7 @@ export default function Index() {
     }, 350)
   }, [subscriptionData])
 
-  if (createdAtUnix + trialPeriod > currentTImeUnix) {
+  if (!subscriptionData?.charge && createdAtUnix + trialPeriod > currentTImeUnix) {
     return (
       <AppLayout>
         <StateWrapper>
@@ -50,7 +50,7 @@ export default function Index() {
     return (
       <AppLayout>
         <StateWrapper>
-          {loading || !subscriptionData ? <AppLoadingState /> : (
+          {loading || !subscriptionData?.charge ? <AppLoadingState /> : (
             <>
               <CardTitle>Settings</CardTitle>
               <YourSubscription subscriptionData={subscriptionData} />

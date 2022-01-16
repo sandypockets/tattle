@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import { getUserPlan } from "../../../helpers/subscriptions";
+import {getSubscriptionByEmail, getUserPlan} from "../../../helpers/subscriptions";
 import CheckoutPage from "../Checkout/CheckoutPage";
 import AppLoadingState from "../Utils/AppLoadingState";
 
 export default function StateWrapper({ children }) {
   const [session, setSession] = useState(null)
   const [hasSubscription, setHasSubscription] = useState(null)
+  const [subscriptionData, setSubscriptionData] = useState()
   const [loading, setLoading] = useState(true)
   const [sessionIstrial, setSessionIsTrial] = useState(null)
   const user = supabase.auth.user()
@@ -32,6 +33,10 @@ export default function StateWrapper({ children }) {
   }, [])
 
   useEffect(() => {
+    getSubscriptionByEmail(user?.email, setSubscriptionData)
+  }, [])
+
+  useEffect(() => {
     if (hasSubscription !== null && sessionIstrial !== null) {
       setTimeout(() => {
         setLoading(false)
@@ -48,11 +53,13 @@ export default function StateWrapper({ children }) {
       <div>
         {loading && <AppLoadingState />}
         {!loading && children}
-        <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
-          <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">
-            Your free trial of Tattle ends in {daysLeftInTrial} {daysLeftInTrial === 1 ? "day" : "days"}
-          </h4>
-        </div>
+        {!subscriptionData && sessionIstrial && (
+          <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
+            <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">
+              Your free trial of Tattle ends in {daysLeftInTrial} {daysLeftInTrial === 1 ? "day" : "days"}
+            </h4>
+          </div>
+        )}
       </div>
     )
   }

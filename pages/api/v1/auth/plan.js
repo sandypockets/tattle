@@ -8,6 +8,7 @@ async function checkUserPlan(req, res) {
       .select('is_subscribed')
       .match({ id: ownerId })
     if (data) {
+      console.log("Line 11", data)
       res.status(200).json(data[0])
     }
     if (error) {

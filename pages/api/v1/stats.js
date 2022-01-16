@@ -16,9 +16,7 @@ async function getTattleCount(req, res) {
 }
 
 export default function handler(req, res) {
-  if (req.method === 'POST') {
-    //
-  } else if (req.method === 'GET') {
+  if (req.method === 'GET') {
     return getTattleCount(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()

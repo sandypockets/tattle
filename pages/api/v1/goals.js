@@ -100,15 +100,18 @@ async function getGoals(req, res) {
 }
 
 export default function handler(req, res) {
+  const errorMsg = "Something's not right. Check your query."
   if (req.method === 'POST') {
     if (req.body.type === 'update') {
       return updateUserGoal(req, res)
     } else if (req.body.type === 'create') {
       return createGoal(req, res)
+    } else {
+      res.send(errorMsg).end()
     }
   } else if (req.method === 'GET') {
     return getGoals(req, res)
   } else {
-    res.send("Something's not right. Check your query.").end()
+    res.send(errorMsg).end()
   }
 }

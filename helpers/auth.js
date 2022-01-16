@@ -50,19 +50,7 @@ function createCustomMessages(userId) {
       console.log("Create error", error);
     });
 }
-// function recordStripeIdStripeTable(userId, stripeCustomerId) {
-//   axios
-//     .post('/api/v1/stripe-id', {
-//       "id": userId,
-//       "stripeCustomerId": stripeCustomerId,
-//     })
-//     .then(function (response) {
-//       console.log("Successfully recorded ID: ", response);
-//     })
-//     .catch(function (error) {
-//       console.log("Update error", error);
-//     });
-// }
+
 function recordStripeCustomerId(userResponse, stripeCustomerId) {
   console.log("USER RESPONSE: !:  ", userResponse)
   axios
