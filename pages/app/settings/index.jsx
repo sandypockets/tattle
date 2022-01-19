@@ -21,7 +21,7 @@ export default function Index() {
 
   const user = supabase.auth.user()
   const createdAtUnix = new Date(user?.created_at).getTime()
-  const currentTImeUnix = new Date().getTime()
+  const currentTimeUnix = new Date().getTime()
   const trialPeriod = 1219000000
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export default function Index() {
     }, 350)
   }, [subscriptionData])
 
-  if (!subscriptionData?.charge && createdAtUnix + trialPeriod > currentTImeUnix) {
+  if (!loading && !subscriptionData?.charge && createdAtUnix + trialPeriod > currentTimeUnix) {
     return (
       <>
         <Head>

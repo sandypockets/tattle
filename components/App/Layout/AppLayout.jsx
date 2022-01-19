@@ -21,6 +21,8 @@ import MobileLinkNoIcon from "./Sidebar/MobileLinkNoIcon";
 import AppLoadingState from "../Utils/AppLoadingState";
 import Search from "./Search/Search";
 import Toggle from "./Toggle";
+import LoadingWheelWrapper from "../../Global/Loading/LoadingWheelWrapper";
+import LoadingWheel from "../../Global/Loading/LoadingWheel";
 
 const navigation = [
   { name: 'Dashboard', href: '/app', icon: HomeIcon },
@@ -44,7 +46,7 @@ function classNames(...classes) {
 
 export default function AppLayout({ children }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   // State used to manage 'main' behaviour while search results are open. Not currently in use
   const [searchIsOpen, setSearchIsOpen] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
@@ -83,6 +85,14 @@ export default function AppLayout({ children }) {
   ]
 
   useEffect(() => {
+    if (!user) {
+      router.push('/signin')
+    } else {
+      setLoading(false)
+    }
+  }, [user])
+
+  useEffect(() => {
     if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
       setDarkMode(true)
@@ -91,15 +101,6 @@ export default function AppLayout({ children }) {
       setDarkMode(false)
     }
   }, [darkMode])
-
-
-  useEffect(() => {
-    if (!user) {
-      router.push('/signin')
-    } else {
-      setLoading(false)
-    }
-  }, [user])
 
   const toggleTheme = () => {
     setDarkMode(!darkMode)
@@ -112,6 +113,13 @@ export default function AppLayout({ children }) {
     }
   }
 
+  if (!user && loading) {
+    return (
+      <LoadingWheelWrapper>
+        <LoadingWheel />
+      </LoadingWheelWrapper>
+    )
+  } else {
     return (
       <>
         <div>
@@ -166,14 +174,14 @@ export default function AppLayout({ children }) {
                       {navigation.map((item) => (
                         <div key={item.href}>
                           <MobileLinkWithIcon item={item} currentPage={currentPage} />
-                            {subNavigation.map((subItem, subItemIndex) => {
-                              if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
-                                return (
-                                  <div key={subItemIndex}>
-                                    <MobileLinkNoIcon item={subItem} currentPage={currentPage} />
-                                  </div>
-                                )
-                              }
+                          {subNavigation.map((subItem, subItemIndex) => {
+                            if (subItem.parentHref === item.href && currentPage && currentPage.toString().split('/')[2] === subItem.category) {
+                              return (
+                                <div key={subItemIndex}>
+                                  <MobileLinkNoIcon item={subItem} currentPage={currentPage} />
+                                </div>
+                              )
+                            }
                           })}
                         </div>
                       ))}
@@ -321,4 +329,7 @@ export default function AppLayout({ children }) {
         </div>
       </>
     )
+  }
+
+
 }

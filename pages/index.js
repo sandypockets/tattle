@@ -10,9 +10,9 @@ const statProps = {
   'subHeading': 'A fun and friendly way to stay accountable. What will you achieve next?',
   'statOne': '90%',
   'statOneText': 'goal success rate',
-  'statTwo': '180',
+  'statTwo': '+180',
   'statTwoText': 'goals achieved',
-  'statThree': '40',
+  'statThree': '+40',
   'statThreeText': 'tattle messages sent',
 }
 

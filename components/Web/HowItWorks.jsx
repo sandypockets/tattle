@@ -42,7 +42,7 @@ export default function HowItWorks() {
   return (
     <>
       <div id="how-it-works"></div>
-      <div className="mt-12 mx-28">
+      <div className="mt-12 mx-6 sm:mx-12 md:mx-28">
         <div className="mb-20 pt-12 ml-6">
           <h1 className="text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl md:text-6xl lg:text-6xl">How it works</h1>
           <h2 className="text-3xl">Achieve your biggest goals yet.</h2>

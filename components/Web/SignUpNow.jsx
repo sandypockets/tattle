@@ -12,11 +12,11 @@ export default function SignUpNow() {
 
   return (
     <div className="mt-8">
-      <div className="mt-6 w-96">
+      <div className="mt-6 w-72 sm:w-96">
         <form action="#" method="POST" className="space-y-1">
-          <TextInput label="First name" type="first-name" onChangeHandler={(e) => setName(e.target.value)} required={true} value={name} />
-          <TextInput label="Email address" type="email" onChangeHandler={(e) => setEmail(e.target.value)} required={true} value={email} />
-          <TextInput label="Password" type="password" onChangeHandler={(e) => setPassword(e.target.value)} required={true} value={password} />
+          <TextInput label="First name" type="first-name" onChangeHandler={(e) => setName(e.target.value)} required={true} value={name} useDark={false} />
+          <TextInput label="Email address" type="email" onChangeHandler={(e) => setEmail(e.target.value)} required={true} value={email} useDark={false} />
+          <TextInput label="Password" type="password" onChangeHandler={(e) => setPassword(e.target.value)} required={true} value={password} useDark={false} />
           <div className="mx-2 pt-4">
             <Button type="submit" onClickHandler={(e) => {
               e.preventDefault()
