@@ -26,7 +26,7 @@ const faqData = {
       id: 1,
       question: "How much does Tattle cost?",
       answer:
-        "$3/month. Running servers, maintaining the software, and sending SMS or voice messages costs money. Our single, inexpensive plan aims only to recoup those costs, and help build new features to improve your experience.",
+        "$3/month.",
     },
       {
         id: 2,
@@ -38,7 +38,7 @@ const faqData = {
         id: 3,
         question: "Do I need to add a payment method to get the free trial?",
         answer:
-          "Yes. A payment method is required at the time of sign up. However it will not be charged until the 14 day trial has ended. If you cancel before the trial ends, you will not be charged.",
+          "No. You do not need to add a payment method to use the free trial. You can still add a payment method at any point during the trial, but will not be charged until the trial has ended.",
       },
       {
         id: 4,
@@ -67,7 +67,7 @@ const faqData = {
         id: 3,
         question: "How many goals can I set?",
         answer:
-          "As many as you want. Dream big! But remember, if you bite off more than you can chew, and dont' achieve your goals on time, your contacts will be hearing from us!",
+          "As many as you want. Dream big! But remember, if you bite off more than you can chew, and don't achieve your goals on time, your contacts will be hearing from us!",
       },
       {
         id: 4,

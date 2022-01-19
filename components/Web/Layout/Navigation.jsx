@@ -5,11 +5,11 @@ import {supabase} from "../../../lib/supabaseClient";
 
 const navItems = [
     {
-    name: 'Tattle',
+    name: 'Home',
     href: '/',
   },
   {
-    name: 'FAQ',
+    name: 'What is Tattle',
     href: '/faq',
   },
   {
