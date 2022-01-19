@@ -1,37 +1,54 @@
 # Tattle
-Tattle is a full stack goal tracking and accountability platform, with a bit of a twist. If you don't achieve your goal, we'll tattle on you. We'll give your mom a ring, or send her an SMS (your preference) to let her know of your disappointment. 
+Tattle is a full stack goal tracking and accountability app, with a bit of a twist. If you don't achieve your goal, we'll tattle on you. We'll give your mom a ring, or send her an SMS (your preference, of course) to let her know of your disappointment. 
 
 Don't want to rope dear old mom into this? Use any phone number you want, just pick someone that will help keep you accountable.
 
 ### Using this repository
-This repo contains the code for the Tattle marketing website, as well as web app, which can be logged into via the marketing site. Tattle also offers a native iOS and Android app, though the codebase is stored separately, in the [`tattle-native`](https://github.com/sandypockets/tattle-native) repo.
+This repo contains the code for the Tattle marketing website, as well as web app, which can be logged into via the marketing site. The marketing website lives in the `pages/` directory. The app resides in the same `pages/` directory, in the `app/` folder.
 
-## Features
+_Coming soon: Tattle also offers a native iOS and Android app, though the codebase is stored separately, in the [`tattle-native`](https://github.com/sandypockets/tattle-native) repo._
+
+### Contents
+- [Features](https://github.com/sandypockets/tattle#features)
+- [Tech stack](https://github.com/sandypockets/tattle#tech-stack)
+- [Getting started](https://github.com/sandypockets/tattle#getting-started)
+  - [Set up Supabase](https://github.com/sandypockets/tattle#set-up-supabase)
+  - [Set up Stripe](https://github.com/sandypockets/tattle#set-up-stripe)
+- [Server commands](https://github.com/sandypockets/tattle#server-commands)
+- [Testing](https://github.com/sandypockets/tattle#testing)
+  - [Storybook](https://github.com/sandypockets/tattle#using-storybook)
+  - [Jest](https://github.com/sandypockets/tattle#using-jest)
+- [Dependencies](https://github.com/sandypockets/tattle#dependencies)
+  - [Dev Dependencies](https://github.com/sandypockets/tattle#dev-dependencies)
+- [Screenshots](https://github.com/sandypockets/tattle#screenshots)
+
+## ✨ Features
 - Create, edit, delete goals
 - Create edit, delete contacts
 - Assign contacts to goals
 - Assign a date to a goal
 - Choose to send either SMS or voice message
 - Create custom SMS or voice message
-- Stats and reporting
 - Recurring subscription payments
 
-## Tech stack
+## 🚀 Tech stack
 - Next.js
 - React
 - Tailwind CSS
 - Supabase
 - Twilio
 - Stripe
+- Google Analytics
 - Storybook
 
-# Getting started
-This guide will walk you through setting up Tattle locally. Tattle was developed and tested with `Node 14`, and `Node 16`, and `yarn`.
+# 🛠 Getting started
+This guide will walk you through setting up Tattle locally. Tattle was developed and tested with `Node 14`, and `Node 16`, using `yarn`.
 
 To complete the setup, you will need API keys for the following accounts:
 - [Supabase](https://supabase.com/)
 - [Twilio](https://www.twilio.com/)
 - [Stripe](https://stripe.com/)
+- [Google Analytics](https://analytics.google.com/)
 
 1. Fork and clone this repository.
 2. From the project's root directory, install dependencies:
@@ -107,8 +124,6 @@ yarn start
 ```
 
 ## Testing
-Components can be developed in isolation using Storybook. This template comes with Storybook 6.3.0
-
 <details>
 <summary>
     <h3 style="display: inline">Using Storybook</h3>
@@ -129,8 +144,14 @@ yarn build-storybook
 ```
 If you're deploying to Vercel, specify `storybook-static` as the output directory.
 </details>
+<details>
+<summary>
+    <h3 style="display: inline">Using Jest</h3>
+</summary>
+Jest is not yet set up for this project, although it very much should be.
+</details>
 
-## Dependencies
+## 📦 Dependencies
 - @headlessui/react `^1.4.0`
 - @heroicons/react `^1.0.3`
 - @stripe/react-stripe-js `^1.6.0`
@@ -154,3 +175,18 @@ If you're deploying to Vercel, specify `storybook-static` as the output director
 - postcss `^7.0.36`
 - serve `11.3.2`
 - tailwindcss `npm:@tailwindcss/postcss7-compat@^2.2.`
+
+# 📸 Screenshots
+## Marketing website
+### Homepage
+![](./docs/tattle-homepage.png)
+
+### How it works page
+![](./docs/tattle-how-it-works.png)
+
+### FAQ page
+![](./docs/tattle-faq.png)
+
+## Web app
+### Dashboard
+![](./docs/tattle-dashboard.png)
