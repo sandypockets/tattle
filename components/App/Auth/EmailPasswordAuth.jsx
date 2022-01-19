@@ -41,7 +41,7 @@ export default function Auth({ registrationType }) {
                 <p className="mt-2 text-sm text-gray-600">
                   or{' '}
                   <Link href={"/signup"}>
-                    <a className="font-medium text-black hover:bg-yellow-500 bg-yellow-400 py-1 px-3 rounded-lg text-xs">
+                    <a className="font-medium text-black hover:bg-yellow-400 bg-yellow-300 py-1 px-3 rounded-lg text-xs">
                       start your 14-day free trial
                     </a>
                   </Link>
@@ -54,7 +54,7 @@ export default function Auth({ registrationType }) {
                 <p className="mt-2 text-sm text-gray-600">
                   Already have an account?{' '}
                   <Link href={"/signin"}>
-                    <a className="font-medium text-black hover:bg-yellow-500 bg-yellow-400 py-1 px-2 rounded-lg text-xs">
+                    <a className="font-medium text-black hover:bg-yellow-400 bg-yellow-300 py-1 px-2 rounded-lg text-xs">
                       Sign in
                     </a>
                   </Link>
@@ -73,6 +73,7 @@ export default function Auth({ registrationType }) {
                     required={true}
                     value={name}
                     useDark={false}
+                    placeholder="Charlie"
                   />
                 )}
                 <TextInput
@@ -82,6 +83,7 @@ export default function Auth({ registrationType }) {
                   required={true}
                   value={email}
                   useDark={false}
+                  placeholder="charlie@gmail.com"
                 />
                 <TextInput
                   label="Password"
@@ -96,7 +98,9 @@ export default function Auth({ registrationType }) {
                     e.preventDefault()
                     content === 'signup' ? handleSignUp(email, password, name).then(() => setTimeout(() => { return router.push('/app') }, 1000)) : handleSignIn(email, password, router)
                   }}>
-                    {content === 'signin' ? "Sign in" : "Sign up"}
+                    <span className="tracking-wider">
+                      {content === 'signin' ? "Sign in" : "Sign up"}
+                    </span>
                   </Button>
                 </div>
               </form>
