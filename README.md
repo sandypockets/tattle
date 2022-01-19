@@ -9,18 +9,18 @@ This repo contains the code for the Tattle marketing website, as well as web app
 _Coming soon: Tattle also offers a native iOS and Android app, though the codebase is stored separately, in the [`tattle-native`](https://github.com/sandypockets/tattle-native) repo._
 
 ### Contents
-- [Features](https://github.com/sandypockets/tattle#features)
-- [Tech stack](https://github.com/sandypockets/tattle#tech-stack)
-- [Getting started](https://github.com/sandypockets/tattle#getting-started)
+- [Features](https://github.com/sandypockets/tattle#-features)
+- [Tech stack](https://github.com/sandypockets/tattle#-tech-stack)
+- [Getting started](https://github.com/sandypockets/tattle#-getting-started)
   - [Set up Supabase](https://github.com/sandypockets/tattle#set-up-supabase)
   - [Set up Stripe](https://github.com/sandypockets/tattle#set-up-stripe)
 - [Server commands](https://github.com/sandypockets/tattle#server-commands)
 - [Testing](https://github.com/sandypockets/tattle#testing)
   - [Storybook](https://github.com/sandypockets/tattle#using-storybook)
   - [Jest](https://github.com/sandypockets/tattle#using-jest)
-- [Dependencies](https://github.com/sandypockets/tattle#dependencies)
+- [Dependencies](https://github.com/sandypockets/tattle#-dependencies)
   - [Dev Dependencies](https://github.com/sandypockets/tattle#dev-dependencies)
-- [Screenshots](https://github.com/sandypockets/tattle#screenshots)
+- [Screenshots](https://github.com/sandypockets/tattle#-screenshots)
 
 ## ✨ Features
 - Create, edit, delete goals
