@@ -11,6 +11,8 @@ import GoalsEmptyState from "../../../components/App/Goals/GoalsEmptyState";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import { getGoals } from "../../../helpers/goals";
 import { getContacts } from "../../../helpers/contacts";
+import {SITE_NAME} from "../../../lib/constants";
+import Head from "next/head";
 
 export default function New() {
   const [displayFormType, setDisplayFormType] = useState('empty')
@@ -60,26 +62,31 @@ export default function New() {
   }, [contactFormState])
 
     return (
-      <AppLayout>
-        {loading ? <AppLoadingState /> : (
-          <StateWrapper>
-            <CardTitle>Create a goal</CardTitle>
-            {!contacts && !goals || contacts?.length >= 1 && goals?.length === 0 && displayFormType === 'empty' &&
-              <GoalsEmptyState setState={setDisplayFormType} />
-            }
-            {/*{!goals || goals?.length < 1 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}*/}
-            {displayFormType === 'create' &&
-              <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
-            {!contacts || contacts?.length === 0 && (
-              <>
-                <Banner>
-                  <p className="mt-1">You need to add a contact before you can create a goal.</p>
-                </Banner>
-                <ContactsEmptyState setState={setContactFormState} />
-              </>
-            )}
-          </StateWrapper>
-        )}
-      </AppLayout>
+      <>
+        <Head>
+          <title>New goal | {SITE_NAME}</title>
+        </Head>
+        <AppLayout>
+          {loading ? <AppLoadingState /> : (
+            <StateWrapper>
+              <CardTitle>Create a goal</CardTitle>
+              {!contacts && !goals || contacts?.length >= 1 && goals?.length === 0 && displayFormType === 'empty' &&
+                <GoalsEmptyState setState={setDisplayFormType} />
+              }
+              {/*{!goals || goals?.length < 1 && <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}*/}
+              {displayFormType === 'create' &&
+                <CreateGoal getUserGoals={getUserGoals} setDisplayFormType={setDisplayFormType} />}
+              {!contacts || contacts?.length === 0 && (
+                <>
+                  <Banner>
+                    <p className="mt-1">You need to add a contact before you can create a goal.</p>
+                  </Banner>
+                  <ContactsEmptyState setState={setContactFormState} />
+                </>
+              )}
+            </StateWrapper>
+          )}
+        </AppLayout>
+      </>
     )
 }

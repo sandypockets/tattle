@@ -12,6 +12,8 @@ import { getContacts } from "../../helpers/contacts";
 import { getGoals } from "../../helpers/goals";
 import { getTattleStats } from "../../helpers/subscriptions";
 import { sortTwice } from "../../helpers/sort";
+import {SITE_NAME} from "../../lib/constants";
+import Head from "next/head";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -85,24 +87,29 @@ export default function Index() {
   }
 
     return (
-      <AppLayout>
-        {loading ? <AppLoadingState /> : (
-          <StateWrapper>
-            <Stats statProps={userStats} />
-            {goals?.length > 0 ? (
-              <UpcomingGoals
-                incompleteGoals={incompleteGoals} numOfCols={numOfCols}
-                numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow}
-              />
-            ) : (
-              <>
-                {contacts.length < 1 && <ContactsEmptyState setState={newContactRedirect} />}
-                {contacts.length > 0 && <GoalsEmptyState setState={newGoalRedirect}/>}
-              </>
-            )}
-          </StateWrapper>
-        )}
-      </AppLayout>
+      <>
+        <Head>
+          <title>Dashboard | {SITE_NAME}</title>
+        </Head>
+        <AppLayout>
+          {loading ? <AppLoadingState /> : (
+            <StateWrapper>
+              <Stats statProps={userStats} />
+              {goals?.length > 0 ? (
+                <UpcomingGoals
+                  incompleteGoals={incompleteGoals} numOfCols={numOfCols}
+                  numberOfGoalsToShow={numberOfGoalsToShow} setNumberOfGoalsToShow={setNumberOfGoalsToShow}
+                />
+              ) : (
+                <>
+                  {contacts.length < 1 && <ContactsEmptyState setState={newContactRedirect} />}
+                  {contacts.length > 0 && <GoalsEmptyState setState={newGoalRedirect}/>}
+                </>
+              )}
+            </StateWrapper>
+          )}
+        </AppLayout>
+      </>
     )
 
 }

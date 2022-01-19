@@ -14,6 +14,8 @@ import IntroCard from "../../../components/App/Goals/IntroCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import { getContacts } from "../../../helpers/contacts";
 import { getGoals } from "../../../helpers/goals";
+import {SITE_NAME} from "../../../lib/constants";
+import Head from "next/head";
 
 export default function Index() {
   const [loading, setLoading] = useState(true)
@@ -56,35 +58,40 @@ export default function Index() {
   }, [goals, contacts])
 
     return (
-      <AppLayout>
-        <StateWrapper>
-          {loading ? <AppLoadingState /> : (
-            <>
-              <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
-              {displayFormType === 'create' &&
-                <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
-              <div className="hidden lg:block">
-                {goals?.length > 0 &&
-                  <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 lg:hidden">
-                {goals?.map((goal) => (
-                  <div key={goal.id}>
-                    <GoalCard goal={goal} />
-                  </div>
-                ))}
-              </div>
-              {!contacts || contacts?.length === 0 &&
-                <HasNoContactsBanner />}
-              {goals?.length < 1 &&
-                <IntroCard contacts={contacts} />}
-              {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 &&
-                <GoalsEmptyState setState={setDisplayFormType} />}
-              <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
-            </>
-          )}
-        </StateWrapper>
-      </AppLayout>
+      <>
+        <Head>
+          <title>Goals | {SITE_NAME}</title>
+        </Head>
+        <AppLayout>
+          <StateWrapper>
+            {loading ? <AppLoadingState /> : (
+              <>
+                <Header setDisplayFormType={setDisplayFormType} goals={goals} contacts={contacts} />
+                {displayFormType === 'create' &&
+                  <CreateGoal setDisplayFormType={setDisplayFormType} getUserGoals={getUserGoals} />}
+                <div className="hidden lg:block">
+                  {goals?.length > 0 &&
+                    <GoalsTable goals={goals} setSelectedGoal={setSelectedGoal} contacts={contacts} setOpen={setOpen} />}
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4 lg:hidden">
+                  {goals?.map((goal) => (
+                    <div key={goal.id}>
+                      <GoalCard goal={goal} />
+                    </div>
+                  ))}
+                </div>
+                {!contacts || contacts?.length === 0 &&
+                  <HasNoContactsBanner />}
+                {goals?.length < 1 &&
+                  <IntroCard contacts={contacts} />}
+                {displayFormType === 'empty' && goals?.length < 1 && contacts?.length > 0 &&
+                  <GoalsEmptyState setState={setDisplayFormType} />}
+                <EditGoalSlideover title="Edit goal" open={open} setOpen={setOpen} user={user} selectedGoal={selectedGoal} getUserGoals={getUserGoals} />
+              </>
+            )}
+          </StateWrapper>
+        </AppLayout>
+      </>
     )
   // }
 }

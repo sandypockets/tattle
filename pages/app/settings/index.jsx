@@ -10,6 +10,8 @@ import YourPaymentInfo from "../../../components/App/Settings/YourPaymentInfo";
 import YourSubscription from "../../../components/App/Settings/YourSubscription";
 import { getSubscriptionByEmail } from "../../../helpers/subscriptions";
 import CheckoutPage from "../../../components/App/Checkout/CheckoutPage";
+import {SITE_NAME} from "../../../lib/constants";
+import Head from "next/head";
 
 export default function Index() {
   const [subscriptionData, setSubscriptionData] = useState()
@@ -40,27 +42,37 @@ export default function Index() {
 
   if (!subscriptionData?.charge && createdAtUnix + trialPeriod > currentTImeUnix) {
     return (
-      <AppLayout>
-        <StateWrapper>
-          <CheckoutPage session={session} />
-        </StateWrapper>
-      </AppLayout>
+      <>
+        <Head>
+          <title>Checkout | {SITE_NAME}</title>
+        </Head>
+        <AppLayout>
+          <StateWrapper>
+            <CheckoutPage session={session} />
+          </StateWrapper>
+        </AppLayout>
+      </>
     )
   } else {
     return (
-      <AppLayout>
-        <StateWrapper>
-          {loading || !subscriptionData?.charge ? <AppLoadingState /> : (
-            <>
-              <CardTitle>Settings</CardTitle>
-              <YourSubscription subscriptionData={subscriptionData} />
-              <YourPaymentInfo setCancelModalOpen={setCancelModalOpen} subscriptionData={subscriptionData} />
-              <YourBillingHistory billingHistory={subscriptionData} />
-              <ModalCancel subscriptionId={subscriptionData?.invoice?.subscription_id} cancelModalOpen={cancelModalOpen} setCancelModalOpen={setCancelModalOpen} />
-            </>
-          )}
-        </StateWrapper>
-      </AppLayout>
+      <>
+        <Head>
+          <title>Settings | {SITE_NAME}</title>
+        </Head>
+        <AppLayout>
+          <StateWrapper>
+            {loading || !subscriptionData?.charge ? <AppLoadingState /> : (
+              <>
+                <CardTitle>Settings</CardTitle>
+                <YourSubscription subscriptionData={subscriptionData} />
+                <YourPaymentInfo setCancelModalOpen={setCancelModalOpen} subscriptionData={subscriptionData} />
+                <YourBillingHistory billingHistory={subscriptionData} />
+                <ModalCancel subscriptionId={subscriptionData?.invoice?.subscription_id} cancelModalOpen={cancelModalOpen} setCancelModalOpen={setCancelModalOpen} />
+              </>
+            )}
+          </StateWrapper>
+        </AppLayout>
+      </>
     )
   }
 }

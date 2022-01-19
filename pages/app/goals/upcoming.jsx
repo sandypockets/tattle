@@ -8,6 +8,8 @@ import GoalCard from "../../../components/App/Dashboard/GoalCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import { getGoals } from "../../../helpers/goals";
 import { sortTwice } from "../../../helpers/sort";
+import {SITE_NAME} from "../../../lib/constants";
+import Head from "next/head";
 
 export default function Upcoming() {
   const [goals, setGoals] = useState()
@@ -50,32 +52,37 @@ export default function Upcoming() {
     )
   } else {
     return (
-      <AppLayout>
-        {loading ? <AppLoadingState /> : (
-          <StateWrapper>
-            <CardTitle>Goals due soon</CardTitle>
-            <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
-              {upcomingGoals?.map((goal, index) => {
-                if (index < numberOfGoalsToShow) {
-                  return (
-                    <article key={index}>
-                      <GoalCard goal={goal} />
-                    </article>
-                  )
+      <>
+        <Head>
+          <title>Upcoming goals | {SITE_NAME}</title>
+        </Head>
+        <AppLayout>
+          {loading ? <AppLoadingState /> : (
+            <StateWrapper>
+              <CardTitle>Goals due soon</CardTitle>
+              <div className={`grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-${numOfCols} gap-5`}>
+                {upcomingGoals?.map((goal, index) => {
+                  if (index < numberOfGoalsToShow) {
+                    return (
+                      <article key={index}>
+                        <GoalCard goal={goal} />
+                      </article>
+                    )
+                  }
+                })}
+              </div>
+              <div className="w-36 mx-auto mt-10">
+                {
+                  upcomingGoals?.length > 4 && numberOfGoalsToShow <= upcomingGoals?.length &&
+                  <Button disabled={numberOfGoalsToShow > upcomingGoals?.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
+                    Show more
+                  </Button>
                 }
-              })}
-            </div>
-            <div className="w-36 mx-auto mt-10">
-              {
-                upcomingGoals?.length > 4 && numberOfGoalsToShow <= upcomingGoals?.length &&
-                <Button disabled={numberOfGoalsToShow > upcomingGoals?.length} onClickHandler={() => setNumberOfGoalsToShow(numberOfGoalsToShow + 4)}>
-                  Show more
-                </Button>
-              }
-            </div>
-          </StateWrapper>
-        )}
-      </AppLayout>
+              </div>
+            </StateWrapper>
+          )}
+        </AppLayout>
+      </>
     )
   }
 }

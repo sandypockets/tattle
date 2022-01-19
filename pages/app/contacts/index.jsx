@@ -11,6 +11,8 @@ import Heading from "../../../components/App/Contacts/Heading";
 import IntroCard from "../../../components/App/Contacts/IntroCard";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import { getContacts } from "../../../helpers/contacts";
+import {SITE_NAME} from "../../../lib/constants";
+import Head from "next/head";
 
 export default function Index() {
   const [contacts, setContacts] = useState([])
@@ -44,30 +46,35 @@ export default function Index() {
   }, [contacts])
 
     return (
-      <AppLayout>
-        {loading ? <AppLoadingState /> : (
-          <StateWrapper>
-            <Heading setDisplayFormType={setDisplayFormType} />
-            {contacts?.length < 1 && <IntroCard/>}
-            {displayFormType === 'empty' && contacts?.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
-            {displayFormType === 'create' && <CreateContact setLoading={setLoading} user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
-            {contacts?.length > 0 && (
-              <section className="hidden sm:block">
-                <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
+      <>
+        <Head>
+          <title>Contacts | {SITE_NAME}</title>
+        </Head>
+        <AppLayout>
+          {loading ? <AppLoadingState /> : (
+            <StateWrapper>
+              <Heading setDisplayFormType={setDisplayFormType} />
+              {contacts?.length < 1 && <IntroCard/>}
+              {displayFormType === 'empty' && contacts?.length === 0 && <ContactsEmptyState setState={setDisplayFormType} />}
+              {displayFormType === 'create' && <CreateContact setLoading={setLoading} user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />}
+              {contacts?.length > 0 && (
+                <section className="hidden sm:block">
+                  <ContactsTable contacts={contacts} setOpen={setOpen} selectedContact={selectedContact} setSelectedContact={setSelectedContact} />
+                </section>
+              )}
+              <section className="sm:hidden grid grid-cols-1 gap-2 2xs:grid-cols-2 2xs:gap-3">
+                {contacts?.map((contact, index) => (
+                  <div key={index}>
+                    <ContactCard contact={contact} />
+                  </div>
+                ))}
               </section>
-            )}
-            <section className="sm:hidden grid grid-cols-1 gap-2 2xs:grid-cols-2 2xs:gap-3">
-              {contacts?.map((contact, index) => (
-                <div key={index}>
-                  <ContactCard contact={contact} />
-                </div>
-              ))}
-            </section>
 
-            <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
-          </StateWrapper>
-        )}
-      </AppLayout>
+              <EditContactSlideover title="Edit contact" open={open} setOpen={setOpen} selectedContact={selectedContact} user={user} />
+            </StateWrapper>
+          )}
+        </AppLayout>
+      </>
     )
 
 }

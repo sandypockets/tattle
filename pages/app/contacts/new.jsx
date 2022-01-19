@@ -5,6 +5,8 @@ import AppLayout from "../../../components/App/Layout/AppLayout";
 import CreateContact from "../../../components/App/Contacts/CreateContact";
 import StateWrapper from "../../../components/App/Layout/StateWrapper";
 import { getContacts } from "../../../helpers/contacts";
+import {SITE_NAME} from "../../../lib/constants";
+import Head from "next/head";
 
 export default function NewContact() {
   const [contacts, setContacts] = useState()
@@ -20,10 +22,15 @@ export default function NewContact() {
   }
 
   return (
-    <AppLayout>
-      <StateWrapper>
-        <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />
-      </StateWrapper>
-    </AppLayout>
+    <>
+      <Head>
+        <title>New contact | {SITE_NAME}</title>
+      </Head>
+      <AppLayout>
+        <StateWrapper>
+          <CreateContact user={user} getUserContacts={getUserContacts} setDisplayFormType={setDisplayFormType} />
+        </StateWrapper>
+      </AppLayout>
+    </>
   )
 }
