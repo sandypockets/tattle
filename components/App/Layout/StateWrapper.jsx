@@ -9,7 +9,7 @@ export default function StateWrapper({ children }) {
   const [hasSubscription, setHasSubscription] = useState(null)
   const [subscriptionData, setSubscriptionData] = useState()
   const [loading, setLoading] = useState(true)
-  const [sessionIstrial, setSessionIsTrial] = useState(null)
+  const [sessionIsTrial, setSessionIsTrial] = useState(null)
   const user = supabase.auth.user()
 
   const createdAtUnix = new Date(user?.created_at).getTime()
@@ -37,14 +37,14 @@ export default function StateWrapper({ children }) {
   }, [])
 
   useEffect(() => {
-    if (hasSubscription !== null && sessionIstrial !== null) {
+    if (hasSubscription !== null && sessionIsTrial !== null) {
       setTimeout(() => {
         setLoading(false)
       }, 300)
     }
-  }, [hasSubscription, sessionIstrial])
+  }, [hasSubscription, sessionIsTrial])
 
-  if (!loading && !sessionIstrial && !hasSubscription) {
+  if (!loading && !sessionIsTrial && !hasSubscription) {
     return (
       <CheckoutPage session={session} />
     )
@@ -53,7 +53,7 @@ export default function StateWrapper({ children }) {
       <div>
         {loading && <AppLoadingState />}
         {!loading && children}
-        {!subscriptionData && sessionIstrial && (
+        {!subscriptionData && sessionIsTrial && (
           <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
             <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">
               Your free trial of Tattle ends in {daysLeftInTrial} {daysLeftInTrial === 1 ? "day" : "days"}
