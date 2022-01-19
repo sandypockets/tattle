@@ -126,7 +126,7 @@ yarn start
 ## Testing
 <details>
 <summary>
-    <h4 style="display: contents">Using Storybook</h4>
+    <h4 style="display: inline-block">Using Storybook</h4>
 </summary>
 
 To start the Storybook development server, run:
@@ -147,7 +147,7 @@ If you're deploying to Vercel, specify `storybook-static` as the output director
 
 <details>
 <summary>
-    <h4 style="display: contents">Using Jest</h4>
+    <h4 style="display: inline-block">Using Jest</h4>
 </summary>
 Jest is not yet set up for this project, although it very much should be.
 </details>
