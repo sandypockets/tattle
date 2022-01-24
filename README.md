@@ -78,6 +78,12 @@ Now with your database set up, and your environment variables configured in the 
 ## Set up Stripe
 The Stripe integration uses a signed webhook to check if the payment was successful. To test those webhooks, you'll need to either use the [Stripe CLI](https://stripe.com/docs/stripe-cli/webhooks), or expose your development environment to the internet over `https` with something like [Ngrok](https://ngrok.com/). 
 
+If you do use Ngrok, and set up a custom hostname, then you can run a similar command from the root of your profile (not root of the project):
+
+```shell
+./ngrok http --hostname=your-custom-ngrok-domain.ngrok.io 3000
+```
+
 > If you're not using the Stripe CLI, your webhook endpoint must be `https`
 
 ### Stripe CLI
