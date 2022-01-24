@@ -42,7 +42,7 @@ export default function StateWrapper({ children }) {
         setLoading(false)
       }, 300)
     }
-  }, [hasSubscription, sessionIsTrial])
+  }, [hasSubscription, sessionIsTrial, subscriptionData])
 
   if (!loading && !sessionIsTrial && !hasSubscription) {
     return (
@@ -53,7 +53,7 @@ export default function StateWrapper({ children }) {
       <div>
         {loading && <AppLoadingState />}
         {!loading && children}
-        {subscriptionData?.charge?.paid === true && sessionIsTrial && (
+        {sessionIsTrial && (
           <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
             <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">
               Your free trial of Tattle ends in {daysLeftInTrial} {daysLeftInTrial === 1 ? "day" : "days"}

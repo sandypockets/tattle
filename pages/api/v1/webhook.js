@@ -1,4 +1,17 @@
+import Stripe from "stripe";
+import { buffer } from 'micro';
 import { supabase } from "../../../lib/supabaseClient";
+
+const webhookSecret = `${process.env.NEXT_PUBLIC_STRIPE_ENDPOINT_SECRET}`;
+const stripe = new Stripe(process.env.NEXT_STRIPE_SECRET_KEY, {
+  apiVersion: "2020-08-27",
+});
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
 
 async function markAsSubscribed(payload) {
   try {
@@ -17,8 +30,8 @@ async function markAsSubscribed(payload) {
   }
 }
 
-async function markAsPaid(req, res) {
-  const payload = req.body.data.object
+async function handleWebhook(req, res, event) {
+  const payload = event.data.object
   switch (payload.object) {
     case 'payment_intent':
       try {
@@ -242,9 +255,27 @@ async function markAsPaid(req, res) {
   }
 }
 
+
+async function checkSignature(req, res) {
+  const buf = await buffer(req);
+  const sig = req.headers["stripe-signature"];
+  let event;
+  try {
+    event = stripe.webhooks.constructEvent(buf.toString(), sig, webhookSecret);
+    if (event) {
+      console.log("Webhook signature verified.")
+    }
+  } catch (err) {
+    res.status(400).send(`Webhook signature could not be verified.`);
+    console.error("Webhook signature could not be verified: ", err.message)
+    return;
+  }
+  return handleWebhook(req, res, event)
+}
+
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    return markAsPaid(req, res)
+    return checkSignature(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()
   }
