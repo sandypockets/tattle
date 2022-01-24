@@ -1,8 +1,13 @@
 import CardTitle from "../../Global/CardTitle";
 import Card from "../../Global/Card";
 import Button from "../../Global/Button";
+import axios from 'axios'
+import {supabase} from "../../../lib/supabaseClient";
+import { useRouter } from "next/router";
 
 export default function YourPaymentInfo({ subscriptionData, setCancelModalOpen }) {
+  const router = useRouter()
+
   return (
     <Card>
       <div className="flex flex-col">
@@ -31,9 +36,34 @@ export default function YourPaymentInfo({ subscriptionData, setCancelModalOpen }
             </div>
             <div className="w-48">
               <Button>
-                <div className="py-0.5">
-                  Payment method
-                </div>
+                <form>
+                  <div className="py-0.5">
+                    <button type="submit" onClick={(e) => {
+                      console.log("one")
+                      e.preventDefault()
+                      console.log("two")
+                      const currentUser = supabase.auth.user()
+                      console.log("three")
+                      if (currentUser) {
+                      console.log("four")
+                        axios
+                          .post('/api/v1/create-customer-portal-session', {
+                            currentUser,
+                            customerId: subscriptionData?.invoice?.customer_id
+                          })
+                          .then(function (response) {
+                            console.log(response.data);
+                            if (response.data?.length > 0) {
+                              return router.push(response.data)
+                            }
+                          })
+                          .catch(function (error) {
+                            console.log(error);
+                          });
+                      }
+                    }}>Manage billing</button>
+                  </div>
+                </form>
               </Button>
             </div>
           </div>
