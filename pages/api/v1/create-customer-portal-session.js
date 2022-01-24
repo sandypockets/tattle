@@ -1,16 +1,13 @@
-
 const stripeApiKey = process.env.NEXT_STRIPE_SECRET_KEY
 const stripe = require('stripe')(`${stripeApiKey}`);
 
 async function createPortalSession(req, res) {
-  console.log("BODY", req.body)
   const { currentUser, customerId } = req.body
   if (currentUser?.id) {
     const session = await stripe.billingPortal.sessions.create({
       customer: `${customerId}`,
       return_url: 'https://kobe.ngrok.io/app/settings',
     });
-    console.log("SESSIONS: ", session)
     res.json(session.url)
   }
 }
