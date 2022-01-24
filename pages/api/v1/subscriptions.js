@@ -63,7 +63,7 @@ async function getSubscriptionByEmail(req, res) {
       try {
         const { data, error } = await supabase
           .from('stripe_subscriptions')
-          .select('id, created_at, card_brand, card_exp_month, card_exp_year, card_last_four')
+          .select('id, created_at, card_brand, card_exp_month, card_exp_year, card_last_four, paid')
           .match({data_type: 'charge', customer_id: dataObject['invoice']['customer_id'], paid: true})
           .order('id', { ascending: false })
           .limit(1)
@@ -102,7 +102,7 @@ async function cancelLocalStripe(deleted) {
         collection_method: deleted.collection_method,
         current_period_end: deleted.current_period_end,
         current_period_start: deleted.current_period_start,
-        customer_id: deleted.customer,
+        customer_id: deleted.customer ? deleted.customer : "",
         latest_invoice_id: deleted.latest_invoice,
         livemode: deleted.livemode,
         plan_price_id: deleted?.plan.id,

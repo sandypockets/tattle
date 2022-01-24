@@ -49,7 +49,7 @@ export default function AppLayout({ children }) {
   const [loading, setLoading] = useState(true)
   // State used to manage 'main' behaviour while search results are open. Not currently in use
   const [searchIsOpen, setSearchIsOpen] = useState(false)
-  const [darkMode, setDarkMode] = useState(false)
+  const [darkMode, setDarkMode] = useState(Boolean)
 
   const router = useRouter()
   const currentPage = router.pathname

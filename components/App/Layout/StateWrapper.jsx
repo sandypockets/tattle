@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../../lib/supabaseClient";
-import {getSubscriptionByEmail, getUserPlan} from "../../../helpers/subscriptions";
+import { getSubscriptionByEmail, getUserPlan } from "../../../helpers/subscriptions";
 import CheckoutPage from "../Checkout/CheckoutPage";
 import AppLoadingState from "../Utils/AppLoadingState";
 
@@ -53,7 +53,7 @@ export default function StateWrapper({ children }) {
       <div>
         {loading && <AppLoadingState />}
         {!loading && children}
-        {!subscriptionData && sessionIsTrial && (
+        {subscriptionData?.charge?.paid === true && sessionIsTrial && (
           <div className="fixed bottom-0 h-12 w-full bg-yellow-300 text-black left-0">
             <h4 className="text-xl font-semibold flex justify-center pt-2 tracking-wide">
               Your free trial of Tattle ends in {daysLeftInTrial} {daysLeftInTrial === 1 ? "day" : "days"}

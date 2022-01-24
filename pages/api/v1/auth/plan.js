@@ -8,7 +8,6 @@ async function checkUserPlan(req, res) {
       .select('is_subscribed')
       .match({ id: ownerId })
     if (data) {
-      console.log("Line 11", data)
       res.status(200).json(data[0])
     }
     if (error) {
@@ -22,9 +21,7 @@ async function checkUserPlan(req, res) {
 }
 
 export default function handler(req, res) {
-  if (req.method === 'POST') {
-    // handle post
-  } else if (req.method === 'GET') {
+  if (req.method === 'GET') {
     return checkUserPlan(req, res)
   } else {
     res.send("Something's not right. Check your query.").end()
