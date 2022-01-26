@@ -2,9 +2,9 @@ import { CheckCircleIcon } from '@heroicons/react/solid'
 import Link from 'next/link'
 
 const includedFeatures = [
-  'Create up to 100 goals per month',
+  'Created unlimited goals',
   'Set completion dates for goals',
-  'Add up to 10 contacts',
+  'Create unlimited contacts',
   'Tattle via voice',
   'Tattle via SMS',
 ]
