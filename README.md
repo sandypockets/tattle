@@ -69,6 +69,8 @@ In the root directory of Tattle (not Supabase) navigate to the `/db/schema/` dir
 
 > It is important to create the schemas in the specified order for relational purposes. 
 
+> Note that row level security must be set up manually in Supabase, or by adding to or modifying the SQL queries above. 
+
 Now with your database set up, and your environment variables configured in the `.env.local` file, you're ready to start the server.
 </details>
 
