@@ -28,7 +28,7 @@ export default function Checkout({ session }) {
         body: JSON.stringify({
           user: user.id,
           stripeCustomerId: stripeCustomerId,
-          items: [{price: 'price_1K252ULSQuRsBVHwBmVYETzD'}]
+          items: [{price: 'price_1KLJgpLSQuRsBVHw3IU2kHfg'}]
         }),
       })
         .then((res) => res.json())
@@ -52,7 +52,7 @@ export default function Checkout({ session }) {
     variables: {
       colorPrimary: '#0570de',
       colorBackground: '#ffffff',
-      colorText: '#8c8c8c',
+      colorText: '#808080',
       colorDanger: '#df1b41',
       fontFamily: 'Ideal Sans, system-ui, sans-serif',
     }

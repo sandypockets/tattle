@@ -257,9 +257,7 @@ export default function AppLayout({ children }) {
                 </button>
                 <div className="flex-1 flex justify-between px-4 md:px-0">
                   <div className="flex-1 flex w-full">
-
                     <Search setSearchIsOpen={setSearchIsOpen} />
-
                   </div>
                   <div className="ml-4 flex items-center md:ml-6">
                     {/* Profile dropdown */}
@@ -330,6 +328,4 @@ export default function AppLayout({ children }) {
       </>
     )
   }
-
-
 }

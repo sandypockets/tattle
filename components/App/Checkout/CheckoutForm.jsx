@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { PaymentElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import { useRouter } from "next/router";
 
 const redirectUrl = process.env.NEXT_PUBLIC_REDIRECT_URL
 

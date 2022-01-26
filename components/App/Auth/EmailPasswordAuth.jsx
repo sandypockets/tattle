@@ -11,7 +11,7 @@ export default function Auth({ registrationType }) {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [content, setContent] = useState('signup')
-  const [name, setName] = useState()
+  const [name, setName] = useState('')
 
   const router = useRouter()
 
