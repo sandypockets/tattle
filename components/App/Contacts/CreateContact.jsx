@@ -49,8 +49,8 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
   return (
     <Card>
       <CardTitle>Create a contact</CardTitle>
-      <div className="flex flex-col sm:flex-row sm:justify-around">
-        <div className="pt-6 w-96">
+      <div className="flex flex-col w-full sm:flex-row sm:justify-around">
+        <div className="pt-6 w-full sm:w-96">
           <p>
             After a contact is created, you can assign the contact to a goal.
           </p>
@@ -58,7 +58,7 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
             If you fail to achieve your goal before the due date, then Tattle will send an SMS or voice message to your contact to let them know.
           </p>
         </div>
-        <div className="w-72 mt-6 sm:mt-0">
+        <div className="w-full sm:w-72 mt-6 sm:mt-0">
           <TextInput type="text" label="Name" value={contactName} onChangeHandler={(e) => setContactName(e.target.value)} />
           <PhoneInput value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} setContactCountryCode={setContactCountryCode} error={phoneError} />
           <div className="flex justify-end mt-4 mr-2">
