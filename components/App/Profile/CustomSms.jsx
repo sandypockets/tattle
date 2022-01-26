@@ -17,7 +17,11 @@ export default function CustomSms({ smsMessageText, setSmsMessageText }) {
           id="custom-sms"
           className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700"
           value={smsMessageText}
-          onChange={(e) => setSmsMessageText(e.target.value)}
+          onChange={(e) => {
+            if (smsMessageText?.length < 200) {
+              setSmsMessageText(e.target.value)
+            }
+          }}
         />
           <p className={`${smsMessageText?.length > 140 && "text-red-400"} flex justify-end font-light text-gray-400 mt-1`}>
             {140 - smsMessageText?.length}/140 characters remaining

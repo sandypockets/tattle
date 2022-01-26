@@ -17,10 +17,14 @@ export default function CustomVoice({ voiceMessageText, setVoiceMessageText }) {
           id="custom-voice"
           className="shadow-sm focus:ring-yellow-400 focus:border-yellow-400 block w-full sm:text-sm border-gray-300 rounded-md dark:bg-gray-700"
           value={voiceMessageText}
-          onChange={(e) => setVoiceMessageText(e.target.value)}
+          onChange={(e) => {
+            if (voiceMessageText?.length < 200) {
+              setVoiceMessageText(e.target.value)
+            }
+          }}
         />
           <p className={`${voiceMessageText?.length > 140 && "text-red-400"} flex justify-end font-light text-gray-400 mt-1`}>
-            {300 - voiceMessageText?.length} / 300 characters remaining
+            {140 - voiceMessageText?.length} / 140 characters remaining
           </p>
         </div>
       </div>
