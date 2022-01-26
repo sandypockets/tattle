@@ -199,3 +199,15 @@ Jest is not yet set up for this project, although it very much should be.
 ## Web app
 ### Dashboard
 ![](./docs/tattle-dashboard.png)
+
+### Checkout
+![](./docs/tattle-stripe-checkout.png)
+
+### New goal page (without contacts created)
+![](./docs/new-goal-without-contact.png)
+
+### Create contact page
+![](./docs/tattle-create-contact.png)
+
+### Dashboard dark mode
+![](./docs/tattle-dashboard-darkmode.png)
