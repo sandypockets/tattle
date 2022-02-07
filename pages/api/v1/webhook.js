@@ -259,6 +259,11 @@ async function handleWebhook(req, res, event) {
 async function checkSignature(req, res) {
   const buf = await buffer(req);
   const sig = req.headers["stripe-signature"];
+
+  console.log("Sig", sig)
+  console.log("Secret", webhookSecret)
+  console.log("Buffer", buf.toString())
+
   let event;
   try {
     event = stripe.webhooks.constructEvent(buf.toString(), sig, webhookSecret);
