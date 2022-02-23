@@ -1,7 +1,12 @@
 {
-  "name": "nextjs-tailwindcss-supabase-storybook",
-  "version": "1.0.0",
+  "name": "tattle",
+  "version": "1.0.2",
   "main": "index.js",
+  "author": "sandypockets",
+  "url" : "https://github.com/sandypockets/tattle/issues",
+  "email" : "hello@sandypockets.dev",
+  "homepage": "https://tattletale.dev",
+  "private": true,
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -27,7 +32,6 @@
     "stripe": "^8.191.0",
     "twilio": "^3.71.2"
   },
-  "license": "MIT",
   "devDependencies": {
     "@storybook/addon-essentials": "6.3.0",
     "@storybook/addon-links": "6.3.0",
