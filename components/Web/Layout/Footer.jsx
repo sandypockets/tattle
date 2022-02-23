@@ -3,6 +3,7 @@ import Link from 'next/link'
 const navigation = [
   { name: 'Terms', href: '/terms' },
   { name: 'Privacy', href: '/privacy' },
+  { name: 'Contact', href: '/contact' },
   { name: 'FAQ', href: '/faq' },
   { name: 'Pricing', href: '/pricing' },
   { name: 'Login', href: '/signin' },

@@ -1,7 +1,7 @@
 export default function TextInput({ label, type, onChangeHandler, required=false, value="", useDark=true, placeholder='' }) {
   return (
     <div className="pt-2 px-2 w-full">
-      <label htmlFor="email" className={useDark ? "block text-sm font-medium text-gray-700 dark:text-gray-300" : "block text-sm font-medium text-gray-700"}>
+      <label htmlFor={type} className={useDark ? "block text-sm font-medium text-gray-700 dark:text-gray-300" : "block text-sm font-medium text-gray-700"}>
         {label}
       </label>
       <div className="mt-1">
