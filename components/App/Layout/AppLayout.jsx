@@ -36,7 +36,8 @@ const subNavigation = [
   {name: 'Upcoming', category: 'goals', href: '/app/goals/upcoming', parentHref: '/app/goals', icon: AdjustmentsIcon},
   {name: 'Completed', category: 'goals', href: '/app/goals/completed', parentHref: '/app/goals', icon: AdjustmentsIcon},
   {name: 'New', category: 'contacts', href: '/app/contacts/new', parentHref: '/app/contacts', icon: AdjustmentsIcon},
-  {name: 'Customize', category: 'settings', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon}
+  {name: 'Customize', category: 'settings', href: '/app/settings/customize', parentHref: '/app/settings', icon: AdjustmentsIcon},
+  {name: 'Contact', category: 'settings', href: '/app/settings/contact', parentHref: '/app/settings', icon: AdjustmentsIcon}
 ]
 
 
@@ -63,6 +64,7 @@ export default function AppLayout({ children }) {
     { name: 'Dashboard', href: '/app/' },
     { name: 'Profile', href: '/app/profile' },
     { name: 'Settings', href: '/app/settings' },
+    { name: 'Submit Feedback', href: '/app/settings/contact' },
     { name: 'Sign out', href: '/' },
     { name:
         <div className="flex mx-auto">
