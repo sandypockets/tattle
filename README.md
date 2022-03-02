@@ -160,11 +160,15 @@ If you're deploying to Vercel, specify `storybook-static` as the output director
 
 Tests can be found in the `cypress/integration` directory, where the tests are broken down into two main categories: `web` and `app`
 
-To run the test suite, run:
+With the server running, run the following command to start the tests
 
 ```shell
 yarn test
 ```
+
+It's a good idea to try the tests on builds too:
+
+Run `yarn build` and `yarn start`, then `yarn test` in another terminal window to start Cypress.
 
 </details>
 
