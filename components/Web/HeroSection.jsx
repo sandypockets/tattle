@@ -24,6 +24,7 @@ export default function HeroSection() {
               <div className="rounded-md shadow">
                 <Link href="/signup">
                   <a
+                    id="landing-sign-up"
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black bg-yellow-300 hover:bg-yellow-400 md:py-4 md:text-lg md:px-10"
                   >
                     Sign up
@@ -33,6 +34,7 @@ export default function HeroSection() {
               <div className="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
                 <Link href="/#how-it-works">
                   <a
+                    id="landing-learn-more"
                     className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-black bg-yellow-300 hover:bg-yellow-400 md:py-4 md:text-lg md:px-10"
                   >
                     Learn more
