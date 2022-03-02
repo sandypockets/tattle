@@ -13,17 +13,21 @@ export async function handleLogin(email) {
 }
 
 // Email sign in
-export async function handleSignIn(userEmail, userPassword, router) {
+export async function handleSignIn(userEmail, userPassword, router, setMessage) {
   try {
     const { email, password, error } = await supabase.auth.signIn(
       {
         email: userEmail,
         password: userPassword,
       })
-    if (error) throw error
+    if (error) {
+      console.error(error)
+      setMessage(error.message)
+      console.error(error)
+    }
     const userSession = await supabase.auth.session()
     if (!userSession) {
-      console.error(error)
+      setMessage(error.message)
     }
   } catch (error) {
     console.error(error['error_description'] || error.message)
@@ -81,7 +85,7 @@ function createStripeCustomer(userEmail, userResponse){
       console.log("Update error", error);
     });
 }
-export async function handleSignUp(userEmail, userPassword, userName) {
+export async function handleSignUp(userEmail, userPassword, userName, setMessage) {
   let userResponse;
   try {
     const {email, password, error, data: result} = await supabase.auth.signUp(
@@ -102,7 +106,8 @@ export async function handleSignUp(userEmail, userPassword, userName) {
     if (userSession) {
       createCustomMessages(userSession?.user.id)
     } else {
-      console.error(error)
+      console.error("signupErr: ", error)
+      setMessage(error.message)
     }
   } catch (error) {
     console.error(error['error_description'] || error.message)

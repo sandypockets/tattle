@@ -12,6 +12,7 @@ export default function Auth({ registrationType }) {
   const [password, setPassword] = useState('')
   const [content, setContent] = useState('signup')
   const [name, setName] = useState('')
+  const [message, setMessage] = useState('')
 
   const router = useRouter()
 
@@ -64,7 +65,12 @@ export default function Auth({ registrationType }) {
           </div>
           <div className="mt-8">
             <div className="mt-6">
-              <form action="#" method="POST" className="space-y-1">
+              <form action="#" method="POST" className="space-y-1 w-full">
+                {message.length > 0 && (
+                  <span id="auth-error-message" className="px-2 mx-auto w-full text-lg font-semibold text-red-500">
+                    {message}
+                  </span>
+                )}
                 {content === 'signup' && (
                   <TextInput
                     label="First name"
@@ -96,7 +102,18 @@ export default function Auth({ registrationType }) {
                 <div className="mx-2 pt-2">
                   <Button type="submit" onClickHandler={(e) => {
                     e.preventDefault()
-                    content === 'signup' ? handleSignUp(email, password, name).then(() => setTimeout(() => { return router.push('/app') }, 1000)) : handleSignIn(email, password, router)
+                    content === 'signup' ?
+                      handleSignUp(email, password, name, setMessage)
+                        .then(() => {
+                          setTimeout(() => {
+                            if (supabase.auth.user()) {
+                              return router.push('/app')
+                            }
+                          }, 1000)
+                        })
+                        .catch((err) => console.log("ERROR!!: ", err))
+                      :
+                      handleSignIn(email, password, router, setMessage)
                   }}>
                     <span className="tracking-wider">
                       {content === 'signin' ? "Sign in" : "Sign up"}

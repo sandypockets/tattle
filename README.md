@@ -158,7 +158,7 @@ If you're deploying to Vercel, specify `storybook-static` as the output director
     <h4 style="display: inline-block">Using Cypress</h4>
 </summary>
 
-Tests can be found in the `cypress/integration` directory, where the tests are broken down into two main categories: `web` and `app`
+Tests can be found in the `cypress/integration` directory, where the tests are broken down into two main categories: `web` and `app`. Before running any tests, you need to copy the contents of `cypress.env.example.json` into it's own file as `cypress.env.json`, and populate it with your own unique values. 
 
 With the server running, run the following command to start the tests
 
