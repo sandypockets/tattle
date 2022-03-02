@@ -6,7 +6,7 @@ export default function TextInput({ label, type, onChangeHandler, required=false
       </label>
       <div className="mt-1">
         <input
-          id={`input-id--${type}--${label}`}
+          id={`input-id--${type}--${label.toLowerCase().replace(' ', '-')}`}
           name={type}
           type={type}
           autoComplete={type}
