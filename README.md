@@ -17,7 +17,7 @@ _Coming soon: Tattle also offers a native iOS and Android app, though the codeba
 - [Server commands](https://github.com/sandypockets/tattle#server-commands)
 - [Testing](https://github.com/sandypockets/tattle#testing)
   - [Storybook](https://github.com/sandypockets/tattle#using-storybook)
-  - [Jest](https://github.com/sandypockets/tattle#using-jest)
+  - [Cypress](https://github.com/sandypockets/tattle#using-cypress)
 - [Dependencies](https://github.com/sandypockets/tattle#-dependencies)
   - [Dev Dependencies](https://github.com/sandypockets/tattle#dev-dependencies)
 - [Screenshots](https://github.com/sandypockets/tattle#-screenshots)
@@ -155,9 +155,17 @@ If you're deploying to Vercel, specify `storybook-static` as the output director
 
 <details>
 <summary>
-    <h4 style="display: inline-block">Using Jest</h4>
+    <h4 style="display: inline-block">Using Cypress</h4>
 </summary>
-Jest is not yet set up for this project, although it very much should be.
+
+Tests can be found in the `cypress/integration` directory, where the tests are broken down into two main categories: `web` and `app`
+
+To run the test suite, run:
+
+```shell
+yarn test
+```
+
 </details>
 
 ## 📦 Dependencies
