@@ -8,6 +8,7 @@ export default function MobileLinkWithIcon({ item, currentPage }) {
   return (
     <Link key={item.href} href={item.href}>
       <a
+        data-cy={`nav-${item.href}-${item.category}`}
         className={classNames(
           item.href === currentPage
             ? 'bg-gray-900 text-yellow-300' : 'text-gray-400 hover:bg-gray-900 hover:text-yellow-300',

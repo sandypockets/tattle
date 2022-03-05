@@ -8,6 +8,7 @@ export default function DesktopLinkNoIcon({ item, currentPage }) {
   return (
     <Link href={item.href}>
       <a
+        data-cy={`nav-${item.href}-${item.category}`}
         className={classNames(
           item.href === currentPage
             ? 'bg-gray-900 text-yellow-300'

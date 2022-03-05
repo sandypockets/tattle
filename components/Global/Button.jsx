@@ -1,6 +1,7 @@
-export default function Button({ type, onClickHandler, disabled=false, children }) {
+export default function Button({ type, onClickHandler, disabled=false, children, dataCy }) {
   return (
     <button
+      data-cy={dataCy}
       type={type}
       className="
         w-full flex justify-center py-2 px-4 border border-transparent

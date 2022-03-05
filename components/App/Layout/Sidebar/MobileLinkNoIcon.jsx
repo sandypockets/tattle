@@ -8,6 +8,7 @@ export default function MobileLinkNoIcon({ item, currentPage }) {
   return (
     <Link href={item.href}>
       <a
+        data-cy={`nav-${item.href}-${item.category}`}
         key={item.href}
         className={classNames(
           item.href === currentPage

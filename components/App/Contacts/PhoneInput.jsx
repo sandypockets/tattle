@@ -1,4 +1,4 @@
-export default function PhoneInput({ onChangeHandler, value, setContactCountryCode, error }) {
+export default function PhoneInput({ onChangeHandler, value, setContactCountryCode, error, dataCy }) {
   return (
     <div className="px-2 my-2">
       <label htmlFor="phone-number" className="block text-sm font-medium text-gray-700 dark:text-gray-300">
@@ -9,6 +9,7 @@ export default function PhoneInput({ onChangeHandler, value, setContactCountryCo
           +1
         </span>
         <input
+          data-cy={dataCy}
           type="text"
           name="phone-number"
           id="phone-number"

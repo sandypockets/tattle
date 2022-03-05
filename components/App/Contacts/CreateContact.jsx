@@ -12,6 +12,7 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
   const [contactPhone, setContactPhone] = useState('')
   const [contactCountryCode, setContactCountryCode] = useState('')
   const [phoneError, setPhoneError] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
 
   async function submitAndRefreshData(validatedPhone) {
     await createContact(user.id, contactName, validatedPhone, contactCountryCode)
@@ -40,15 +41,16 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
     console.log(preFilteredPhone)
     if (validPhone.test(preFilteredPhone)) {
       console.log("Phone number is valid")
+      setErrorMessage('')
       return submitAndRefreshData(preFilteredPhone)
     } else {
-      console.error("Phone number format is not valid")
+      setErrorMessage("Phone number format is not valid")
     }
   }
 
   return (
     <Card>
-      <CardTitle>Create a contact</CardTitle>
+      <CardTitle dataCy="create-contact-form-title">Create a contact</CardTitle>
       <div className="flex flex-col w-full sm:flex-row sm:justify-around">
         <div className="pt-6 w-full sm:w-96">
           <p>
@@ -59,11 +61,12 @@ export default function CreateContact({ user, getUserContacts, setDisplayFormTyp
           </p>
         </div>
         <div className="w-full sm:w-72 mt-6 sm:mt-0">
-          <TextInput type="text" label="Name" value={contactName} onChangeHandler={(e) => setContactName(e.target.value)} />
-          <PhoneInput value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} setContactCountryCode={setContactCountryCode} error={phoneError} />
+          <TextInput dataCy="create-contact-form-name" type="text" label="Name" value={contactName} onChangeHandler={(e) => setContactName(e.target.value)} />
+          <PhoneInput dataCy="create-contact-form-phone" value={contactPhone} onChangeHandler={(e) => setContactPhone(e.target.value)} setContactCountryCode={setContactCountryCode} error={phoneError} />
+          <span className="ml-2 text-red-500 h-6" data-cy="phone-validation-error-message">{errorMessage}</span>
           <div className="flex justify-end mt-4 mr-2">
             <div className="max-w-min">
-              <Button type="button" onClickHandler={() => {
+              <Button dataCy="create-contact-form-submit" type="button" onClickHandler={() => {
                 return validatePhone(contactPhone)
               }}>
                 Save

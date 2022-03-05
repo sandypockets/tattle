@@ -1,4 +1,4 @@
-export default function TextInput({ label, type, onChangeHandler, required=false, value="", useDark=true, placeholder='' }) {
+export default function TextInput({ label, type, onChangeHandler, required=false, value="", useDark=true, placeholder='', dataCy }) {
   return (
     <div className="pt-2 px-2 w-full">
       <label htmlFor={type} className={useDark ? "block text-sm font-medium text-gray-700 dark:text-gray-300" : "block text-sm font-medium text-gray-700"}>
@@ -6,6 +6,7 @@ export default function TextInput({ label, type, onChangeHandler, required=false
       </label>
       <div className="mt-1">
         <input
+          data-cy={dataCy}
           id={`input-id--${type}--${label.toLowerCase().replace(' ', '-')}`}
           name={type}
           type={type}
