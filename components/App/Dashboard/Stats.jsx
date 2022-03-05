@@ -16,21 +16,21 @@ export default function Stats({ statProps }) {
 
                 <div className="flex flex-col border-b border-gray-100 dark:border-gray-700 p-6 text-center sm:border-0 sm:border-r xs:border-r">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500 dark:text-gray-200">{statOneText}</dt>
-                  <dd className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statOne}</dd>
+                  <dd id="statOne" className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statOne}</dd>
                 </div>
 
                 <div className="flex flex-col border-b border-gray-100 dark:border-gray-700 p-6 text-center sm:border-0 sm:border-r">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500 dark:text-gray-200">{statFourText}</dt>
-                  <dd className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statFour}</dd>
+                  <dd id="statFour" className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statFour}</dd>
                 </div>
 
                 <div className="flex flex-col border-t border-b border-gray-100 dark:border-gray-700 p-6 text-center sm:border-0 sm:border-l sm:border-r xs:border-r">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500 dark:text-gray-200">{statTwoText}</dt>
-                  <dd className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statTwo}</dd>
+                  <dd id="statTwo" className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statTwo}</dd>
                 </div>
                 <div className="flex flex-col border-t border-gray-100 dark:border-gray-700 p-6 text-center sm:border-0 sm:border-l">
                   <dt className="order-2 mt-2 text-lg leading-6 font-medium text-gray-500 dark:text-gray-200">{statThreeText}</dt>
-                  <dd className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statThree}</dd>
+                  <dd id="statThree" className="order-1 text-5xl font-extrabold text-yellow-300 dark:text-yellow-300">{statThree}</dd>
                 </div>
 
               </dl>
