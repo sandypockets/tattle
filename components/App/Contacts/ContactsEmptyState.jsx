@@ -15,7 +15,7 @@ export default function ContactsEmptyState({ setState }) {
         <div className="mx-auto h-12 w-12">
           <UsersIcon />
         </div>
-        <span className="mt-2 block text-sm font-medium">Add your first contact</span>
+        <span data-cy="add-first-contact-card" className="mt-2 block text-sm font-medium">Add your first contact</span>
       </button>
     </Card>
   )
