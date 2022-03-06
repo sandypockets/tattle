@@ -1,5 +1,6 @@
 const testEmail = Cypress.env('testUserEmail')
 const testPassword = Cypress.env('testUserPassword')
+const testOwnerId = Cypress.env('testUserOwnerId')
 
 beforeEach(() => {
   cy.visit('http://localhost:3000/signin')
@@ -14,7 +15,7 @@ beforeEach(() => {
 describe('Dashboard', () => {
   it("asks the user to create a contact if they don't have any", () => {
     let numberOfContacts = 0;
-    cy.request('http://localhost:3000/api/v1/contacts?type=all&ownerId=65442cde-a6c8-4126-8c3b-c50e7a237f4a').then(req => {
+    cy.request(`http://localhost:3000/api/v1/contacts?type=all&ownerId=${testOwnerId}`).then(req => {
       numberOfContacts = req.body.length
     }).then(() => {
       if (numberOfContacts === 0) {
@@ -29,11 +30,11 @@ describe('Dashboard', () => {
     cy.get('dd#statOne').contains('0')
     let numOfGoals = 0;
     let numOfContacts = 0;
-    cy.request('http://localhost:3000/api/v1/contacts?type=all&ownerId=65442cde-a6c8-4126-8c3b-c50e7a237f4a').then(req => {
+    cy.request(`http://localhost:3000/api/v1/contacts?type=all&ownerId=${testOwnerId}`).then(req => {
       numOfContacts = req.body.length
     })
       .then(() => {
-        cy.request('http://localhost:3000/api/v1/goals?ownerId=65442cde-a6c8-4126-8c3b-c50e7a237f4a').then(req => {
+        cy.request(`http://localhost:3000/api/v1/goals?ownerId=${testOwnerId}`).then(req => {
           numOfGoals = req.body.length
         })
       })

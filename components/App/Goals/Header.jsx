@@ -6,7 +6,7 @@ export default function Header({ goals, setDisplayFormType, contacts }) {
     <div className="flex justify-between">
       <CardTitle>All goals</CardTitle>
       <div className="max-w-min">
-        <Button disabled={!contacts || contacts.length === 0} onClickHandler={() => setDisplayFormType('create')}>Create</Button>
+        <Button dataCy="header-button" disabled={!contacts || contacts.length === 0} onClickHandler={() => setDisplayFormType('create')}>Create</Button>
       </div>
     </div>
   )

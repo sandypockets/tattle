@@ -1,5 +1,6 @@
 const testEmail = Cypress.env('testUserEmail')
 const testPassword = Cypress.env('testUserPassword')
+const testOwnerId = Cypress.env('testUserOwnerId')
 
 beforeEach(() => {
   cy.visit('http://localhost:3000/signin')
@@ -15,7 +16,7 @@ beforeEach(() => {
 describe('Contacts index page', () => {
   it("should show a prompt to create a contact if the user has none", () => {
     let numOfContacts = 0;
-    cy.request('http://localhost:3000/api/v1/contacts?type=all&ownerId=65442cde-a6c8-4126-8c3b-c50e7a237f4a').then(req => {
+    cy.request(`http://localhost:3000/api/v1/contacts?type=all&ownerId=${testOwnerId}`).then(req => {
       numOfContacts = req.body.length
     }).then(() => {
       if (numOfContacts === 0) {
@@ -26,7 +27,7 @@ describe('Contacts index page', () => {
 
   it("should show a table of contacts if the user has 1 or more contacts", () => {
     let numOfContacts = 0;
-    cy.request('http://localhost:3000/api/v1/contacts?type=all&ownerId=65442cde-a6c8-4126-8c3b-c50e7a237f4a').then(req => {
+    cy.request(`http://localhost:3000/api/v1/contacts?type=all&ownerId=${testOwnerId}`).then(req => {
       numOfContacts = req.body.length
     }).then(() => {
       if (numOfContacts > 0) {
@@ -35,6 +36,17 @@ describe('Contacts index page', () => {
     })
   });
 
+  it("number of contacts in table and number of contacts created should match", () => {
+    let numOfContacts = 0;
+    cy.request(`http://localhost:3000/api/v1/contacts?type=all&ownerId=${testOwnerId}`).then(req => {
+      numOfContacts = req.body.length
+    }).then(() => {
+      if (numOfContacts > 0) {
+        cy.get('table[data-cy*="contacts-page-table"]')
+        cy.get('td.nameClass').should('have.length', numOfContacts)
+      }
+    })
+  });
 });
 
 describe('Contacts new page', () => {
@@ -50,8 +62,8 @@ describe('Contacts new page', () => {
     cy.get('input[data-cy*="create-contact-form-name"]').type('Kobe')
     cy.get('input[data-cy*="create-contact-form-phone"]').type('6139994567')
     cy.get('button[data-cy*="create-contact-form-submit"]').click()
-    // TO DO
-    // Check that contact is displayed successfully
+    cy.get('table[data-cy*="contacts-page-table"]')
+    cy.get('td[data-cy*="contact-table-6139994567-kobe"]')
   });
 });
 

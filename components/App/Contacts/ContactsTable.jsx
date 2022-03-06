@@ -59,7 +59,7 @@ export default function ContactsTable({ contacts, setOpen, selectedContact, setS
               <tbody>
               {contacts && contacts.map((contact, index) => (
                 <tr key={contact.id} className={index % 2 === 0 ? 'bg-white dark:bg-gray-600' : 'bg-gray-100 dark:bg-gray-700'}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300">{contact.name}</td>
+                  <td className="nameClass px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 dark:text-gray-300" data-cy={`contact-table-${contact.phone}-${contact.name.toLowerCase().split(' ')[0]}`}>{contact.name}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{contact.phone}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">{new Date(contact['created_at']).toLocaleDateString('en-CA')}</td>
                   <td className="py-4 whitespace-nowrap text-right text-sm font-medium max-w-6xs">
